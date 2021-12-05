@@ -1,4 +1,4 @@
-import request from "./allOriginsProxy";
+import request from "./AllOriginsProxy";
 
 export class baseLession {
 	subject: string;
