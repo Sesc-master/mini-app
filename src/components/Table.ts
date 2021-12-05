@@ -2,18 +2,28 @@ import { schedules, idableScheduleType } from "./Schedule";
 
 
 export class Table {
-	getTable(isFull : boolean, scheduleType : idableScheduleType,
-		weekday :number, grade : string){
-		if (isFull) {
-			return schedules.getFullSchedule(weekday);
+	static teachers: any;
+	static auditories: any;
+	
+	public static getTable(scheduleType: idableScheduleType, weekday: number, grade: string){
+		switch (scheduleType) {
+			case "group":
+				return schedules.getSchedule(scheduleType, weekday, Number(Table.grades.get(grade)));
+			case "teacher":
+				// TODO: парсить учителей и их id
+				return schedules.getSchedule(scheduleType, weekday, Number(Table.grades.get(grade)));
+			case "auditory":
+				// TODO: парсить кабинеты и их id
+				return schedules.getSchedule(scheduleType, weekday, Number(Table.grades.get(grade)));
 		}
-		
-		if (!this.grades.get(grade)) return;
-
-		return schedules.getSchedule(scheduleType, weekday, Number(this.grades.get(grade)))
+		// TODO: случай поеботы с нeкорректным типом, послать исключением
 	}
 
-	private grades: Map<string, number> = new Map([
+	public static getFullTable(weekday: number){
+		return schedules.getFullSchedule(weekday)
+	}
+
+	private static grades: Map<string, number> = new Map([
 		["8А",1],
 		["8В",2],
 		["9А",4],

@@ -1,32 +1,32 @@
 import request from "./AllOriginsProxy";
 
-export class baseLession {
+export class baseLesson {
 	subject: string;
 	teacher: string;
 	group: string;
 }
 
 export class fullSсhedule {
-	auditories: Map<string, Array<baseLession | boolean>>;
+	auditories: Map<string, Array<baseLesson | boolean>>;
 
-	public isFreeAuditory(auditory: string, lessionNumber: number): Boolean {
+	public isFreeAuditory(auditory: string, lessonNumber: number): Boolean {
 		let auditorySchedule = this.auditories.get(auditory);
 		if (auditorySchedule !== undefined) {
-			return auditorySchedule[lessionNumber] === false;
+			return auditorySchedule[lessonNumber] === false;
 		}
 		else return false;
 	}
-	public getFreeAuditories(lessionNumber: number): Array<string> {
+	public getFreeAuditories(lessonNumber: number): Array<string> {
 		let freeAuditories: Array<string> = [];
 		console.log(this.auditories);
-		this.auditories.forEach((lessions, auditory) => {
-			if (lessions[lessionNumber] === false) freeAuditories.push(auditory);
+		this.auditories.forEach((lessons, auditory) => {
+			if (lessons[lessonNumber] === false) freeAuditories.push(auditory);
 		});
 		return freeAuditories;
 	}
 }
 
-export class sheduleLession extends baseLession {
+export class sheduleLesson extends baseLesson {
 	uid: number;
 	auditory: string;
 	subgroup: number;
@@ -40,8 +40,8 @@ export type scheduleType = idableScheduleType | "all";
 
 export class schedule {
 	type: scheduleType;
-	lessons: Array<sheduleLession>;
-	diffs: Array<sheduleLession>;
+	lessons: Array<sheduleLesson>;
+	diffs: Array<sheduleLesson>;
 }
 
 export class schedules {
@@ -65,9 +65,9 @@ export class schedules {
 		})
 	}
 
-	private static scheduleFromJSON(JSON: JSON | any) {
+	private static scheduleFromJSON(parsedJSON: JSON | any) {
 		let result = new schedule();
-		Object.assign(result, JSON);
+		Object.assign(result, parsedJSON); // `Ты кто такой чтобы это менять, блять`
 		return result;
 	}
 

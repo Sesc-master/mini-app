@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import bridge from '@vkontakte/vk-bridge';
 import {ConfigProvider, AppRoot, Root, View, Panel} from "@vkontakte/vkui";
+import './index.css';
 
 import '@vkontakte/vkui/dist/vkui.css';
 import Navbar from './components/Navbar';

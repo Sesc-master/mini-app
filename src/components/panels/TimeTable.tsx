@@ -1,6 +1,10 @@
-import React, { useState } from 'react';
-import { FormItem, SelectMimicry, Tabs, TabsItem, Text, Div} from "@vkontakte/vkui";
+import React, { useState, useEffect } from 'react';
+import { FormItem, SelectMimicry, Tabs, Text, Div, Cell} from "@vkontakte/vkui";
 import '@vkontakte/vkui/dist/vkui.css';
+import { Table } from "../Table"
+import { sheduleLesson } from '../Schedule';
+import Task from '../task/Task'
+import Week from '../Week'
 
 type ISetActiveView = () => void;
 
@@ -10,8 +14,16 @@ type ITimeTable = {
 }
 
 const TimeTable = ({setActiveView, grade} : ITimeTable) => {
-	const [dayIndex, setDayIndex] = useState(0)
+	const [targetDayIndex, setTargetDayIndex] = useState(1)
+	const [timetable, setTimetable] = useState<Array<sheduleLesson>>([])
 
+
+	useEffect(() => {
+		Table.getTable("group", targetDayIndex, grade)
+			.then(result=> {
+				setTimetable(result.lessons);
+			})
+	}, [grade, targetDayIndex])
 
 	return (
 		<>
@@ -21,57 +33,16 @@ const TimeTable = ({setActiveView, grade} : ITimeTable) => {
 					onClick={() => setActiveView()}
 				>{grade}</SelectMimicry>
 			</FormItem>
-			<Tabs>
-				<TabsItem
-					onClick={() => setDayIndex(1)}
-					selected={dayIndex === 1}
-					style={{padding:0}}
-				>
-					ПН
-				</TabsItem>
-				<TabsItem
-					onClick={() => setDayIndex(2)}
-					selected={dayIndex === 2}
-					style={{padding:0}}
-				>
-					ВТ
-				</TabsItem>
-				<TabsItem
-					onClick={() => setDayIndex(3)}
-					selected={dayIndex === 3}
-					style={{padding:0}}
-				>
-					СР
-				</TabsItem>
-				<TabsItem
-					onClick={() => setDayIndex(4)}
-					selected={dayIndex === 4}
-					style={{padding:0}}
-				>
-					ЧТ
-				</TabsItem>
-				<TabsItem
-					onClick={() => setDayIndex(5)}
-					selected={dayIndex === 5}
-					style={{padding:0}}
-				>
-					ПТ
-				</TabsItem>
-				<TabsItem
-					onClick={() => setDayIndex(6)}
-					selected={dayIndex === 6}
-					style={{padding:0}}
-				>
-					СБ
-				</TabsItem>
-			</Tabs>
+			<Week setTargetDayIndex={setTargetDayIndex} targetIndex={targetDayIndex}/>
 			<Div>
 				<Text weight="semibold">
-					day: {dayIndex}
+					day: {targetDayIndex}
 				</Text>
 				<Text weight="semibold">
 					grade: {grade}
 				</Text>
+					{[...timetable]?.map((el, index) => (<Div key={index}>{el.subject}</Div>) )}
+				<Task date='' topic='' homework='' mark='' />
 			</Div>
 		</>
 	);
