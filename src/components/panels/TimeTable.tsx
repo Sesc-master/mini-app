@@ -1,21 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import { FormItem, SelectMimicry, Tabs, Text, Div, Cell} from "@vkontakte/vkui";
 import '@vkontakte/vkui/dist/vkui.css';
-import { Table } from "../Table"
-import { sheduleLesson } from '../Schedule';
-import Task from '../task/Task'
-import Week from '../Week'
+import { Table } from "../../Modules/Table"
+import { sheduleLesson } from '../../Modules/Schedule';
+import Task from '../Task/Task';
+import Week from '../Week';
+import TimetableItem from '../TimetableItem/TimetableItem';
 
 type ISetActiveView = () => void;
 
-type ITimeTable = { 
+type ITimetable = { 
 	setActiveView: ISetActiveView,
 	grade: string
 }
 
-const TimeTable = ({setActiveView, grade} : ITimeTable) => {
+const Timetable = ({setActiveView, grade} : ITimetable) => {
 	const [targetDayIndex, setTargetDayIndex] = useState(1)
-	const [timetable, setTimetable] = useState<Array<sheduleLesson>>([])
+	const [Timetable, setTimetable] = useState<Array<sheduleLesson>>([])
 
 
 	useEffect(() => {
@@ -41,11 +42,11 @@ const TimeTable = ({setActiveView, grade} : ITimeTable) => {
 				<Text weight="semibold">
 					grade: {grade}
 				</Text>
-					{[...timetable]?.map((el, index) => (<Div key={index}>{el.subject}</Div>) )}
+					{[...Timetable]?.map((el, index) => (<Div key={index}>{el.subject}</Div>) )}
 				<Task date='' topic='' homework='' mark='' />
 			</Div>
 		</>
 	);
 }
 
-export default TimeTable;
+export default Timetable

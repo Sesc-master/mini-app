@@ -12,7 +12,7 @@ type IDay = {
 const Day = (props : IDay) => {
 	return(
 		<TabsItem
-            onClick={() => props.setTargetDayIndex(props.targetIndex)}
+            onClick={() => props.setTargetDayIndex(props.dayIndex)}
             selected={props.dayIndex === props.targetIndex}
             style={{padding:0}}
 				>

@@ -1,4 +1,4 @@
-import request from "./AllOriginsProxy";
+import request from "../Modules/AllOriginsProxy";
 
 export class baseLesson {
 	subject: string;
@@ -67,7 +67,7 @@ export class schedules {
 
 	private static scheduleFromJSON(parsedJSON: JSON | any) {
 		let result = new schedule();
-		Object.assign(result, parsedJSON); // `Ты кто такой чтобы это менять, блять`
+		Object.assign(result, parsedJSON);
 		return result;
 	}
 

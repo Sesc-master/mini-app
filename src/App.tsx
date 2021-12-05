@@ -4,12 +4,12 @@ import {ConfigProvider, AppRoot, Root, View, Panel} from "@vkontakte/vkui";
 import './index.css';
 
 import '@vkontakte/vkui/dist/vkui.css';
-import Navbar from './components/Navbar';
-import TimeTable from './components/panels/TimeTable';
-import AppHeader from './components/AppHeader';
-import Diary from './components/panels/Diary';
-import About from './components/panels/About';
-import Grades from './components/panels/Grades';
+import Navbar from './Components/Navbar';
+import Timetable from './Components/Panels/Timetable';
+import AppHeader from './Components/AppHeader';
+import Diary from './Components/Panels/Diary';
+import About from './Components/Panels/About';
+import Grades from './Components/Panels/Grades';
 
 const App = () => {
 	const [activeView, setActiveView] = useState('time-table')
@@ -34,7 +34,7 @@ const App = () => {
 					<View id="time-table" activePanel="panel">
 						<Panel id='panel'>
 							<AppHeader/>
-							<TimeTable grade={grade} setActiveView={() => setActiveView('grades')}/>
+							<Timetable grade={grade} setActiveView={() => setActiveView('grades')}/>
 						</Panel>
 					</View>
 					<View id="register" activePanel="panel">
