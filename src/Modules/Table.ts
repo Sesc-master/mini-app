@@ -1,4 +1,4 @@
-import { schedules, schedule, idableScheduleType, sheduleLesson } from "../Modules/Schedule";
+import { schedules, schedule, idableScheduleType, sсheduleLesson } from "../Modules/Schedule";
 
 
 export class Table {
@@ -23,9 +23,9 @@ export class Table {
 	static lessonCanceledName = "Нет";
 
 	public static listifySchedule(schedule: schedule) {
-		let result = new Array<Array<sheduleLesson>>();
+		let result = new Array<Array<sсheduleLesson>>();
 		for (let scheduleSlot = 0; scheduleSlot < this.maxLessons; scheduleSlot++) {
-			result.push(new Array<sheduleLesson>());
+			result.push(new Array<sсheduleLesson>());
 		}
 		schedule.lessons.forEach(lesson => result[lesson.number - 1].push(lesson));
 		console.log(result);

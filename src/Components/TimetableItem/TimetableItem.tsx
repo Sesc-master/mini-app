@@ -1,13 +1,13 @@
 import React from 'react';
 import {Text} from "@vkontakte/vkui";
 import styles from './TimetableItem.module.css'
-import {sheduleLesson} from '../../Modules/Schedule'
+import {sсheduleLesson} from '../../Modules/Schedule'
 
 import '@vkontakte/vkui/dist/vkui.css';
 
 type ITimetableItem = {
 	time : string [], 
-	schedule: sheduleLesson []
+	schedule: sсheduleLesson []
 }
 
 const TimetableItem = ({time, schedule}: ITimetableItem) => {

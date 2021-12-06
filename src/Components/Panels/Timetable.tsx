@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { FormItem, SelectMimicry, Tabs, Text, Div, Cell} from "@vkontakte/vkui";
 import '@vkontakte/vkui/dist/vkui.css';
 import { Table } from "../../Modules/Table"
-import { sheduleLesson } from '../../Modules/Schedule';
+import { sсheduleLesson } from '../../Modules/Schedule';
 import Task from '../Task/Task';
 import Week from '../Week';
 import ReactLoading from 'react-loading';
@@ -17,7 +17,7 @@ type ITimetable = {
 
 const Timetable = ({setActiveView, grade} : ITimetable) => {
 	const [targetDayIndex, setTargetDayIndex] = useState(1)
-	const [timetable, setTimetable] = useState<Array<Array<sheduleLesson>>>([])
+	const [timetable, setTimetable] = useState<Array<Array<sсheduleLesson>>>([])
 	const [isLoading, setIsLoading] = useState(false)
 	const times = [
 		['09:00', '09:40'],

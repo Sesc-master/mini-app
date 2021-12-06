@@ -26,7 +26,7 @@ export class fullSсhedule {
 	}
 }
 
-export class sheduleLesson extends baseLesson {
+export class sсheduleLesson extends baseLesson {
 	uid: number;
 	auditory: string;
 	subgroup: number;
@@ -40,8 +40,8 @@ export type scheduleType = idableScheduleType | "all";
 
 export class schedule {
 	type: scheduleType;
-	lessons: Array<sheduleLesson>;
-	diffs: Array<sheduleLesson>;
+	lessons: Array<sсheduleLesson>;
+	diffs: Array<sсheduleLesson>;
 }
 
 export class schedules {
