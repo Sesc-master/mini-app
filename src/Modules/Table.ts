@@ -1,11 +1,11 @@
-import { schedules, idableScheduleType } from "../Modules/Schedule";
+import { schedules, schedule, idableScheduleType, sheduleLesson } from "../Modules/Schedule";
 
 
 export class Table {
 	static teachers: any;
 	static auditories: any;
 	
-	public static getTable(scheduleType: idableScheduleType, weekday: number, grade: string){
+	public static getTable(scheduleType: idableScheduleType, weekday: number, grade: string) {
 		switch (scheduleType) {
 			case "group":
 				return schedules.getSchedule(scheduleType, weekday, Number(Table.grades.get(grade)));
@@ -19,7 +19,23 @@ export class Table {
 		// TODO: случай поеботы с нeкорректным типом, послать исключением
 	}
 
-	public static getFullTable(weekday: number){
+	static maxLessons = 7;
+
+	public static listifySchedule(schedule: schedule) {
+		let lessons = new Array<sheduleLesson>();
+
+		schedule.lessons.forEach(lesson => lessons.push(lesson));
+		schedule.diffs.forEach(lesson => lessons.push(lesson));
+
+		let result = new Array<Array<sheduleLesson>>();
+		for (let scheduleSlot = 0; scheduleSlot < this.maxLessons; scheduleSlot++) {
+			result.push(new Array<sheduleLesson>());
+		}
+		lessons.forEach(lesson => result[lesson.number - 1].push(lesson));
+		return result;
+	}
+
+	public static getFullTable(weekday: number) {
 		return schedules.getFullSchedule(weekday)
 	}
 
