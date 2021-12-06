@@ -1,6 +1,6 @@
 import React from 'react';
 import { Div, Text, Button} from "@vkontakte/vkui";
-import ico from "../Images/icon.svg"
+import ico from "../Images/Icon.svg"
 
 import '@vkontakte/vkui/dist/vkui.css';
 
