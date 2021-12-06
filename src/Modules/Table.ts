@@ -20,18 +20,34 @@ export class Table {
 	}
 
 	static maxLessons = 7;
+	static lessonCanceledName = "Нет";
 
 	public static listifySchedule(schedule: schedule) {
-		let lessons = new Array<sheduleLesson>();
-
-		schedule.lessons.forEach(lesson => lessons.push(lesson));
-		schedule.diffs.forEach(lesson => lessons.push(lesson));
-
 		let result = new Array<Array<sheduleLesson>>();
 		for (let scheduleSlot = 0; scheduleSlot < this.maxLessons; scheduleSlot++) {
 			result.push(new Array<sheduleLesson>());
 		}
-		lessons.forEach(lesson => result[lesson.number - 1].push(lesson));
+		schedule.lessons.forEach(lesson => result[lesson.number - 1].push(lesson));
+		console.log(result);
+		schedule.diffs.forEach(lesson => {
+			if (lesson.subject === this.lessonCanceledName) {
+				if (lesson.subgroup === 0) result[lesson.number - 1] = [];
+				else {
+					result[lesson.number - 1] = result[lesson.number - 1].filter(l => l.subgroup !== lesson.subgroup);
+				}
+			}
+			else if (result[lesson.number - 1].length === 0) {
+				result[lesson.number - 1].push(lesson);
+			}
+			else {
+				if (lesson.subgroup === 0) result[lesson.number - 1] = [lesson];
+				else {
+					result[lesson.number - 1].forEach(l => {
+						if (l.subgroup === lesson.subgroup) l = lesson;
+					});
+				}
+			}
+		});
 		return result;
 	}
 
