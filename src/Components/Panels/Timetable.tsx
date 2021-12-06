@@ -17,7 +17,7 @@ type ITimetable = {
 
 const Timetable = ({setActiveView, grade} : ITimetable) => {
 	const [targetDayIndex, setTargetDayIndex] = useState(1)
-	const [timetable, setTimetable] = useState<Array<sheduleLesson>>([])
+	const [timetable, setTimetable] = useState<Array<Array<sheduleLesson>>>([])
 	const [isLoading, setIsLoading] = useState(false)
 	const times = [
 		['09:00', '09:40'],
@@ -33,8 +33,10 @@ const Timetable = ({setActiveView, grade} : ITimetable) => {
 		setIsLoading(true)
 		Table.getTable("group", targetDayIndex, grade)
 			.then(result=> {
-				setTimetable(result.lessons);
-				setIsLoading(false)
+				let lessons = Table.listifySchedule(result)
+				setTimetable(lessons);
+				console.log(timetable)
+				setTimeout(() => setIsLoading(false), 300)
 			})
 	}, [grade, targetDayIndex])
 
@@ -47,17 +49,19 @@ const Timetable = ({setActiveView, grade} : ITimetable) => {
 				>{grade}</SelectMimicry>
 			</FormItem>
 			<Week setTargetDayIndex={setTargetDayIndex} targetIndex={targetDayIndex}/>
-			<Div>
-					{	!isLoading && timetable.length !== 0 ? 
-						[...timetable]?.map((el, index) => (<div key={index}>
-							<TimetableItem key={index} time={times[el.number - 1]} teacher={el?.teacher} auditory={el?.auditory} subgroup={1} subject={el.subject}/>
-						</div>) ) : 
-							<div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', paddingTop: '50px'}}>
-								<ReactLoading type={'spokes'} color={'#47a7f5'} height={100} width={100}/>
-							</div>
-					}
-				<Div style={{height: '20px'}}></Div>
-			</Div>
+			<div style={{paddingLeft: '2px', paddingRight: '2px'}}>
+				{	!isLoading && timetable.length !== 0 ? 
+					[...timetable]?.map((el, index) => (
+					<div key={index}>
+						{console.log(times[index], el)}
+						<TimetableItem schedule={el} time={times[index]}/>
+					</div>) ) : 
+					<div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', paddingTop: '50px'}}>
+						<ReactLoading type={'spokes'} color={'silver'} height={100} width={100}/>
+					</div>
+				}
+			</div>
+			<Div style={{height: '30px'}}></Div>
 		</>
 	);
 }
