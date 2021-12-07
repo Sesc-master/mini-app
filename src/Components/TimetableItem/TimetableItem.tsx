@@ -1,7 +1,7 @@
 import React from 'react';
 import {Text} from "@vkontakte/vkui";
 import styles from './TimetableItem.module.css'
-import {sсheduleLesson} from '../../Modules/Schedule'
+import {baseLesson, sсheduleLesson} from '../../Modules/Schedule'
 
 import '@vkontakte/vkui/dist/vkui.css';
 
@@ -13,20 +13,21 @@ type ITimetableItem = {
 const TimetableItem = ({time, schedule}: ITimetableItem) => {
 	if (schedule.length === 1){
 		let lesson = schedule[0]
+		console.log(lesson.subgroup)
 		return (
 			<div className={styles.task} id='ripple'>
 				<div className={styles.date}>
-					<Text weight="semibold" style={{ display: 'flex', color: 'white'}}>
+					<Text weight="semibold" >
 						{time[0]}
 					</Text>
-					<Text weight="semibold" style={{ display: 'flex', color: 'white'}}>
+					<Text weight="semibold" >
 						{time[1]}	
 					</Text>
 				</div>
 				<div className={styles.stick}></div>
 				<div style={{paddingLeft: '5px', overflowX: 'hidden'}}>
-					<Text weight="semibold" style={{color: 'white'}}>{lesson.subject}</Text>
-					<Text weight="regular" style={{color: 'white'}}>{lesson.teacher.split(' ')[0]} {lesson.auditory}</Text>
+					<Text weight="semibold">{lesson?.subject}</Text>
+					<Text weight="regular">{lesson?.teacher.split(' ')[0]} {lesson.auditory}</Text>
 				</div>
 			</div>
 		)
@@ -34,44 +35,42 @@ const TimetableItem = ({time, schedule}: ITimetableItem) => {
 		let lesson = schedule[0]
 		let lesson2 = schedule[1]
 		return (
-			<div style={{display: 'flex', padding: 0, margin: 0, border: 0}}>
-				<div className={styles.task} id='ripple' style={{width: '55%'}}>
+				<div className={styles.task} id='ripple'>
 					<div className={styles.date}>
-						<Text weight="semibold" style={{ display: 'flex', color: 'white'}}>
+						<Text weight="semibold">
 							{time[0]}
 						</Text>
-						<Text weight="semibold" style={{ display: 'flex', color: 'white'}}>
+						<Text weight="semibold">
 							{time[1]}	
 						</Text>
 					</div>
 					<div className={styles.stick}></div>
-					<div style={{paddingLeft: '5px', overflowX: 'hidden'}}>
-						<Text weight="semibold" style={{color: 'white'}}>{lesson.subject}</Text>
-						<Text weight="regular" style={{color: 'white'}}>{lesson.teacher.split(' ')[0]} {lesson.auditory}</Text>
+					<div style={{paddingLeft: '5px', overflowX: 'hidden', width: '37%'}}>
+						<Text weight="semibold">{lesson.subject}</Text>
+						<Text weight="regular">{lesson.teacher.split(' ')[0]} {lesson.auditory}</Text>
 					</div>
-				</div>
-				<div className={styles.task} id='ripple' style={{width: '44%', marginLeft: '1%'}}>
-					<div style={{paddingLeft: '5px', overflowX: 'hidden'}}>
-						<Text weight="semibold" style={{color: 'white'}}>{lesson2.subject}</Text>
-						<Text weight="regular" style={{color: 'white'}}>{lesson2.teacher.split(' ')[0]} {lesson2.auditory}</Text>
+					<div className={styles.stick}></div>
+					<div style={{paddingLeft: '5px', overflowX: 'hidden', width: '40%'}}>
+						<Text weight="semibold">{lesson2.subject}</Text>
+						<Text weight="regular">{lesson2.teacher.split(' ')[0]} {lesson2.auditory}</Text>
 					</div>
+
 				</div>
-			</div>
 		)
 	} else {
 		return(	
 		<div className={styles.task} id='ripple'>
 			<div className={styles.date}>
-				<Text weight="semibold" style={{ display: 'flex', color: 'white'}}>
+				<Text weight="semibold">
 					{time[0]}
 				</Text>
-				<Text weight="semibold" style={{ display: 'flex', color: 'white'}}>
+				<Text weight="semibold">
 					{time[1]}	
 				</Text>
 			</div>
 			<div className={styles.stick}></div>
 			<div style={{paddingLeft: '5px', overflowX: 'hidden'}}>
-				<Text weight="semibold" style={{color: 'white'}}>-</Text>
+				<Text weight="semibold">-</Text>
 			</div>
 		</div>
 		)

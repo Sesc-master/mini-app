@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef} from 'react';
 import { FormItem, SelectMimicry, Tabs, Text, Div, Cell} from "@vkontakte/vkui";
 import '@vkontakte/vkui/dist/vkui.css';
 import { Table } from "../../Modules/Table"
@@ -19,6 +19,7 @@ const Timetable = ({setActiveView, grade} : ITimetable) => {
 	const [targetDayIndex, setTargetDayIndex] = useState(1)
 	const [timetable, setTimetable] = useState<Array<Array<sсheduleLesson>>>([])
 	const [isLoading, setIsLoading] = useState(false)
+	const [isFirstRender, setIsFirstRender] = useState(true)
 	const times = [
 		['09:00', '09:40'],
 		['09:50', '10:30'],
@@ -30,12 +31,14 @@ const Timetable = ({setActiveView, grade} : ITimetable) => {
 	]
 
 	useEffect(() => {
+		if (isFirstRender){
+			setIsFirstRender(false)
+		}
 		setIsLoading(true)
 		Table.getTable("group", targetDayIndex, grade)
 			.then(result=> {
 				let lessons = Table.listifySchedule(result)
 				setTimetable(lessons);
-				console.log(timetable)
 				setTimeout(() => setIsLoading(false), 300)
 			})
 	}, [grade, targetDayIndex])
@@ -50,10 +53,14 @@ const Timetable = ({setActiveView, grade} : ITimetable) => {
 			</FormItem>
 			<Week setTargetDayIndex={setTargetDayIndex} targetIndex={targetDayIndex}/>
 			<div style={{paddingLeft: '2px', paddingRight: '2px'}}>
-				{	!isLoading && timetable.length !== 0 ? 
+				{!grade ? (
+					<div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', paddingTop: '50px'}}>
+						<Text weight="semibold" >Выберите класс и день недели</Text>
+					</div>) :
+					!isLoading && timetable.length !== 0 ? 
 					[...timetable]?.map((el, index) => (
 					<div key={index}>
-						{console.log(times[index], el)}
+						{console.log(el[0]?.subgroup)}
 						<TimetableItem schedule={el} time={times[index]}/>
 					</div>) ) : 
 					<div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', paddingTop: '50px'}}>

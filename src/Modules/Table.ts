@@ -28,7 +28,7 @@ export class Table {
 			result.push(new Array<sсheduleLesson>());
 		}
 		schedule.lessons.forEach(lesson => result[lesson.number - 1].push(lesson));
-		console.log(result);
+		//console.log(result);
 		schedule.diffs.forEach(lesson => {
 			if (lesson.subject === this.lessonCanceledName) {
 				if (lesson.subgroup === 0) result[lesson.number - 1] = [];
