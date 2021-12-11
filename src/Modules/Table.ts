@@ -19,38 +19,6 @@ export class Table {
 		// TODO: случай поеботы с нeкорректным типом, послать исключением
 	}
 
-	static maxLessons = 7;
-	static lessonCanceledName = "Нет";
-
-	public static listifySchedule(schedule: schedule) {
-		let result = new Array<Array<sсheduleLesson>>();
-		for (let scheduleSlot = 0; scheduleSlot < this.maxLessons; scheduleSlot++) {
-			result.push(new Array<sсheduleLesson>());
-		}
-		schedule.lessons.forEach(lesson => result[lesson.number - 1].push(lesson));
-		//console.log(result);
-		schedule.diffs.forEach(lesson => {
-			if (lesson.subject === this.lessonCanceledName) {
-				if (lesson.subgroup === 0) result[lesson.number - 1] = [];
-				else {
-					result[lesson.number - 1] = result[lesson.number - 1].filter(l => l.subgroup !== lesson.subgroup);
-				}
-			}
-			else if (result[lesson.number - 1].length === 0) {
-				result[lesson.number - 1].push(lesson);
-			}
-			else {
-				if (lesson.subgroup === 0) result[lesson.number - 1] = [lesson];
-				else {
-					result[lesson.number - 1].forEach(l => {
-						if (l.subgroup === lesson.subgroup) l = lesson;
-					});
-				}
-			}
-		});
-		return result;
-	}
-
 	public static getFullTable(weekday: number) {
 		return schedules.getFullSchedule(weekday)
 	}

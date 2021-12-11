@@ -7,6 +7,7 @@ import Task from '../Task/Task';
 import Week from '../Week';
 import ReactLoading from 'react-loading';
 import TimetableItem from '../TimetableItem/TimetableItem';
+import listifySchedule from "../../Modules/ListifySchedule";
 
 type ISetActiveView = () => void;
 
@@ -37,7 +38,7 @@ const Timetable = ({setActiveView, grade} : ITimetable) => {
 		setIsLoading(true)
 		Table.getTable("group", targetDayIndex, grade)
 			.then(result=> {
-				let lessons = Table.listifySchedule(result)
+				let lessons = listifySchedule(result)
 				setTimetable(lessons);
 				setTimeout(() => setIsLoading(false), 300)
 			})
