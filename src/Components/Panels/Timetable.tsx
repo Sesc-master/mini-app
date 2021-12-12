@@ -57,11 +57,9 @@ const Timetable = ({setActiveView, grade} : ITimetable) => {
 				{!grade ? (
 					<div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', paddingTop: '50px'}}>
 						<Text weight="semibold" >Выберите класс и день недели</Text>
-					</div>) :
-					!isLoading && timetable.length !== 0 ? 
+					</div>) : !isLoading && timetable.length !== 0 ? 
 					[...timetable]?.map((el, index) => (
 					<div key={index}>
-						{console.log(el[0]?.subgroup)}
 						<TimetableItem schedule={el} time={times[index]}/>
 					</div>) ) : 
 					<div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', paddingTop: '50px'}}>
