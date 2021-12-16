@@ -1,6 +1,7 @@
 import React from 'react';
-import { Div, Text, Button} from "@vkontakte/vkui";
+import { Div, Button} from "@vkontakte/vkui";
 import ico from "../Images/Icon.svg"
+import '../../Styles/About.css'
 
 import '@vkontakte/vkui/dist/vkui.css';
 
@@ -9,20 +10,20 @@ const About = () => {
 	return (
 		<Div style={{ display: 'flex', alignItems: 'center', flexDirection: 'column'}}>
 			<Div>
-				<img alt='master' src={ico} style={{height: '125px', borderRadius: '10px'}}/>
+				<img alt='master' src={ico} className='icon'/>
 			</Div>
 			<Div>
-				<Text style={{ textAlign: 'center' }} weight={"semibold"}>SESC Master</Text>
+				<h1 className='app-name'>SESC Master</h1>
 			</Div>
-			<Div style={{ width:'100%'}}>
+			<Div className='link'>
 				<Button size="l" stretched  mode="outline" >Группа ВК</Button>
-     	</Div>
-			 <Div style={{ width:'100%'}}>
+     		</Div>
+			 <Div className='link'>
 				<Button size="l" stretched  mode="outline" >Найти свободный кабинет</Button>
-     	</Div>
-			<Div style={{ width:'100%'}}>
-				<Button size="l" stretched  mode="destructive">Выйти из Дневника</Button>
-     	</Div>
+			</Div>
+			<Div className='link'>
+					<Button size="l" stretched  mode="destructive">Выйти из Дневника</Button>
+			</Div>
 		</Div>
 	);
 }

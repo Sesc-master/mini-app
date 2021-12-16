@@ -17,7 +17,7 @@ const Day = (props : IDay) => {
             style={{padding:0}}
 				>
 					{props.name}
-				</TabsItem>
+		</TabsItem>
 	)
 }
 

@@ -1,13 +1,13 @@
-import React, { useState, useEffect, useRef} from 'react';
-import { FormItem, SelectMimicry, Tabs, Text, Div, Cell} from "@vkontakte/vkui";
+import React, { useState, useEffect, } from 'react';
+import { FormItem, SelectMimicry, Text, Div, } from "@vkontakte/vkui";
 import '@vkontakte/vkui/dist/vkui.css';
 import { Table } from "../../Modules/Table"
-import { sсheduleLesson } from '../../Modules/Schedule';
-import Task from '../Task/Task';
 import Week from '../Week';
 import ReactLoading from 'react-loading';
-import TimetableItem from '../TimetableItem/TimetableItem';
-import listifySchedule from "../../Modules/ListifySchedule";
+import TimetableItem from '../TimetableItem';
+import {listifySchedule} from "../../Modules/ListifySchedule";
+import {TimetableElement} from "../../Modules/ListifySchedule";
+import '../../Styles/Timetable.css'
 
 type ISetActiveView = () => void;
 
@@ -16,11 +16,35 @@ type ITimetable = {
 	grade: string
 }
 
+const renderInstruction = () => {
+	return (
+		<div className='loader'>
+			<Text weight="semibold" >Выберите класс и день недели</Text>
+		</div>
+	)
+}
+
+const renderLoader = () => {
+	return (					
+		<div className='loader'>
+			<ReactLoading type={'spokes'} color={'silver'} height={100} width={100}/>
+		</div>
+	)
+}
+
+const renderError = () => {
+	return (
+		<Text weight='semibold'>Что-то пошло не так</Text>
+	)
+}
+
+
 const Timetable = ({setActiveView, grade} : ITimetable) => {
 	const [targetDayIndex, setTargetDayIndex] = useState(1)
-	const [timetable, setTimetable] = useState<Array<Array<sсheduleLesson>>>([])
+	const [timetable, setTimetable] = useState<Array<TimetableElement>>([])
 	const [isLoading, setIsLoading] = useState(false)
 	const [isFirstRender, setIsFirstRender] = useState(true)
+	const [isError, setIsError] = useState(false)
 	const times = [
 		['09:00', '09:40'],
 		['09:50', '10:30'],
@@ -32,16 +56,20 @@ const Timetable = ({setActiveView, grade} : ITimetable) => {
 	]
 
 	useEffect(() => {
-		if (isFirstRender){
-			setIsFirstRender(false)
+		try {
+			if (isFirstRender){
+				setIsFirstRender(false)
+			}
+			setIsLoading(true)
+			Table.getTable("group", targetDayIndex, grade)
+				.then(result=> {
+					let lessons = listifySchedule(result)
+					setTimetable(lessons);
+					setTimeout(() => setIsLoading(false), 300)
+				})
+		}catch {
+			setIsError(true);
 		}
-		setIsLoading(true)
-		Table.getTable("group", targetDayIndex, grade)
-			.then(result=> {
-				let lessons = listifySchedule(result)
-				setTimetable(lessons);
-				setTimeout(() => setIsLoading(false), 300)
-			})
 	}, [grade, targetDayIndex])
 
 	return (
@@ -53,21 +81,19 @@ const Timetable = ({setActiveView, grade} : ITimetable) => {
 				>{grade}</SelectMimicry>
 			</FormItem>
 			<Week setTargetDayIndex={setTargetDayIndex} targetIndex={targetDayIndex}/>
-			<div style={{paddingLeft: '2px', paddingRight: '2px'}}>
-				{!grade ? (
-					<div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', paddingTop: '50px'}}>
-						<Text weight="semibold" >Выберите класс и день недели</Text>
-					</div>) : !isLoading && timetable.length !== 0 ? 
-					[...timetable]?.map((el, index) => (
-					<div key={index}>
-						<TimetableItem schedule={el} time={times[index]}/>
-					</div>) ) : 
-					<div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', paddingTop: '50px'}}>
-						<ReactLoading type={'spokes'} color={'silver'} height={100} width={100}/>
-					</div>
+			<div className='elements'>
+				{
+					isError ? renderError() : 
+					grade === '' ? renderInstruction() : 
+					isLoading === false && timetable.length !== 0 ? 
+						[...timetable]?.map((el, index) => (
+						<div key={index}>
+							<TimetableItem schedule={el} time={times[index]}/>
+						</div>) ) : 
+					renderLoader()
 				}
 			</div>
-			<Div style={{height: '30px'}}></Div>
+			<Div className='end'></Div>
 		</>
 	);
 }

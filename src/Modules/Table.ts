@@ -1,4 +1,4 @@
-import { schedules, schedule, idableScheduleType, sсheduleLesson } from "../Modules/Schedule";
+import { schedules, idableScheduleType,} from "../Modules/Schedule";
 
 
 export class Table {

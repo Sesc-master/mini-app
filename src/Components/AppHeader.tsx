@@ -6,7 +6,7 @@ import '@vkontakte/vkui/dist/vkui.css';
 
 const AppHeader = () => {
     return(
-        <PanelHeader fixed={false} style={{fontFamily: 'sans-serif'}}>SESC Master</PanelHeader>
+        <PanelHeader fixed={false}>SESC Master</PanelHeader>
     )
 }
 

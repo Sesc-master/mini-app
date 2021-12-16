@@ -1,9 +1,15 @@
 import { sсheduleLesson, schedule } from "./Schedule";
 
 const maxLessons = 7;
-const lessonCanceledName = "Нет";
 
-export default function listifySchedule (schedule: schedule) {
+export class TimetableElement {
+    firstGroupLesson: sсheduleLesson | undefined
+    secondGroupLesson: sсheduleLesson | undefined
+    commonLesson: sсheduleLesson | undefined
+    isCommonLesson: Boolean | undefined
+}
+
+export function listifySchedule (schedule: schedule) : Array<TimetableElement>{
     let lessons = new Array<Array<sсheduleLesson>>(), changes = new Array<Array<sсheduleLesson>>();
     for (let scheduleSlot = 0; scheduleSlot < maxLessons; scheduleSlot++) {
         changes.push(new Array<sсheduleLesson>());
@@ -12,12 +18,41 @@ export default function listifySchedule (schedule: schedule) {
     schedule.lessons.forEach(lesson => lessons[lesson.number - 1].push(lesson));
     schedule.diffs.forEach(lesson => changes[lesson.number - 1].push(lesson));
 
-    for (let lessonNumber = 0; lessonNumber < maxLessons; lessonNumber++) {
-        if (changes[lessonNumber].length != 0) {
-            lessons[lessonNumber] = changes[lessonNumber];
-        }
-        lessons[lessonNumber] = lessons[lessonNumber].filter(lesson => lesson.subject != lessonCanceledName);
+    let timetableItems = new Array<TimetableElement>()
+
+    for (let i = 0; i <= 6; i++){
+        timetableItems.push(new TimetableElement())
     }
-    
-    return lessons;
+
+    schedule.lessons.forEach((element) => {
+        if (element === undefined) return;
+
+        if (element.subgroup === 0){
+            timetableItems[element.number - 1].isCommonLesson = true
+            timetableItems[element.number - 1].commonLesson = element
+        }else if(element.subgroup === 1){
+            timetableItems[element.number - 1].isCommonLesson = false
+            timetableItems[element.number - 1].firstGroupLesson = element
+        }else {
+            timetableItems[element.number - 1].isCommonLesson = false
+            timetableItems[element.number - 1].secondGroupLesson = element
+        }
+    })
+
+    schedule.diffs.forEach((element) => {
+        if (element === undefined) return;
+
+        if (element.subgroup === 0){
+            timetableItems[element.number - 1].isCommonLesson = true
+            timetableItems[element.number - 1].commonLesson = element
+        }else if(element.subgroup === 1){
+            timetableItems[element.number - 1].isCommonLesson = false
+            timetableItems[element.number - 1].firstGroupLesson = element
+        }else {
+            timetableItems[element.number - 1].isCommonLesson = false
+            timetableItems[element.number - 1].secondGroupLesson = element
+        }
+    })
+
+    return timetableItems
 };

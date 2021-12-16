@@ -1,0 +1,15 @@
+.loader {
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+    padding-top: 50px;
+}
+
+.elements {
+    padding-left: 2px;
+    padding-right: 2px;
+}
+
+.end {
+    height: 30px;
+}
