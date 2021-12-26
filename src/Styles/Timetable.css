@@ -18,6 +18,14 @@
     padding-right: 2px;
 }
 
+.error {
+    padding-top: 20px;
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+    font-size: 25px;
+}
+
 .end {
     height: 30px;
 }

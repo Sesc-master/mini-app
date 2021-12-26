@@ -39,7 +39,10 @@ const renderLoader = (times: string [][]) => {
 
 const renderError = () => {
 	return (
-		<Text weight='semibold'>Что-то пошло не так</Text>
+		<>
+			<Text className="error" weight='semibold'>Что-то пошло не так</Text>
+			<Text className="error" weight='semibold'>¯\_(ツ)_/¯</Text>
+		</>
 	)
 }
 
@@ -61,7 +64,7 @@ const Timetable = ({setActiveView, grade} : ITimetable) => {
 
 	const isTimetableRendering = !isError && !isLoading && !!timetable.length && grade !== ''
 	const isInstructionRendering = !isError && grade === ''
-	const isLoaderRendering = isLoading && grade !== ''
+	const isLoaderRendering = !isError && isLoading && grade !== ''
 
 	useEffect(() => {
 		try {
@@ -72,6 +75,7 @@ const Timetable = ({setActiveView, grade} : ITimetable) => {
 					setTimetable(lessons);
 					setIsLoading(false)
 				})
+				.catch(() => setIsError(true))
 		}catch {
 			setIsError(true);
 		}
