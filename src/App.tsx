@@ -28,8 +28,8 @@ const App = () => {
 	}, []);
 
 	return (
-		<ConfigProvider>
-			<AppRoot>
+		<ConfigProvider scheme="space_gray">
+			<AppRoot >
 				<Navbar setActiveView={(view) => setActiveView(view)}/>
 				<Root activeView={activeView}>
 					<View id="time-table" activePanel="panel">

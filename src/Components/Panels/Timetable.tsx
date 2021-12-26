@@ -8,6 +8,7 @@ import TimetableItem from '../TimetableItem';
 import {listifySchedule} from "../../Modules/ListifySchedule";
 import {TimetableElement} from "../../Modules/ListifySchedule";
 import '../../Styles/Timetable.css'
+import TimetableItemLoader from '../TimetableItemLoader'
 
 type ISetActiveView = () => void;
 
@@ -18,18 +19,22 @@ type ITimetable = {
 
 const renderInstruction = () => {
 	return (
-		<div className='loader'>
+		<div className='instruction'>
 			<Text weight="semibold" >Выберите класс и день недели</Text>
 		</div>
 	)
 }
 
 const renderLoader = () => {
-	return (					
-		<div className='loader'>
-			<ReactLoading type={'spokes'} color={'silver'} height={100} width={100}/>
-		</div>
+	return (
+		<>
+			{Array(7).fill(<TimetableItemLoader />)}
+			<div className="loader">
+				<ReactLoading color="gray" type='spin' height="20px" width="20px"/>
+			</div>
+		</>
 	)
+	
 }
 
 const renderError = () => {
@@ -38,13 +43,16 @@ const renderError = () => {
 	)
 }
 
-
 const Timetable = ({setActiveView, grade} : ITimetable) => {
 	const [targetDayIndex, setTargetDayIndex] = useState(1)
 	const [timetable, setTimetable] = useState<Array<TimetableElement>>([])
+	const [render, setRender] = useState({
+		isLoading: false,
+		isError: false,
+	})
 	const [isLoading, setIsLoading] = useState(false)
-	const [isFirstRender, setIsFirstRender] = useState(true)
 	const [isError, setIsError] = useState(false)
+
 	const times = [
 		['09:00', '09:40'],
 		['09:50', '10:30'],
@@ -55,17 +63,18 @@ const Timetable = ({setActiveView, grade} : ITimetable) => {
 		['14:35', '15:15']
 	]
 
+	const isTimetableRendering = !isError && !isLoading && !!timetable.length && grade !== ''
+	const isInstructionRendering = !isError && grade === ''
+	const isLoaderRendering = isLoading && grade !== ''
+
 	useEffect(() => {
 		try {
-			if (isFirstRender){
-				setIsFirstRender(false)
-			}
 			setIsLoading(true)
 			Table.getTable("group", targetDayIndex, grade)
 				.then(result=> {
 					let lessons = listifySchedule(result)
 					setTimetable(lessons);
-					setTimeout(() => setIsLoading(false), 300)
+					setIsLoading(false)
 				})
 		}catch {
 			setIsError(true);
@@ -82,16 +91,15 @@ const Timetable = ({setActiveView, grade} : ITimetable) => {
 			</FormItem>
 			<Week setTargetDayIndex={setTargetDayIndex} targetIndex={targetDayIndex}/>
 			<div className='elements'>
-				{
-					isError ? renderError() : 
-					grade === '' ? renderInstruction() : 
-					isLoading === false && timetable.length !== 0 ? 
-						[...timetable]?.map((el, index) => (
+				{isError && renderError()}
+				{isInstructionRendering && renderInstruction()}
+				{isTimetableRendering && (
+					[...timetable]?.map((el, index) => (
 						<div key={index}>
 							<TimetableItem schedule={el} time={times[index]}/>
-						</div>) ) : 
-					renderLoader()
-				}
+						</div>)
+				))}
+				{isLoaderRendering && renderLoader()}
 			</div>
 			<Div className='end'></Div>
 		</>
