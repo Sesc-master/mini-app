@@ -37,6 +37,15 @@ const renderLoader = (times: string [][]) => {
 	
 }
 
+const renderTimetable = (timetable: TimetableElement [], times: string [][]) => {
+	return (
+		[...timetable]?.map((el, index) => (
+			<div key={index}>
+				<TimetableItem schedule={el} time={times[index]}/>
+			</div>)
+	))
+}
+
 const renderError = () => {
 	return (
 		<>
@@ -93,12 +102,7 @@ const Timetable = ({setActiveView, grade} : ITimetable) => {
 			<div className='elements'>
 				{isError && renderError()}
 				{isInstructionRendering && renderInstruction()}
-				{isTimetableRendering && (
-					[...timetable]?.map((el, index) => (
-						<div key={index}>
-							<TimetableItem schedule={el} time={times[index]}/>
-						</div>)
-				))}
+				{isTimetableRendering && renderTimetable(timetable, times)}
 				{isLoaderRendering && renderLoader(times)}
 			</div>
 			<Div className='end'></Div>
