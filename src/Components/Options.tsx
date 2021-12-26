@@ -2,7 +2,8 @@
 import React from 'react';
 
 import '@vkontakte/vkui/dist/vkui.css';
-import { List, Cell} from "@vkontakte/vkui";
+import { List, Div } from "@vkontakte/vkui";
+import '../Styles/Option.css'
 
 type ISetOptions = (option: string) => void;
 
@@ -14,7 +15,7 @@ type IOptions = {
 const Options = ({options, setOption}: IOptions) => {
 	return (
 		<List>
-			{options?.map((option, index) => (<Cell key={index} onClick={() => setOption(option)}>{option}</Cell>))}
+			{options?.map((option, index) => (<Div key={index} onClick={() => setOption(option)} className="option">{option}</Div>))}
 		</List>	
 	);
 }

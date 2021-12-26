@@ -25,10 +25,10 @@ const renderInstruction = () => {
 	)
 }
 
-const renderLoader = () => {
+const renderLoader = (times: string [][]) => {
 	return (
 		<>
-			{Array(7).fill(<TimetableItemLoader />)}
+			{times.map((time, index) => <div key={index}><TimetableItemLoader time={time}/></div>)}
 			<div className="loader">
 				<ReactLoading color="gray" type='spin' height="20px" width="20px"/>
 			</div>
@@ -46,10 +46,6 @@ const renderError = () => {
 const Timetable = ({setActiveView, grade} : ITimetable) => {
 	const [targetDayIndex, setTargetDayIndex] = useState(1)
 	const [timetable, setTimetable] = useState<Array<TimetableElement>>([])
-	const [render, setRender] = useState({
-		isLoading: false,
-		isError: false,
-	})
 	const [isLoading, setIsLoading] = useState(false)
 	const [isError, setIsError] = useState(false)
 
@@ -99,7 +95,7 @@ const Timetable = ({setActiveView, grade} : ITimetable) => {
 							<TimetableItem schedule={el} time={times[index]}/>
 						</div>)
 				))}
-				{isLoaderRendering && renderLoader()}
+				{isLoaderRendering && renderLoader(times)}
 			</div>
 			<Div className='end'></Div>
 		</>

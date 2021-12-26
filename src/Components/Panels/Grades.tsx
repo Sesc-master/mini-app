@@ -20,7 +20,7 @@ const Grades = ({setGrade, setActiveView} : IGrades) => {
 
 	return (
     <>
-      {gradeName === '' && <Options options={Object?.keys({...grades})} setOption={setGradeName}/>}
+      {gradeName === '' && <Options options={Object?.keys({...grades})} setOption={(option) => setTimeout(() => setGradeName(option), 100)}/>}
       {gradeName !== '' && <Options options={Object.assign({...grades}[gradeName], [])} setOption={(grade) => {setGrade(grade); setActiveView()}}/>}
     </>
 	);

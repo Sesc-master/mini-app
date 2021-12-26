@@ -1,12 +1,24 @@
 import React from 'react';
-import '../Styles/TimetableItem.css'
-import ReactLoading from 'react-loading';
+import '../Styles/TimetableItem.css';
+import {Text} from "@vkontakte/vkui";
 
+type ITimetableItemLoader = {
+    time: string []
+}
 
-
-const TimetableItemLoader = () => {
+const TimetableItemLoader = (props : ITimetableItemLoader) => {
+    const {time} = props
     return (
         <div className='task'>
+            <div className='date'>
+				<Text weight="semibold">
+					{time[0]}
+				</Text>
+				<Text weight="semibold">
+                    {time[1]}
+				</Text>
+			</div>
+            <div className='stick'></div>
         </div>
     )
 }; 
