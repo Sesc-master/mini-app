@@ -16,13 +16,21 @@ export class fullSсhedule {
 		}
 		else return false;
 	}
-	public getFreeAuditories(lessonNumber: number): Array<string> {
+	public getFreeAuditoriesOnLesson(lessonNumber: number): Array<string> {
 		let freeAuditories: Array<string> = [];
 		console.log(this.auditories);
 		this.auditories.forEach((lessons, auditory) => {
 			if (lessons[lessonNumber] === false) freeAuditories.push(auditory);
 		});
 		return freeAuditories;
+	}
+	public getFreeAuditories(): Array<Array<string>> {
+		let maxLessons: number = this.auditories.values().next().value.length;
+		let result = new Array<Array<string>>(maxLessons);
+		for (let lesson = 0; lesson < maxLessons; lesson++) {
+			result[lesson] = this.getFreeAuditoriesOnLesson(lesson);
+		}
+		return result;
 	}
 }
 
