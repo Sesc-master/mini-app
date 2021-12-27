@@ -1,3 +1,4 @@
+import Lesson from "../Components/Lesson";
 import request from "../Modules/AllOriginsProxy";
 
 export class baseLesson {
@@ -7,6 +8,8 @@ export class baseLesson {
 }
 
 export class fullSсhedule {
+	public static ignoringAuditories: Array<string> = ["Общежитие", "Библиотека", "Нет"];
+
 	auditories: Map<string, Array<baseLesson | boolean>>;
 
 	public isFreeAuditory(auditory: string, lessonNumber: number): Boolean {
@@ -20,7 +23,7 @@ export class fullSсhedule {
 		let freeAuditories: Array<string> = [];
 		console.log(this.auditories);
 		this.auditories.forEach((lessons, auditory) => {
-			if (lessons[lessonNumber] === false) freeAuditories.push(auditory);
+			if (lessons[lessonNumber] === false && !fullSсhedule.ignoringAuditories.includes(auditory)) freeAuditories.push(auditory);
 		});
 		return freeAuditories;
 	}
@@ -91,6 +94,7 @@ export class schedules {
 		})
 	}
 	public static async getSchedule(scheduleType: idableScheduleType, weekday: number, id: number) {
+		console.log((await this.getFullSchedule(weekday)).getFreeAuditories())
 		return this.request(scheduleType, weekday, id)
 		.then(schedules.scheduleFromJSON);
 	}
