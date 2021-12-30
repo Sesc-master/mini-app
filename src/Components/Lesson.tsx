@@ -1,13 +1,13 @@
 import React from 'react';
 import {Text} from "@vkontakte/vkui";
-import {sсheduleLesson} from '../Modules/Schedule'
+import {SсheduleLesson} from '../Modules/Schedule'
 import '../Styles/Lesson.css'
   
 
 import '@vkontakte/vkui/dist/vkui.css';
 
 type ILesson = {
-    lesson: sсheduleLesson | undefined,
+    lesson: SсheduleLesson | undefined,
 }
 
 const Lesson = ({lesson}: ILesson) => {
