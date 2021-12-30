@@ -22,6 +22,6 @@
         "lines-between-class-members": "off"
         //"@typescript-eslint/quotes": ["error", "double", "avoid-escape"],
         //"@typescript-eslint/explicit-function-return-type": ["error"],
-        //"brace-style": ["error", "1tbs", { "allowSingleLine": true }]
+        //"brace-style": ["error", "stroustrup", { "allowSingleLine": true }]
     }
 }

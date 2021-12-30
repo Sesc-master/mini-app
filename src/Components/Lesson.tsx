@@ -1,6 +1,6 @@
 import React from 'react';
 import {Text} from "@vkontakte/vkui";
-import {SсheduleLesson} from '../Modules/Schedule'
+import { SсheduleLesson } from '../Modules/Schedule/ScheduleLesson';
 import '../Styles/Lesson.css'
   
 

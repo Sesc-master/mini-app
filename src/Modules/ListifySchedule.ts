@@ -1,4 +1,5 @@
-import { SсheduleLesson, Schedule } from "./Schedule";
+import { Schedule } from "./Schedule/Schedule";
+import { SсheduleLesson } from "./Schedule/ScheduleLesson";
 
 const maxLessons = 7;
 

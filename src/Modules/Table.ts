@@ -1,4 +1,5 @@
-import { Schedules, IdableScheduleType,} from "../Modules/Schedule";
+import { getSchedule, getFullSchedule} from "./Schedule";
+import { IdableScheduleType } from "./Schedule/Schedule";
 
 
 export class Table {
@@ -8,19 +9,19 @@ export class Table {
     public static getTable(scheduleType: IdableScheduleType, weekday: number, grade: string) {
         switch (scheduleType) {
             case "group":
-                return Schedules.getSchedule(scheduleType, weekday, Number(Table.grades.get(grade)));
+                return getSchedule(scheduleType, weekday, Number(Table.grades.get(grade)));
             case "teacher":
                 // TODO: парсить учителей и их id
-                return Schedules.getSchedule(scheduleType, weekday, Number(Table.grades.get(grade)));
+                return getSchedule(scheduleType, weekday, Number(Table.grades.get(grade)));
             case "auditory":
                 // TODO: парсить кабинеты и их id
-                return Schedules.getSchedule(scheduleType, weekday, Number(Table.grades.get(grade)));
+                return getSchedule(scheduleType, weekday, Number(Table.grades.get(grade)));
         }
         // TODO: случай поеботы с нeкорректным типом, послать исключением
     }
 
     public static getFullTable(weekday: number) {
-        return Schedules.getFullSchedule(weekday)
+        return getFullSchedule(weekday)
     }
 
     private static grades: Map<string, number> = new Map([
