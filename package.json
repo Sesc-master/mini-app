@@ -30,13 +30,9 @@
     "build": "craco build",
     "eject": "react-scripts eject",
     "build:css": "postcss src/tailwind.css -o src/index.css",
-    "watch": ""
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
+    "watch": "",
+    "lint": "npx eslint ./src/**/*.{tsx,ts}",
+    "lint:fix": "npx eslint --fix ./src/**/*.{tsx,ts}"
   },
   "browserslist": {
     "production": [
