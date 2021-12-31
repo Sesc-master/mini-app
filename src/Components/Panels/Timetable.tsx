@@ -19,9 +19,8 @@ type ITimetable = {
 
 const renderInstruction = () => {
 	return (
-		<div className='instruction'>
-			<Text weight="semibold" >Выберите класс и день недели</Text>
-		</div>
+		<Text className='instruction' weight="semibold" >Выберите класс и день недели</Text>
+
 	)
 }
 
@@ -30,7 +29,7 @@ const renderLoader = (times: string [][]) => {
 		<>
 			{times.map((time, index) => <div key={index}><TimetableItemLoader time={time}/></div>)}
 			<div className="loader">
-				<ReactLoading color="gray" type='spin' height="20px" width="20px"/>
+				<ReactLoading color="#60cbfd" type='spin' height="30px" width="30px"/>
 			</div>
 		</>
 	)

@@ -10,7 +10,7 @@ import AppHeader from './Components/AppHeader';
 import Diary from './Components/Panels/Diary';
 import About from './Components/Panels/About';
 import Grades from './Components/Panels/Grades';
-import EmptyAuditory from "./Components/Panels/EmptyAuditory";
+import EmptyAuditories from "./Components/Panels/EmptyAuditories";
 
 const App = () => {
 	const [activeView, setActiveView] = useState('time-table')
@@ -59,7 +59,7 @@ const App = () => {
 					<View id="empty-cabinet" activePanel="panel">
 						<Panel id='panel'>
 							<AppHeader/>
-							<EmptyAuditory setActiveView={() => setActiveView('settings')}/>
+							<EmptyAuditories setActiveView={() => setActiveView('settings')}/>
 						</Panel>
 					</View>
 				</Root>

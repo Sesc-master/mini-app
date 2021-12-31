@@ -13,12 +13,12 @@ const About = (props : IAbout) => {
 
 	return (
 		<Div style={{ display: 'flex', alignItems: 'center', flexDirection: 'column'}}>
-			<Div>
+			{/* <Div>
 				<img alt='master' src={ico} className='icon'/>
 			</Div>
 			<Div>
 				<h1 className='app-name'>SESC Master</h1>
-			</Div>
+			</Div> */}
 			<Div className='link'>
 				<Button size="l" stretched mode="outline" >Группа ВК</Button>
      		</Div>

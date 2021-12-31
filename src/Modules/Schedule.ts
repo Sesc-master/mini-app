@@ -39,6 +39,20 @@ export async function getFullSchedule(weekday: number) {
         })
 }
 
+export async function getFreeAuditories(weekday: number) {
+    return APIRequest("all", weekday)
+        .then(APIResponse => {
+            let result = new FullSсhedule();
+            if (APIResponse.auditories) {
+                //Convert object in parsed json to map
+                result.auditories = new Map(Object.keys(APIResponse.auditories).map(auditory => [
+                    auditory, APIResponse.auditories[auditory]
+                ]));
+            }
+            return result.getFreeAuditories();
+        })
+}
+
 export async function getSchedule(scheduleType: IdableScheduleType, weekday: number, id: number) {
     console.log((await getFullSchedule(weekday)).getFreeAuditories())
     return APIRequest(scheduleType, weekday, id)

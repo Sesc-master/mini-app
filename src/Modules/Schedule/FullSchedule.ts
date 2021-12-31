@@ -1,17 +1,19 @@
 import BaseLesson from "./BaseLesson";
 
+
+
 export class FullSсhedule {
     public static ignoringAuditories: Array<string> = ["Общежитие", "Библиотека", "Нет"];
 
     public auditories: Map<string, Array<BaseLesson | boolean>>;
 
-    public isFreeAuditory(auditory: string, lessonNumber: number): Boolean {
+    protected isFreeAuditory(auditory: string, lessonNumber: number): Boolean {
         let auditorySchedule = this.auditories.get(auditory);
         if (auditorySchedule !== undefined)
             return auditorySchedule[lessonNumber] === false;
         else return false;
     }
-    public getFreeAuditoriesOnLesson(lessonNumber: number): Array<string> {
+    protected getFreeAuditoriesOnLesson(lessonNumber: number): Array<string> {
         let freeAuditories: Array<string> = [];
         console.log(this.auditories);
         this.auditories.forEach((lessons, auditory) => {
@@ -19,7 +21,7 @@ export class FullSсhedule {
                 freeAuditories.push(auditory);
         });
         return freeAuditories;
-    }
+    } 
     public getFreeAuditories(): Array<Array<string>> {
         let maxLessons: number = this.auditories.values().next().value.length;
         let result = new Array<Array<string>>(maxLessons);
