@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import '@vkontakte/vkui/dist/vkui.css';
+// import '@vkontakte/vkui/dist/vkui.css';
 import Options from "../Options"
 
 type IGrades = {

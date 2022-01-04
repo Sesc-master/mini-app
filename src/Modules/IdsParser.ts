@@ -1,4 +1,4 @@
-import request from "./AllOriginsProxy";
+import request from "./ProxyModule";
 
 export default class IDs {
     static server: string = "lyceum.urfu.ru";

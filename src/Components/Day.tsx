@@ -1,6 +1,6 @@
 import React from 'react';
 import { TabsItem} from "@vkontakte/vkui";
-import '@vkontakte/vkui/dist/vkui.css';
+// import '@vkontakte/vkui/dist/vkui.css';
 
 type IDay = {
 	setTargetDayIndex: (index: number) => void,

@@ -1,4 +1,4 @@
-import request from "../Modules/AllOriginsProxy";
+import request from "./ProxyModule";
 import { FullSсhedule } from "./Schedule/FullSchedule";
 import { IdableScheduleType, Schedule, ScheduleType } from "./Schedule/Schedule";
 

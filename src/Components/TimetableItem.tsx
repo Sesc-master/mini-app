@@ -1,6 +1,6 @@
 import React from 'react';
 import {Text} from "@vkontakte/vkui";
-import '../Styles/TimetableItem.css'
+// import '../../public/Styles/TimetableItem.css'
 import {TimetableElement} from "../Modules/ListifySchedule";
 import Lesson from './Lesson';
 

@@ -3,7 +3,7 @@ import { Div, Button, Text} from "@vkontakte/vkui";
 import {getFreeAuditories} from "../../Modules/Schedule"
 import  {FullSсhedule}  from '../../Modules/Schedule/FullSchedule';
 import AuditoriesPerLesson from "../AuditoriesPerLesson"
-import "../../Styles/EmptyAuditories.css"
+// import "../../../public/Styles/EmptyAuditories.css"
 
 
 type IEmptyAuditory = {

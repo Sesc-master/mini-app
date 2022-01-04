@@ -1,16 +1,15 @@
 import React from 'react';
 import { Div, Button} from "@vkontakte/vkui";
-import ico from "../Images/Icon.svg"
-import '../../Styles/About.css'
+// import ico from "../Images/Icon.svg"
+// import '../../../public/Styles/About.css'
 
-import '@vkontakte/vkui/dist/vkui.css';
+// import '@vkontakte/vkui/dist/vkui.css';
 
 type IAbout = {
 	setActiveView: () => void
 }
 
 const About = (props : IAbout) => {
-
 	return (
 		<Div style={{ display: 'flex', alignItems: 'center', flexDirection: 'column'}}>
 			{/* <Div>

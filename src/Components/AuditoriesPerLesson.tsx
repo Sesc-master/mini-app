@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import { Div, Button} from "@vkontakte/vkui";
 
-import "../Styles/AuditoriesPerLesson.css"
+// import "../../public/Styles/AuditoriesPerLesson.css"
 
 
 type IAuditoriesPerLesson = {

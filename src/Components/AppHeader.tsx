@@ -2,7 +2,7 @@ import React from 'react';
 import {PanelHeader} from "@vkontakte/vkui";
   
 
-import '@vkontakte/vkui/dist/vkui.css';
+// import '@vkontakte/vkui/dist/vkui.css';
 
 const AppHeader = () => {
     return(

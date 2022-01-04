@@ -3,7 +3,7 @@ import React from 'react';
 
 import '@vkontakte/vkui/dist/vkui.css';
 import { List, Div } from "@vkontakte/vkui";
-import '../Styles/Option.css'
+// import '../../public/Styles/Option.css'
 
 type ISetOptions = (option: string) => void;
 

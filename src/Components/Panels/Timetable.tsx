@@ -1,13 +1,13 @@
 import React, { useState, useEffect, } from 'react';
 import { FormItem, SelectMimicry, Text, Div, } from "@vkontakte/vkui";
-import '@vkontakte/vkui/dist/vkui.css';
+// import '@vkontakte/vkui/dist/vkui.css';
 import { Table } from "../../Modules/Table"
 import Week from '../Week';
 import ReactLoading from 'react-loading';
 import TimetableItem from '../TimetableItem';
 import {listifySchedule} from "../../Modules/ListifySchedule";
 import {TimetableElement} from "../../Modules/ListifySchedule";
-import '../../Styles/Timetable.css'
+// import '../../../public/Styles/Timetable.css'
 import TimetableItemLoader from '../TimetableItemLoader'
 
 type ISetActiveView = () => void;
