@@ -25,7 +25,12 @@
     display: flex;
     justify-content: center; 
     align-items: center;
+    flex-direction: column;
+}
+
+.text_error {
     font-size: 25px;
+    text-align: center;
 }
 
 .end {
