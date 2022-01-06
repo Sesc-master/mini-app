@@ -15,7 +15,6 @@ export class FullSсhedule {
     }
     protected getFreeAuditoriesOnLesson(lessonNumber: number): Array<string> {
         let freeAuditories: Array<string> = [];
-        console.log(this.auditories);
         this.auditories.forEach((lessons, auditory) => {
             if (lessons[lessonNumber] === false && !FullSсhedule.ignoringAuditories.includes(auditory))
                 freeAuditories.push(auditory);

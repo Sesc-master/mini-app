@@ -2,8 +2,8 @@ import { get, globalAgent } from "https";
 import * as http from "http";
 globalAgent.options.rejectUnauthorized = false;
 
-export default async function proxy(req, res, method) {
-    if (req.method === "get") {
+export default async function proxy(req, res) {
+    if (req.method === "GET") {
         try {
             await get(req.query.url, response => {
 
@@ -12,7 +12,7 @@ export default async function proxy(req, res, method) {
         } catch (er){
             res.status(500).send(er);
         }
-    } else if (req.method === "post") {
+    } else if (req.method === "POST") {
         try {
             await http.request(req.query.url, response => {
 

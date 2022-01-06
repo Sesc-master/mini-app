@@ -1,33 +1,36 @@
 import React from 'react';
 import {Text} from "@vkontakte/vkui";
-import './Task.css'
-
-import '@vkontakte/vkui/dist/vkui.css';
 
 type ITask = {
-	date : string, 
-	topic : string, 
-	homework : string, 
-	mark : string
+    date : string, 
+    topic : string, 
+    homework : string, 
+    mark : string,
+    weight : string
 }
 
-const Task = ({date, topic, homework, mark}: ITask) => {
+const Task = ({date, topic, homework, mark, weight}: ITask) => {
 	
-	return (	
-		<div className='task' id='ripple'>
-			<div className='date'>
-				<Text weight="semibold" style={{ display: 'flex', fontFamily: 'sans-serif', color: 'white', marginLeft: '10px'}}>{date}</Text>
-				<div className='stick'></div>
-			</div>
-			<Text weight="semibold" style={{fontFamily: 'sans-serif', color: 'white',  overflowY: 'hidden', maxHeight: '100%', textAlign: 'center'}}>
-				{topic}
-			</Text>
-			<div style={{display: 'flex', alignItems: 'center', width: '40px'}}>
-				<div className='stick'></div>
-				<Text weight="semibold" style={{ fontFamily: 'sans-serif', color: 'white', marginLeft: '10px', marginRight: '10px'}}>{mark}</Text>
-			</div>
-		</div>
-	)
+    return (	
+        <div className="table">
+            <input className="hidden-input" type="checkbox" id="check-1"></input>
+            <label htmlFor="check-1">
+                <div className="main">
+                    <div className="center date">{date}</div>
+                    <div className="text">
+                        {topic}
+                    </div>
+                    <div className="info">
+                        <div className="center marks">{mark}</div>
+                        <div className="center data">{`${weight}x`}</div>
+                    </div>
+                </div>
+            </label>
+            <div className="more-info">
+                {homework}
+            </div>
+        </div>
+    )
 }; 
 
 export default Task;

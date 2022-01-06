@@ -10,6 +10,7 @@ import '../public/Styles/Option.css'
 import '../public/Styles/Timetable.css'
 import '../public/Styles/TimetableItem.css'
 import '@vkontakte/vkui/dist/vkui.css';
+import '../public/Styles/Task.css'
 
 import Navbar from '../src/Components/Navbar';
 import Timetable from '../src/Components/Panels/Timetable';
@@ -20,8 +21,11 @@ import Grades from '../src/Components/Panels/Grades';
 import EmptyAuditories from "../src/Components/Panels/EmptyAuditories";
 
 const _app = () => {
+	const userAgent = 'Mozilla/5.0 (iPhone; CPU iPhone OS 8_0 like Mac OS X) AppleWebKit/600.1.4 (KHTML, like Gecko) Version/8.0 Mobile/12A365 Safari/600.1.4';
+	//TODO : get true user-agent
 	const [activeView, setActiveView] = useState('time-table')
 	const [grade, setGrade] = useState<string>('')
+
 
 	useEffect(() => {
 		bridge.subscribe(({ detail }) => {
@@ -35,7 +39,7 @@ const _app = () => {
 	}, []);
 
 	return (
-		<SSRWrapper>
+		<SSRWrapper userAgent={userAgent}>
 			<ConfigProvider scheme="space_gray">
 				<AppRoot >
 					<Navbar setActiveView={(view) => setActiveView(view)}/>
@@ -76,5 +80,6 @@ const _app = () => {
 		</SSRWrapper>
 	);
 }
+
 
 export default _app;

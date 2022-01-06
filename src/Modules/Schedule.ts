@@ -54,7 +54,6 @@ export async function getFreeAuditories(weekday: number) {
 }
 
 export async function getSchedule(scheduleType: IdableScheduleType, weekday: number, id: number) {
-    console.log((await getFullSchedule(weekday)).getFreeAuditories())
     return APIRequest(scheduleType, weekday, id)
         .then(scheduleFromJSON);
 }
