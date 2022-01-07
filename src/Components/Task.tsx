@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {Text} from "@vkontakte/vkui";
 
 type ITask = {
@@ -6,27 +6,32 @@ type ITask = {
     topic : string, 
     homework : string, 
     mark : string,
-    weight : string
+    weight : number 
 }
 
 const Task = ({date, topic, homework, mark, weight}: ITask) => {
+    const [isOpened, setIsOpened] = useState<boolean>(false)
+
+    const getClassMoreInfo = () => {
+        if (isOpened) {
+            return 'more-info'
+        }
+        return 'more-info hidden-task'
+    } 
 	
     return (	
-        <div className="table">
-            <input className="hidden-input" type="checkbox" id="check-1"></input>
-            <label htmlFor="check-1">
-                <div className="main">
-                    <div className="center date">{date}</div>
-                    <div className="text">
-                        {topic}
-                    </div>
-                    <div className="info">
-                        <div className="center marks">{mark}</div>
-                        <div className="center data">{`${weight}x`}</div>
-                    </div>
+        <div className="table" onClick={() => setIsOpened(!isOpened)}>
+            <div className="main">
+                <div className="center date text-style-task">{date}</div>
+                <div className="text text-style-task">
+                    {topic}
                 </div>
-            </label>
-            <div className="more-info">
+                <div className="info">
+                    <div className="center marks text-style-task">{mark}</div>
+                    <div className="center data text-style-task">{`${weight}x`}</div>
+                </div>
+            </div>
+            <div className={getClassMoreInfo()}>
                 {homework}
             </div>
         </div>

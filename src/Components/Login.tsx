@@ -1,11 +1,10 @@
 import React, {useState} from 'react';
 import {FormLayoutGroup, FormItem, Input, SliderSwitch, Button, Div, Text} from "@vkontakte/vkui";
-import Authenticate from "../Modules/Authenticate";
-import { type } from 'os';
 
 // import '@vkontakte/vkui/dist/vkui.css';
 
 type ISetLoginData = ( data : { roles: string[]; token: string; teachLoad: string;}) => void;
+
 type ILogin = {
     setLoginData?: ISetLoginData
 }
@@ -16,7 +15,7 @@ type ILoginData = {
     type: string | number,
 }
 
-const Login = () => {
+const Login = ({setLoginRequest} : any) => {
     const [loginData, setLoginData] = useState<ILoginData>({
         login: '',
         password: '',
@@ -24,7 +23,6 @@ const Login = () => {
     })
 
     return (
-
         <FormLayoutGroup mode="vertical">
             <FormItem>
                 <SliderSwitch 
@@ -54,7 +52,9 @@ const Login = () => {
                 }}/>
             </FormItem>
             <Div>
-                <Button size="l" stretched style={{ marginRight: 8 }} >Войти</Button>
+                <Button size="l" stretched style={{ marginRight: 8 }} onClick={() => {
+                    setLoginRequest(loginData)
+                }}>Войти</Button>
             </Div>
         </FormLayoutGroup>
     )
