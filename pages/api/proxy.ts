@@ -1,27 +1,64 @@
-import { get, globalAgent } from "https";
-import * as http from "http";
-globalAgent.options.rejectUnauthorized = false;
+import { request } from "https";
 
-export default async function proxy(req, res) {
-    if (req.method === "GET") {
-        try {
-            await get(req.query.url, response => {
+const allowedMethods = ["GET", "POST"];
+const allowedHosts = ["lycreg.urfu.ru", "lyceum.urfu.ru"];
+const requestTimeout = 3000;
+const enforceCORS = false;
 
-                res.status(200).send(response);
-            })
-        } catch (er){
-            res.status(500).send(er);
+export default async function proxy(req, res): Promise<void> {
+    return new Promise((resolve, reject) => {
+        if (req.query.url === undefined) {
+            res.status(400).send();
+            resolve();
+            return;
         }
-    } else if (req.method === "POST") {
-        try {
-            await http.request(req.query.url, response => {
+        
+        let url = new URL(req.query.url);
+        if (allowedMethods.includes(req.method) && allowedHosts.includes(url.host)) {
+            try {
+                let proxyReq = request(url, {
+                    method: req.method,
+                    rejectUnauthorized: false,
+                    timeout: requestTimeout
+                }, response => {
+                    res.status(response.statusCode);
 
-                res.status(200).send(response);
-            })
-        } catch (er){
-            res.status(500).send(er);
+                    if (enforceCORS) {
+                        res.setHeader("Access-Control-Allow-Origin", "*");
+                        res.setHeader("Access-Control-Allow-Methods", allowedMethods.join(", "));
+                    }
+
+                    response.setEncoding("utf-8");
+                    response.on("data", (data) => {
+                        res.write(data);
+                    });
+                    response.on("end", () => {
+                        res.send();
+                        resolve();
+                    });
+
+                    response.socket.on("timeout", () => {
+                        res.status(504).send();
+                    });
+                });
+
+                if (req.body) {
+                    proxyReq.write(req.body);
+                }
+                proxyReq.end();
+            }
+            catch (e) {
+                res.status(500).send();
+                reject();
+            }
         }
-    }
-
-
+        else if (!allowedMethods.includes(req.method)) {
+            res.status(405).send();
+            resolve();
+        }
+        else if (!allowedHosts.includes(url.host)) {
+            res.status(403).send();
+            resolve();
+        }
+    });
 }
