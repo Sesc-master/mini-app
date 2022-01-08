@@ -7638,6 +7638,11 @@
   "resolved" "https://registry.npmjs.org/lines-and-columns/-/lines-and-columns-1.2.4.tgz"
   "version" "1.2.4"
 
+"linkifyjs@^3.0.5":
+  "integrity" "sha512-1Y9XQH65eQKA9p2xtk+zxvnTeQBG7rdAXSkUG97DmuI/Xhji9uaUzaWxRj6rf9YC0v8KKHkxav7tnLX82Sz5Fg=="
+  "resolved" "https://registry.npmjs.org/linkifyjs/-/linkifyjs-3.0.5.tgz"
+  "version" "3.0.5"
+
 "loader-runner@^2.4.0":
   "integrity" "sha512-Jsmr89RcXGIwivFY21FcRrisYZfvLMTWx5kOLc+JTxtpBOG6xML0vzbc6SEQG2FO9/4Fc3wW4LVcB5DmGflaRw=="
   "resolved" "https://registry.npmjs.org/loader-runner/-/loader-runner-2.4.0.tgz"
