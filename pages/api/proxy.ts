@@ -7,13 +7,15 @@ const enforceCORS = false;
 
 export default async function proxy(req, res): Promise<void> {
     return new Promise((resolve, reject) => {
-        if (req.query.url === undefined) {
+        const targetUrl = JSON.parse(req.body).url
+
+        if (targetUrl === undefined) {
             res.status(400).send();
             resolve();
             return;
         }
         
-        let url = new URL(req.query.url);
+        let url = new URL(targetUrl);
         if (allowedMethods.includes(req.method) && allowedHosts.includes(url.host)) {
             try {
                 let proxyReq = request(url, {

@@ -6,5 +6,8 @@ export default async function request (url: string | URL) {
     const PORT = process.env.PORT || "3000";
     let requestUrl = new URL(`http://${HOST}:${PORT}/api/proxy`);
     requestUrl.searchParams.set("url", url);
-    return fetch(requestUrl.toString());
+    return fetch('/api/proxy', {
+        method: 'POST',
+        body: JSON.stringify({url}),
+    })
 }
