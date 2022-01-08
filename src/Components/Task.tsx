@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {SplitCol, Text} from "@vkontakte/vkui";
 import { type } from 'os';
-import { formatLinksToButtons } from '../Modules/FormatLinksToButtons'
+import TextWithLinks from './TextWithLinks'
 
 type ITask = {
     date : string, 
@@ -62,9 +62,7 @@ const Task = ({date, topic, homework, mark, weight}: ITask) => {
                 </div>
             </div>
             <div className={getClassMoreInfo()}>
-                <>
-                    {formatLinksToButtons(homework)}
-                </>
+                <TextWithLinks str={homework}/>
             </div>
         </div>
     )
