@@ -30,6 +30,7 @@ let defaultState : IRootState = {
 	journal: {},
 	isJournalLoaded: false,
 	targetSubject: '',
+	localStorageLogin: 'loginData'
 }
 
 function reducer(state = defaultState, action) {

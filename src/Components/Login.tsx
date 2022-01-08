@@ -19,7 +19,7 @@ const Login = ({setLoginRequest} : any) => {
     const [loginData, setLoginData] = useState<ILoginData>({
         login: '',
         password: '',
-        type: '',
+        type: 'pupil',
     })
 
     return (
@@ -36,9 +36,10 @@ const Login = ({setLoginRequest} : any) => {
                         value: 'par',
                     },
                     ]}
-                    onSwitch={value => {
+                    onSwitch={(value : string) => {
                         setLoginData({...loginData, type: value})
                     }}
+                    activeValue={loginData.type}
                 />
             </FormItem>
             <FormItem top="Логин">
@@ -54,6 +55,11 @@ const Login = ({setLoginRequest} : any) => {
             <Div>
                 <Button size="l" stretched style={{ marginRight: 8 }} onClick={() => {
                     setLoginRequest(loginData)
+                    setLoginData({
+                        login: '',
+                        password: '',
+                        type: 'pupil',
+                    })
                 }}>Войти</Button>
             </Div>
         </FormLayoutGroup>

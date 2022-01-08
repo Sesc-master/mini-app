@@ -1,4 +1,4 @@
-import React, { useState, useEffect, } from 'react';
+import React, { useState, useEffect, useRef} from 'react';
 import { FormItem, SelectMimicry, Text, Div, } from "@vkontakte/vkui";
 // import '@vkontakte/vkui/dist/vkui.css';
 import { Table } from "../../Modules/Table"
@@ -75,6 +75,7 @@ const Timetable = ({setActiveView, grade} : ITimetable) => {
 	const isLoaderRendering = !isError && isLoading && grade !== ''
 
 	useEffect(() => {
+		if (grade === '') return;
 		try {
 			setIsLoading(true)
 			Table.getTable("group", targetDayIndex, grade)
