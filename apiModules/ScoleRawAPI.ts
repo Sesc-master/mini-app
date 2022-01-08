@@ -2,7 +2,7 @@ import { request } from "https";
 
 process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = '0';
 
-export type UserType = "root" | "admin" | "teacher" | "tutor" | "pupil" | "parent"
+export type UserType = "root" | "admin" | "teacher" | "tutor" | "pupil" | "par" | 'parent'
 
 var server: string = "lycreg.urfu.ru";
 
@@ -44,7 +44,7 @@ args?: string[] | string, capthca?: string | number, capthcaId?: string | number
     });
 }
 
-export async function register(login: string, password: string, type: UserType,
+export async function authorise(login: string, password: string, type: UserType,
 captcha: string | number, capthcaId: string | number): Promise<{ roles: UserType[]; token: string; teachLoad: Map<string, Array<string>>; tutClss: Array<string>}> {
     return apiRequest("login", login, password, type, undefined, captcha, capthcaId);
 }
