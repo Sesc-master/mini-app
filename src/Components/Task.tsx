@@ -37,7 +37,9 @@ const Task = ({date, topic, homework, mark, weight}: ITask) => {
         }
 
         if (isOpened || formatedTopic === '') {
-            return formatedTopic
+            return (
+                <TextWithLinks str={formatedTopic} />
+            )
         }
 
         return (

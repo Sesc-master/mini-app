@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef} from 'react';
-import { FormItem, SelectMimicry, Text, Div, } from "@vkontakte/vkui";
+import { FormItem, SelectMimicry, Text, Div, Spinner} from "@vkontakte/vkui";
 // import '@vkontakte/vkui/dist/vkui.css';
 import { Table } from "../../Modules/Table"
 import Week from '../Week';
@@ -29,7 +29,7 @@ const renderLoader = (times: string [][]) => {
 		<>
 			{times.map((time, index) => <div key={index}><TimetableItemLoader time={time}/></div>)}
 			<div className="loader">
-				<ReactLoading color="#60cbfd" type='spin' height="30px" width="30px"/>
+				<Spinner size="medium"/>
 			</div>
 		</>
 	)

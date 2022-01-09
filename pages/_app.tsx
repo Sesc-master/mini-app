@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import bridge from '@vkontakte/vk-bridge';
 import {ConfigProvider, AppRoot, Root, View, Panel, SSRWrapper} from "@vkontakte/vkui";
-import '../public/Styles/index.css';
 import '../public/Styles/About.css'
 import '../public/Styles/AuditoriesPerLesson.css'
 import '../public/Styles/EmptyAuditories.css'
@@ -11,6 +10,7 @@ import '../public/Styles/Timetable.css'
 import '../public/Styles/TimetableItem.css'
 import '@vkontakte/vkui/dist/vkui.css';
 import '../public/Styles/Task.css'
+import '../public/Styles/Global.css'
 
 import Navbar from '../src/Components/Navbar';
 import Timetable from '../src/Components/Panels/Timetable';
@@ -20,10 +20,12 @@ import About from '../src/Components/Panels/About';
 import Grades from '../src/Components/Panels/Grades';
 import EmptyAuditories from "../src/Components/Panels/EmptyAuditories";
 import Subjects from '../src/Components/Panels/Subjects'
+import ProjectRoot from '../src/Components/ProjectRoot'
 import { IRootState } from '../src/Modules/IRootState';
 
 import { createStore } from 'redux'
 import { Provider } from 'react-redux'
+import {useDispatch, useSelector} from 'react-redux'
 
 let defaultState : IRootState = {
 	subjects: [],
@@ -72,47 +74,7 @@ const _app = () => {
 		<SSRWrapper userAgent={userAgent}>
 			<Provider store={store}>
 				<ConfigProvider scheme="space_gray">
-					<AppRoot >
-						<Navbar setActiveView={(view) => setActiveView(view)}/>
-						<Root activeView={activeView}>
-							<View id="time-table" activePanel="panel">
-								<Panel id='panel'>
-									<AppHeader/>
-									<Timetable grade={grade} setActiveView={() => setActiveView('grades')}/>
-								</Panel>
-							</View>
-							<View id="register" activePanel="panel">
-								<Panel id='panel'>
-									<AppHeader/>
-									<Diary setActiveViewSubjects={() => setActiveView('subjects')}/>
-								</Panel>
-							</View>
-							<View id="settings" activePanel="panel">
-								<Panel id='panel'>
-									<AppHeader/>
-									<About setActiveView={() => setActiveView('empty-cabinet')}/>
-								</Panel>
-							</View>
-							<View id="grades" activePanel="panel">
-								<Panel id='panel'>
-									<AppHeader/>
-									<Grades setGrade={setGrade} setActiveView={() => setActiveView('time-table')}/>
-								</Panel>
-							</View>
-							<View id="empty-cabinet" activePanel="panel">
-								<Panel id='panel'>
-									<AppHeader/>
-									<EmptyAuditories setActiveView={() => setActiveView('settings')}/>
-								</Panel>
-							</View>
-							<View id="subjects" activePanel="panel">
-								<Panel id='panel'>
-									<AppHeader/>
-									<Subjects setActiveViewDiary={() => setActiveView("register")}/>
-								</Panel>
-							</View>
-						</Root>
-					</AppRoot>
+					<ProjectRoot setActiveView={setActiveView} setGrade={setGrade} grade={grade} activeView={activeView}/>
 				</ConfigProvider>
 			</Provider>
 		</SSRWrapper>
