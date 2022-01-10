@@ -107,12 +107,14 @@ export async function getJournal(login: string, token: string, type: UserType): 
                 result.get(<string>subjectName)?.notes.push(newNote);
             });
             result.get(<string>subjectName)?.notes.sort((firstNote, secondNote) => {
+                const monthsOrder = [9, 10, 11, 12, 1, 2, 3, 4, 5, 6, 7, 8]
                 let firstmonth = Number(firstNote.date.substring(3, 5));
                 let secondmonth = Number(secondNote.date.substring(3, 5));
                 if (firstmonth == secondmonth) {
                     return Number(firstNote.date.substring(0, 2)) - Number(secondNote.date.substring(0, 2));
                 }
-                else return firstmonth - secondmonth;
+
+                return monthsOrder.indexOf(firstmonth) - monthsOrder.indexOf(secondmonth);
             });
         });
         // console.log(result)

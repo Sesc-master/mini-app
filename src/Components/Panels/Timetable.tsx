@@ -48,8 +48,10 @@ const renderTimetable = (timetable: TimetableElement [], times: string [][]) => 
 const renderError = () => {
 	return (
 		<>
-			<Text className="error" weight='semibold'>Что-то пошло не так</Text>
-			<Text className="error" weight='semibold'>¯\_(ツ)_/¯</Text>
+			<div className="error">
+				<Text weight='semibold'>Что-то пошло не так</Text>
+				<Text weight='semibold'>¯\_(ツ)_/¯</Text>
+			</div>
 		</>
 	)
 }
@@ -75,6 +77,7 @@ const Timetable = ({setActiveView, grade} : ITimetable) => {
 	const isLoaderRendering = !isError && isLoading && grade !== ''
 
 	useEffect(() => {
+		setIsError(false)
 		if (grade === '') return;
 		try {
 			setIsLoading(true)
