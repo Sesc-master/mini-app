@@ -1,6 +1,6 @@
-import { getJournal } from "../../apiModules/ScoleAPI";
-import { authorise } from "../../apiModules/ScoleRawAPI";
-import getCaptcha from "../../apiModules/getCaptcha";
+import { getJournal } from "../../src/APIModules/ScoleAPI";
+import { authorise } from "../../src/APIModules/ScoleRawAPI";
+import getCaptcha from "../../src/APIModules/getCaptcha";
 
 export default async function journalAPI(req, res) {
     try {

@@ -3,5 +3,7 @@ export interface IRootState {
     journal: {}, 
     isJournalLoaded: boolean, 
     targetSubject: string,
-    localStorageLogin: string
+    localStorageLogin: string,
+    token: string,
+    scheme: string
 }

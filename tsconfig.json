@@ -24,7 +24,7 @@
   },
   "include": [
     "src"
-  ],
+, "apiModules/getCaptcha.ts"  ],
   "exclude": [
     "node_modules"
   ]

@@ -1,5 +1,5 @@
 
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 
 import '@vkontakte/vkui/dist/vkui.css';
 import Navbar from './Navbar';
@@ -11,7 +11,7 @@ import Grades from './Panels/Grades';
 import EmptyAuditories from "./Panels/EmptyAuditories";
 import Subjects from './Panels/Subjects'
 import { IRootState } from '../Modules/IRootState';
-import {ConfigProvider, AppRoot, Root, View, Panel, SSRWrapper} from "@vkontakte/vkui";
+import {ConfigProvider, AppRoot, Root, View, Panel} from "@vkontakte/vkui";
 import {useDispatch, useSelector} from 'react-redux'
 // import '../../public/Styles/Option.css'
 
@@ -21,15 +21,23 @@ type IProjectRoot = {
     grade: string,
     setActiveView: (view: string) => void,
     setGrade: (grade: string) => void,
-    activeView: string
+    activeView: string,
+    setScheme: (scheme: 'client_dark' | 'client_light') => void
 }
 
 
 
-const ProjectRoot = ({grade, setActiveView, activeView, setGrade}: IProjectRoot) => {
+const ProjectRoot = () => {
+	const [activeView, setActiveView] = useState('time-table')
+	const [grade, setGrade] = useState<string>('')
     const dispatch = useDispatch() 
-    let isLoaded = useSelector((state : IRootState) => state.isJournalLoaded)
+    // let isLoaded = useSelector((state : IRootState) => state.isJournalLoaded)
     const localStorageLogin = useSelector((state : IRootState) => state.localStorageLogin)
+    const scheme = useSelector((state: IRootState) => state.scheme)
+
+    const setScheme = (scheme : string) => {
+        dispatch({type: "SET_SCHEME", payload: scheme})
+    }
 
     const setSubjects = (subjects : string[]) => {
         dispatch({type: "SET_SUBJECTS", payload: subjects})
@@ -69,10 +77,15 @@ const ProjectRoot = ({grade, setActiveView, activeView, setGrade}: IProjectRoot)
                 })
         }
 
+        if (localStorage.getItem('scheme') !== null){
+            const scheme = localStorage.getItem('scheme') || '{}'
+            setScheme(scheme)
+        }
+
     }, [])
 
     return (
-        <>
+        <ConfigProvider scheme={scheme}>
             <AppRoot >
                 <Navbar setActiveView={(view) => setActiveView(view)}/>
                 <Root activeView={activeView}>
@@ -114,7 +127,7 @@ const ProjectRoot = ({grade, setActiveView, activeView, setGrade}: IProjectRoot)
                     </View>
                 </Root>
             </AppRoot>
-        </>
+        </ConfigProvider>
     );
 }
 
