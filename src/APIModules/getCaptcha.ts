@@ -4,10 +4,10 @@ import {resolve} from "./resolve";
 export default async function getCaptcha() {
     return new Promise((res, rej) => {
         get("https://lycreg.urfu.ru/cpt.a", (cptRes : any) => {
-            let result;
+            let result : any;
             const id = cptRes.headers['x-cpt']
             cptRes
-                .on('data', function(chunk) {
+                .on('data', function(chunk : any) {
                     result = chunk;
                 })
                 .on('end', function() {
