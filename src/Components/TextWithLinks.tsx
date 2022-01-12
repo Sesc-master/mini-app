@@ -1,4 +1,4 @@
-import * as linkify from 'linkifyjs';
+import * as linkify from "linkifyjs";
 
 function getDomain(url: string){
     let domain = (new URL(url));
@@ -9,7 +9,7 @@ const TextWithLinks = ({str} : {str: string}) => {
     let formatedHomework = str.replace( /<\/?[^>]+(>|$)/g, "")
     // deleted tags
     let links = linkify.find(formatedHomework)
-    let splitSymbol = '<>'
+    let splitSymbol = "<>"
 
     if (links.length === 0) return (
         <>

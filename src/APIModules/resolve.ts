@@ -1,4 +1,4 @@
-const Window = require('window');
+const Window = require("window");
 
 const window = new Window();
 
@@ -8,7 +8,7 @@ const numMask = [
             [248, 510, 510, 911, 911, 911, 911, 911, 911, 911, 911, 911, 911, 911, 911, 911, 511, 510, 252],
             [3, 7, 31, 127, 127, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15],
             [124, 254, 511, 463, 463, 463, 463, 31, 30, 62, 60, 60, 120, 120, 240, 240, 511, 511, 511],
-        [252, 510, 1023, 975, 975, 975, 15, 126, 124, 127, 15, 975, 975, 975, 975, 975, 1023, 510, 252],
+            [252, 510, 1023, 975, 975, 975, 15, 126, 124, 127, 15, 975, 975, 975, 975, 975, 1023, 510, 252],
             [126, 126, 254, 254, 254, 478, 478, 478, 926, 926, 926, 1822, 2047, 2047, 2047, 2047, 30, 30, 30],
             [1023, 1023, 1023, 960, 960, 988, 1022, 1023, 975, 975, 15, 15, 975, 975, 975, 975, 1023, 510, 252],
             [252, 510, 511, 975, 975, 960, 988, 1022, 1023, 975, 975, 975, 975, 975, 975, 975, 511, 510, 252],
@@ -33,20 +33,20 @@ const numMask = [
         ],
         [15, 8, 14, 15, 14, 16, 15, 13, 16, 13]
     ]
-].map(m => ((f, l) => f.map((a, i) => a.map(b => b.toString(2).padStart(l[i], '0'))))(...m));
+].map(m => ((f, l) => f.map((a, i) => a.map(b => b.toString(2).padStart(l[i], "0"))))(...m));
 
 // console.log('debug', 'Masks has been generated');
 
 export const resolve = async (uri) => {
     return new Promise((resolve, reject) => {
-        let img = window.document.createElement('img');
+        let img = window.document.createElement("img");
         img.src = uri;
 
 
 
         //let ctx = document.getElementById("#ctx");
-        let canvas = window.document.createElement('canvas');
-        let ctx = canvas.getContext('2d');
+        let canvas = window.document.createElement("canvas");
+        let ctx = canvas.getContext("2d");
         img.onload = () => {
             ctx.drawImage(img, 0, 0);
 
@@ -55,10 +55,8 @@ export const resolve = async (uri) => {
             let imgData = ctx.getImageData(0, 0, img.width, img.height);
             let a = []
             for (let i = 0; i < imgData.data.length; i += 4) {
-                if (imgData.data[i] == 246)
-                    a.push(0);
-                else
-                    a.push(1);
+                if (imgData.data[i] == 246) a.push(0);
+                else a.push(1);
             }
 
             let w = img.width;
@@ -74,9 +72,7 @@ export const resolve = async (uri) => {
             let nums = new Array(6).fill(null).map(() => []);
 
             for (let i = 0; i < 6; i++) {
-                for (let j = 0; j < h; j++) {
-                    nums[i].push('');
-                }
+                for (let j = 0; j < h; j++) nums[i].push("");
             }
 
             for (let j = 0; j < w; j++) {
@@ -85,15 +81,11 @@ export const resolve = async (uri) => {
                     if (a[i * w + j] != 0)
                         allZero = false;
                 }
-                if (allZero)
-                    flag = true;
+                if (allZero) flag = true;
                 else {
-                    if (flag)
-                        id++;
+                    if (flag) id++;
                     flag = false;
-                    for (let i = 0; i < h; i++) {
-                        nums[id][i] += a[i * w + j];
-                    }
+                    for (let i = 0; i < h; i++) nums[id][i] += a[i * w + j];
                 }
             }
 
@@ -102,40 +94,32 @@ export const resolve = async (uri) => {
                 for (let i = 0; i < h; i++) {
                     let allZero = true;
                     for (let j = 0; j < nums[id][i].length; j++) {
-                        if (nums[id][i][j] != 0)
-                            allZero = false;
+                        if (nums[id][i][j] != 0) allZero = false;
                     }
-                    if (allZero)
-                        l = i;
-                    else
-                        break;
+                    if (allZero) l = i;
+                    else break;
                 }
                 for (let i = h - 1; i >= 0; i--) {
                     let allZero = true;
                     for (let j = 0; j < nums[id][i].length; j++) {
-                        if (nums[id][i][j] != 0)
-                            allZero = false;
+                        if (nums[id][i][j] != 0) allZero = false;
                     }
-                    if (allZero)
-                        r = i + 1;
-                    else
-                        break;
+                    if (allZero) r = i + 1;
+                    else break;
                 }
                 nums[id] = nums[id].slice(l + 1, r - 1);
             }
 
-            let captcha = '';
+            let captcha = "";
 
             for (id = 0; id < 6; id++) {
                 for (let i = 0; i < 10; i++) {
                     if (nums[id].length == numMask[0][i].length) {
                         let equal = true;
                         for (let j = 0; j < nums[id].length; j++) {
-                            if (nums[id][j] != numMask[0][i][j])
-                                equal = false;
+                            if (nums[id][j] != numMask[0][i][j]) equal = false;
                         }
-                        if (equal)
-                            captcha += i;
+                        if (equal) captcha += i;
                     }
                     if (nums[id].length == numMask[1][i].length) {
                         let equal = true;
@@ -143,8 +127,7 @@ export const resolve = async (uri) => {
                             if (nums[id][j] != numMask[1][i][j])
                                 equal = false;
                         }
-                        if (equal)
-                            captcha += i;
+                        if (equal) captcha += i;
                     }
                 }
             }

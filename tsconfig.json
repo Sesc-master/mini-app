@@ -23,8 +23,10 @@
     "incremental": true
   },
   "include": [
-    "src"
-, "apiModules/getCaptcha.ts"  ],
+    "src",
+    "apiModules",
+    "pages"
+  ],
   "exclude": [
     "node_modules"
   ]

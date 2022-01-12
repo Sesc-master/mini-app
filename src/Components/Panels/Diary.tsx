@@ -1,12 +1,12 @@
-import React, {useEffect, useState, useRef} from 'react';
+import React, {useEffect, useState, useRef} from "react";
 import {Div, Spinner} from "@vkontakte/vkui"
-import { IRootState } from '../../Modules/IRootState'
+import { IRootState } from "../../Modules/IRootState"
 
 // import '@vkontakte/vkui/dist/vkui.css';
-import Login from '../Login';
-import Task from '../Task';
-import Journal from '../Journal'
-import {useDispatch, useSelector} from 'react-redux'
+import Login from "../Login";
+import Task from "../Task";
+import Journal from "../Journal"
+import {useDispatch, useSelector} from "react-redux"
 
 type IDiaryProps = { 
     setActiveViewSubjects: () => void
@@ -33,8 +33,8 @@ const Diary = ({setActiveViewSubjects}: IDiaryProps) => {
     }
     // const subjects = isJournalLoaded ? Object.keys(loginResponse.journal) : []
     const getJournal = (login : string, password : string, type : string) => {
-        return fetch('/api/journal', {
-            method: 'POST',
+        return fetch("/api/journal", {
+            method: "POST",
             body: JSON.stringify({login, password, type})
         })
             .then((response) => response.json())
@@ -60,7 +60,7 @@ const Diary = ({setActiveViewSubjects}: IDiaryProps) => {
                     setSubjects(Object.keys(response.journal))
                     setJournal(response.journal)
                     setIsJournalLoaded(true)
-                    localStorage.setItem('loginData', JSON.stringify({
+                    localStorage.setItem("loginData", JSON.stringify({
                         login: loginRequest.login,
                         password: loginRequest.password, 
                         type: loginRequest.type

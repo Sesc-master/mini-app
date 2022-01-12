@@ -17,7 +17,7 @@ const AuditoriesPerLesson = (props : IAuditoriesPerLesson) => {
             <Button className="button" size = "m" onClick={() =>{setVisibility(!isVisible)}}>
                 {props.lesson + " урок"}
             </Button>
-            { isVisible && <Div className="auditories">{props.auditories?.join(', ')}</Div> }
+            { isVisible && <Div className="auditories">{props.auditories?.join(", ")}</Div> }
         </Div>
     )
 };

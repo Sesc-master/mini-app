@@ -17,11 +17,11 @@
             "format": ["PascalCase"]
         }],
         "max-classes-per-file": ["error", 1],
-        "max-len": ["error", 120],
+        "max-len": ["error", 200],
 
-        "lines-between-class-members": "off"
-        //"@typescript-eslint/quotes": ["error", "double", "avoid-escape"],
-        //"@typescript-eslint/explicit-function-return-type": ["error"],
-        //"brace-style": ["error", "stroustrup", { "allowSingleLine": true }]
+        "lines-between-class-members": "off",
+        "@typescript-eslint/quotes": ["error", "double", "avoid-escape"],
+        "@typescript-eslint/explicit-function-return-type": ["error"],
+        "brace-style": ["error", "stroustrup", { "allowSingleLine": true }]
     }
 }

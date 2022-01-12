@@ -1,7 +1,7 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState} from "react";
 import { Div, Button, Text} from "@vkontakte/vkui";
 import {getFreeAuditories} from "../../Modules/Schedule"
-import  {FullSсhedule}  from '../../Modules/Schedule/FullSchedule';
+import  {FullSсhedule}  from "../../Modules/Schedule/FullSchedule";
 import AuditoriesPerLesson from "../AuditoriesPerLesson"
 // import "../../../public/Styles/EmptyAuditories.css"
 
@@ -18,15 +18,15 @@ const EmptyAuditory = (props : IEmptyAuditory) => {
     }, [])
     
     return (
-        <Div style={{ display: 'flex', alignItems: 'center', flexDirection: 'column'}}>
+        <Div style={{ display: "flex", alignItems: "center", flexDirection: "column"}}>
             <Div>
-                <Text style={{fontSize: '20px'}} weight="semibold">Свободные аудитории:</Text>
+                <Text style={{fontSize: "20px"}} weight="semibold">Свободные аудитории:</Text>
             </Div>
             {[...new Array(7)]?.map((value, index) => (<AuditoriesPerLesson auditories={auditories[index]} lesson={index + 1} />))}
             <Div className="container_close">
                 <Button size="m" className="button_close" onClick={props.setActiveView}>Вернуться назад</Button>
             </Div>
-            <Div style={{height: '30px'}}></Div>
+            <Div style={{height: "30px"}}></Div>
         </Div>
     );
 }

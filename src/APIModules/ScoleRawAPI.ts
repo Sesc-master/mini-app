@@ -1,15 +1,13 @@
 import { request } from "https";
 
-process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = '0';
-
-export type UserType = "root" | "admin" | "teacher" | "tutor" | "pupil" | "par" | 'parent'
+export type UserType = "root" | "admin" | "teacher" | "tutor" | "pupil" | "par" | "parent"
 
 var server: string = "lycreg.urfu.ru";
 
 var APIObjectsProperties: Array<Array<string>> = [];
 
 async function apiRequest(method: string, login: string, pass: string, type: UserType,
-args?: string[] | string, capthca?: string | number, capthcaId?: string | number): Promise<any | string> {
+    args?: string[] | string, capthca?: string | number, capthcaId?: string | number): Promise<any | string> {
     return new Promise((resolve, reject) => {
         let requestBody: any = { f: method, l: login, p: pass, t: type };
         if (args) requestBody["z"] = args;
@@ -17,7 +15,10 @@ args?: string[] | string, capthca?: string | number, capthcaId?: string | number
         if (capthca) requestBody["c"] = String(capthca);
         if (capthcaId) requestBody["ci"] = String(capthcaId);
 
-        let req = request(`https://${server}/`, {method: "POST"}, res => {
+        let req = request(`https://${server}/`, {
+            method: "POST",
+            rejectUnauthorized: false
+        }, res => {
             var responseBody = "";
             res.on("data", chunk => {
                 responseBody += chunk;
@@ -34,7 +35,8 @@ args?: string[] | string, capthca?: string | number, capthcaId?: string | number
                         }
                         else return value;
                     }));
-                } catch (e) {
+                }
+                catch (e) {
                     resolve(responseBody);
                 }
             });
@@ -45,7 +47,7 @@ args?: string[] | string, capthca?: string | number, capthcaId?: string | number
 }
 
 export async function authorise(login: string, password: string, type: UserType,
-captcha: string | number, capthcaId: string | number): Promise<{ roles: UserType[]; token: string; teachLoad: Map<string, Array<string>>; tutClss: Array<string>}> {
+    captcha: string | number, capthcaId: string | number): Promise<{ roles: UserType[]; token: string; teachLoad: Map<string, Array<string>>; tutClss: Array<string>}> {
     return apiRequest("login", login, password, type, undefined, captcha, capthcaId);
 }
 
@@ -67,7 +69,7 @@ export async function jrnGet(login: string, token: string, type: UserType): Prom
 }
 
 export async function absentGet(login: string, token: string, type: UserType, className: string = "",
-pupil: string): Promise<Array<{d: string, s: string, p: string, abs: number}>> {
+    pupil: string): Promise<Array<{d: string, s: string, p: string, abs: number}>> {
     return apiRequest("absentGet", login, token, type, [className, pupil]);
 }
 
@@ -140,7 +142,7 @@ export async function classesList(login: string, token: string, type: UserType):
 }
 
 export async function distrEdit(login: string, token: string, type: UserType, action: "add" | "del",
-teacher: string, subject: string, className: string): Promise<actionResult> {
+    teacher: string, subject: string, className: string): Promise<actionResult> {
     return apiRequest("distrEdit", login, token, type, [action, teacher, subject, className]);
 }
 
@@ -158,7 +160,7 @@ export async function _export(login: string, token: string, type: UserType, clas
 }
 
 export async function gradeAdd(login: string, token: string, type: UserType, date: string, className: string,
-subject: string, pupil: string, grade: string, pin: string, teacher: string): Promise<"success" | "none" | "pupBlock" | "pinBad"> {
+    subject: string, pupil: string, grade: string, pin: string, teacher: string): Promise<"success" | "none" | "pupBlock" | "pinBad"> {
     return apiRequest("gradeAdd", login, token, type, [date, className, subject, pupil, grade, pin, teacher]);
 }
 

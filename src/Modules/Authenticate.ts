@@ -1,8 +1,8 @@
-import request from './ProxyModule'
+import request from "./ProxyModule"
 
 export default async function Authenticate(login : string, password : string, type : string | number) {
-    const captcha: any = await fetch('/api/captcha');
-    const apiOptions: any = {method: "POST", cache: "no-cache", body: ''};
+    const captcha: any = await fetch("/api/captcha");
+    const apiOptions: any = {method: "POST", cache: "no-cache", body: ""};
 
     apiOptions.body = `{
          "t":  "${type}",
@@ -14,8 +14,9 @@ export default async function Authenticate(login : string, password : string, ty
       }`;
     const apiResponse = await (await fetch("/", apiOptions)).text();
     if (apiResponse == "none") {
-        throw new Error('auth error');
-    } else {
+        throw new Error("auth error");
+    }
+    else {
         return JSON.parse(apiResponse);
     }
 

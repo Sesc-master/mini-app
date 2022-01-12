@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState} from "react";
 import {FormLayoutGroup, FormItem, Input, SliderSwitch, Button, Div, Text} from "@vkontakte/vkui";
 
 // import '@vkontakte/vkui/dist/vkui.css';
@@ -17,9 +17,9 @@ type ILoginData = {
 
 const Login = ({setLoginRequest} : any) => {
     const [loginData, setLoginData] = useState<ILoginData>({
-        login: '',
-        password: '',
-        type: 'pupil',
+        login: "",
+        password: "",
+        type: "pupil",
     })
 
     return (
@@ -27,14 +27,14 @@ const Login = ({setLoginRequest} : any) => {
             <FormItem>
                 <SliderSwitch 
                     options={[
-                    {
-                        name: 'Ученик',
-                        value: 'pupil',
-                    },
-                    {
-                        name: 'Родитель',
-                        value: 'par',
-                    },
+                        {
+                            name: "Ученик",
+                            value: "pupil",
+                        },
+                        {
+                            name: "Родитель",
+                            value: "par",
+                        },
                     ]}
                     onSwitch={(value : string) => {
                         setLoginData({...loginData, type: value})
@@ -56,9 +56,9 @@ const Login = ({setLoginRequest} : any) => {
                 <Button size="l" stretched style={{ marginRight: 8 }} onClick={() => {
                     setLoginRequest(loginData)
                     setLoginData({
-                        login: '',
-                        password: '',
-                        type: 'pupil',
+                        login: "",
+                        password: "",
+                        type: "pupil",
                     })
                 }}>Войти</Button>
             </Div>

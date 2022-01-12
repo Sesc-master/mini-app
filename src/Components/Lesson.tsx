@@ -1,6 +1,6 @@
-import React from 'react';
+import React from "react";
 import {Text} from "@vkontakte/vkui";
-import { SсheduleLesson } from '../Modules/Schedule/ScheduleLesson';
+import { SсheduleLesson } from "../Modules/Schedule/ScheduleLesson";
 // import '../../public/Styles/Lesson.css'
   
 
@@ -17,11 +17,12 @@ const Lesson = ({lesson}: ILesson) => {
                 <div className='stick'></div>
                 <div className='lesson'>
                     <Text weight="semibold">{lesson?.subject}</Text> 
-                    <Text weight="regular">{lesson?.teacher.split(' ')[0]} {lesson?.auditory}</Text>
+                    <Text weight="regular">{lesson?.teacher.split(" ")[0]} {lesson?.auditory}</Text>
                 </div>
             </> 
         )
-    } else {
+    }
+    else {
         return(
             <>
                 <div className='stick'></div>

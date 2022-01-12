@@ -3,8 +3,8 @@ export default async function request (url: string | URL) {
         url = url.toString();
     }
 
-    return fetch('/api/proxy', {
-        method: 'POST',
+    return fetch("/api/proxy", {
+        method: "POST",
         body: JSON.stringify({url}),
     })
 }

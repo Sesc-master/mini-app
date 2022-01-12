@@ -31,10 +31,12 @@ export function listifySchedule (schedule: Schedule) : Array<TimetableElement>{
         if (element.subgroup === 0) {
             timetableItems[element.number - 1].isCommonLesson = true
             timetableItems[element.number - 1].commonLesson = element
-        } else if(element.subgroup === 1) {
+        }
+        else if(element.subgroup === 1) {
             timetableItems[element.number - 1].isCommonLesson = false
             timetableItems[element.number - 1].firstGroupLesson = element
-        } else {
+        }
+        else {
             timetableItems[element.number - 1].isCommonLesson = false
             timetableItems[element.number - 1].secondGroupLesson = element
         }
@@ -46,10 +48,12 @@ export function listifySchedule (schedule: Schedule) : Array<TimetableElement>{
         if (element.subgroup === 0) {
             timetableItems[element.number - 1].isCommonLesson = true
             timetableItems[element.number - 1].commonLesson = element
-        } else if(element.subgroup === 1) {
+        }
+        else if(element.subgroup === 1) {
             timetableItems[element.number - 1].isCommonLesson = false
             timetableItems[element.number - 1].firstGroupLesson = element
-        } else {
+        }
+        else {
             timetableItems[element.number - 1].isCommonLesson = false
             timetableItems[element.number - 1].secondGroupLesson = element
         }

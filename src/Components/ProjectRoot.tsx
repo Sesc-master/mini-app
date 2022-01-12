@@ -1,18 +1,18 @@
 
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState} from "react";
 
-import '@vkontakte/vkui/dist/vkui.css';
-import Navbar from './Navbar';
-import Timetable from './Panels/Timetable';
-import AppHeader from './AppHeader';
-import Diary from './Panels/Diary';
-import About from './Panels/About';
-import Grades from './Panels/Grades';
+import "@vkontakte/vkui/dist/vkui.css";
+import Navbar from "./Navbar";
+import Timetable from "./Panels/Timetable";
+import AppHeader from "./AppHeader";
+import Diary from "./Panels/Diary";
+import About from "./Panels/About";
+import Grades from "./Panels/Grades";
 import EmptyAuditories from "./Panels/EmptyAuditories";
-import Subjects from './Panels/Subjects'
-import { IRootState } from '../Modules/IRootState';
+import Subjects from "./Panels/Subjects"
+import { IRootState } from "../Modules/IRootState";
 import {ConfigProvider, AppRoot, Root, View, Panel} from "@vkontakte/vkui";
-import {useDispatch, useSelector} from 'react-redux'
+import {useDispatch, useSelector} from "react-redux"
 // import '../../public/Styles/Option.css'
 
 type ISetOptions = (option: string) => void;
@@ -22,14 +22,14 @@ type IProjectRoot = {
     setActiveView: (view: string) => void,
     setGrade: (grade: string) => void,
     activeView: string,
-    setScheme: (scheme: 'client_dark' | 'client_light') => void
+    setScheme: (scheme: "client_dark" | "client_light") => void
 }
 
 
 
 const ProjectRoot = () => {
-	const [activeView, setActiveView] = useState('time-table')
-	const [grade, setGrade] = useState<string>('')
+    const [activeView, setActiveView] = useState("time-table")
+    const [grade, setGrade] = useState<string>("")
     const dispatch = useDispatch() 
     // let isLoaded = useSelector((state : IRootState) => state.isJournalLoaded)
     const localStorageLogin = useSelector((state : IRootState) => state.localStorageLogin)
@@ -52,8 +52,8 @@ const ProjectRoot = () => {
     }
     // const subjects = isJournalLoaded ? Object.keys(loginResponse.journal) : []
     const getJournal = (login : string, password : string, type : string) => {
-        return fetch('/api/journal', {
-            method: 'POST',
+        return fetch("/api/journal", {
+            method: "POST",
             body: JSON.stringify({login, password, type})
         })
             .then((response) => response.json())
@@ -65,7 +65,7 @@ const ProjectRoot = () => {
     useEffect(() => {
         if (localStorage.getItem(localStorageLogin) !== null){
             const loginData : {login: string, password: string, type: string} = 
-            JSON.parse(localStorage.getItem(localStorageLogin) || '{}')
+            JSON.parse(localStorage.getItem(localStorageLogin) || "{}")
 
             getJournal(loginData.login, loginData.password, loginData.type)
                 .then((response) => {
@@ -77,8 +77,8 @@ const ProjectRoot = () => {
                 })
         }
 
-        if (localStorage.getItem('scheme') !== null){
-            const scheme = localStorage.getItem('scheme') || '{}'
+        if (localStorage.getItem("scheme") !== null){
+            const scheme = localStorage.getItem("scheme") || "{}"
             setScheme(scheme)
         }
 
@@ -92,31 +92,31 @@ const ProjectRoot = () => {
                     <View id="time-table" activePanel="panel">
                         <Panel id='panel'>
                             <AppHeader/>
-                            <Timetable grade={grade} setActiveView={() => setActiveView('grades')}/>
+                            <Timetable grade={grade} setActiveView={() => setActiveView("grades")}/>
                         </Panel>
                     </View>
                     <View id="register" activePanel="panel">
                         <Panel id='panel'>
                             <AppHeader/>
-                            <Diary setActiveViewSubjects={() => setActiveView('subjects')}/>
+                            <Diary setActiveViewSubjects={() => setActiveView("subjects")}/>
                         </Panel>
                     </View>
                     <View id="settings" activePanel="panel">
                         <Panel id='panel'>
                             <AppHeader/>
-                            <About setActiveView={() => setActiveView('empty-cabinet')}/>
+                            <About setActiveView={() => setActiveView("empty-cabinet")}/>
                         </Panel>
                     </View>
                     <View id="grades" activePanel="panel">
                         <Panel id='panel'>
                             <AppHeader/>
-                            <Grades setGrade={setGrade} setActiveView={() => setActiveView('time-table')}/>
+                            <Grades setGrade={setGrade} setActiveView={() => setActiveView("time-table")}/>
                         </Panel>
                     </View>
                     <View id="empty-cabinet" activePanel="panel">
                         <Panel id='panel'>
                             <AppHeader/>
-                            <EmptyAuditories setActiveView={() => setActiveView('settings')}/>
+                            <EmptyAuditories setActiveView={() => setActiveView("settings")}/>
                         </Panel>
                     </View>
                     <View id="subjects" activePanel="panel">

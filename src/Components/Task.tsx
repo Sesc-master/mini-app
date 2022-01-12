@@ -1,7 +1,7 @@
-import React, {useState} from 'react';
+import React, {useState} from "react";
 import {SplitCol, Text} from "@vkontakte/vkui";
-import { type } from 'os';
-import TextWithLinks from './TextWithLinks'
+import { type } from "os";
+import TextWithLinks from "./TextWithLinks"
 
 type ITask = {
     date : string, 
@@ -16,16 +16,16 @@ const Task = ({date, topic, homework, mark, weight}: ITask) => {
 
     const getClassMoreInfo = () => {
         if (isOpened) {
-            return 'more-info'
+            return "more-info"
         }
-        return 'more-info hidden-task'
+        return "more-info hidden-task"
     } 
 
     const getClassMain = () => {
         if (isOpened) {
-            return 'main'
+            return "main"
         }
-        return 'main main-closed-task'
+        return "main main-closed-task"
     }
 
     const formatTopicText = (topic: string) => {
@@ -33,10 +33,10 @@ const Task = ({date, topic, homework, mark, weight}: ITask) => {
         let formatedTopic = topic 
 
         if (formatedTopic.length >= formatedTopicLength && !isOpened) {
-            formatedTopic = formatedTopic.slice(0, formatedTopicLength) + '...'
+            formatedTopic = formatedTopic.slice(0, formatedTopicLength) + "..."
         }
 
-        if (isOpened || formatedTopic === '') {
+        if (isOpened || formatedTopic === "") {
             return (
                 <TextWithLinks str={formatedTopic} />
             )
