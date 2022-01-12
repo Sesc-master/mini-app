@@ -26,7 +26,7 @@ export type Document = {
     id: string;
 }
 
-export async function getDocuments(args: IGetDocumentsArgs): Promise<"none" | Array<Document>> {
+export async function getDocuments(args: IGetDocumentsArgs): Promise<Array<Document> | "none"> {
     return scoleRequest("sprGet", args, [args.target])
         .then(response => {
             if (response === "none") return response;

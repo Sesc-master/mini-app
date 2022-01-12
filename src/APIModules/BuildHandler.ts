@@ -1,9 +1,7 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import replacer from "./JSONReplacer";
-import { IBaseRequestArgs } from "./ScoleRequest";
 
-export default function buildHandler<IArguments extends IBaseRequestArgs>
-(apiFunction: (args: IArguments) => Promise<"none" | any>) {
+export default function buildHandler(apiFunction: (args: any) => Promise<"none" | any>) {
     return async (req: NextApiRequest, res: NextApiResponse): Promise<void> => {
         return apiFunction(req.body).then(response => {
             if (response === "none") res.status(401).send("");

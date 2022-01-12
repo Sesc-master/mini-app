@@ -22,14 +22,14 @@ export type Absent = {
     abs: number
 }
 
-export async function getAbsences(args: IGetAbsencesArgs) {
+export async function getAbsences(args: IGetAbsencesArgs): Promise<Map<string, Array<Absent>> | "none"> {
     return Promise.all([getSubjectsList(args), scoleRequest("absentGet", args, [args.class || "", args.pupil || ""])])
         .then(responses => {
             let subjects = responses[0];
             if (subjects === "none" || responses[1] === "none") return "none";
             else {
                 let absences: Array<GoldinAbsent> = JSON.parse(responses[1]);
-                let result = new Map<String, Array<Absent>>();
+                let result = new Map<string, Array<Absent>>();
                 absences.forEach(absent => {
                     let subject = subjects.get(absent.s)
                     let absentObject: Absent = {

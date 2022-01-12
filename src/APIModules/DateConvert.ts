@@ -1,4 +1,4 @@
-export default function dateConvert (dateInput: string, full: boolean) {
+export default function dateConvert (dateInput: string, full: boolean): string {
     if (dateInput.includes("-")) {
         let dateArray = dateInput.split("-");
         let year = dateArray[0];

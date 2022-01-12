@@ -23,8 +23,8 @@ export type Note = {
     id: string;
 }
 
-export async function getNotes(args: IGetNotesArgs) {
-    return scoleRequest("notesGet", args, [args.pupil]).then(response => {
+export async function getNotes(args: IGetNotesArgs): Promise<Array<Note> | "none"> {
+    return scoleRequest("notesGet", args, [args.pupil || ""]).then(response => {
         if (response === "none") return response;
         else {
             let result = new Array<Note>();

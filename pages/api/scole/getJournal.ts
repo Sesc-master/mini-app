@@ -5,12 +5,12 @@ import dateConvert from "../../../src/APIModules/DateConvert";
 import reviver from "../../../src/APIModules/JSONReviver";
 import buildHandler from "../../../src/APIModules/BuildHandler";
 
-type Subject = {
+export type Subject = {
     teacher: string;
     notes: Array<SubjectNote>;
 }
 
-type SubjectNote = {
+export type SubjectNote = {
     date: string;
     theme: string;
     hometask: string;
@@ -18,7 +18,9 @@ type SubjectNote = {
     grades?: string;
 }
 
-export async function getJournal(args: IBaseRequestArgs) {
+export type Journal = Map<string, Subject>;
+
+export async function getJournal(args: IBaseRequestArgs): Promise<Journal | "none"> {
     return Promise.all([getSubjectsList(args), getTeachersList(args), scoleRequest("jrnGet", args, [])]).then(responses => {
         var result = new Map<string, Subject>();
         let [subjects, teachers, journalStr] = responses;
