@@ -4,7 +4,6 @@ This project was made for getting [SESC](https://lyceum.urfu.ru/) curriculum thr
 ## Available Scripts
 
 In the project directory, you can run:
-
 ### `npm start`
 
 Runs the app in the development mode.\
@@ -18,15 +17,17 @@ You will also see any lint errors in the console.
 Launches [tailwind.css](https://tailwindcss.com) build script that makes css\
  files from html classes that you may change in project files/
 
-### `npm run watch`
-
-Starts interactive mode in which you\
-can change html classes an css will generate automatically.
-
 ### `npm run build`
 
 Builds the app for production to the `build` folder.\
 It correctly bundles React in production mode and optimizes the build for the best performance.
+
+### `npm run lint`
+
+Prints your code style errors. 
+### `npm run lint:fix`
+
+Automatically fixes your code style errors.
 
 ### `npm run eject`
 

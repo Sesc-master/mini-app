@@ -35,21 +35,8 @@
     "start": "next start",
     "build": "next build",
     "build:css": "postcss public/Styles/tailwind.css -o src/Styles/index.css",
-    "watch": "",
     "lint": "npx eslint ./src/**/*.{tsx,ts}",
     "lint:fix": "npx eslint --fix ./src/**/*.{tsx,ts}"
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
   },
   "devDependencies": {
     "autoprefixer": "^9.8.8",
