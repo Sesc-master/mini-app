@@ -1,6 +1,7 @@
 import scoleRequest, { IBaseRequestArgs } from "../../../src/APIModules/ScoleRequest"
 import reviver from "../../../src/APIModules/JSONReviver";
 import buildHandler from "../../../src/APIModules/BuildHandler";
+import buildCachedFunction from "../../../src/APIModules/Cache";
 
 const defaultSubjects: Map<string, string> = new Map([
     ["s110", "Русский язык"],
@@ -32,7 +33,7 @@ const defaultSubjects: Map<string, string> = new Map([
     ["s820", "ОБЖ"]
 ]);
 
-export async function getSubjectsList(args: IBaseRequestArgs) {
+export const getSubjectsList = buildCachedFunction(async function (args: IBaseRequestArgs) {
     return scoleRequest("subjList", args)
         .then(response => {
             if (response === "none") return response;
@@ -42,6 +43,6 @@ export async function getSubjectsList(args: IBaseRequestArgs) {
                 return subjects;
             }
         });
-}
+}, "subjects");
 
 export default buildHandler(getSubjectsList);
