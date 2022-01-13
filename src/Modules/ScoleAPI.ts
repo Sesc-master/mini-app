@@ -8,13 +8,14 @@ import { Teacher } from "../../pages/api/scole/getTeachersList";
 import { SessionInfo } from "../../pages/api/scole/login";
 import reviver from "../APIModules/JSONReviver";
 
-async function APIRequest(method: string, args: any, APIObjectsProperties: Array<Array<string>> = [[]]): Promise<any | undefined> {
-    return fetch(`/api/scole/${method}`, {
+async function APIRequest(method: string, args: any, APIObjectsProperties?: Array<Array<string>>): Promise<any | undefined> {
+    return fetch("/api/scole/" + method, {
         body: JSON.stringify(args),
-        method: "POST"
+        method: "POST",
+        headers: { "Content-Type": "application/json" }
     }).then(response => {
         if (!response.ok) return undefined;
-        else response.text()
+        else return response.text()
     }).then(responseText => {
         if (responseText) return JSON.parse(responseText, reviver(APIObjectsProperties));
         else return undefined;
@@ -26,7 +27,7 @@ export async function login(login: string, password: string, type: string, captc
 }
 
 export async function getCaptcha(): Promise<Capthca | undefined> {
-    return APIRequest("getCaptcha", undefined, [["URI", "ID"]]);
+    return APIRequest("getCaptcha", "", [["URI", "ID"]]);
 }
 
 export async function getAbsences(login: string, token: string, type: string, className?: string): Promise<Map<string, Array<Absent>> | undefined> {
@@ -57,7 +58,7 @@ export async function getReportCard(login: string, token: string, type: string, 
 }
 
 export async function getSubjectsList(login: string, token: string, type: string, target: string = login): Promise<Map<string, string> | undefined> {
-    return APIRequest("getReportCard", {login, token, type, target});
+    return APIRequest("getSubjectsList", {login, token, type, target});
 }
 
 export async function getTeachersList(login: string, token: string, type: string): Promise<Array<Teacher> | undefined> {

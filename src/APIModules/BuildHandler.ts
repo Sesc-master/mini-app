@@ -4,7 +4,12 @@ import replacer from "./JSONReplacer";
 export default function buildHandler(apiFunction: (args?: any) => Promise<"none" | any>, requiedArgs: boolean = true) {
     return async (req: NextApiRequest, res: NextApiResponse): Promise<void> => {
         let apiFunctionPromise;
-        if (requiedArgs) apiFunctionPromise = apiFunction(req.body);
+        if (requiedArgs) {
+            let APIArgs: any;
+            if (typeof req.body == "string") APIArgs = JSON.parse(APIArgs);
+            else APIArgs = req.body;
+            apiFunctionPromise = apiFunction(APIArgs);
+        }
         else apiFunctionPromise = apiFunction();
 
         return apiFunctionPromise.then(response => {

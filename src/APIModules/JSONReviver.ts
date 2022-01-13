@@ -1,9 +1,12 @@
-export default function reviver(APIObjectsProperties: Array<Array<string>>) {
+export default function reviver(APIObjectsProperties?: Array<Array<string>>) {
     return (key: string, value: any): any => {
         if (typeof value == "object" && !(value instanceof Array)) {
-            for (let possibleObjectProperties of APIObjectsProperties) {
-                let hasAllProperties = possibleObjectProperties.every(property => value.hasOwnProperty(property))
-                if (hasAllProperties) return value;
+            if (APIObjectsProperties) {
+                let isObject = APIObjectsProperties.some(possibleObjectProperties => {
+                    return possibleObjectProperties.every(property => value.hasOwnProperty(property))
+                });
+                if (isObject) return value;
+                else return new Map(Object.entries(value));
             }
             return new Map(Object.entries(value));
         }
