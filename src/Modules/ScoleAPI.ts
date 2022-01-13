@@ -1,4 +1,5 @@
 import { Absent } from "../../pages/api/scole/getAbsences";
+import { Capthca } from "../../pages/api/scole/getCaptcha";
 import { Document } from "../../pages/api/scole/getDocuments";
 import { Journal } from "../../pages/api/scole/getJournal";
 import { Note } from "../../pages/api/scole/getNotes";
@@ -22,6 +23,10 @@ async function APIRequest(method: string, args: any, APIObjectsProperties: Array
 
 export async function login(login: string, password: string, type: string, captcha: string | number, captchaID: string | number): Promise<SessionInfo | undefined> {
     return APIRequest("login", { login, password, type, captcha, captchaID }, [["token", "roles"]]);
+}
+
+export async function getCaptcha(): Promise<Capthca | undefined> {
+    return APIRequest("getCaptcha", undefined, [["URI", "ID"]]);
 }
 
 export async function getAbsences(login: string, token: string, type: string, className?: string): Promise<Map<string, Array<Absent>> | undefined> {

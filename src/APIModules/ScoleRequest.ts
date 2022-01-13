@@ -8,19 +8,20 @@ export interface IBaseRequestArgs {
     login: string, token: string, type: string
 }
 
-export const requestArgs: RequestOptions = {
+export const scoleRequestArgs: RequestOptions = {
     rejectUnauthorized: false,
     hostname: server,
     method: "POST",
-    timeout: timeout
+    timeout: timeout,
+    protocol: "https:"
 }
 
 export default async function scoleRequest(method: string, defaultArgs: IBaseRequestArgs, args?: any): Promise<string> {
-    return httpsRequest(requestArgs, JSON.stringify({
+    return httpsRequest(scoleRequestArgs, JSON.stringify({
         f: method,
         l: defaultArgs.login,
         p: defaultArgs.token,
         t: defaultArgs.type,
         z: args
-    }));
+    })).then(res => res.body);
 }
