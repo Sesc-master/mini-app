@@ -37,8 +37,8 @@ export async function getAbsences(login: string, token: string, type: string, cl
     return APIRequest("getAbsences", argsObject, [["date", "subject", "pupil", "abs"]]);
 }
 
-export async function getDocuments(login: string, token: string, type: string): Promise<Array<Document> | undefined> {
-    return APIRequest("getDocuments", { login, token, type }, [["class", "pupil", "type", "dateStart", "dateEnd", "prim", "id"]]);
+export async function getDocuments(login: string, token: string, type: string, target: string = "pupil"): Promise<Array<Document> | undefined> {
+    return APIRequest("getDocuments", { login, token, type, target}, [["class", "pupil", "type", "dateStart", "dateEnd", "prim", "id"]]);
 }
 
 export async function getJournal(login: string, token: string, type: string): Promise<Journal | undefined> {
@@ -57,8 +57,8 @@ export async function getReportCard(login: string, token: string, type: string, 
     return APIRequest("getReportCard", {login, token, type, target});
 }
 
-export async function getSubjectsList(login: string, token: string, type: string, target: string = login): Promise<Map<string, string> | undefined> {
-    return APIRequest("getSubjectsList", {login, token, type, target});
+export async function getSubjectsList(login: string, token: string, type: string): Promise<Map<string, string> | undefined> {
+    return APIRequest("getSubjectsList", {login, token, type});
 }
 
 export async function getTeachersList(login: string, token: string, type: string): Promise<Array<Teacher> | undefined> {
