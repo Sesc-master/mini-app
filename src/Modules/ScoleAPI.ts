@@ -43,7 +43,7 @@ export async function getDocuments(login: string, token: string, type: string): 
 
 export async function getJournal(login: string, token: string, type: string): Promise<Journal | undefined> {
     return APIRequest("getJournal", { login, token, type }, [
-        ["teacher", "notes"], ["date", "theme", "hometask", "coefficient", "grades"]
+        ["teacher", "notes"], ["date", "theme", "hometask", "coefficient"]
     ]);
 }
 
