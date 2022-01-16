@@ -1,0 +1,23 @@
+.icon {
+    height: 125px;
+    border-radius: 10px;
+}
+
+.link {
+    width: 100%;
+}
+
+.app-name {
+    text-align: 'center';
+}
+
+.about-content { 
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.about-header {
+    font-size: 25px; 
+    margin-bottom: 1.5em
+}

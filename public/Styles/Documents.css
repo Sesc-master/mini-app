@@ -1,0 +1,18 @@
+.documents-header {
+    padding: 0;
+    margin: 8px;
+    text-align: center;
+}
+
+.documents-content {
+    display: flex;
+    flex-direction: column;
+}
+
+.documents-text {
+    padding: 8px;
+    text-align: center;
+    margin: 5px;
+    border: 2px solid #47a7f5;
+    border-radius: 8px
+}

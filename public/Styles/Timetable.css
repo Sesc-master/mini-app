@@ -1,0 +1,31 @@
+
+.instruction {
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+    padding-top: 50px;
+    font-size: 20px;
+    text-align: center;
+}
+
+.elements {
+    padding-left: 2px;
+    padding-right: 2px;
+}
+
+.error {
+    padding-top: 20px;
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+    flex-direction: column;
+}
+
+.text_error {
+    font-size: 25px;
+    text-align: center;
+}
+
+.end {
+    height: 30px;
+}
