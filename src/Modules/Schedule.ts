@@ -57,3 +57,4 @@ export async function getSchedule(scheduleType: IdableScheduleType, weekday: num
     return APIRequest(scheduleType, weekday, id)
         .then(scheduleFromJSON);
 }
+

@@ -6,8 +6,7 @@ import MarksTable from "../MarksTable";
 
 const Marks = () => {
     const token = useSelector((state: IRootState) => state.token)
-    const localStorageLogin = useSelector((state: IRootState) => state.localStorageLogin)
-    const {login, type} = JSON.parse(localStorage.getItem(localStorageLogin))
+    const {login, type} = JSON.parse(localStorage.getItem("loginData"))
     const [marks, setMarks] = useState([])
 
     useEffect(async () => {

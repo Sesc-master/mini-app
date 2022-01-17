@@ -6,8 +6,7 @@ import TextWithLinks from "../TextWithLinks";
 
 const Notes = () => {
     const token = useSelector((state: IRootState) => state.token)
-    const localStorageLogin = useSelector((state: IRootState) => state.localStorageLogin)
-    const {login, type} = JSON.parse(localStorage.getItem(localStorageLogin))
+    const {login, type} = JSON.parse(localStorage.getItem("loginData"))
     const [notes, setNotes] = useState([])
 
     useEffect(async () => {

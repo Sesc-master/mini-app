@@ -14,7 +14,10 @@ const Week = (props : IWeek) => {
 
     return(
         <Tabs>
-            {names.map((element, index) => (<Day key={index} name={element} targetIndex={props.targetIndex} setTargetDayIndex={props.setTargetDayIndex} dayIndex={index + 1}/>))}
+            {names.map((element, index) => (
+                <Day key={index} name={element}
+                     targetIndex={props.targetIndex} setTargetDayIndex={props.setTargetDayIndex}
+                     dayIndex={index + 1}/>))}
         </Tabs>
     )
 }

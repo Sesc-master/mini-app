@@ -64,7 +64,8 @@ const Diary = ({setActiveViewSubjects}: IDiaryProps) => {
                 }
                 setIsLoading(false)
             })
-            .catch(() => {
+            .catch((err) => {
+                console.log(err)
                 setIsError(true)
                 setIsLoading(false)
             })

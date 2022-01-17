@@ -1,6 +1,4 @@
-
 import React, {useEffect, useState} from "react";
-
 import "@vkontakte/vkui/dist/vkui.css";
 import Navbar from "./Navbar";
 import Timetable from "./Panels/Timetable";
@@ -38,7 +36,6 @@ const ProjectRoot = () => {
     const [grade, setGrade] = useState<string>("")
     const dispatch = useDispatch() 
     // let isLoaded = useSelector((state : IRootState) => state.isJournalLoaded)
-    const localStorageLogin = useSelector((state : IRootState) => state.localStorageLogin)
     const scheme = useSelector((state: IRootState) => state.scheme)
 
     const setToken = (token: string) => {
@@ -63,11 +60,10 @@ const ProjectRoot = () => {
     // const subjects = isJournalLoaded ? Object.keys(loginResponse.journal) : []
 
     useEffect(() => {
-        if (localStorage.getItem(localStorageLogin) !== null){
+        if (localStorage.getItem('loginData') !== null){
             const loginData : {login: string, password: string, type: string} = 
-            JSON.parse(localStorage.getItem(localStorageLogin) || "{}")
-            try {
-                getDiary(loginData.login, loginData.password, loginData.type)
+            JSON.parse(localStorage.getItem('loginData') || "{}")
+            getDiary(loginData.login, loginData.password, loginData.type)
                 .then((response) => {
                     if (response.journal){
                         setSubjects([...response.journal.keys()])
@@ -76,9 +72,7 @@ const ProjectRoot = () => {
                         setToken(response.token)
                     }
                 })
-            } catch (error) {
-                console.error(error)
-            }
+
         }
 
         if (localStorage.getItem("scheme") !== null){

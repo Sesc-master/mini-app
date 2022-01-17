@@ -8,7 +8,6 @@ const Absences = () => {
     const [absences, setAbsences] = useState(new Map())
     const [summary, setSummary] = useState(0)
     const token = useSelector((state: IRootState) => state.token)
-    const localStorageLogin = useSelector((state: IRootState) => state.localStorageLogin)
 
     const getSummary = (absences) => {
         let counter = 0
@@ -20,7 +19,7 @@ const Absences = () => {
 
     useEffect(async () => {
         try {
-            const {login, type} = JSON.parse(localStorage.getItem(localStorageLogin))
+            const {login, type} = JSON.parse(localStorage.getItem("loginData"))
             const absences = new Map(await getAbsences(login, token, type))
             console.log(login, type, token)
             setAbsences(absences)

@@ -5,11 +5,10 @@ import { getDocuments } from "../../Modules/ScoleAPI";
 
 const Documents = () => {
     const token = useSelector((state: IRootState) => state.token)
-    const localStorageLogin = useSelector((state: IRootState) => state.localStorageLogin)
     const [documents, setDocuments] = useState([])
 
     useEffect(async () => {
-        const {login, type} = JSON.parse(localStorage.getItem(localStorageLogin))
+        const {login, type} = JSON.parse(localStorage.getItem("loginData"))
         let documents = await getDocuments(login, token, type)
         setDocuments(documents)
     }, [])

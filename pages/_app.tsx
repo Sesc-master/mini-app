@@ -31,9 +31,8 @@ let defaultState : IRootState = {
 	journal: {},
 	isJournalLoaded: false,
 	targetSubject: '',
-	localStorageLogin: 'loginData',
 	token: '',
-	scheme: 'client_dark'
+	scheme: 'client_dark',
 }
 
 function reducer(state = defaultState, action) {
@@ -50,6 +49,7 @@ function reducer(state = defaultState, action) {
 		return {...state, token: action.payload}
 	case 'SET_SCHEME':
 		return {...state, scheme: action.payload}
+
 	default:
 		return state
   }
