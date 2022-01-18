@@ -27,7 +27,7 @@ export class Table {
         const IDs = await getIDs()
         const schedule = [];
         await Promise.all(Array.from({ length: 6 }).map(async (_, day) => {
-                schedule.push(await getSchedule('group', day + 1, Number(IDs.groups.get(grade))))
+                schedule[day] = (await getSchedule('group', day + 1, Number(IDs.groups.get(grade))))
             })
         )
         return schedule;

@@ -78,6 +78,7 @@ const Timetable = ({setActiveView, grade} : ITimetable) => {
     const isLoaderRendering = !isError && isLoading && grade !== ""
 
     useEffect(() => {
+        console.log(targetDayIndex)
         // const lessons = listifySchedule(weekSchedule[targetDayIndex
         if (grade === "") return;
 

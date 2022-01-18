@@ -9,14 +9,13 @@ type IAbout = {
 
 const DiaryInfo = (props : IAbout) => {
     const dispatch = useDispatch();
-    const localStorageLogin = useSelector((state : IRootState) => state.localStorageLogin)
     const isLoaded = useSelector((state : IRootState) => state.isJournalLoaded)
 
     const exitJournal = () => {
         setSubjects([])
         setJournal({})
         setIsJournalLoaded(false)
-        localStorage.removeItem(localStorageLogin)
+        localStorage.removeItem('loginData')
     }
 
     const setSubjects = (subjects : string[]) => {
