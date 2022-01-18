@@ -2,7 +2,11 @@ const { createServer } = require("https");
 const { parse } = require("url");
 const next = require("next");
 const fs = require("fs");
+<<<<<<< HEAD
 const port = 80;
+=======
+const port = 3000;
+>>>>>>> 936687ac4d7c91e6db3f10e8da731cb16a6e9ecd
 const dev = process.env.NODE_ENV !== "production";
 const app = next({ dev });
 const handle = app.getRequestHandler();
