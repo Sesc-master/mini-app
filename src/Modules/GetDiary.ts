@@ -11,7 +11,5 @@ export async function getDiary(userName : string, password : string, type : stri
 
     const journal = await getJournal(userName, loginData.token, type)
 
-    console.log(loginData.token, userName, password, type)
-
     return {journal: journal, token: loginData.token}
 }

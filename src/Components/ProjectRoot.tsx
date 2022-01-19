@@ -21,16 +21,6 @@ import Documents from "./Panels/Documents";
 
 type ISetOptions = (option: string) => void;
 
-type IProjectRoot = {
-    grade: string,
-    setActiveView: (view: string) => void,
-    setGrade: (grade: string) => void,
-    activeView: string,
-    setScheme: (scheme: "client_dark" | "client_light") => void
-}
-
-
-
 const ProjectRoot = () => {
     const [activeView, setActiveView] = useState("time-table")
     const [grade, setGrade] = useState<string>("")
@@ -54,8 +44,12 @@ const ProjectRoot = () => {
         dispatch({type: "SET_JOURNAL", payload: journal})
     }
 
-    const setIsJournalLoaded = (isLoaded : boolean) => {
-        dispatch({type: "SET_IS_JOURNAL_LOADED", payload: isLoaded})
+    const setIsLogin = (isLogin : boolean) => {
+        dispatch({type: "SET_IS_LOGIN", payload: isLogin})
+    }
+
+    const setIsJournalLoading = (isLoading : boolean) => {
+        dispatch({type: "SET_IS_JOURNAL_LOADING", payload: isLoading})
     }
     // const subjects = isJournalLoaded ? Object.keys(loginResponse.journal) : []
 
@@ -63,18 +57,21 @@ const ProjectRoot = () => {
         if (localStorage.getItem('loginData') !== null){
             const loginData : {login: string, password: string, type: string} = 
             JSON.parse(localStorage.getItem('loginData') || "{}")
+            setIsJournalLoading(true)
             getDiary(loginData.login, loginData.password, loginData.type)
                 .then((response) => {
                     if (response.journal){
                         setSubjects([...response.journal.keys()])
                         setJournal(response.journal)
-                        setIsJournalLoaded(true)
+                        setIsLogin(true)
                         setToken(response.token)
                     }
+                    setIsJournalLoading(false)
                 })
-
+                .catch(() => {
+                    setIsJournalLoading(false)
+                })
         }
-
         if (localStorage.getItem("scheme") !== null){
             const scheme = localStorage.getItem("scheme") || "{}"
             setScheme(scheme)

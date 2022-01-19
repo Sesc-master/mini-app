@@ -9,12 +9,12 @@ type IAbout = {
 
 const DiaryInfo = (props : IAbout) => {
     const dispatch = useDispatch();
-    const isLoaded = useSelector((state : IRootState) => state.isJournalLoaded)
+    const isLogin = useSelector((state : IRootState) => state.isLogin)
 
     const exitJournal = () => {
         setSubjects([])
         setJournal({})
-        setIsJournalLoaded(false)
+        setIsLogin(false)
         localStorage.removeItem('loginData')
     }
 
@@ -26,15 +26,15 @@ const DiaryInfo = (props : IAbout) => {
         dispatch({type: "SET_JOURNAL", payload: journal})
     }
 
-    const setIsJournalLoaded = (isLoaded : boolean) => {
-        dispatch({type: "SET_IS_JOURNAL_LOADED", payload: isLoaded})
+    const setIsLogin = (isLogin : boolean) => {
+        dispatch({type: "SET_IS_LOGIN", payload: isLogin})
     }
 
     return (
         <>  
             <Div style={{ display: "flex", alignItems: "center", flexDirection: "column"}}>
-                {!isLoaded && <Text style={{textAlign: 'center'}} weight="semibold">Авторизуйтесь, чтобы видеть ваши данные</Text>}
-                {isLoaded && 
+                {!isLogin && <Text style={{textAlign: 'center'}} weight="semibold">Авторизуйтесь, чтобы видеть ваши данные</Text>}
+                {isLogin && 
                 <>
                     <Div className='link'>
                         <Button size="l" stretched mode="outline" onClick={() => props.setActiveView("marks")}>Табель</Button>

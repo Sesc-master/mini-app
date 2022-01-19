@@ -21,7 +21,6 @@ const Absences = () => {
         try {
             const {login, type} = JSON.parse(localStorage.getItem("loginData"))
             const absences = new Map(await getAbsences(login, token, type))
-            console.log(login, type, token)
             setAbsences(absences)
             setSummary(getSummary(absences))
         } catch(err) {

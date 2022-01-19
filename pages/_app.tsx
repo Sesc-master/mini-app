@@ -29,10 +29,11 @@ import { Provider } from 'react-redux'
 let defaultState : IRootState = {
 	subjects: [],
 	journal: {},
-	isJournalLoaded: false,
+	isLogin: false,
 	targetSubject: '',
 	token: '',
 	scheme: 'client_dark',
+	isJournalLoading: false,
 }
 
 function reducer(state = defaultState, action) {
@@ -41,15 +42,16 @@ function reducer(state = defaultState, action) {
 		return {...state, subjects: action.payload}
 	case 'SET_JOURNAL':
 		return {...state, journal: action.payload}
-	case 'SET_IS_JOURNAL_LOADED':
-		return {...state, isJournalLoaded: action.payload}
+	case 'SET_IS_LOGIN':
+		return {...state, isLogin: action.payload}
 	case 'SET_TARGET_SUBJECT':
 		return {...state, targetSubject: action.payload}
 	case 'SET_TOKEN':
 		return {...state, token: action.payload}
 	case 'SET_SCHEME':
 		return {...state, scheme: action.payload}
-
+	case "SET_IS_JOURNAL_LOADING":
+		return {...state, isJournalLoading: action.payload}
 	default:
 		return state
   }

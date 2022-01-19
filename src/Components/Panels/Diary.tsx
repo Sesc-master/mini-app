@@ -15,10 +15,10 @@ type IDiaryProps = {
 
 const Diary = ({setActiveViewSubjects}: IDiaryProps) => {
     const [loginRequest, setLoginRequest] = useState<any>({})
-    const [isLoading, setIsLoading] = useState<boolean>(true)
-    const [isError, setIsError] = useState<Boolean>(false)
+    const isLoading = useSelector((state: IRootState) : boolean => state.isJournalLoading)
+    const [isError, setIsError] = useState<boolean>(false)
     const dispatch = useDispatch() 
-    let isLoaded = useSelector((state : IRootState) => state.isJournalLoaded)
+    let isLogin = useSelector((state : IRootState) => state.isLogin)
     const firstUpdate = useRef(true);
 
     const setToken = (token: string) => {
@@ -33,28 +33,30 @@ const Diary = ({setActiveViewSubjects}: IDiaryProps) => {
         dispatch({type: "SET_JOURNAL", payload: journal})
     }
 
-    const setIsJournalLoaded = (isLoaded : boolean) => {
-        dispatch({type: "SET_IS_JOURNAL_LOADED", payload: isLoaded})
+    const setIsLogin = (isLogin : boolean) => {
+        dispatch({type: "SET_IS_LOGIN", payload: isLogin})
+    }
+
+    const setIsJournalLoading = (isLoading: boolean) : void => {
+        dispatch({type: "SET_IS_JOURNAL_LOADING", payload: isLoading})
     }
     // const subjects = isJournalLoaded ? Object.keys(loginResponse.journal) : []
 
     useEffect(() => {
-        setIsLoading(true)
-        setIsError(false)
-
         if (firstUpdate.current === true){
             firstUpdate.current = false
-            setIsLoading(false)
             return;
         }
 
+        setIsJournalLoading(true)
+        setIsError(false)
 
         getDiary(loginRequest.login, loginRequest.password, loginRequest.type)
             .then((response) => {
                 if (response.journal){
                     setSubjects([...response.journal.keys()])
                     setJournal(response.journal)
-                    setIsJournalLoaded(true)
+                    setIsLogin(true)
                     localStorage.setItem("loginData", JSON.stringify({
                         login: loginRequest.login,
                         password: loginRequest.password, 
@@ -62,12 +64,12 @@ const Diary = ({setActiveViewSubjects}: IDiaryProps) => {
                     }))
                     setToken(response.token)
                 }
-                setIsLoading(false)
+                setIsJournalLoading(false)
             })
             .catch((err) => {
                 console.log(err)
                 setIsError(true)
-                setIsLoading(false)
+                setIsJournalLoading(false)
             })
         
     }, [loginRequest])
@@ -78,8 +80,8 @@ const Diary = ({setActiveViewSubjects}: IDiaryProps) => {
 			<div className='loader'>
 			    <Spinner size='medium'/>
 			</div>}
-            {!isLoaded && !isLoading && <Login setLoginRequest={setLoginRequest}/>}
-            {isLoaded && !isLoading && <Journal setActiveViewSubjects={setActiveViewSubjects}/>}
+            {!isLogin && !isLoading && <Login setLoginRequest={setLoginRequest}/>}
+            {isLogin && !isLoading && <Journal setActiveViewSubjects={setActiveViewSubjects}/>}
             {isError && <Div className="diary-error">Убедитесь, что корректно указали данные</Div>}
         </>
 

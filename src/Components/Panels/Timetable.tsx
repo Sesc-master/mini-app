@@ -62,7 +62,6 @@ const Timetable = ({setActiveView, grade} : ITimetable) => {
     const [isLoading, setIsLoading] = useState(false)
     const [isError, setIsError] = useState(false)
     const [weekSchedule, setWeekSchedule] = useState([])
-
     const times = [
         ["09:00", "09:40"],
         ["09:50", "10:30"],
@@ -78,8 +77,6 @@ const Timetable = ({setActiveView, grade} : ITimetable) => {
     const isLoaderRendering = !isError && isLoading && grade !== ""
 
     useEffect(() => {
-        console.log(targetDayIndex)
-        // const lessons = listifySchedule(weekSchedule[targetDayIndex
         if (grade === "") return;
 
         const lessons = listifySchedule(weekSchedule[targetDayIndex - 1])
@@ -91,7 +88,6 @@ const Timetable = ({setActiveView, grade} : ITimetable) => {
         setIsError(false)
         try {
             setIsLoading(true)
-
             const weekSchedule = await Table.getTableForWeek(grade)
             setWeekSchedule(weekSchedule)
             const lessons = listifySchedule(weekSchedule[targetDayIndex - 1])
