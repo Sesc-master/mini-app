@@ -19,6 +19,7 @@ type SubjectNote = {
 }
 
 export async function getJournal(args: IBaseRequestArgs) {
+    console.log(args)
     return Promise.all([getSubjectsList(args), getTeachersList(args), scoleRequest("jrnGet", args, [])]).then(responses => {
         var result = new Map<string, Subject>();
         let [subjects, teachers, journalStr] = responses;
@@ -29,8 +30,8 @@ export async function getJournal(args: IBaseRequestArgs) {
         journal.forEach((journalNotes, teacher) => {
             let [className, subjectId, teacherLogin] = teacher.split("_");
 
-            let subjectName = subjects.get(subjectId);
-            let teacherName = teachers.find(teacherObject => teacherObject.login === teacherLogin)?.fio;
+            let subjectName = subjects?.get(subjectId);
+            let teacherName = teachers?.find(teacherObject => teacherObject.login === teacherLogin)?.fio;
 
             result.set(<string>subjectName, { teacher: <string>teacherName, notes: [] });
             journalNotes.forEach((note, day) => {
