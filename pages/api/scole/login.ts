@@ -25,9 +25,10 @@ export async function login(args: ILoginArgs): Promise<SessionInfo | "none"> {
         c: String(args.captcha),
         ci: String(args.captchaID)
     })).then(response => {
-        //sconsole.log(response);
         if (response.body === "none") return "none";
-        else return JSON.parse(response.body, reviver([["roles", "token"]]))
+        else{
+            return JSON.parse(response.body, reviver([["roles", "token"]]))
+        }
     });
 }
 

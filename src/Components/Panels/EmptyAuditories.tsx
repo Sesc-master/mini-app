@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from "react";
 import { Div, Button, Text} from "@vkontakte/vkui";
 import {getFreeAuditories} from "../../Modules/Schedule"
-import  {FullSсhedule}  from "../../Modules/Schedule/FullSchedule";
 import AuditoriesPerLesson from "../AuditoriesPerLesson"
 // import "../../../public/Styles/EmptyAuditories.css"
 

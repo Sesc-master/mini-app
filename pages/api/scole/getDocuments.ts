@@ -29,6 +29,7 @@ export type Document = {
 export async function getDocuments(args: IGetDocumentsArgs): Promise<Array<Document> | "none"> {
     return scoleRequest("sprGet", args, [args.target])
         .then(response => {
+            console.log(response)
             if (response === "none") return response;
             else {
                 let apiResponse: Array<GoldinDocument> = JSON.parse(response, reviver([[

@@ -1,9 +1,9 @@
 export interface IRootState {
     subjects: string [],
     journal: {}, 
-    isJournalLoaded: boolean, 
+    isLogin: boolean, 
     targetSubject: string,
-    localStorageLogin: string,
     token: string,
-    scheme: string
+    scheme: string,
+    isJournalLoading: boolean,
 }

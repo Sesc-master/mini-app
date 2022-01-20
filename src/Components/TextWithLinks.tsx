@@ -6,6 +6,10 @@ function getDomain(url: string){
 }
 
 const TextWithLinks = ({str} : {str: string}) => {
+    if (str === undefined) {
+        return ''
+    }
+
     let formatedHomework = str.replace( /<\/?[^>]+(>|$)/g, "")
     // deleted tags
     let links = linkify.find(formatedHomework)

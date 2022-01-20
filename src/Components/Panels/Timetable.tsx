@@ -3,12 +3,12 @@ import { FormItem, SelectMimicry, Text, Div, Spinner} from "@vkontakte/vkui";
 // import '@vkontakte/vkui/dist/vkui.css';
 import { Table } from "../../Modules/Table"
 import Week from "../Week";
-import ReactLoading from "react-loading";
 import TimetableItem from "../TimetableItem";
 import {listifySchedule} from "../../Modules/ListifySchedule";
 import {TimetableElement} from "../../Modules/ListifySchedule";
 // import '../../../public/Styles/Timetable.css'
 import TimetableItemLoader from "../TimetableItemLoader"
+import lesson from "../Lesson";
 
 type ISetActiveView = () => void;
 
@@ -61,7 +61,7 @@ const Timetable = ({setActiveView, grade} : ITimetable) => {
     const [timetable, setTimetable] = useState<Array<TimetableElement>>([])
     const [isLoading, setIsLoading] = useState(false)
     const [isError, setIsError] = useState(false)
-
+    const [weekSchedule, setWeekSchedule] = useState([])
     const times = [
         ["09:00", "09:40"],
         ["09:50", "10:30"],
@@ -77,22 +77,26 @@ const Timetable = ({setActiveView, grade} : ITimetable) => {
     const isLoaderRendering = !isError && isLoading && grade !== ""
 
     useEffect(() => {
-        setIsError(false)
         if (grade === "") return;
+
+        const lessons = listifySchedule(weekSchedule[targetDayIndex - 1])
+        setTimetable(lessons)
+    }, [targetDayIndex])
+
+    useEffect(async () => {
+        if (grade === "") return;
+        setIsError(false)
         try {
             setIsLoading(true)
-            Table.getTable("group", targetDayIndex, grade)
-                .then(result=> {
-                    let lessons = listifySchedule(result)
-                    setTimetable(lessons);
-                    setIsLoading(false)
-                })
-                .catch(() => setIsError(true))
+            const weekSchedule = await Table.getTableForWeek(grade)
+            setWeekSchedule(weekSchedule)
+            const lessons = listifySchedule(weekSchedule[targetDayIndex - 1])
+            setTimetable(lessons);
+            setIsLoading(false)
+        } catch {
+            setIsError(true)
         }
-        catch {
-            setIsError(true);
-        }
-    }, [grade, targetDayIndex])
+    }, [grade])
 
     return (
         <>

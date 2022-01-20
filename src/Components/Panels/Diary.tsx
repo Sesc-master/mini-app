@@ -1,12 +1,13 @@
 import React, {useEffect, useState, useRef} from "react";
 import {Div, Spinner} from "@vkontakte/vkui"
 import { IRootState } from "../../Modules/IRootState"
+import { getDiary } from "../../Modules/GetDiary";
 
 // import '@vkontakte/vkui/dist/vkui.css';
 import Login from "../Login";
-import Task from "../Task";
 import Journal from "../Journal"
 import {useDispatch, useSelector} from "react-redux"
+
 
 type IDiaryProps = { 
     setActiveViewSubjects: () => void
@@ -14,11 +15,15 @@ type IDiaryProps = {
 
 const Diary = ({setActiveViewSubjects}: IDiaryProps) => {
     const [loginRequest, setLoginRequest] = useState<any>({})
-    const [loginResponse, setLoginResponse] = useState<any>({})
-    const [isLoading, setIsLoading] = useState<boolean>(true)
+    const isLoading = useSelector((state: IRootState) : boolean => state.isJournalLoading)
+    const [isError, setIsError] = useState<boolean>(false)
     const dispatch = useDispatch() 
-    let isLoaded = useSelector((state : IRootState) => state.isJournalLoaded)
+    let isLogin = useSelector((state : IRootState) => state.isLogin)
     const firstUpdate = useRef(true);
+
+    const setToken = (token: string) => {
+        dispatch({type: "SET_TOKEN", payload: token})
+    }
 
     const setSubjects = (subjects : string[]) => {
         dispatch({type: "SET_SUBJECTS", payload: subjects})
@@ -28,46 +33,45 @@ const Diary = ({setActiveViewSubjects}: IDiaryProps) => {
         dispatch({type: "SET_JOURNAL", payload: journal})
     }
 
-    const setIsJournalLoaded = (isLoaded : boolean) => {
-        dispatch({type: "SET_IS_JOURNAL_LOADED", payload: isLoaded})
+    const setIsLogin = (isLogin : boolean) => {
+        dispatch({type: "SET_IS_LOGIN", payload: isLogin})
+    }
+
+    const setIsJournalLoading = (isLoading: boolean) : void => {
+        dispatch({type: "SET_IS_JOURNAL_LOADING", payload: isLoading})
     }
     // const subjects = isJournalLoaded ? Object.keys(loginResponse.journal) : []
-    const getJournal = (login : string, password : string, type : string) => {
-        return fetch("/api/journal", {
-            method: "POST",
-            body: JSON.stringify({login, password, type})
-        })
-            .then((response) => response.json())
-            .then((response) => {
-                return response;
-            })
-    }
-
 
     useEffect(() => {
-        setIsLoading(true)
-
         if (firstUpdate.current === true){
             firstUpdate.current = false
-            setIsLoading(false)
             return;
         }
 
-        getJournal(loginRequest.login, loginRequest.password, loginRequest.type)
+        setIsJournalLoading(true)
+        setIsError(false)
+
+        getDiary(loginRequest.login, loginRequest.password, loginRequest.type)
             .then((response) => {
-                setLoginResponse(response)
                 if (response.journal){
-                    setSubjects(Object.keys(response.journal))
+                    setSubjects([...response.journal.keys()])
                     setJournal(response.journal)
-                    setIsJournalLoaded(true)
+                    setIsLogin(true)
                     localStorage.setItem("loginData", JSON.stringify({
                         login: loginRequest.login,
                         password: loginRequest.password, 
                         type: loginRequest.type
                     }))
+                    setToken(response.token)
                 }
-                setIsLoading(false)
+                setIsJournalLoading(false)
             })
+            .catch((err) => {
+                console.log(err)
+                setIsError(true)
+                setIsJournalLoading(false)
+            })
+        
     }, [loginRequest])
 
     return (
@@ -76,8 +80,9 @@ const Diary = ({setActiveViewSubjects}: IDiaryProps) => {
 			<div className='loader'>
 			    <Spinner size='medium'/>
 			</div>}
-            {!isLoaded && !isLoading && <Login setLoginRequest={setLoginRequest}/>}
-            {isLoaded && !isLoading && <Journal setActiveViewSubjects={setActiveViewSubjects}/>}
+            {!isLogin && !isLoading && <Login setLoginRequest={setLoginRequest}/>}
+            {isLogin && !isLoading && <Journal setActiveViewSubjects={setActiveViewSubjects}/>}
+            {isError && <Div className="diary-error">Убедитесь, что корректно указали данные</Div>}
         </>
 
     );

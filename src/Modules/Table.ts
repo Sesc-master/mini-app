@@ -22,4 +22,14 @@ export class Table {
     public static getFullTable(weekday: number) {
         return getFullSchedule(weekday)
     }
+
+    public static async getTableForWeek(grade: string) {
+        const IDs = await getIDs()
+        const schedule = [];
+        await Promise.all(Array.from({ length: 6 }).map(async (_, day) => {
+                schedule[day] = (await getSchedule('group', day + 1, Number(IDs.groups.get(grade))))
+            })
+        )
+        return schedule;
+    }
 }

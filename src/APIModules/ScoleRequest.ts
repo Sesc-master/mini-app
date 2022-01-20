@@ -2,7 +2,7 @@ import { RequestOptions } from "https";
 import httpsRequest from "./HttpsRequest";
 
 const server: string = "lycreg.urfu.ru";
-const timeout: number = 750;
+const timeout: number = 5000;
 
 export interface IBaseRequestArgs {
     login: string, token: string, type: string

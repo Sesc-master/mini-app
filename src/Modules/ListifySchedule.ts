@@ -16,8 +16,8 @@ export function listifySchedule (schedule: Schedule) : Array<TimetableElement>{
         changes.push(new Array<SсheduleLesson>());
         lessons.push(new Array<SсheduleLesson>());
     }
-    schedule.lessons.forEach(lesson => lessons[lesson.number - 1].push(lesson));
-    schedule.diffs.forEach(lesson => changes[lesson.number - 1].push(lesson));
+    schedule?.lessons?.forEach(lesson => lessons[lesson.number - 1].push(lesson));
+    schedule?.diffs?.forEach(lesson => changes[lesson.number - 1].push(lesson));
 
     let timetableItems = new Array<TimetableElement>()
 
@@ -25,7 +25,7 @@ export function listifySchedule (schedule: Schedule) : Array<TimetableElement>{
         timetableItems.push(new TimetableElement())
     }
 
-    schedule.lessons.forEach((element) => {
+    schedule?.lessons.forEach((element) => {
         if (element === undefined) return;
 
         if (element.subgroup === 0) {
@@ -42,7 +42,7 @@ export function listifySchedule (schedule: Schedule) : Array<TimetableElement>{
         }
     })
 
-    schedule.diffs.forEach((element) => {
+    schedule?.diffs.forEach((element) => {
         if (element === undefined) return;
 
         if (element.subgroup === 0) {

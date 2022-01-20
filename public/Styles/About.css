@@ -10,3 +10,14 @@
 .app-name {
     text-align: 'center';
 }
+
+.about-content { 
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.about-header {
+    font-size: 25px; 
+    margin-bottom: 1.5em
+}

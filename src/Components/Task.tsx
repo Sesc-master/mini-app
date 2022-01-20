@@ -1,6 +1,4 @@
 import React, {useState} from "react";
-import {SplitCol, Text} from "@vkontakte/vkui";
-import { type } from "os";
 import TextWithLinks from "./TextWithLinks"
 
 type ITask = {
@@ -29,10 +27,15 @@ const Task = ({date, topic, homework, mark, weight}: ITask) => {
     }
 
     const formatTopicText = (topic: string) => {
+        if (topic === undefined) {
+            return ''
+        }
+
         const formatedTopicLength = 45
+        
         let formatedTopic = topic 
 
-        if (formatedTopic.length >= formatedTopicLength && !isOpened) {
+        if (formatedTopic?.length >= formatedTopicLength && !isOpened) {
             formatedTopic = formatedTopic.slice(0, formatedTopicLength) + "..."
         }
 

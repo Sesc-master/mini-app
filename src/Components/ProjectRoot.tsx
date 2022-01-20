@@ -1,6 +1,4 @@
-
 import React, {useEffect, useState} from "react";
-
 import "@vkontakte/vkui/dist/vkui.css";
 import Navbar from "./Navbar";
 import Timetable from "./Panels/Timetable";
@@ -13,27 +11,26 @@ import Subjects from "./Panels/Subjects"
 import { IRootState } from "../Modules/IRootState";
 import {ConfigProvider, AppRoot, Root, View, Panel} from "@vkontakte/vkui";
 import {useDispatch, useSelector} from "react-redux"
+import { getDiary } from '../Modules/GetDiary'
+import Notes from "./Panels/Notes";
+import Absences from "./Panels/Absences";
+import Marks from "./Panels/Marks";
+import DiaryInfo from "./Panels/DiaryInfo";
+import Documents from "./Panels/Documents";
 // import '../../public/Styles/Option.css'
 
 type ISetOptions = (option: string) => void;
-
-type IProjectRoot = {
-    grade: string,
-    setActiveView: (view: string) => void,
-    setGrade: (grade: string) => void,
-    activeView: string,
-    setScheme: (scheme: "client_dark" | "client_light") => void
-}
-
-
 
 const ProjectRoot = () => {
     const [activeView, setActiveView] = useState("time-table")
     const [grade, setGrade] = useState<string>("")
     const dispatch = useDispatch() 
     // let isLoaded = useSelector((state : IRootState) => state.isJournalLoaded)
-    const localStorageLogin = useSelector((state : IRootState) => state.localStorageLogin)
     const scheme = useSelector((state: IRootState) => state.scheme)
+
+    const setToken = (token: string) => {
+        dispatch({type: "SET_TOKEN", payload: token})
+    }
 
     const setScheme = (scheme : string) => {
         dispatch({type: "SET_SCHEME", payload: scheme})
@@ -47,36 +44,34 @@ const ProjectRoot = () => {
         dispatch({type: "SET_JOURNAL", payload: journal})
     }
 
-    const setIsJournalLoaded = (isLoaded : boolean) => {
-        dispatch({type: "SET_IS_JOURNAL_LOADED", payload: isLoaded})
+    const setIsLogin = (isLogin : boolean) => {
+        dispatch({type: "SET_IS_LOGIN", payload: isLogin})
+    }
+
+    const setIsJournalLoading = (isLoading : boolean) => {
+        dispatch({type: "SET_IS_JOURNAL_LOADING", payload: isLoading})
     }
     // const subjects = isJournalLoaded ? Object.keys(loginResponse.journal) : []
-    const getJournal = (login : string, password : string, type : string) => {
-        return fetch("/api/journal", {
-            method: "POST",
-            body: JSON.stringify({login, password, type})
-        })
-            .then((response) => response.json())
-            .then((response) => {
-                return response;
-            })
-    }
 
     useEffect(() => {
-        if (localStorage.getItem(localStorageLogin) !== null){
+        if (localStorage.getItem('loginData') !== null){
             const loginData : {login: string, password: string, type: string} = 
-            JSON.parse(localStorage.getItem(localStorageLogin) || "{}")
-
-            getJournal(loginData.login, loginData.password, loginData.type)
+            JSON.parse(localStorage.getItem('loginData') || "{}")
+            setIsJournalLoading(true)
+            getDiary(loginData.login, loginData.password, loginData.type)
                 .then((response) => {
                     if (response.journal){
-                        setSubjects(Object.keys(response.journal))
+                        setSubjects([...response.journal.keys()])
                         setJournal(response.journal)
-                        setIsJournalLoaded(true)
+                        setIsLogin(true)
+                        setToken(response.token)
                     }
+                    setIsJournalLoading(false)
+                })
+                .catch(() => {
+                    setIsJournalLoading(false)
                 })
         }
-
         if (localStorage.getItem("scheme") !== null){
             const scheme = localStorage.getItem("scheme") || "{}"
             setScheme(scheme)
@@ -104,7 +99,7 @@ const ProjectRoot = () => {
                     <View id="settings" activePanel="panel">
                         <Panel id='panel'>
                             <AppHeader/>
-                            <About setActiveView={() => setActiveView("empty-cabinet")}/>
+                            <About setActiveView={setActiveView}/>
                         </Panel>
                     </View>
                     <View id="grades" activePanel="panel">
@@ -123,6 +118,36 @@ const ProjectRoot = () => {
                         <Panel id='panel'>
                             <AppHeader/>
                             <Subjects setActiveViewDiary={() => setActiveView("register")}/>
+                        </Panel>
+                    </View>
+                    <View id="notes" activePanel="panel">
+                        <Panel id='panel'>
+                            <AppHeader/>
+                            <Notes/>
+                        </Panel>
+                    </View>
+                    <View id="absences" activePanel="panel">
+                        <Panel id='panel'>
+                            <AppHeader/>
+                            <Absences/>
+                        </Panel>
+                    </View>
+                    <View id="marks" activePanel="panel">
+                        <Panel id='panel'>
+                            <AppHeader/>
+                            <Marks/>
+                        </Panel>
+                    </View>
+                    <View id="diary-info" activePanel="panel">
+                        <Panel id='panel'>
+                            <AppHeader/>
+                            <DiaryInfo setActiveView={setActiveView}/>
+                        </Panel>
+                    </View>
+                    <View id="documents" activePanel="panel">
+                        <Panel id='panel'>
+                            <AppHeader/>
+                            <Documents/>
                         </Panel>
                     </View>
                 </Root>
