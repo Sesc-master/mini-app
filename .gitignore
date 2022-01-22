@@ -6,7 +6,6 @@
 .pnp.js
 /.next
 /.yarn
-/.idea
 
 # testing
 /coverage

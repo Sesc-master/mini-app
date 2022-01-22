@@ -3,8 +3,8 @@ const { parse } = require("url");
 const next = require("next");
 const fs = require("fs");
 const port = 443;
-const dev = process.env.NODE_ENV !== "production";
-const app = next({ dev });
+// const dev = process.env.NODE_ENV !== "production";
+const app = next({ dev: true });
 const handle = app.getRequestHandler();
 
 const httpsOptions = {

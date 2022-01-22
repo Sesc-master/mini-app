@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import Head from 'next/head'
 import bridge from '@vkontakte/vk-bridge';
 import { SSRWrapper} from "@vkontakte/vkui";
 import '../public/Styles/About.css'
@@ -36,7 +37,7 @@ let defaultState : IRootState = {
 	isJournalLoading: false,
 }
 
-function reducer(state = defaultState, action) {
+function reducer(state = defaultState, action: {type: string, payload: any}) : IRootState {
   switch (action.type) {
 	case 'SET_SUBJECTS':
 		return {...state, subjects: action.payload}
@@ -68,11 +69,20 @@ const _app = () => {
 	}, []);
 
 	return (
-		<SSRWrapper userAgent={userAgent}>
-			<Provider store={store}>
+		<>
+			<Head>
+				<title>SESC Master</title>
+				<link rel='icon' href="/icon.png" />
+				<link rel="manifest" href="/manifest.json" />
+				<link rel="apple-touch-icon" href="/icon.png"></link>
+				<meta name="theme-color" content="#fff" />
+			</Head>
+			<SSRWrapper userAgent={userAgent}>
+				<Provider store={store}>
 					<ProjectRoot />
-			</Provider>
-		</SSRWrapper>
+				</Provider>
+			</SSRWrapper>
+		</>
 	);
 }
 
