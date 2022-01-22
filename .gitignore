@@ -6,6 +6,11 @@
 .pnp.js
 /.next
 /.yarn
+/.idea
+/public/sw.js
+/public/sw.js.map
+/public/workbox-9a8b0a38.js
+/public/workbox-9a8b0a38.js.map
 
 # testing
 /coverage
