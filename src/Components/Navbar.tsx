@@ -1,45 +1,47 @@
 import React, { useState } from "react";
 import {Tabbar, TabbarItem, FixedLayout} from "@vkontakte/vkui";
-import { Icon24NewsfeedOutline, Icon24MenuOutline,} from "@vkontakte/icons";
-import { Icon24BillheadOutline } from '@vkontakte/icons';
-import { Icon24ServicesOutline } from '@vkontakte/icons';
+import { Icon28NewsfeedOutline, Icon28MenuOutline,} from "@vkontakte/icons";
+import { Icon28BillheadOutline } from '@vkontakte/icons';
+import { Icon28ServicesOutline } from '@vkontakte/icons';
 import "@vkontakte/vkui/dist/vkui.css";
+import {Page} from "../Modules/Routes";
+import {useNavigate} from 'react-router-dom';
 
-type ISetActiveView = (view: string) => void;
+type IPage = Page.About | Page.Timetable | Page.DiaryInfo | Page.Diary
 
-type INavbar = {
-    setActiveView: ISetActiveView
-}
-
-const Navbar = ({setActiveView} : INavbar) => {
-    const [view, setView] = useState("time-table")
+const Navbar = () => {
+    const [page, setPage] = useState<IPage>()
+    const navigate = useNavigate();
+    const openPage = (page: IPage) : void => {
+        navigate(page)
+    }
 
     return (
         <FixedLayout filled vertical="bottom" >      
-            <Tabbar>
-                <TabbarItem selected={view === "time-table"} onClick={() => {
-                    setView("time-table")
-                    setActiveView("time-table")
+            <Tabbar >
+                <TabbarItem selected={page === Page.Timetable} onClick={() => {
+                    setPage(Page.Timetable)
+                    openPage(Page.Timetable)
                 }}>
-                    < Icon24BillheadOutline/>
+                    < Icon28BillheadOutline/>
                 </TabbarItem>
-                <TabbarItem selected={view === "register"} onClick={() => {
-                    setView("register")
-                    setActiveView("register")
+                <TabbarItem selected={page === Page.Diary} onClick={() => {
+                    setPage(Page.Diary)
+                    openPage(Page.Diary)
                 }}>
-                    <Icon24NewsfeedOutline/>
+                    <Icon28NewsfeedOutline/>
                 </TabbarItem>
-                <TabbarItem selected={view === "diary-info"} onClick={() => {
-                    setView("diary-info")
-                    setActiveView("diary-info")
+                <TabbarItem selected={page === Page.DiaryInfo} onClick={() => {
+                    setPage(Page.DiaryInfo)
+                    openPage(Page.DiaryInfo)
                 }}>
-                    < Icon24ServicesOutline/>
+                    < Icon28ServicesOutline/>
                 </TabbarItem>
-                <TabbarItem selected={view === "settings"} onClick={() => {
-                    setView("settings")
-                    setActiveView("settings")
+                <TabbarItem selected={page === Page.About} onClick={() => {
+                    setPage(Page.About)
+                    openPage(Page.About)
                 }}>
-                    <Icon24MenuOutline/>
+                    <Icon28MenuOutline/>
                 </TabbarItem>
             </Tabbar>
         </FixedLayout>      

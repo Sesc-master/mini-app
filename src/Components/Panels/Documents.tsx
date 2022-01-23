@@ -1,16 +1,20 @@
 import React, { useState, useEffect } from "react";
-import { useSelector } from "react-redux"
-import { IRootState } from "../../Modules/IRootState"
 import { getDocuments } from "../../Modules/ScoleAPI";
+import {useStore} from "effector-react";
+import {diaryStore} from "../../Modules/Effector/DiaryStore";
 
 const Documents = () => {
-    const token = useSelector((state: IRootState) => state.token)
-    const [documents, setDocuments] = useState([])
+    const {token} = useStore(diaryStore)
+    const [documents, setDocuments] = useState<Array<any>>([])
 
-    useEffect(async () => {
-        const {login, type} = JSON.parse(localStorage.getItem("loginData"))
+    const setDocumentsData = async () => {
+        const {login, type} = JSON.parse(localStorage.getItem("loginData") || '{}')
         let documents = await getDocuments(login, token, type)
-        setDocuments(documents)
+        setDocuments(documents || [])
+    }
+
+    useEffect(() => {
+        setDocumentsData()
     }, [])
 
     return (
@@ -19,8 +23,8 @@ const Documents = () => {
             <div className="documents-content">
                 {documents?.map((document, index) => (
                     <div key={index} className="documents-text">
-                        {`Освобождение с ${document?.dateStart.split('-').join('.')} 
-                        до ${document?.dateEnd.split('-').join('.')}`}
+                        {`Освобождение с ${document?.dateStart?.split('-').join('.')} 
+                        до ${document?.dateEnd?.split('-').join('.')}`}
                     </div>
                 ))}
             </div>

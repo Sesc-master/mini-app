@@ -8,68 +8,58 @@ import About from "./Panels/About";
 import Grades from "./Panels/Grades";
 import EmptyAuditories from "./Panels/EmptyAuditories";
 import Subjects from "./Panels/Subjects"
-import { IRootState } from "../Modules/IRootState";
-import {ConfigProvider, AppRoot, Root, View, Panel} from "@vkontakte/vkui";
-import {useDispatch, useSelector} from "react-redux"
+import {
+    ConfigProvider,
+    AppRoot,
+    Panel,
+    SplitLayout,
+    ModalRoot,
+    ModalPage,
+    AdaptivityProvider,
+    ModalPageHeader
+} from "@vkontakte/vkui";
+import { withModalRootContext } from "@vkontakte/vkui";
 import { getDiary } from '../Modules/GetDiary'
 import Notes from "./Panels/Notes";
 import Absences from "./Panels/Absences";
 import Marks from "./Panels/Marks";
 import DiaryInfo from "./Panels/DiaryInfo";
 import Documents from "./Panels/Documents";
-// import '../../public/Styles/Option.css'
 
-type ISetOptions = (option: string) => void;
+import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom'
+import {Page} from "../Modules/Routes";
+import {Modal} from "../Modules/Modal"
+import {
+    setDiary,
+    setIsDiaryLoading,
+    setIsLogin,
+    setSubjects,
+    setToken,
+} from "../Modules/Effector/DiaryStore";
+import {appSettingsStore, setScheme, setModalView} from "../Modules/Effector/AppSettingsSrore"
+import {useStore} from "effector-react";
 
 const ProjectRoot = () => {
-    const [activeView, setActiveView] = useState("time-table")
     const [grade, setGrade] = useState<string>("")
-    const dispatch = useDispatch() 
-    // let isLoaded = useSelector((state : IRootState) => state.isJournalLoaded)
-    const scheme = useSelector((state: IRootState) => state.scheme)
-
-    const setToken = (token: string) => {
-        dispatch({type: "SET_TOKEN", payload: token})
-    }
-
-    const setScheme = (scheme : string) => {
-        dispatch({type: "SET_SCHEME", payload: scheme})
-    }
-
-    const setSubjects = (subjects : string[]) => {
-        dispatch({type: "SET_SUBJECTS", payload: subjects})
-    }
-
-    const setJournal = (journal : {}) => {
-        dispatch({type: "SET_JOURNAL", payload: journal})
-    }
-
-    const setIsLogin = (isLogin : boolean) => {
-        dispatch({type: "SET_IS_LOGIN", payload: isLogin})
-    }
-
-    const setIsJournalLoading = (isLoading : boolean) => {
-        dispatch({type: "SET_IS_JOURNAL_LOADING", payload: isLoading})
-    }
-    // const subjects = isJournalLoaded ? Object.keys(loginResponse.journal) : []
+    const {scheme, modalView} = useStore(appSettingsStore)
 
     useEffect(() => {
         if (localStorage.getItem('loginData') !== null){
             const loginData : {login: string, password: string, type: string} = 
             JSON.parse(localStorage.getItem('loginData') || "{}")
-            setIsJournalLoading(true)
+            setIsDiaryLoading(true)
             getDiary(loginData.login, loginData.password, loginData.type)
                 .then((response) => {
                     if (response.journal){
                         setSubjects([...response.journal.keys()])
-                        setJournal(response.journal)
+                        setDiary(response.journal)
                         setIsLogin(true)
                         setToken(response.token)
                     }
-                    setIsJournalLoading(false)
+                    setIsDiaryLoading(false)
                 })
                 .catch(() => {
-                    setIsJournalLoading(false)
+                    setIsDiaryLoading(false)
                 })
         }
         if (localStorage.getItem("scheme") !== null){
@@ -79,79 +69,51 @@ const ProjectRoot = () => {
 
     }, [])
 
+
+    const modal = (
+        <ModalRoot activeModal={modalView} onClose={() => setModalView('')}>
+            <ModalPage id={Modal.Subjects}>
+                <ModalPageHeader>Выберите предмет</ModalPageHeader>
+                <Subjects />
+            </ModalPage>
+            <ModalPage id={Modal.Grades} dynamicContentHeight={true}>
+                <ModalPageHeader>Выберите Класс</ModalPageHeader>
+                <Grades setGrade={setGrade} />
+            </ModalPage>
+        </ModalRoot>
+    );
+
     return (
+        // @ts-ignore
         <ConfigProvider scheme={scheme}>
+            <AdaptivityProvider>
             <AppRoot >
-                <Navbar setActiveView={(view) => setActiveView(view)}/>
-                <Root activeView={activeView}>
-                    <View id="time-table" activePanel="panel">
+                <SplitLayout modal={modal}>
+
+                    <Router>
                         <Panel id='panel'>
+                            <Navbar/>
                             <AppHeader/>
-                            <Timetable grade={grade} setActiveView={() => setActiveView("grades")}/>
+                            <Routes>
+                                <Route path={Page.Timetable} element={<Timetable grade={grade}/>}/>
+                                <Route path={Page.Diary} element={<Diary />}/>
+                                <Route path={Page.Notes} element={<Notes />}/>
+                                <Route path={Page.Marks} element={<Marks />}/>
+                                <Route path={Page.Absences} element={<Absences />}/>
+                                <Route path={Page.Documents} element={<Documents />}/>
+                                <Route path={Page.DiaryInfo} element={<DiaryInfo />}/>
+                                <Route path={Page.About} element={<About />}/>
+                                <Route path={Page.EmptyAuditories} element={<EmptyAuditories />}/>
+                                <Route
+                                    path="*"
+                                    element={<Navigate to={Page.About} />}
+                                />
+                            </Routes>
                         </Panel>
-                    </View>
-                    <View id="register" activePanel="panel">
-                        <Panel id='panel'>
-                            <AppHeader/>
-                            <Diary setActiveViewSubjects={() => setActiveView("subjects")}/>
-                        </Panel>
-                    </View>
-                    <View id="settings" activePanel="panel">
-                        <Panel id='panel'>
-                            <AppHeader/>
-                            <About setActiveView={setActiveView}/>
-                        </Panel>
-                    </View>
-                    <View id="grades" activePanel="panel">
-                        <Panel id='panel'>
-                            <AppHeader/>
-                            <Grades setGrade={setGrade} setActiveView={() => setActiveView("time-table")}/>
-                        </Panel>
-                    </View>
-                    <View id="empty-cabinet" activePanel="panel">
-                        <Panel id='panel'>
-                            <AppHeader/>
-                            <EmptyAuditories setActiveView={() => setActiveView("settings")}/>
-                        </Panel>
-                    </View>
-                    <View id="subjects" activePanel="panel">
-                        <Panel id='panel'>
-                            <AppHeader/>
-                            <Subjects setActiveViewDiary={() => setActiveView("register")}/>
-                        </Panel>
-                    </View>
-                    <View id="notes" activePanel="panel">
-                        <Panel id='panel'>
-                            <AppHeader/>
-                            <Notes/>
-                        </Panel>
-                    </View>
-                    <View id="absences" activePanel="panel">
-                        <Panel id='panel'>
-                            <AppHeader/>
-                            <Absences/>
-                        </Panel>
-                    </View>
-                    <View id="marks" activePanel="panel">
-                        <Panel id='panel'>
-                            <AppHeader/>
-                            <Marks/>
-                        </Panel>
-                    </View>
-                    <View id="diary-info" activePanel="panel">
-                        <Panel id='panel'>
-                            <AppHeader/>
-                            <DiaryInfo setActiveView={setActiveView}/>
-                        </Panel>
-                    </View>
-                    <View id="documents" activePanel="panel">
-                        <Panel id='panel'>
-                            <AppHeader/>
-                            <Documents/>
-                        </Panel>
-                    </View>
-                </Root>
+                    </Router>
+                </SplitLayout>
             </AppRoot>
+            </AdaptivityProvider>
         </ConfigProvider>
     );
 }

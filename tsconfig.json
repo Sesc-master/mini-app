@@ -25,7 +25,8 @@
   "include": [
     "src",
     "apiModules",
-    "pages"
+    "pages",
+    "public/sesc-master.svg"
   ],
   "exclude": [
     "node_modules"

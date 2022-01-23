@@ -25,11 +25,14 @@ export class Table {
 
     public static async getTableForWeek(grade: string) {
         const IDs = await getIDs()
-        const schedule = [];
+        const schedule : Array<any> = [];
         await Promise.all(Array.from({ length: 6 }).map(async (_, day) => {
-                schedule[day] = (await getSchedule('group', day + 1, Number(IDs.groups.get(grade))))
-            })
-        )
+            try {
+                schedule[day] = await getSchedule('group', day + 1, Number(IDs.groups.get(grade)))
+            } catch (er) {
+                schedule[day] = undefined
+            }
+        }))
         return schedule;
     }
 }

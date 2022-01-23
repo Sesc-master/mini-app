@@ -1,42 +1,46 @@
-import React, { useState, useEffect } from "react";
-import {useSelector} from "react-redux"
-import { IRootState } from "../../Modules/IRootState"
+import React, {useState, useEffect, EffectCallback} from "react";
 import { getAbsences} from "../../Modules/ScoleAPI";
+import {useStore} from "effector-react";
+import {diaryStore} from "../../Modules/Effector/DiaryStore";
 
 
-const Absences = () => {
+const Absences = () : JSX.Element => {
     const [absences, setAbsences] = useState(new Map())
     const [summary, setSummary] = useState(0)
-    const token = useSelector((state: IRootState) => state.token)
+    const {token} = useStore(diaryStore)
 
-    const getSummary = (absences) => {
+    const getSummary = (absences: Map<string, any>) => {
         let counter = 0
         Array.from(absences?.keys()).forEach(subject => {
-            counter += absences.get(subject).length
+            counter += absences?.get(subject)?.length ?? 0
         });
         return counter
     }
 
-    useEffect(async () => {
+    const setAbsencesData = async () => {
         try {
-            const {login, type} = JSON.parse(localStorage.getItem("loginData"))
-            const absences = new Map(await getAbsences(login, token, type))
+            const {login, type} = JSON.parse(localStorage.getItem("loginData") || '{}')
+            const absences = new Map(await getAbsences(login, token, type) || [])
             setAbsences(absences)
             setSummary(getSummary(absences))
         } catch(err) {
             console.log(err)
         }
+    }
+
+    useEffect(() => {
+        setAbsencesData()
     }, [])
 
     return (
         <>
             <h1 className="absences-header">Пропуски</h1>
             <div className="absences-content">
-                {[...absences?.keys()]?.map((subject) => (
+                {Array.from(absences?.keys())?.map((subject) => (
                     <div className='absences-absence'>
                         <div className="absences-subject">{subject}</div>
                         <div className="absences-dates">
-                            {absences.get(subject)?.map((absence) => `${absence.date} `)}
+                            {absences.get(subject)?.map((absence : any) => `${absence.date} `)}
                         </div>
                     </div>
                 ))}

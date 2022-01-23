@@ -1,52 +1,38 @@
 import React from "react";
 import { Div, Button, Text} from "@vkontakte/vkui";
-import {useSelector, useDispatch} from "react-redux"
-import { IRootState } from "../../Modules/IRootState"
+import {useNavigate} from "react-router-dom";
+import {Page } from '../../Modules/Routes'
+import {setIsLogin, setDiary, setSubjects, diaryStore} from "../../Modules/Effector/DiaryStore";
+import {useStore} from 'effector-react'
 
-type IAbout = {
-    setActiveView: (view: string) => void,
-}
-
-const DiaryInfo = (props : IAbout) => {
-    const dispatch = useDispatch();
-    const isLogin = useSelector((state : IRootState) => state.isLogin)
+const DiaryInfo = () : JSX.Element => {
+    const navigate = useNavigate()
+    const {isLogin} = useStore(diaryStore)
 
     const exitJournal = () => {
         setSubjects([])
-        setJournal({})
+        setDiary({})
         setIsLogin(false)
         localStorage.removeItem('loginData')
     }
 
-    const setSubjects = (subjects : string[]) => {
-        dispatch({type: "SET_SUBJECTS", payload: subjects})
-    }
-
-    const setJournal = (journal : {}) => {
-        dispatch({type: "SET_JOURNAL", payload: journal})
-    }
-
-    const setIsLogin = (isLogin : boolean) => {
-        dispatch({type: "SET_IS_LOGIN", payload: isLogin})
-    }
-
     return (
-        <>  
+        <>
             <Div style={{ display: "flex", alignItems: "center", flexDirection: "column"}}>
                 {!isLogin && <Text style={{textAlign: 'center'}} weight="semibold">Авторизуйтесь, чтобы видеть ваши данные</Text>}
-                {isLogin && 
+                {isLogin &&
                 <>
                     <Div className='link'>
-                        <Button size="l" stretched mode="outline" onClick={() => props.setActiveView("marks")}>Табель</Button>
+                        <Button size="l" stretched mode="outline" onClick={() => navigate(Page.Marks)}>Табель</Button>
                     </Div>
                     <Div className='link'>
-                        <Button size="l" stretched mode="outline" onClick={() => props.setActiveView("notes")}>Заметки</Button>
+                        <Button size="l" stretched mode="outline" onClick={() => navigate(Page.Notes)}>Заметки</Button>
                     </Div>
                     <Div className='link'>
-                        <Button size="l" stretched mode="outline" onClick={() => props.setActiveView("absences")}>Пропуски</Button>
+                        <Button size="l" stretched mode="outline" onClick={() => navigate(Page.Absences)}>Пропуски</Button>
                     </Div>
                     <Div className='link'>
-                        <Button size="l" stretched mode="outline" onClick={() => props.setActiveView("documents")}>Справки</Button>
+                        <Button size="l" stretched mode="outline" onClick={() => navigate(Page.Documents)}>Справки</Button>
                     </Div>
                     <Div className='link'>
                         <Button size="l" stretched mode="outline" onClick={exitJournal}>Выйти из Дневника</Button>

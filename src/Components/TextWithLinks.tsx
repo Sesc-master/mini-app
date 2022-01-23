@@ -1,3 +1,4 @@
+import React from "react";
 import * as linkify from "linkifyjs";
 
 function getDomain(url: string){
@@ -5,11 +6,7 @@ function getDomain(url: string){
     return domain.hostname;
 }
 
-const TextWithLinks = ({str} : {str: string}) => {
-    if (str === undefined) {
-        return ''
-    }
-
+const TextWithLinks = ({str} : {str: string}) : JSX.Element => {
     let formatedHomework = str.replace( /<\/?[^>]+(>|$)/g, "")
     // deleted tags
     let links = linkify.find(formatedHomework)

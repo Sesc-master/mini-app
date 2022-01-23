@@ -16,7 +16,10 @@ const Options = ({options, setOption}: IOptions) => {
     return (
         <>
             <List>
-                {options?.map((option, index) => (<Div key={index} onClick={() => setOption(option)} className="option">{option}</Div>))}
+                {options?.map((option, index) =>
+                    (<Div key={index} onClick={() => setOption(option)} className="option">
+                        {option}
+                    </Div>))}
             </List>	
             <Div className='end'></Div>
         </>

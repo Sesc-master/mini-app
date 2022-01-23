@@ -36,8 +36,8 @@ const Login = ({setLoginRequest} : any) => {
                             value: "par",
                         },
                     ]}
-                    onSwitch={(value : string) => {
-                        setLoginData({...loginData, type: value})
+                    onSwitch={(value : string | number) => {
+                        return setLoginData({...loginData, type: value});
                     }}
                     activeValue={loginData.type}
                 />

@@ -1,14 +1,15 @@
-import React, { useState } from "react";
+import React, {useEffect, useState} from "react";
 
-// import '@vkontakte/vkui/dist/vkui.css';
 import Options from "../Options"
+import {setModalView} from "../../Modules/Effector/AppSettingsSrore";
+import {withModalRootContext} from "@vkontakte/vkui";
 
 type IGrades = {
     setGrade: (grade: string) => void,
-    setActiveView: () => void
+    updateModalHeight: () => void
 }
 
-const Grades = ({setGrade, setActiveView} : IGrades) => {
+const Grades = ({setGrade,  updateModalHeight} : IGrades) => {
     const grades = {
         "8": ["8А", "8В"],
         "9": ["9А", "9Б", "9В", "9Г", "9Е"],
@@ -18,12 +19,23 @@ const Grades = ({setGrade, setActiveView} : IGrades) => {
 
     const [gradeName, setGradeName] = useState("");
 
+    useEffect(()=> {
+        if (gradeName != '') updateModalHeight()
+    }, [gradeName])
+
     return (
         <>
-            {gradeName === "" && <Options options={Object?.keys({...grades})} setOption={(option) => setTimeout(() => setGradeName(option), 100)}/>}
-            {gradeName !== "" && <Options options={Object.assign({...grades}[gradeName], [])} setOption={(grade) => {setGrade(grade); setActiveView()}}/>}
+            {gradeName === "" && <Options options={Object?.keys({...grades})} setOption={
+                (option) => {
+                    setTimeout(() => setGradeName(option), 100)
+                }}/>}
+            {gradeName !== "" && <Options options={Object.assign({...grades}[gradeName], [])} setOption={
+                (grade) => {
+                    setGrade(grade)
+                    setModalView('')
+                }}/>}
         </>
     );
 }
 
-export default Grades;
+export default withModalRootContext(Grades);

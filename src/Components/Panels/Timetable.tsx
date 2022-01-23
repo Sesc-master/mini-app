@@ -1,26 +1,21 @@
-import React, { useState, useEffect, useRef} from "react";
-import { FormItem, SelectMimicry, Text, Div, Spinner} from "@vkontakte/vkui";
-// import '@vkontakte/vkui/dist/vkui.css';
-import { Table } from "../../Modules/Table"
+import React, {useEffect, useState, useRef} from "react";
+import {Div, FormItem, SelectMimicry, Spinner, Text} from "@vkontakte/vkui";
+import {Table} from "../../Modules/Table"
 import Week from "../Week";
 import TimetableItem from "../TimetableItem";
-import {listifySchedule} from "../../Modules/ListifySchedule";
-import {TimetableElement} from "../../Modules/ListifySchedule";
-// import '../../../public/Styles/Timetable.css'
+import {listifySchedule, TimetableElement} from "../../Modules/ListifySchedule";
 import TimetableItemLoader from "../TimetableItemLoader"
-import lesson from "../Lesson";
+import {setModalView} from "../../Modules/Effector/AppSettingsSrore";
+import {Modal} from "../../Modules/Modal";
 
-type ISetActiveView = () => void;
 
-type ITimetable = { 
-    setActiveView: ISetActiveView,
+type ITimetable = {
     grade: string
 }
 
 const renderInstruction = () => {
     return (
         <Text className='instruction' weight="semibold" >Выберите класс и день недели</Text>
-
     )
 }
 
@@ -38,7 +33,7 @@ const renderLoader = (times: string [][]) => {
 
 const renderTimetable = (timetable: TimetableElement [], times: string [][]) => {
     return (
-        [...timetable]?.map((el, index) => (
+        Array.from(timetable).map((el, index) => (
             <div key={index}>
                 <TimetableItem schedule={el} time={times[index]}/>
             </div>)
@@ -56,12 +51,13 @@ const renderError = () => {
     )
 }
 
-const Timetable = ({setActiveView, grade} : ITimetable) => {
+const Timetable = ({ grade } : ITimetable) => {
     const [targetDayIndex, setTargetDayIndex] = useState(1)
     const [timetable, setTimetable] = useState<Array<TimetableElement>>([])
     const [isLoading, setIsLoading] = useState(false)
     const [isError, setIsError] = useState(false)
-    const [weekSchedule, setWeekSchedule] = useState([])
+    const [weekSchedule, setWeekSchedule] = useState<Array<any>>([])
+    const isFirstRender = useRef<boolean>(true)
     const times = [
         ["09:00", "09:40"],
         ["09:50", "10:30"],
@@ -72,30 +68,45 @@ const Timetable = ({setActiveView, grade} : ITimetable) => {
         ["14:35", "15:15"]
     ]
 
-    const isTimetableRendering = !isError && !isLoading && !!timetable.length && grade !== ""
-    const isInstructionRendering = !isError && grade === ""
-    const isLoaderRendering = !isError && isLoading && grade !== ""
+    const isTimetableRendering = !isError && !isLoading && !!timetable.length && grade
+    const isInstructionRendering = !isError && !grade
+    const isLoaderRendering = !isError && isLoading && grade
+
+    const memorizeGrade = (grade: string) => {
+        localStorage.setItem('grade', grade)
+    }
+
+    const onGradeChange = async () => {
+        if (!grade) return
+
+        setIsError(false)
+        setIsLoading(true)
+
+        const weekSchedule = await Table.getTableForWeek(grade)
+        setWeekSchedule(weekSchedule)
+        const lessons = listifySchedule(weekSchedule[targetDayIndex - 1])
+
+        setTimetable(lessons);
+        setIsLoading(false)
+
+        if (weekSchedule[targetDayIndex - 1] === undefined){
+            setIsError(true)
+        }
+    }
 
     useEffect(() => {
-        if (grade === "") return;
-
+        setIsError(false)
+        if (!grade) return;
+        if (weekSchedule[targetDayIndex - 1] === undefined){
+            setIsError(true)
+            return;
+        }
         const lessons = listifySchedule(weekSchedule[targetDayIndex - 1])
         setTimetable(lessons)
     }, [targetDayIndex])
 
-    useEffect(async () => {
-        if (grade === "") return;
-        setIsError(false)
-        try {
-            setIsLoading(true)
-            const weekSchedule = await Table.getTableForWeek(grade)
-            setWeekSchedule(weekSchedule)
-            const lessons = listifySchedule(weekSchedule[targetDayIndex - 1])
-            setTimetable(lessons);
-            setIsLoading(false)
-        } catch {
-            setIsError(true)
-        }
+    useEffect( () => {
+        onGradeChange()
     }, [grade])
 
     return (
@@ -103,7 +114,7 @@ const Timetable = ({setActiveView, grade} : ITimetable) => {
 		 	<FormItem top="Выберите класс">
                 <SelectMimicry
                     placeholder="Не выбран"
-                    onClick={() => setActiveView()}
+                    onClick={() => setModalView(Modal.Grades)}
                 >{grade}</SelectMimicry>
             </FormItem>
             <Week setTargetDayIndex={setTargetDayIndex} targetIndex={targetDayIndex}/>

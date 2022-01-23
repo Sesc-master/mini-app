@@ -1,6 +1,14 @@
 const withPWA = require("next-pwa");
 
 module.exports = withPWA({
+    async rewrites() {
+        return [
+            {
+                source: '/:any*',
+                destination: '/',
+            },
+        ];
+    },
     eslint: {
         ignoreDuringBuilds: true,
     },

@@ -1,23 +1,17 @@
-import React, { useState } from "react";
-// import '@vkontakte/vkui/dist/vkui.css';
+import React from "react";
 import Options from "../Options";
-import {useDispatch, useSelector} from "react-redux"
-import { IRootState } from "../../Modules/IRootState"
+import {setTargetSubject, diaryStore} from "../../Modules/Effector/DiaryStore";
+import {setModalView} from "../../Modules/Effector/AppSettingsSrore";
+import {useStore} from "effector-react";
 
-type ISubjectsProps = { 
-    setActiveViewDiary: () => void
-}
-
-const Subjects = ({setActiveViewDiary} : ISubjectsProps) => {
-    const dispatch = useDispatch()
-    const subjects = useSelector((state : IRootState) => state.subjects)
-    const setTargetSubject = (subject: string) => dispatch({type: "SET_TARGET_SUBJECT", payload: subject})
+const Subjects = () => {
+    const {subjects} = useStore(diaryStore)
 
     return (
         <>
             <Options options={subjects} setOption={(subject) => {
-                setActiveViewDiary();
                 setTargetSubject(subject)
+                setModalView('')
             }}/>
         </>
     );

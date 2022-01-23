@@ -1,20 +1,25 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux"
-import { IRootState } from "../../Modules/IRootState"
 import { getNotes } from "../../Modules/ScoleAPI";
 import TextWithLinks from "../TextWithLinks";
+import {useStore} from "effector-react";
+import {diaryStore} from "../../Modules/Effector/DiaryStore";
 
 const Notes = () => {
-    const token = useSelector((state: IRootState) => state.token)
-    const {login, type} = JSON.parse(localStorage.getItem("loginData"))
-    const [notes, setNotes] = useState([])
+    const {token} = useStore(diaryStore)
+    const {login, type} = JSON.parse(localStorage.getItem("loginData") || '{}')
+    const [notes, setNotes] = useState<Array<any>>([])
 
-    useEffect(async () => {
-        let notes = await getNotes(login, token, type)
+    const setNotesData = async () => {
+        let notes = await getNotes(login, token, type) || []
         notes?.sort((a, b) => {
             return Number(a.date.split(" ")[0]) - Number(b.date.split(" ")[0])
         })
         setNotes(notes)
+    }
+
+    useEffect( () => {
+        setNotesData()
     }, [])
 
     return (

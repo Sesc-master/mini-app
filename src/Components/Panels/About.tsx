@@ -1,23 +1,19 @@
 import React from "react";
 import { Div, Button, Text, SliderSwitch } from "@vkontakte/vkui";
-// import ico from "../Images/Icon.svg"
-// import '../../../public/Styles/About.css'
-// import '@vkontakte/vkui/dist/vkui.css';
-import {useSelector, useDispatch} from "react-redux"
-import { IRootState } from "../../Modules/IRootState"
 import Image from "next/image"
-import mountains from "../../../public/Sesc-master.svg"
+// @ts-ignore
+import sescMaster from "../../../public/sesc-master.svg"
+import {useNavigate} from "react-router-dom";
+import {Page} from "../../Modules/Routes";
+import {appSettingsStore, setScheme as changeScheme} from "../../Modules/Effector/AppSettingsSrore";
+import {useStore} from "effector-react";
 
-type IAbout = {
-    setActiveView: (view: string) => void,
-}
+const About = () : JSX.Element => {
+    const store = useStore(appSettingsStore)
+    const navigator = useNavigate()
 
-const About = (props : IAbout) => {
-    const dispatch = useDispatch();
-    const scheme = useSelector((state: IRootState) => state.scheme)
-
-    const setScheme = (scheme: "client_dark" | "client_light") => {
-        dispatch({type: "SET_SCHEME", payload: scheme})
+    const setScheme = (scheme: "space_gray" | "client_light") => {
+        changeScheme(scheme)
         localStorage.setItem("scheme", scheme)
     }  
 
@@ -26,8 +22,8 @@ const About = (props : IAbout) => {
             <Div className="about-content">
                 <Div>
                     <Image
-                        alt="Mountains"
-                        src={mountains}
+                        alt="sesc-master"
+                        src={sescMaster}
                         width={200}
                         height={200}
                     />
@@ -38,7 +34,7 @@ const About = (props : IAbout) => {
                         options={[
                             {
                                 name: "Тёмная тема",
-                                value: "client_dark",
+                                value: "space_gray",
                             },
                             {
                                 name: "Светлая тема",
@@ -47,7 +43,7 @@ const About = (props : IAbout) => {
                         onSwitch={(value : any) => {
                             setScheme(value)
                         }}
-                        activeValue={scheme}
+                        activeValue={store.scheme}
                     />
                 </Div>
                 <Div className='link' >
@@ -56,7 +52,7 @@ const About = (props : IAbout) => {
                     }}>Группа ВК</Button>
                 </Div>
                 <Div className='link'>
-                    <Button size="l" stretched mode="outline" onClick={() => props.setActiveView("empty-cabinet")}>
+                    <Button size="l" stretched mode="outline" onClick={() => navigator(Page.EmptyAuditories)}>
 						Найти свободный кабинет
                     </Button>
                 </Div>
