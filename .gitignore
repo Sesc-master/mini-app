@@ -2,21 +2,25 @@
 
 # dependencies
 /node_modules
-/.pnp
-.pnp.js
 /.next
-/.yarn
-/.idea
 /public/sw.js
-/public/sw.js.map
 /public/workbox-9a8b0a38.js
-/public/workbox-9a8b0a38.js.map
+
+# yarn
+.pnp.*
+.yarn/*
+
+# IDEs
+/.idea
+/.vscode
 
 # testing
 /coverage
+**.js.map
 
 # production
 /build
+/https_cert
 
 # misc
 .DS_Store
