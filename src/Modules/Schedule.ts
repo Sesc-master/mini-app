@@ -27,7 +27,7 @@ function scheduleFromJSON(parsedJSON: JSON | any) {
 }
 
 export async function getFullSchedule(weekday: number): Promise<FullSсhedule> {
-    return fetch("/api/sesc/getSchedule", {
+    return fetch("/api/sesc/getFullSchedule", {
         body: JSON.stringify({weekday}),
         headers: { "Content-Type": "application/json" },
         method: "POST"
