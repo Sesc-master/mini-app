@@ -1,4 +1,4 @@
-import getIDs from "./IdsParser";
+import getIDs from "./GetIDs";
 import { getSchedule, getFullSchedule } from "./Schedule";
 import { IdableScheduleType, Schedule } from "./Schedule/Schedule";
 
@@ -7,7 +7,7 @@ export class Table {
     static auditories: any;
 
     public static async getTable(scheduleType: IdableScheduleType, weekday: number, grade: string): Promise<Schedule> {
-        return getIDs().then((IDs) => {
+        return getIDs().then(IDs => {
             switch (scheduleType) {
                 case "group":
                     return getSchedule(scheduleType, weekday, Number(IDs.groups.get(grade)));
@@ -24,15 +24,10 @@ export class Table {
     }
 
     public static async getTableForWeek(grade: string) {
-        const IDs = await getIDs()
-        const schedule : Array<any> = [];
-        await Promise.all(Array.from({ length: 6 }).map(async (_, day) => {
-            try {
-                schedule[day] = await getSchedule('group', day + 1, Number(IDs.groups.get(grade)))
-            } catch (er) {
-                schedule[day] = undefined
-            }
-        }))
+        const IDs = await getIDs();
+        const schedule = await Promise.all(Array.from({length: 6}, (_, dayIndex) => {
+            return getSchedule("group", dayIndex + 1, Number(IDs.groups.get(grade)));
+        }));
         return schedule;
     }
 }

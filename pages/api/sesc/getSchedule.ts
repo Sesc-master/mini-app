@@ -1,4 +1,4 @@
-import { NextApiRequest, NextApiResponse } from "next";
+import buildHandler from "../../../src/APIModules/BuildHandler";
 import httpsRequest from "../../../src/APIModules/HttpsRequest";
 import { IdableScheduleType } from "../../../src/Modules/Schedule/Schedule";
 
@@ -12,10 +12,8 @@ export interface IGetScheduleArgs {
     type: IdableScheduleType
 }
 
-export default async function getSchedule(req: NextApiRequest, res: NextApiResponse) {
-    let args: IGetScheduleArgs = JSON.parse(req.body);
-
-    let url = new URL("/");
+export async function getSchedule(args: IGetScheduleArgs) {
+    let url = new URL(`http://${server}/`);
     url.searchParams.append("type", String(methodType));
     url.searchParams.append("scheduleType", args.type);
     url.searchParams.append("weekday", String(args.weekday));
@@ -24,6 +22,9 @@ export default async function getSchedule(req: NextApiRequest, res: NextApiRespo
     return httpsRequest({
         hostname: server,
         timeout: timeout,
-        path: url.pathname
-    });
+        path: url.pathname + "?" + url.searchParams.toString(),
+        headers: { host: server }
+    }).then(response => JSON.parse(response.body));
 }
+
+export default buildHandler(getSchedule);

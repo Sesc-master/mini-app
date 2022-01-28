@@ -1,4 +1,4 @@
-import { NextApiRequest, NextApiResponse } from "next";
+import buildHandler from "../../../src/APIModules/BuildHandler";
 import httpsRequest from "../../../src/APIModules/HttpsRequest";
 
 const server = "lyceum.urfu.ru";
@@ -10,17 +10,18 @@ export interface IGetFullScheduleArgs {
     weekday: number
 }
 
-export default async function getFullSchedule(req: NextApiRequest, res: NextApiResponse) {
-    let args: IGetFullScheduleArgs = JSON.parse(req.body);
-    
-    let url = new URL("/");
+export async function getFullSchedule(args: IGetFullScheduleArgs) {
+    let url = new URL(`http://${server}/`);
     url.searchParams.append("type", String(methodType));
-    url.searchParams.append("scheduleType", "all");
+    url.searchParams.append("scheduleType", scheduleType);
     url.searchParams.append("weekday", String(args.weekday));
 
     return httpsRequest({
         hostname: server,
         timeout: timeout,
-        path: url.pathname
-    });
+        path: url.pathname + "?" + url.searchParams.toString(),
+        headers: { host: server }
+    }).then(response => JSON.parse(response.body));
 }
+
+export default buildHandler(getFullSchedule);

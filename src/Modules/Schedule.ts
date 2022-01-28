@@ -1,3 +1,4 @@
+import reviver from "../APIModules/JSONReviver";
 import request from "./ProxyModule";
 import { FullSсhedule } from "./Schedule/FullSchedule";
 import { IdableScheduleType, Schedule, ScheduleType } from "./Schedule/Schedule";
@@ -25,36 +26,30 @@ function scheduleFromJSON(parsedJSON: JSON | any) {
     return result;
 }
 
-export async function getFullSchedule(weekday: number) {
-    return APIRequest("all", weekday)
-        .then(APIResponse => {
-            let result = new FullSсhedule();
-            if (APIResponse.auditories) {
-                //Convert object in parsed json to map
-                result.auditories = new Map(Object.keys(APIResponse.auditories).map(auditory => [
-                    auditory, APIResponse.auditories[auditory]
-                ]));
-            }
-            return result;
-        })
+export async function getFullSchedule(weekday: number): Promise<FullSсhedule> {
+    return fetch("/api/sesc/getSchedule", {
+        body: JSON.stringify({weekday}),
+        headers: { "Content-Type": "application/json" },
+        method: "POST"
+    }).then(response => response.text()).then(text =>  {
+        let apiObject = JSON.parse(text, reviver([["auditories"]]));
+        let result = new FullSсhedule();
+        result.auditories = apiObject.auditories;
+        return result;
+    });
 }
 
 export async function getFreeAuditories(weekday: number) {
-    return APIRequest("all", weekday)
-        .then(APIResponse => {
-            let result = new FullSсhedule();
-            if (APIResponse.auditories) {
-                //Convert object in parsed json to map
-                result.auditories = new Map(Object.keys(APIResponse.auditories).map(auditory => [
-                    auditory, APIResponse.auditories[auditory]
-                ]));
-            }
-            return result.getFreeAuditories();
-        })
+    return getFullSchedule(weekday).then(fullSchedule => fullSchedule.getFreeAuditories());
 }
 
-export async function getSchedule(scheduleType: IdableScheduleType, weekday: number, id: number) {
-    return APIRequest(scheduleType, weekday, id)
-        .then(scheduleFromJSON);
+export async function getSchedule(type: IdableScheduleType, weekday: number, id: number): Promise<Schedule> {
+    return fetch("/api/sesc/getSchedule", {
+        body: JSON.stringify({type, weekday, id}),
+        headers: { "Content-Type": "application/json" },
+        method: "POST"
+    }).then(response => response.text()).then(text => 
+        JSON.parse(text, reviver([["type", "lessons", "diffs"], ["subject", "teacher", "group"]]))
+    );
 }
 
