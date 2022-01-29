@@ -25,9 +25,11 @@ export class Table {
 
     public static async getTableForWeek(grade: string) {
         const IDs = await getIDs();
+
         const schedule = await Promise.all(Array.from({length: 6}, (_, dayIndex) => {
             return getSchedule("group", dayIndex + 1, Number(IDs.groups.get(grade)));
         }));
+
         return schedule;
     }
 }

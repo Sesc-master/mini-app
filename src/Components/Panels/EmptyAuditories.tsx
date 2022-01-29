@@ -12,7 +12,9 @@ const EmptyAuditory = () => {
     const navigate = useNavigate()
 
     useEffect(() => {
-        getFreeAuditories(new Date().getDate()).then((result) => {setAuditories(result)})
+        const day = new Date().getDay()
+        getFreeAuditories(day === 0 ? 1 : day).then((result) => {setAuditories(result)})
+        console.log(day === 0 ? 1 : day - 1)
     }, [])
     
     return (
