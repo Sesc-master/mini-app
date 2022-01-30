@@ -1,5 +1,5 @@
 import React, {useEffect, useState, useRef} from "react";
-import {Div, FormItem, SelectMimicry, Spinner, Text, Group} from "@vkontakte/vkui";
+import {Div, FormItem, SelectMimicry, Spinner, Text, Group, Button} from "@vkontakte/vkui";
 import {Table} from "../../Modules/Table"
 import Week from "../Week";
 import TimetableItem from "../TimetableItem";
@@ -43,16 +43,6 @@ const renderTimetable = (timetable: TimetableElement [], times: string [][]) => 
         ))
 }
 
-const renderError = () => {
-    return (
-        <>
-            <div className="error">
-                <Text weight='semibold'>Что-то пошло не так</Text>
-                <Text weight='semibold'>¯\_(ツ)_/¯</Text>
-            </div>
-        </>
-    )
-}
 
 const Timetable = () => {
     const {grade, weekSchedule, isError, isTimetableLoading} = useStore(timetableStore)
@@ -74,6 +64,24 @@ const Timetable = () => {
     const isInstructionRendering = !isError && !grade
     const isLoaderRendering = !isError && isTimetableLoading && grade
 
+
+    const renderError = () => {
+        return (
+            <>
+                <div className="error">
+                    <div className="timetable-text-error">Что-то пошло не так...</div>
+                    <Button size="l" stretched mode="outline" style={{
+                        marginTop: '2em'
+                    }} onClick={() => {
+                        loadTimetable(grade)
+                    }}>
+                        Перезагрузить
+                    </Button>
+                </div>
+            </>
+        )
+    }
+
     useEffect( () => {
         if (isFirstRender.current && weekSchedule.length === 0){
             const grade = localStorage.getItem('grade') || ''
@@ -85,6 +93,7 @@ const Timetable = () => {
         }
             
         setIsError(false)
+
         if (!grade) return;
         if (weekSchedule[targetDayIndex - 1] === undefined){
             setIsError(true)
