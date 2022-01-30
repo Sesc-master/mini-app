@@ -62,7 +62,7 @@ const Timetable = () => {
 
     const isTimetableRendering = !isError && !isTimetableLoading && !!timetable.length && grade
     const isInstructionRendering = !isError && !grade
-    const isLoaderRendering = !isError && isTimetableLoading && grade
+    const isLoaderRendering = isTimetableLoading && grade
 
 
     const renderError = () => {
@@ -70,13 +70,13 @@ const Timetable = () => {
             <>
                 <div className="error">
                     <div className="timetable-text-error">Что-то пошло не так...</div>
-                    <Button size="l" stretched mode="outline" style={{
-                        marginTop: '2em'
-                    }} onClick={() => {
+                    <div className="timetable-btn" onClick={() => {
                         loadTimetable(grade)
                     }}>
-                        Перезагрузить
-                    </Button>
+                        <div>
+                            Перезагрузить
+                        </div>
+                    </div>
                 </div>
             </>
         )
@@ -99,6 +99,7 @@ const Timetable = () => {
             setIsError(true)
             return;
         }
+
         const lessons = listifySchedule(weekSchedule[targetDayIndex - 1])
         setTimetable(lessons)
     }, [targetDayIndex, weekSchedule])
@@ -114,7 +115,7 @@ const Timetable = () => {
             <Week setTargetDayIndex={setTargetDayIndex} targetIndex={targetDayIndex}/>
             
             <div className='elements'>
-                {isError && renderError()}
+                {isError && !isTimetableLoading && renderError()}
                 {isInstructionRendering && renderInstruction()}
                 {isTimetableRendering && renderTimetable(timetable, times)}
                 {isLoaderRendering && renderLoader(times)}

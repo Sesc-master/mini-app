@@ -1,9 +1,8 @@
-import { useState, useEffect } from 'react';
-import {useStore} from "effector-react";
 import {Table} from "../Modules/Table"
 import {
     setWeekSchedule, 
-    setIsTimetableLoading
+    setIsTimetableLoading,
+    setIsError,
 } from '../Modules/Effector/TimetableStore'
 
 const memorizeGrade = (grade: string) => {
@@ -11,11 +10,18 @@ const memorizeGrade = (grade: string) => {
 }
 
 export const loadTimetable = async (grade: string) => {
-    memorizeGrade(grade)
+    try {
+        memorizeGrade(grade)
 
-    setIsTimetableLoading(true)
+        setIsTimetableLoading(true)
+        setIsError(false)
 
-    const weekSchedule = await Table.getTableForWeek(grade)
-    setWeekSchedule(weekSchedule)
-    setIsTimetableLoading(false)
+        const weekSchedule = await Table.getTableForWeek(grade)
+        setWeekSchedule(weekSchedule)
+
+        setIsTimetableLoading(false)
+    }catch {
+        setIsError(true)
+        setIsTimetableLoading(false)
+    }
 }

@@ -23,7 +23,7 @@ const EmptyAuditory = () => {
             </Div>
             {[...new Array(7)]?.map((value, index) => (<AuditoriesPerLesson auditories={auditories[index]} lesson={index + 1} />))}
             <Div className="container_close">
-                <Button size="m" className="button_close" onClick={() => {navigate(Page.About)}}>Вернуться назад</Button>
+                <Button size="l" mode="outline" className="button_close" onClick={() => {navigate(Page.About)}}>Вернуться назад</Button>
             </Div>
             <Div style={{height: "30px"}}></Div>
         </Div>
