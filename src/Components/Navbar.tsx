@@ -25,7 +25,7 @@ const Navbar = () => {
                 }}>
                     < Icon28BillheadOutline/>
                 </TabbarItem>
-                <TabbarItem selected={page === Page.Diary} onClick={() => {
+                {/* <TabbarItem selected={page === Page.Diary} onClick={() => {
                     setPage(Page.Diary)
                     openPage(Page.Diary)
                 }}>
@@ -36,7 +36,7 @@ const Navbar = () => {
                     openPage(Page.DiaryInfo)
                 }}>
                     < Icon28ServicesOutline/>
-                </TabbarItem>
+                </TabbarItem> */}
                 <TabbarItem selected={page === Page.About} onClick={() => {
                     setPage(Page.About)
                     openPage(Page.About)

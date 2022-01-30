@@ -1,6 +1,5 @@
 import React from "react";
 import {Div, FormItem, SelectMimicry} from "@vkontakte/vkui";
-import {useSelector} from "react-redux"
 import Task from "./Task";
 import {Modal} from "../Modules/Modal";
 import {setModalView} from "../Modules/Effector/AppSettingsSrore";
