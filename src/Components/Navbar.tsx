@@ -16,9 +16,8 @@ const Navbar = () => {
         navigate(page)
     }
 
-    return (
-        <FixedLayout filled vertical="bottom" >      
-            <Tabbar >
+    return (    
+            <Tabbar className="navbar">
                 <TabbarItem selected={page === Page.Timetable} onClick={() => {
                     setPage(Page.Timetable)
                     openPage(Page.Timetable)
@@ -44,7 +43,6 @@ const Navbar = () => {
                     <Icon28MenuOutline/>
                 </TabbarItem>
             </Tabbar>
-        </FixedLayout>      
     );
 }
 

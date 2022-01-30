@@ -3,7 +3,7 @@ import httpsRequest from "../../../src/APIModules/HttpsRequest";
 import { IdableScheduleType } from "../../../src/Modules/Schedule/Schedule";
 
 const server = "lyceum.urfu.ru";
-const timeout = 750;
+const timeout = 2000;
 const methodType = 11;
 
 export interface IGetScheduleArgs {
@@ -22,7 +22,7 @@ export async function getSchedule(args: IGetScheduleArgs) {
     return httpsRequest({
         hostname: server,
         timeout: timeout,
-        path: url.pathname + "?" + url.searchParams.toString(),
+        path: url.toString(),
         headers: { host: server }
     }).then(response => JSON.parse(response.body));
 }

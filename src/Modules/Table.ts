@@ -1,3 +1,4 @@
+import { resolve } from "path/posix";
 import getIDs from "./GetIDs";
 import { getSchedule, getFullSchedule } from "./Schedule";
 import { IdableScheduleType, Schedule } from "./Schedule/Schedule";
@@ -27,7 +28,10 @@ export class Table {
         const IDs = await getIDs();
 
         const schedule = await Promise.all(Array.from({length: 6}, (_, dayIndex) => {
-            return getSchedule("group", dayIndex + 1, Number(IDs.groups.get(grade)));
+            return getSchedule("group", dayIndex + 1, Number(IDs.groups.get(grade)))
+                    .catch(() => {
+                        return undefined
+                    })
         }));
 
         return schedule;

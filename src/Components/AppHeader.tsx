@@ -4,9 +4,9 @@ import {PanelHeader} from "@vkontakte/vkui";
 
 // import '@vkontakte/vkui/dist/vkui.css';
 
-const AppHeader = () => {
+const AppHeader = () : JSX.Element => {
     return(
-        <PanelHeader fixed={false}>SESC Master</PanelHeader>
+        <PanelHeader style={{width: '100vw'}}fixed={false}>SESC Master</PanelHeader>
     )
 }
 

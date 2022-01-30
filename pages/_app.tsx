@@ -19,6 +19,7 @@ import "../public/Styles/Notes.css"
 import "../public/Styles/Absences.css"
 import "../public/Styles/Journal.css"
 import "../public/Styles/Documents.css"
+import "../public/Styles/DesktopNavbar.css"
 
 import ProjectRoot from '../src/Components/ProjectRoot'
 

@@ -57,7 +57,7 @@ const Task = ({date, topic, homework, mark, weight}: ITask) => {
     return (	
         <div className="table" onClick={() => setIsOpened(!isOpened)}>
             <div className={getClassMain()}>
-                <div className="center date text-style-task">{date}</div>
+                <div className="center task-date text-style-task">{date}</div>
                 <div className="text text-style-task">
                     {formatTopicText(topic)}
                 </div>

@@ -1,7 +1,7 @@
 .task {
     display: flex; 
     /* background-color: #47a7f5;  */
-    background-color: rgba(61, 61, 61, 0.1);
+    background-color: rgba(65, 65, 65, 0.1);
     border-radius: 7px; 
     margin-top: 5px;
     height: 60px; 
@@ -12,5 +12,5 @@
     display: flex;
     align-items: center;
     flex-direction: column;
-    width: 50px;
+    width: 3.5em;
 }

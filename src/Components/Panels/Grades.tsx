@@ -3,13 +3,14 @@ import React, {useEffect, useState} from "react";
 import Options from "../Options"
 import {setModalView} from "../../Modules/Effector/AppSettingsSrore";
 import {withModalRootContext} from "@vkontakte/vkui";
+import {setGrade } from '../../Modules/Effector/TimetableStore'
+import {loadTimetable} from '../../Hooks/loadTimetable'
 
 type IGrades = {
-    setGrade: (grade: string) => void,
     updateModalHeight: () => void
 }
 
-const Grades = ({setGrade,  updateModalHeight} : IGrades) => {
+const Grades = ({ updateModalHeight} : IGrades) => {
     const grades = {
         "8": ["8А", "8В"],
         "9": ["9А", "9Б", "9В", "9Г", "9Е"],
@@ -33,6 +34,7 @@ const Grades = ({setGrade,  updateModalHeight} : IGrades) => {
                 (grade) => {
                     setGrade(grade)
                     setModalView('')
+                    loadTimetable(grade)
                 }}/>}
         </>
     );

@@ -11,9 +11,8 @@ type IWeek = {
 const Week = (props : IWeek) => {
     let names = ["ПН", "ВТ", "СР", "ЧТ", "ПТ", "СБ"]
 
-
     return(
-        <Tabs>
+        <Tabs style={{color: 'white'}}>
             {names.map((element, index) => (
                 <Day key={index} name={element}
                      targetIndex={props.targetIndex} setTargetDayIndex={props.setTargetDayIndex}
