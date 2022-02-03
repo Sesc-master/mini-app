@@ -38,6 +38,7 @@ import {
 } from "../Modules/Effector/DiaryStore";
 import {appSettingsStore, setScheme, setModalView} from "../Modules/Effector/AppSettingsSrore"
 import {useStore} from "effector-react";
+import {Role} from "../Modules/ScoleAPI/types/Role";
 
 const ProjectRoot = () => {
     const [grade, setGrade] = useState<string>("")
@@ -45,7 +46,7 @@ const ProjectRoot = () => {
 
     useEffect(() => {
         if (localStorage.getItem('loginData') !== null){
-            const loginData : {login: string, password: string, type: string} = 
+            const loginData : {login: string, password: string, type: Role} =
             JSON.parse(localStorage.getItem('loginData') || "{}")
             setIsDiaryLoading(true)
             getDiary(loginData.login, loginData.password, loginData.type)

@@ -35,11 +35,8 @@ const numMask = [
 
 export const resolve = async (uri) => {
     return new Promise((resolve, reject) => {
-        const mime = "image/png";
-        const encoding = "base64";
-        let url = "data:" + mime + ";" + encoding + "," + uri.toString(encoding)
         let img = window.document.createElement("img");
-        img.src = url;
+        img.src = uri;
 
         //let ctx = document.getElementById("#ctx");
         let canvas = window.document.createElement("canvas");

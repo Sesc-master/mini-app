@@ -33,7 +33,7 @@ const Login = ({setLoginRequest} : any) => {
                         },
                         {
                             name: "Родитель",
-                            value: "par",
+                            value: "parent",
                         },
                     ]}
                     onSwitch={(value : string | number) => {
