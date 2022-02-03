@@ -3,8 +3,6 @@
 # dependencies
 /node_modules
 /.next
-/public/sw.js
-/public/workbox-9a8b0a38.js
 
 # yarn
 .pnp.*
@@ -21,6 +19,8 @@
 # production
 /build
 /https_cert
+/public/sw.js
+/public/workbox-*.js
 
 # misc
 .DS_Store

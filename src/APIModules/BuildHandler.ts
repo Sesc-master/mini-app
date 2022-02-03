@@ -6,14 +6,14 @@ export default function buildHandler(apiFunction: (args?: any) => Promise<"none"
         let apiFunctionPromise;
         if (requiedArgs) {
             let APIArgs: any;
-            if (typeof req.body == "string") APIArgs = JSON.parse(APIArgs);
+            if (typeof req.body == "string") APIArgs = JSON.parse(req.body);
             else APIArgs = req.body;
             apiFunctionPromise = apiFunction(APIArgs);
         }
         else apiFunctionPromise = apiFunction();
 
         return apiFunctionPromise.then(response => {
-            if (response === "none") res.status(401).send("");
+            if (response === "none" || !response) res.status(401).send("");
             else res.status(200).send(JSON.stringify(response, replacer));
         })
     }

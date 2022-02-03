@@ -1,24 +1,23 @@
 import buildHandler from "../../../src/APIModules/BuildHandler";
-import httpsRequest from "../../../src/APIModules/HttpsRequest";
 import { scoleRequestArgs } from "../../../src/APIModules/ScoleRequest";
 import captchaRequest from "../../../src/APIModules/CaptchaRequest"
 
-const mime = "image/png";
 const encoding = "base64";
 
 export type Capthca = {
-    URI: string, ID: string
+    data: string, ID: string
 }
 
 export async function getCaptcha(): Promise<Capthca | "none"> {
     let args = Object.assign({}, scoleRequestArgs);
     args.method = "GET";
     args.path = "/cpt.a"
-    return captchaRequest(args).then(response => {
+    return captchaRequest(args, encoding).then(response => {
         let captchaID = response.message.headers["x-cpt"];
-        if (typeof captchaID === "string") {
+        let mime = response.message.headers["content-type"];
+        if (typeof captchaID === "string" && mime) {
             return {
-                URI: response.body,
+                data: "data:" + mime + ";" + encoding + "," + response.body,
                 ID: captchaID
             }
         }

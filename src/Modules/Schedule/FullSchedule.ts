@@ -1,8 +1,6 @@
 import BaseLesson from "./BaseLesson";
 
-
-
-export class FullSсhedule {
+export class FullSchedule {
     public static ignoringAuditories: Array<string> = ["Общежитие", "Библиотека", "Нет"];
 
     public auditories: Map<string, Array<BaseLesson | boolean>>;
@@ -16,7 +14,7 @@ export class FullSсhedule {
     protected getFreeAuditoriesOnLesson(lessonNumber: number): Array<string> {
         let freeAuditories: Array<string> = [];
         this.auditories.forEach((lessons, auditory) => {
-            if (lessons[lessonNumber] === false && !FullSсhedule.ignoringAuditories.includes(auditory))
+            if (lessons[lessonNumber] === false && !FullSchedule.ignoringAuditories.includes(auditory))
                 freeAuditories.push(auditory);
         });
         return freeAuditories;

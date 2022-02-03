@@ -1,7 +1,7 @@
 import { IncomingMessage } from "http";
 import { request, RequestOptions } from "https";
 
-export default async function captchaRequest(options: RequestOptions, payload?: string): Promise<{message: IncomingMessage, body: string}> {
+export default async function captchaRequest(options: RequestOptions, encoding: BufferEncoding = "base64", payload?: string): Promise<{message: IncomingMessage, body: string}> {
     return new Promise((resolve, reject) => {
         let scoleRequest = request(options, response => {
             let body = Buffer.alloc(0);
@@ -12,7 +12,7 @@ export default async function captchaRequest(options: RequestOptions, payload?: 
             response.on("end", () => {
                 resolve({
                     message: response,
-                    body: body.toString("base64")
+                    body: body.toString(encoding)
                 });
             });
 

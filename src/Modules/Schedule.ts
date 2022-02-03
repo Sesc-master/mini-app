@@ -1,39 +1,15 @@
 import reviver from "../APIModules/JSONReviver";
-import request from "./ProxyModule";
-import { FullSсhedule } from "./Schedule/FullSchedule";
-import { IdableScheduleType, Schedule, ScheduleType } from "./Schedule/Schedule";
+import { FullSchedule } from "./Schedule/FullSchedule";
+import { IdableScheduleType, Schedule } from "./Schedule/Schedule";
 
-const type = 11;
-const server = "lyceum.urfu.ru"
-
-async function APIRequest(scheduleType: ScheduleType, weekday: number, id?: number) {
-    let url = new URL(`https://${server}`);
-    url.searchParams.append("weekday", String(weekday));
-    url.searchParams.append("scheduleType", scheduleType);
-    url.searchParams.append("type", String(type));
-    if (scheduleType !== "all") {
-        url.searchParams.append(scheduleType, String(id))
-    }
-    return request(url.toString())
-        .then(response => {
-            return response.json();
-        })
-}
-
-function scheduleFromJSON(parsedJSON: JSON | any) {
-    let result = new Schedule();
-    Object.assign(result, parsedJSON);
-    return result;
-}
-
-export async function getFullSchedule(weekday: number): Promise<FullSсhedule> {
+export async function getFullSchedule(weekday: number): Promise<FullSchedule> {
     return fetch("/api/sesc/getFullSchedule", {
         body: JSON.stringify({weekday}),
         headers: { "Content-Type": "application/json" },
         method: "POST"
     }).then(response => response.text()).then(text =>  {
         let apiObject = JSON.parse(text, reviver([["auditories"]]));
-        let result = new FullSсhedule();
+        let result = new FullSchedule();
         result.auditories = apiObject.auditories;
         return result;
     });

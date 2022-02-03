@@ -5,12 +5,7 @@ import dateConvert from "../../../src/APIModules/DateConvert";
 import reviver from "../../../src/APIModules/JSONReviver";
 import buildHandler from "../../../src/APIModules/BuildHandler";
 
-type Subject = {
-    teacher: string;
-    notes: Array<SubjectNote>;
-}
-
-type SubjectNote = {
+export type SubjectNote = {
     date: string;
     theme: string;
     hometask: string;
@@ -18,8 +13,14 @@ type SubjectNote = {
     grades?: string;
 }
 
-export async function getJournal(args: IBaseRequestArgs) {
-    console.log(args)
+export type Subject = {
+    teacher: string;
+    notes: Array<SubjectNote>;
+}
+
+export type Journal = Map<string, Subject>;
+
+export async function getJournal(args: IBaseRequestArgs): Promise<Journal | "none"> {
     return Promise.all([getSubjectsList(args), getTeachersList(args), scoleRequest("jrnGet", args, [])]).then(responses => {
         var result = new Map<string, Subject>();
         let [subjects, teachers, journalStr] = responses;
@@ -30,8 +31,8 @@ export async function getJournal(args: IBaseRequestArgs) {
         journal.forEach((journalNotes, teacher) => {
             let [className, subjectId, teacherLogin] = teacher.split("_");
 
-            let subjectName = subjects?.get(subjectId);
-            let teacherName = teachers?.find(teacherObject => teacherObject.login === teacherLogin)?.fio;
+            let subjectName = (subjects as Map<string, string>).get(subjectId);
+            let teacherName = (teachers as Array<Teacher>).find(teacherObject => teacherObject.login === teacherLogin)?.fio;
 
             result.set(<string>subjectName, { teacher: <string>teacherName, notes: [] });
             journalNotes.forEach((note, day) => {
