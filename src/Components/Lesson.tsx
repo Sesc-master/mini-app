@@ -27,7 +27,7 @@ const Lesson = ({lesson}: ILesson) => {
             <>
                 <div className='stick'></div>
                 <div className='lesson'>
-                    <Text weight="semibold">-</Text>
+                    <Text weight="semibold">—</Text>
                 </div>
             </> 
         )

@@ -9,6 +9,7 @@ import Grades from "./Panels/Grades";
 import EmptyAuditories from "./Panels/EmptyAuditories";
 import Subjects from "./Panels/Subjects"
 import {
+    View,
     ConfigProvider,
     AppRoot,
     Panel,
@@ -16,7 +17,9 @@ import {
     ModalRoot,
     ModalPage,
     AdaptivityProvider,
-    ModalPageHeader
+    ModalPageHeader,
+    Text,
+    Group
 } from "@vkontakte/vkui";
 import { withModalRootContext } from "@vkontakte/vkui";
 import { getDiary } from '../Modules/GetDiary'
@@ -25,7 +28,6 @@ import Absences from "./Panels/Absences";
 import Marks from "./Panels/Marks";
 import DiaryInfo from "./Panels/DiaryInfo";
 import Documents from "./Panels/Documents";
-
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom'
 import {Page} from "../Modules/Routes";
 import {Modal} from "../Modules/Modal"
@@ -41,7 +43,6 @@ import {useStore} from "effector-react";
 import {Role} from "../Modules/ScoleAPI/types/Role";
 
 const ProjectRoot = () => {
-    const [grade, setGrade] = useState<string>("")
     const {scheme, modalView} = useStore(appSettingsStore)
 
     useEffect(() => {
@@ -79,7 +80,7 @@ const ProjectRoot = () => {
             </ModalPage>
             <ModalPage id={Modal.Grades} dynamicContentHeight={true}>
                 <ModalPageHeader>Выберите Класс</ModalPageHeader>
-                <Grades setGrade={setGrade} />
+                <Grades />
             </ModalPage>
         </ModalRoot>
     );
@@ -90,27 +91,32 @@ const ProjectRoot = () => {
             <AdaptivityProvider>
             <AppRoot >
                 <SplitLayout modal={modal}>
-
                     <Router>
-                        <Panel id='panel'>
-                            <Navbar/>
-                            <AppHeader/>
-                            <Routes>
-                                <Route path={Page.Timetable} element={<Timetable grade={grade}/>}/>
-                                <Route path={Page.Diary} element={<Diary />}/>
-                                <Route path={Page.Notes} element={<Notes />}/>
-                                <Route path={Page.Marks} element={<Marks />}/>
-                                <Route path={Page.Absences} element={<Absences />}/>
-                                <Route path={Page.Documents} element={<Documents />}/>
-                                <Route path={Page.DiaryInfo} element={<DiaryInfo />}/>
-                                <Route path={Page.About} element={<About />}/>
-                                <Route path={Page.EmptyAuditories} element={<EmptyAuditories />}/>
-                                <Route
-                                    path="*"
-                                    element={<Navigate to={Page.About} />}
-                                />
-                            </Routes>
-                        </Panel>
+                        <View activePanel='panel' >
+                            <Panel id='panel'>
+                                <AppHeader/>
+                                <Navbar/>
+                                <Group className="panel">
+                                    <div style={{minHeight: '80vh'}}>
+                                        <Routes>
+                                            <Route path={Page.Timetable} element={<Timetable/>}/>
+                                            {/* <Route path={Page.Diary} element={<Diary />}/>
+                                            <Route path={Page.Notes} element={<Notes />}/>
+                                            <Route path={Page.Marks} element={<Marks />}/>
+                                            <Route path={Page.Absences} element={<Absences />}/>
+                                            <Route path={Page.Documents} element={<Documents />}/>
+                                            <Route path={Page.DiaryInfo} element={<DiaryInfo />}/> */}
+                                            <Route path={Page.About} element={<About />}/>
+                                            <Route path={Page.EmptyAuditories} element={<EmptyAuditories />}/>
+                                            <Route
+                                                path="*"
+                                                element={<Navigate to={Page.About} />}
+                                            />
+                                        </Routes>
+                                    </div>
+                                </Group>
+                            </Panel>
+                        </View>
                     </Router>
                 </SplitLayout>
             </AppRoot>

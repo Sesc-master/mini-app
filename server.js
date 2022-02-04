@@ -4,7 +4,7 @@ const next = require("next");
 const fs = require("fs");
 const port = 443;
 // const dev = process.env.NODE_ENV !== "production";
-const app = next({ dev: true });
+const app = next({ dev: false });
 const handle = app.getRequestHandler();
 
 const httpsOptions = {

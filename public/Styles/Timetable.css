@@ -21,11 +21,29 @@
     flex-direction: column;
 }
 
-.text_error {
-    font-size: 25px;
+.timetable-text-error {
+    font-size: 1.5em;
     text-align: center;
+    font-weight: 600;
 }
 
 .end {
     height: 30px;
 }
+
+.timetable-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1.5em;
+    border-radius: 3em;
+    background-color: #47a7f5;
+    width: 10em;
+    color: white;
+    height: 3em;
+    font-weight: 600;
+}  
+
+.timetable-btn:active {
+    background-color: #329cf3;
+} 

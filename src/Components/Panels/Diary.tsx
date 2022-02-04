@@ -29,11 +29,9 @@ const Diary = () : JSX.Element => {
         setIsDiaryLoading(true)
         setIsError(false)
 
-        console.log(isDiaryLoading)
         getDiary(loginRequest.login, loginRequest.password, loginRequest.type)
             .then((response) => {
                 if (response.journal){
-                    console.log(isDiaryLoading)
                     setSubjects([...response.journal.keys()])
                     setDiary(response.journal)
                     setIsLogin(true)

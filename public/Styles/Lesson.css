@@ -1,6 +1,9 @@
 .stick {
-    border-left: 2px solid #47a7f5;
     height: 75%;
+    width: 0.25em;
+    border-radius: 8px;
+    background-color: #47a7f5;
+    margin-right: 0.05em;
 }
 
 .lesson {

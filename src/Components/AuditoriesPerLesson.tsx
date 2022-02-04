@@ -14,7 +14,7 @@ const AuditoriesPerLesson = (props : IAuditoriesPerLesson) => {
 
     return(
         <Div className="button-wrapper">
-            <Button className="button" size = "m" onClick={() =>{setVisibility(!isVisible)}}>
+            <Button size="l" mode="outline" className="button" onClick={() =>{setVisibility(!isVisible)}}>
                 {props.lesson + " урок"}
             </Button>
             { isVisible && <Div className="auditories">{props.auditories?.join(", ")}</Div> }

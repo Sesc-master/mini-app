@@ -18,7 +18,7 @@ class CachedValue<StoreType> {
 
 var cache = new Map<string, CachedValue<any>>();
 
-const defaultExpireTime = 3600000;
+const defaultExpireTime = 3600000 * 30;
 
 type CachableFunction<StoreType> = (...args: any) => Promise<StoreType>;
 

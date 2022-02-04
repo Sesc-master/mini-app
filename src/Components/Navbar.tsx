@@ -16,16 +16,15 @@ const Navbar = () => {
         navigate(page)
     }
 
-    return (
-        <FixedLayout filled vertical="bottom" >      
-            <Tabbar >
+    return (    
+            <Tabbar className="navbar">
                 <TabbarItem selected={page === Page.Timetable} onClick={() => {
                     setPage(Page.Timetable)
                     openPage(Page.Timetable)
                 }}>
                     < Icon28BillheadOutline/>
                 </TabbarItem>
-                <TabbarItem selected={page === Page.Diary} onClick={() => {
+                {/* <TabbarItem selected={page === Page.Diary} onClick={() => {
                     setPage(Page.Diary)
                     openPage(Page.Diary)
                 }}>
@@ -36,7 +35,7 @@ const Navbar = () => {
                     openPage(Page.DiaryInfo)
                 }}>
                     < Icon28ServicesOutline/>
-                </TabbarItem>
+                </TabbarItem> */}
                 <TabbarItem selected={page === Page.About} onClick={() => {
                     setPage(Page.About)
                     openPage(Page.About)
@@ -44,7 +43,6 @@ const Navbar = () => {
                     <Icon28MenuOutline/>
                 </TabbarItem>
             </Tabbar>
-        </FixedLayout>      
     );
 }
 
