@@ -15,12 +15,17 @@ import convertReportCard from "./ScoleAPI/converters/reportCard";
 import {LoginInfo} from "./ScoleAPI/types/LoginInfo";
 import {Captcha} from "./ScoleAPI/types/Captcha";
 
+function convertRoleForAPI(role: Role): string {
+    if (role == "parent") return "par";
+    else return role;
+}
+
 async function scoleRequest(methodName: string, login: string, token: string, role: Role, args?: Array<string>, reviverObjects?: Array<Array<string>>): Promise<any | "none"> {
     let requestBody: any = {
         f: methodName,
         l: login,
         p: token,
-        t: role
+        t: convertRoleForAPI(role)
     }
     if (args) requestBody.z = args;
 
@@ -118,7 +123,7 @@ export async function login(login: string, password: string, role: Role, captcha
         f: "login",
         l: login,
         p: password,
-        t: role,
+        t: convertRoleForAPI(role),
         c: captcha.toString(),
         ci: captchaID.toString()
     })}).then(response => response.text()).then(body => {
