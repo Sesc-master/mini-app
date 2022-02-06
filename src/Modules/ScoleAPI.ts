@@ -143,7 +143,7 @@ export async function getReportCard(login: string, token: string, role: Role, su
 }
 
 export async function getDocuments(login: string, token: string, role: Role, target: string = login): Promise<Documents | undefined> {
-    return scoleRequest("sprGet", login, token, role, [target], [[
+    return scoleRequest("sprGet", login, token, role, [role], [[
         "Uclass", "pupil", "vid", "start", "fin", "prim", "_id"
     ]]).then(convertDocuments);
 }

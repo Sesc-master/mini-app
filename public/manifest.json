@@ -4,8 +4,9 @@
     "display": "standalone",
     "scope": "/",
     "start_url": "/",
-    "name": "SESC Master",
+    "description": "",
     "short_name": "SESC Master",
+    "name": "SESC Master",
     "icons": [
         {
             "src": "/icon-192x192.png",

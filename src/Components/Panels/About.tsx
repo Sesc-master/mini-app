@@ -24,8 +24,8 @@ const About = () : JSX.Element => {
                     <Image
                         alt="sesc-master"
                         src={sescMaster}
-                        width={200}
-                        height={200}
+                        width={228}
+                        height={228}
                     />
                 </Div>
                 <Text weight='medium' style={{fontSize: "25px", marginBottom: "1.5em"}}>SESC Master</Text>

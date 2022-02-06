@@ -11,15 +11,18 @@ const Documents = () => {
         const {login, type} = JSON.parse(localStorage.getItem("loginData") || '{}')
         let documents = await getDocuments(login, token, type)
         setDocuments(documents || [])
+        console.log(documents)
     }
 
     useEffect(() => {
         setDocumentsData()
+        console.log(documents)
     }, [])
+    console.log(documents)
 
     return (
         <>
-            <h1 className="documents-header">Документы</h1>
+            <h1 className="documents-header">Справки</h1>
             <div className="documents-content">
                 {documents?.map((document, index) => (
                     <div key={index} className="documents-text">

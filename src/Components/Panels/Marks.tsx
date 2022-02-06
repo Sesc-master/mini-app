@@ -15,7 +15,7 @@ const Marks = () => {
     }
 
     useEffect(() => {
-
+        setMarksData()
     }, [])
 
     return (
