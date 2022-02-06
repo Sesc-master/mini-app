@@ -1,20 +1,20 @@
 import { Schedule } from "./Schedule/Schedule";
-import { SсheduleLesson } from "./Schedule/ScheduleLesson";
+import { ScheduleLesson } from "./Schedule/ScheduleLesson";
 
 const maxLessons = 7;
 
 export class TimetableElement {
-    firstGroupLesson: SсheduleLesson | undefined
-    secondGroupLesson: SсheduleLesson | undefined
-    commonLesson: SсheduleLesson | undefined
+    firstGroupLesson: ScheduleLesson | undefined
+    secondGroupLesson: ScheduleLesson | undefined
+    commonLesson: ScheduleLesson | undefined
     isCommonLesson: Boolean | undefined
 }
 
 export function listifySchedule (schedule: Schedule) : Array<TimetableElement>{
-    let lessons = new Array<Array<SсheduleLesson>>(), changes = new Array<Array<SсheduleLesson>>();
+    let lessons = new Array<Array<ScheduleLesson>>(), changes = new Array<Array<ScheduleLesson>>();
     for (let scheduleSlot = 0; scheduleSlot < maxLessons; scheduleSlot++) {
-        changes.push(new Array<SсheduleLesson>());
-        lessons.push(new Array<SсheduleLesson>());
+        changes.push(new Array<ScheduleLesson>());
+        lessons.push(new Array<ScheduleLesson>());
     }
     schedule?.lessons?.forEach(lesson => lessons[lesson.number - 1].push(lesson));
     schedule?.diffs?.forEach(lesson => changes[lesson.number - 1].push(lesson));

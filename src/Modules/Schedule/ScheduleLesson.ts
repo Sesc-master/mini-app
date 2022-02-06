@@ -1,6 +1,6 @@
 import BaseLesson from "./BaseLesson";
 
-export class SсheduleLesson extends BaseLesson {
+export class ScheduleLesson extends BaseLesson {
     uid: number;
     auditory: string;
     subgroup: number;

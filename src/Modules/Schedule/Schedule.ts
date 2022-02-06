@@ -1,11 +1,11 @@
-import { SсheduleLesson } from "./ScheduleLesson";
+import { ScheduleLesson } from "./ScheduleLesson";
 
 
 export type IdableScheduleType = "group" | "teacher" | "auditory";
 export type ScheduleType = IdableScheduleType | "all";
 
 export class Schedule {
-    type: ScheduleType;
-    lessons: Array<SсheduleLesson>;
-    diffs: Array<SсheduleLesson>;
+    type: IdableScheduleType;
+    lessons: Array<ScheduleLesson>;
+    diffs: Array<ScheduleLesson>;
 }
