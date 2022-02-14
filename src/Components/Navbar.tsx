@@ -7,28 +7,16 @@ import "@vkontakte/vkui/dist/vkui.css";
 import {Page} from "../Modules/Routes";
 import {useNavigate, useLocation} from 'react-router-dom';
 
-type IPage = Page.About | Page.Timetable | Page.DiaryInfo | Page.Diary | ''
-
 const Navbar = () => {
-    const [page, setPage] = useState<IPage>()
+    const [page, setPage] = useState<string>()
     const navigate = useNavigate();
-    const openPage = (page: IPage) : void => {
+    const openPage = (page: string) : void => {
         navigate(page)
     }
     const location = useLocation();
 
     const setCurrentLocation = () => {
-        let path : IPage = '';
-        
-        switch (location.pathname){
-            case Page.About:
-                path = Page.About
-                break
-            case Page.Timetable:
-                path = Page.Timetable
-                break
-        }
-
+        let path : string = location.pathname;
         setPage(path)
     }
 
