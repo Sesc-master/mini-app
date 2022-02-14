@@ -100,12 +100,12 @@ const ProjectRoot = () => {
                                     <div style={{minHeight: '80vh'}}>
                                         <Routes>
                                             <Route path={Page.Timetable} element={<Timetable/>}/>
-                                            {/* <Route path={Page.Diary} element={<Diary />}/>
+                                            <Route path={Page.Diary} element={<Diary />}/>
                                             <Route path={Page.Notes} element={<Notes />}/>
                                             <Route path={Page.Marks} element={<Marks />}/>
                                             <Route path={Page.Absences} element={<Absences />}/>
                                             <Route path={Page.Documents} element={<Documents />}/>
-                                            <Route path={Page.DiaryInfo} element={<DiaryInfo />}/> */}
+                                            <Route path={Page.DiaryInfo} element={<DiaryInfo />}/>
                                             <Route path={Page.About} element={<About />}/>
                                             <Route path={Page.EmptyAuditories} element={<EmptyAuditories />}/>
                                             <Route
