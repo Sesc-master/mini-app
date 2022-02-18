@@ -41,6 +41,7 @@ import {
 import {appSettingsStore, setScheme, setModalView} from "../Modules/Effector/AppSettingsSrore"
 import {useStore} from "effector-react";
 import {Role} from "../Modules/ScoleAPI/types/Role";
+import $ from "jquery"
 
 const ProjectRoot = () => {
     const {scheme, modalView} = useStore(appSettingsStore)
@@ -71,6 +72,14 @@ const ProjectRoot = () => {
 
     }, [])
 
+    useEffect(() => {
+        if (scheme === 'client_light'){
+            $('body').css('background-color', '#ececec')
+        }else{
+            $('body').css('background-color', '#19191a')
+        }
+    }, [scheme])
+
 
     const modal = (
         <ModalRoot activeModal={modalView} onClose={() => setModalView('')}>
@@ -87,36 +96,34 @@ const ProjectRoot = () => {
 
     return (
         // @ts-ignore
-        <ConfigProvider scheme={scheme}>
+        <ConfigProvider scheme={'client_light'}>
             <AdaptivityProvider>
-            <AppRoot >
+            <AppRoot>
                 <SplitLayout modal={modal}>
                     <Router>
-                        <View activePanel='panel' >
-                            <Panel id='panel'>
-                                <AppHeader/>
-                                <Navbar/>
-                                <Group className="panel">
-                                    <div style={{minHeight: '80vh'}}>
-                                        <Routes>
-                                            <Route path={Page.Timetable} element={<Timetable/>}/>
-                                            {/* <Route path={Page.Diary} element={<Diary />}/>
-                                            <Route path={Page.Notes} element={<Notes />}/>
-                                            <Route path={Page.Marks} element={<Marks />}/>
-                                            <Route path={Page.Absences} element={<Absences />}/>
-                                            <Route path={Page.Documents} element={<Documents />}/>
-                                            <Route path={Page.DiaryInfo} element={<DiaryInfo />}/> */}
-                                            <Route path={Page.About} element={<About />}/>
-                                            <Route path={Page.EmptyAuditories} element={<EmptyAuditories />}/>
-                                            <Route
-                                                path="*"
-                                                element={<Navigate to={Page.About} />}
-                                            />
-                                        </Routes>
-                                    </div>
-                                </Group>
-                            </Panel>
-                        </View>
+                        <Panel>
+                            <AppHeader/>
+                            <Navbar/>
+
+                                <div className="panel">
+                                    <Routes>
+                                        <Route path={Page.Timetable} element={<Timetable/>}/>
+                                        <Route path={Page.Diary} element={<Diary />}/>
+                                        <Route path={Page.Notes} element={<Notes />}/>
+                                        <Route path={Page.Marks} element={<Marks />}/>
+                                        <Route path={Page.Absences} element={<Absences />}/>
+                                        <Route path={Page.Documents} element={<Documents />}/>
+                                        <Route path={Page.DiaryInfo} element={<DiaryInfo />}/>
+                                        <Route path={Page.About} element={<About />}/>
+                                        <Route path={Page.EmptyAuditories} element={<EmptyAuditories />}/>
+                                        <Route
+                                            path="*"
+                                            element={<Navigate to={Page.About} />}
+                                        />
+                                    </Routes>
+                                </div>
+
+                        </Panel>
                     </Router>
                 </SplitLayout>
             </AppRoot>
