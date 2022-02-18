@@ -73,10 +73,14 @@ const ProjectRoot = () => {
     }, [])
 
     useEffect(() => {
-        if (scheme === 'client_light'){
+        if (scheme === 'client_light' && window.screen.width <= 700){
+            $('body').css('background-color', 'white')
+        }else if (scheme === 'client_light' && window.screen.width > 700){
             $('body').css('background-color', '#ececec')
-        }else{
+        }else if (scheme === "space_gray" && window.screen.width <= 700){
             $('body').css('background-color', '#19191a')
+        }else if (scheme === "space_gray" && window.screen.width > 700){
+            $('body').css('background-color', 'black')
         }
     }, [scheme])
 
@@ -96,7 +100,7 @@ const ProjectRoot = () => {
 
     return (
         // @ts-ignore
-        <ConfigProvider scheme={'client_light'}>
+        <ConfigProvider scheme={scheme}>
             <AdaptivityProvider>
             <AppRoot>
                 <SplitLayout modal={modal}>
@@ -105,23 +109,23 @@ const ProjectRoot = () => {
                             <AppHeader/>
                             <Navbar/>
 
-                                <div className="panel">
-                                    <Routes>
-                                        <Route path={Page.Timetable} element={<Timetable/>}/>
-                                        <Route path={Page.Diary} element={<Diary />}/>
-                                        <Route path={Page.Notes} element={<Notes />}/>
-                                        <Route path={Page.Marks} element={<Marks />}/>
-                                        <Route path={Page.Absences} element={<Absences />}/>
-                                        <Route path={Page.Documents} element={<Documents />}/>
-                                        <Route path={Page.DiaryInfo} element={<DiaryInfo />}/>
-                                        <Route path={Page.About} element={<About />}/>
-                                        <Route path={Page.EmptyAuditories} element={<EmptyAuditories />}/>
-                                        <Route
-                                            path="*"
-                                            element={<Navigate to={Page.About} />}
-                                        />
-                                    </Routes>
-                                </div>
+                            <div className="panel">
+                                <Routes>
+                                    <Route path={Page.Timetable} element={<Timetable/>}/>
+                                    <Route path={Page.Diary} element={<Diary />}/>
+                                    <Route path={Page.Notes} element={<Notes />}/>
+                                    <Route path={Page.Marks} element={<Marks />}/>
+                                    <Route path={Page.Absences} element={<Absences />}/>
+                                    <Route path={Page.Documents} element={<Documents />}/>
+                                    <Route path={Page.DiaryInfo} element={<DiaryInfo />}/>
+                                    <Route path={Page.About} element={<About />}/>
+                                    <Route path={Page.EmptyAuditories} element={<EmptyAuditories />}/>
+                                    <Route
+                                        path="*"
+                                        element={<Navigate to={Page.About} />}
+                                    />
+                                </Routes>
+                            </div>
 
                         </Panel>
                     </Router>
