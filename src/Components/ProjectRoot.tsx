@@ -108,7 +108,6 @@ const ProjectRoot = () => {
                         <Panel>
                             <AppHeader/>
                             <Navbar/>
-
                             <div className="panel">
                                 <Routes>
                                     <Route path={Page.Timetable} element={<Timetable/>}/>
@@ -126,7 +125,6 @@ const ProjectRoot = () => {
                                     />
                                 </Routes>
                             </div>
-
                         </Panel>
                     </Router>
                 </SplitLayout>

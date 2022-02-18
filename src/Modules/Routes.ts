@@ -1,6 +1,6 @@
 export enum Page {
     Timetable = '/timetable',
-    About = '/about',
+    About = '/',
     Diary = '/diary',
     DiaryInfo = '/diary-info',
     Absences = '/diary-info/absences',

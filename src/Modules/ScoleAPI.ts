@@ -147,8 +147,8 @@ export async function getReportCard(login: string, token: string, role: Role, su
         .then(goldinReportCard => convertReportCard(goldinReportCard, subjects));
 }
 
-export async function getDocuments(login: string, token: string, role: Role, target: string = login): Promise<Documents | undefined> {
-    return scoleRequest("sprGet", login, token, role, [role], [[
+export async function getDocuments(login: string, token: string, role: Role, target: string = "pupil"): Promise<Documents | undefined> {
+    return scoleRequest("sprGet", login, token, role, [target], [[
         "Uclass", "pupil", "vid", "start", "fin", "prim", "_id"
     ]]).then(convertDocuments);
 }
