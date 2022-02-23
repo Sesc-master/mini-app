@@ -12,13 +12,14 @@ import {
     diaryStore
 } from "../../Modules/Effector/DiaryStore";
 import {useStore} from "effector-react";
-
+import useInstallation from "../../Hooks/useInstalation";
 
 const Diary = () : JSX.Element => {
     const [loginRequest, setLoginRequest] = useState<any>({})
     const [isError, setIsError] = useState<boolean>(false)
     const {isLogin, isDiaryLoading} = useStore(diaryStore)
     const firstUpdate = useRef(true);
+    useInstallation()
 
     useEffect(() => {
         if (firstUpdate.current === true){
@@ -49,7 +50,6 @@ const Diary = () : JSX.Element => {
                 setIsError(true)
                 setIsDiaryLoading(false)
             })
-        
     }, [loginRequest])
 
     return (
@@ -61,8 +61,8 @@ const Diary = () : JSX.Element => {
             {!isLogin && !isDiaryLoading && <Login setLoginRequest={setLoginRequest}/>}
             {isLogin && !isDiaryLoading && <Journal />}
             {isError && <Div className="diary-error">Убедитесь, что корректно указали данные</Div>}
+            
         </>
-
     );
 }
 

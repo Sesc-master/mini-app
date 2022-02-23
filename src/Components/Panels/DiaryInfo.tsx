@@ -4,10 +4,12 @@ import {useNavigate} from "react-router-dom";
 import {Page } from '../../Modules/Routes'
 import {setIsLogin, setDiary, setSubjects, diaryStore} from "../../Modules/Effector/DiaryStore";
 import {useStore} from 'effector-react'
+import useInstallation from "../../Hooks/useInstalation";
 
 const DiaryInfo = () : JSX.Element => {
     const navigate = useNavigate()
     const {isLogin} = useStore(diaryStore)
+    useInstallation()
 
     const exitJournal = () => {
         setSubjects([])

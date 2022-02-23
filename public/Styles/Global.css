@@ -34,10 +34,13 @@
     }
     
     .panel {
+        padding: 0px;
         justify-self: center;
         width: 700px;
         margin-left: auto;
         margin-right: auto;
+        min-height: 700px;
+        border-radius: 8px;
     }
 
     .navbar {

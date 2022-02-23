@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useState, useLayoutEffect} from "react";
 import "@vkontakte/vkui/dist/vkui.css";
 import Navbar from "./Navbar";
 import Timetable from "./Panels/Timetable";
@@ -42,6 +42,7 @@ import {appSettingsStore, setScheme, setModalView} from "../Modules/Effector/App
 import {useStore} from "effector-react";
 import {Role} from "../Modules/ScoleAPI/types/Role";
 import $ from "jquery"
+import Installation from "./Panels/Installation";
 
 const ProjectRoot = () => {
     const {scheme, modalView} = useStore(appSettingsStore)
@@ -72,18 +73,21 @@ const ProjectRoot = () => {
 
     }, [])
 
-    useEffect(() => {
+    useLayoutEffect(() => {
         if (scheme === 'client_light' && window.screen.width <= 700){
             $('body').css('background-color', 'white')
+            $('div.scheme-color').css('background-color', 'white')
         }else if (scheme === 'client_light' && window.screen.width > 700){
             $('body').css('background-color', '#ececec')
-        }else if (scheme === "space_gray" && window.screen.width <= 700){
+            $('div.scheme-color').css('background-color', 'white')
+        }else if ((scheme === "space_gray" || scheme === 'client_dark') && window.screen.width <= 700){
             $('body').css('background-color', '#19191a')
-        }else if (scheme === "space_gray" && window.screen.width > 700){
+            $('div.scheme-color').css('background-color', '#19191a')
+        }else if ((scheme === "space_gray" || scheme === 'client_dark') && window.screen.width > 700){
             $('body').css('background-color', 'black')
+            $('div.scheme-color').css('background-color', '#19191a')
         }
     }, [scheme])
-
 
     const modal = (
         <ModalRoot activeModal={modalView} onClose={() => setModalView('')}>
@@ -108,7 +112,7 @@ const ProjectRoot = () => {
                         <Panel>
                             <AppHeader/>
                             <Navbar/>
-                            <div className="panel">
+                            <div className="panel scheme-color">
                                 <Routes>
                                     <Route path={Page.Timetable} element={<Timetable/>}/>
                                     <Route path={Page.Diary} element={<Diary />}/>
@@ -119,6 +123,7 @@ const ProjectRoot = () => {
                                     <Route path={Page.DiaryInfo} element={<DiaryInfo />}/>
                                     <Route path={Page.About} element={<About />}/>
                                     <Route path={Page.EmptyAuditories} element={<EmptyAuditories />}/>
+                                    <Route path={Page.Installation} element={<Installation />}/>
                                     <Route
                                         path="*"
                                         element={<Navigate to={Page.About} />}
