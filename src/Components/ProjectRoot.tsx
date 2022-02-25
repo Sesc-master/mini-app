@@ -36,11 +36,10 @@ import {
     setSubjects,
     setToken,
 } from "../Modules/Effector/DiaryStore";
-import {appSettingsStore, setScheme, setModalView, setInitialPage, setNavbarItems} from "../Modules/Effector/AppSettingsSrore"
+import {appSettingsStore, setScheme, setModalView, setNavbarItems} from "../Modules/Effector/AppSettingsSrore"
 import {useStore} from "effector-react";
 import {Role} from "../Modules/ScoleAPI/types/Role";
 import $ from "jquery"
-import Installation from "./Installation";
 import Settings from "./Panels/Settings";
 import {StorageKey} from "../Modules/StorageKey";
 import {Appearance} from "../Modules/Appearance";
@@ -128,7 +127,7 @@ const ProjectRoot = () => {
                             <div className="panel scheme-color">
                                 <Routes>
                                     <Route path={Page.Timetable} element={<Timetable/>}/>
-                                    <Route path={Page.Diary} element={ShowInstaller(<Diary />)}/>
+                                    <Route path={Page.Diary} element={ShowInstaller(<Diary /> )}/>
                                     <Route path={Page.Notes} element={<Notes />}/>
                                     <Route path={Page.Marks} element={<Marks />}/>
                                     <Route path={Page.Absences} element={<Absences />}/>

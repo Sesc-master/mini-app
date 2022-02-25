@@ -1,18 +1,18 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import Installation from "./Installation";
+import {useStore} from "effector-react";
+import {appSettingsStore} from "../Modules/Effector/AppSettingsSrore";
 
 
-export default function ShowInstaller(component: JSX.Element){
-    let isPWA = window.matchMedia('(display-mode: standalone)').matches
+export default function ShowInstaller(Component: JSX.Element){
+    const {isPWA} = useStore(appSettingsStore)
+
     if (!isPWA) {
         return (
-            <Installation />
+            <>
+                <Installation />
+            </>
         )
     }
-    return (
-        <>
-            component
-        </>
-    )
-
+    return Component;
 }

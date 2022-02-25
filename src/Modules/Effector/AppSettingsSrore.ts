@@ -8,20 +8,23 @@ export const setModalView = createEvent<IModal>()
 export const setScheme = createEvent<string>()
 export const setNavbarItems = createEvent<NavbarItem[]>()
 export const setInitialPage = createEvent<Page>()
+export const setIsPWA = createEvent<boolean>()
 
 
 export type IAppSettingsStore = {
     scheme: string,
     modalView: IModal,
     navbarItems: NavbarItem[],
-    initialPage: Page
+    initialPage: Page,
+    isPWA: boolean
 }
 
 export const appSettingsStore = createStore<IAppSettingsStore>({
     modalView: '',
     scheme: Appearance.Dark,
     navbarItems: defaultItems,
-    initialPage: Page.About
+    initialPage: Page.About,
+    isPWA: false
 })
     .on(setModalView, (state, modalView) => (
         {...state, modalView}
@@ -34,4 +37,7 @@ export const appSettingsStore = createStore<IAppSettingsStore>({
     ))
     .on(setInitialPage, (state, initialPage) => (
         {...state, initialPage}
+    ))
+    .on(setIsPWA, (state, isPWA) => (
+        {...state, isPWA}
     ))

@@ -2,6 +2,7 @@ import React, {useEffect, useState} from "react";
 import Image from "next/image"
 import {isIOS, isDesktop, isAndroid} from 'react-device-detect';
 import {Div, Text, Group, Header} from '@vkontakte/vkui'
+import {setIsPWA} from "../Modules/Effector/AppSettingsSrore";
 
 import ios1 from '../../public/iosInstallation/ios1.png'
 import ios2 from '../../public/iosInstallation/ios2.png'
@@ -14,6 +15,9 @@ import android2 from '../../public/androidInstallation/android2.jpg'
 import android3 from '../../public/androidInstallation/android3.jpg'
 
 const Installation = () => {
+    useEffect(() => {
+        setIsPWA(window.matchMedia('(display-mode: standalone)').matches)
+    })
 
     const iosInstallation = (
         <>
@@ -66,7 +70,7 @@ const Installation = () => {
         <>
             <div className={'step'}>
                 <div>
-                    В верхнем правом углу нажмите на кнопку установить
+                    1. В верхнем правом углу нажмите на кнопку установить
                 </div>
                 <Image src={desktop}/>
             </div>
