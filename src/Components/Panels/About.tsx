@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import { Div, Button, Text, SliderSwitch } from "@vkontakte/vkui";
 import Image from "next/image"
 // @ts-ignore
@@ -11,6 +11,12 @@ import {useStore} from "effector-react";
 const About = () : JSX.Element => {
     const store = useStore(appSettingsStore)
     const navigator = useNavigate()
+    const [PWAInstallEvent, setPWAInstallEvent] = useState(null);
+
+    window.addEventListener("beforeinstallprompt", (event) => {
+        event.preventDefault();
+        setPWAInstallEvent(event);
+    });
 
     const setScheme = (scheme: "space_gray" | "client_light") => {
         changeScheme(scheme)
@@ -56,6 +62,11 @@ const About = () : JSX.Element => {
 						Найти свободный кабинет
                     </Button>
                 </Div>
+                {PWAInstallEvent !== null && <Div className='link'>
+                    <Button size="l" stretched mode="outline" onClick={async () => {
+                        PWAInstallEvent.prompt();
+                    }}>Установить</Button>
+                </Div>}
                 <Div className='end'></Div>
             </Div>
         </>
