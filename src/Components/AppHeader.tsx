@@ -6,7 +6,7 @@ import {PanelHeader} from "@vkontakte/vkui";
 
 const AppHeader = () : JSX.Element => {
     return(
-        <PanelHeader style={{width: '100vw'}}fixed={false}>SESC Master</PanelHeader>
+        <PanelHeader style={{width: '100vw'}} fixed={false}>SESC Master</PanelHeader>
     )
 }
 

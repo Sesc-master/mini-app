@@ -12,7 +12,8 @@ import {
     diaryStore
 } from "../../Modules/Effector/DiaryStore";
 import {useStore} from "effector-react";
-import useInstallation from "../../Hooks/useInstalation";
+import useInstallation from "../ShowInstaller";
+import {StorageKey} from "../../Modules/StorageKey"
 
 const Diary = () : JSX.Element => {
     const [loginRequest, setLoginRequest] = useState<any>({})
@@ -31,12 +32,12 @@ const Diary = () : JSX.Element => {
         setIsError(false)
 
         getDiary(loginRequest.login, loginRequest.password, loginRequest.type)
-            .then((response) => {
+            .then((response : any) => {
                 if (response.journal){
                     setSubjects([...response.journal.keys()])
                     setDiary(response.journal)
                     setIsLogin(true)
-                    localStorage.setItem("loginData", JSON.stringify({
+                    localStorage.setItem(StorageKey.Login, JSON.stringify({
                         login: loginRequest.login,
                         password: loginRequest.password, 
                         type: loginRequest.type

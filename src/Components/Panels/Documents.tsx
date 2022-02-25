@@ -2,23 +2,22 @@ import React, { useState, useEffect } from "react";
 import { getDocuments } from "../../Modules/ScoleAPI";
 import {useStore} from "effector-react";
 import {diaryStore} from "../../Modules/Effector/DiaryStore";
+import {StorageKey} from "../../Modules/StorageKey";
+
 
 const Documents = () => {
     const {token} = useStore(diaryStore)
     const [documents, setDocuments] = useState<Array<any>>([])
 
     const setDocumentsData = async () => {
-        const {login, type} = JSON.parse(localStorage.getItem("loginData") || '{}')
+        const {login, type} = JSON.parse(localStorage.getItem(StorageKey.Login) || '{}')
         let documents = await getDocuments(login, token, type)
         setDocuments(documents || [])
-        console.log(documents)
     }
 
     useEffect(() => {
         setDocumentsData()
-        console.log(documents)
     }, [])
-    console.log(documents)
 
     return (
         <>

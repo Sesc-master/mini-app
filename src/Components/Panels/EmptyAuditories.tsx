@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import { Div, Button, Text} from "@vkontakte/vkui";
+import {Div, Header} from "@vkontakte/vkui";
 import {getFreeAuditories} from "../../Modules/Schedule"
 import AuditoriesPerLesson from "../AuditoriesPerLesson"
 import {useNavigate} from "react-router-dom";
@@ -17,16 +17,11 @@ const EmptyAuditory = () => {
     }, [])
     
     return (
-        <Div style={{ display: "flex", alignItems: "center", flexDirection: "column"}}>
-            <Div>
-                <Text style={{fontSize: "20px"}} weight="semibold">Свободные аудитории:</Text>
-            </Div>
+        <>
+            <Header >Свободные аудитории:</Header>
             {[...new Array(7)]?.map((value, index) => (<AuditoriesPerLesson auditories={auditories[index]} lesson={index + 1} />))}
-            <Div className="container_close">
-                <Button size="l" mode="outline" className="button_close" onClick={() => {navigate(Page.About)}}>Вернуться назад</Button>
-            </Div>
-            <Div style={{height: "30px"}}></Div>
-        </Div>
+            <Div className={'end'}></Div>
+        </>
     );
 }
 

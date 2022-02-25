@@ -1,5 +1,7 @@
 import React, {useState} from "react";
-import { Div, Button} from "@vkontakte/vkui";
+import {Cell, Div} from "@vkontakte/vkui";
+import Icon from "./Icon";
+import {IconName} from "../Modules/IconName";
 
 // import "../../public/Styles/AuditoriesPerLesson.css"
 
@@ -13,12 +15,12 @@ const AuditoriesPerLesson = (props : IAuditoriesPerLesson) => {
     const [isVisible, setVisibility] = useState(false)
 
     return(
-        <Div className="button-wrapper">
-            <Button size="l" mode="outline" className="button" onClick={() =>{setVisibility(!isVisible)}}>
-                {props.lesson + " урок"}
-            </Button>
+        <>
+            <Cell before={<Icon iconName={IconName.EmptyRoom}/>} className="button" onClick={() =>{setVisibility(!isVisible)}}>
+                {`свободны во время ${props.lesson} урока`}
+            </Cell>
             { isVisible && <Div className="auditories">{props.auditories?.join(", ")}</Div> }
-        </Div>
+        </>
     )
 };
 

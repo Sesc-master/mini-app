@@ -3,10 +3,12 @@ import {getReportCard} from "../../Modules/ScoleAPI";
 import MarksTable from "../MarksTable";
 import {useStore} from "effector-react";
 import {diaryStore} from "../../Modules/Effector/DiaryStore";
+import {StorageKey} from "../../Modules/StorageKey";
+
 
 const Marks = () => {
     const {token} = useStore(diaryStore)
-    const {login, type} = JSON.parse(localStorage.getItem("loginData") || '{}')
+    const {login, type} = JSON.parse(localStorage.getItem(StorageKey.Login) || '{}')
     const [marks, setMarks] = useState<Map<string, any>>(new Map())
 
     const setMarksData = async () => {

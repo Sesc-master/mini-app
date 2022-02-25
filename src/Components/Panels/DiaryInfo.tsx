@@ -4,7 +4,9 @@ import {useNavigate} from "react-router-dom";
 import {Page } from '../../Modules/Routes'
 import {setIsLogin, setDiary, setSubjects, diaryStore} from "../../Modules/Effector/DiaryStore";
 import {useStore} from 'effector-react'
-import useInstallation from "../../Hooks/useInstalation";
+import useInstallation from "../ShowInstaller";
+import {StorageKey} from "../../Modules/StorageKey";
+
 
 const DiaryInfo = () : JSX.Element => {
     const navigate = useNavigate()
@@ -15,7 +17,7 @@ const DiaryInfo = () : JSX.Element => {
         setSubjects([])
         setDiary({})
         setIsLogin(false)
-        localStorage.removeItem('loginData')
+        localStorage.removeItem(StorageKey.Login)
     }
 
     return (
