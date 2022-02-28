@@ -2,6 +2,7 @@ import React, {useState, useEffect, EffectCallback} from "react";
 import { getAbsences} from "../../Modules/ScoleAPI";
 import {useStore} from "effector-react";
 import {diaryStore} from "../../Modules/Effector/DiaryStore";
+import {StorageKey} from "../../Modules/StorageKey";
 
 
 const Absences = () : JSX.Element => {
@@ -19,7 +20,7 @@ const Absences = () : JSX.Element => {
 
     const setAbsencesData = async () => {
         try {
-            const {login, type} = JSON.parse(localStorage.getItem("loginData") || '{}')
+            const {login, type} = JSON.parse(localStorage.getItem(StorageKey.Login) || '{}')
             const absences = new Map(await getAbsences(login, token, type) || [])
             setAbsences(absences)
             setSummary(getSummary(absences))

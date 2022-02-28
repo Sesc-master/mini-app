@@ -1,6 +1,7 @@
-export type IModal = Modal.Grades | Modal.Subjects | ''
+export type IModal = Modal.Grades | Modal.Subjects | Modal.Settings | ''
 
 export enum Modal {
     Grades = 'grades',
-    Subjects = 'subjects'
+    Subjects = 'subjects',
+    Settings = 'settings'
 }

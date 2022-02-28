@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { useSelector } from "react-redux"
 import { getNotes } from "../../Modules/ScoleAPI";
 import TextWithLinks from "../TextWithLinks";
 import {useStore} from "effector-react";
 import {diaryStore} from "../../Modules/Effector/DiaryStore";
+import {StorageKey} from "../../Modules/StorageKey";
 
 const Notes = () => {
     const {token} = useStore(diaryStore)
-    const {login, type} = JSON.parse(localStorage.getItem("loginData") || '{}')
+    const {login, type} = JSON.parse(localStorage.getItem(StorageKey.Login) || '{}')
     const [notes, setNotes] = useState<Array<any>>([])
 
     const setNotesData = async () => {

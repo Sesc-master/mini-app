@@ -1,18 +1,16 @@
 import React, { useEffect, useState } from "react";
 import {Tabbar, TabbarItem, FixedLayout} from "@vkontakte/vkui";
-import { Icon28NewsfeedOutline, Icon28MenuOutline,} from "@vkontakte/icons";
-import { Icon28BillheadOutline } from '@vkontakte/icons';
-import { Icon28ServicesOutline } from '@vkontakte/icons';
 import "@vkontakte/vkui/dist/vkui.css";
-import {Page} from "../Modules/Routes";
 import {useNavigate, useLocation} from 'react-router-dom';
+import {defaultItems} from "../Modules/NavbarItems";
+import Icon from "./Icon"
+import {appSettingsStore} from "../Modules/Effector/AppSettingsSrore"
+import {useStore} from "effector-react";
 
 const Navbar = () => {
     const [page, setPage] = useState<string>()
+    const {navbarItems} = useStore(appSettingsStore)
     const navigate = useNavigate();
-    const openPage = (page: string) : void => {
-        navigate(page)
-    }
     const location = useLocation();
 
     const setCurrentLocation = () => {
@@ -20,34 +18,28 @@ const Navbar = () => {
         setPage(path)
     }
 
+    const openPage = (page: string) : void => {
+        navigate(page)
+    }
+
     useEffect(() => {
         setCurrentLocation()
-    })
+    }, )
 
     return (    
-            <Tabbar className="navbar">
-                <TabbarItem selected={page === Page.Timetable} onClick={() => {
-                    openPage(Page.Timetable)
-                }}>
-                    < Icon28BillheadOutline/>
-                </TabbarItem>
-                <TabbarItem selected={page === Page.Diary} onClick={() => {
-                    setPage(Page.Diary)
-                    openPage(Page.Diary)
-                }}>
-                    <Icon28NewsfeedOutline/>
-                </TabbarItem>
-                <TabbarItem selected={page === Page.DiaryInfo} onClick={() => {
-                    setPage(Page.DiaryInfo)
-                    openPage(Page.DiaryInfo)
-                }}>
-                    < Icon28ServicesOutline/>
-                </TabbarItem>
-                <TabbarItem selected={page === Page.About} onClick={() => {
-                    openPage(Page.About)
-                }}>
-                    <Icon28MenuOutline/>
-                </TabbarItem>
+            <Tabbar className={`navbar`}>
+                {navbarItems.map((navbarItem) => {
+                    if (navbarItem.isActive) {
+                        return (
+                            <TabbarItem selected={page === navbarItem.link} onClick={() => {
+                                openPage(navbarItem.link)
+                                setPage(navbarItem.link)
+                            }}>
+                                <Icon iconName={navbarItem.iconName}/>
+                            </TabbarItem>
+                        )
+                    }
+                })}
             </Tabbar>
     );
 }

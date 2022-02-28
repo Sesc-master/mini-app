@@ -105,7 +105,7 @@ const Timetable = () => {
     }, [targetDayIndex, weekSchedule])
 
     return (
-        <>  
+        <div style={{margin: '0.3em'}}>
             <FormItem top="Выберите класс">
                 <SelectMimicry
                     placeholder="Не выбран"
@@ -121,7 +121,7 @@ const Timetable = () => {
                 {isLoaderRendering && renderLoader(times)}
             </div>
             <Div className='end'></Div>
-        </>
+        </div>
     );
 }
 

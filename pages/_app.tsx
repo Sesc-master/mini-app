@@ -35,11 +35,11 @@ const _app = () => {
 				<title>SESC Master</title>
 				<link rel='icon' href="/icon.png"/>
 				<link rel="manifest" href="/manifest.json" />
-				<link rel="apple-touch-icon" href="/icon-512x512.png"></link>
+				<link rel="apple-touch-icon" href="/icon-512x512.jpg"></link>
 			</Head>
-			<SSRWrapper >
-					{typeof window === 'undefined' ? null : <ProjectRoot />}
-			</SSRWrapper>
+
+			{typeof window === 'undefined' ? null : <ProjectRoot />}
+
 		</>
 	);
 }

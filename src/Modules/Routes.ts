@@ -1,6 +1,6 @@
 export enum Page {
     Timetable = '/timetable',
-    About = '/',
+    About = '/about',
     Diary = '/diary',
     DiaryInfo = '/diary-info',
     Absences = '/diary-info/absences',
@@ -8,5 +8,7 @@ export enum Page {
     Marks = '/diary-info/marks',
     Notes = '/diary-info/notes',
     EmptyAuditories = '/empty-auditories',
-    Installation = '/installation'
+    Installation = '/installation',
+    Settings = '/settings',
+    Main = '/a'
 }

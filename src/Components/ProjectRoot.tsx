@@ -9,7 +9,6 @@ import Grades from "./Panels/Grades";
 import EmptyAuditories from "./Panels/EmptyAuditories";
 import Subjects from "./Panels/Subjects"
 import {
-    View,
     ConfigProvider,
     AppRoot,
     Panel,
@@ -18,17 +17,16 @@ import {
     ModalPage,
     AdaptivityProvider,
     ModalPageHeader,
-    Text,
-    Group
+    PanelHeaderButton
 } from "@vkontakte/vkui";
-import { withModalRootContext } from "@vkontakte/vkui";
+import { Icon24Dismiss  } from '@vkontakte/icons';
 import { getDiary } from '../Modules/GetDiary'
 import Notes from "./Panels/Notes";
 import Absences from "./Panels/Absences";
 import Marks from "./Panels/Marks";
 import DiaryInfo from "./Panels/DiaryInfo";
 import Documents from "./Panels/Documents";
-import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom'
+import {BrowserRouter as Router, Route, Routes, Navigate, useNavigate} from 'react-router-dom'
 import {Page} from "../Modules/Routes";
 import {Modal} from "../Modules/Modal"
 import {
@@ -38,22 +36,27 @@ import {
     setSubjects,
     setToken,
 } from "../Modules/Effector/DiaryStore";
-import {appSettingsStore, setScheme, setModalView} from "../Modules/Effector/AppSettingsSrore"
+import {appSettingsStore, setScheme, setModalView, setNavbarItems} from "../Modules/Effector/AppSettingsSrore"
 import {useStore} from "effector-react";
 import {Role} from "../Modules/ScoleAPI/types/Role";
 import $ from "jquery"
-import Installation from "./Panels/Installation";
+import Settings from "./Panels/Settings";
+import {StorageKey} from "../Modules/StorageKey";
+import {Appearance} from "../Modules/Appearance";
+import {getInitialPage} from "../Modules/getInitialPage";
+import ShowInstaller from './ShowInstaller'
+
 
 const ProjectRoot = () => {
     const {scheme, modalView} = useStore(appSettingsStore)
 
     useEffect(() => {
-        if (localStorage.getItem('loginData') !== null){
+        if (localStorage.getItem(StorageKey.Login) !== null){
             const loginData : {login: string, password: string, type: Role} =
-            JSON.parse(localStorage.getItem('loginData') || "{}")
+            JSON.parse(localStorage.getItem(StorageKey.Login) || "{}")
             setIsDiaryLoading(true)
             getDiary(loginData.login, loginData.password, loginData.type)
-                .then((response) => {
+                .then((response : any) => {
                     if (response.journal){
                         setSubjects([...response.journal.keys()])
                         setDiary(response.journal)
@@ -66,24 +69,27 @@ const ProjectRoot = () => {
                     setIsDiaryLoading(false)
                 })
         }
-        if (localStorage.getItem("scheme") !== null){
-            const scheme = localStorage.getItem("scheme") || "{}"
+        if (localStorage.getItem(StorageKey.Scheme) !== null){
+            const scheme = localStorage.getItem(StorageKey.Scheme) || "{}"
             setScheme(scheme)
         }
-
+        if (localStorage.getItem(StorageKey.NavbarItems) !== null){
+            const navbarItems : any = JSON.parse(localStorage.getItem(StorageKey.NavbarItems) || "{}")
+            setNavbarItems(navbarItems)
+        }
     }, [])
 
     useLayoutEffect(() => {
-        if (scheme === 'client_light' && window.screen.width <= 700){
+        if (scheme === Appearance.Light && window.screen.width <= 700){
             $('body').css('background-color', 'white')
             $('div.scheme-color').css('background-color', 'white')
-        }else if (scheme === 'client_light' && window.screen.width > 700){
+        }else if (scheme === Appearance.Light && window.screen.width > 700){
             $('body').css('background-color', '#ececec')
             $('div.scheme-color').css('background-color', 'white')
-        }else if ((scheme === "space_gray" || scheme === 'client_dark') && window.screen.width <= 700){
+        }else if ((scheme === Appearance.Dark) && window.screen.width <= 700){
             $('body').css('background-color', '#19191a')
             $('div.scheme-color').css('background-color', '#19191a')
-        }else if ((scheme === "space_gray" || scheme === 'client_dark') && window.screen.width > 700){
+        }else if ((scheme === Appearance.Dark) && window.screen.width > 700){
             $('body').css('background-color', 'black')
             $('div.scheme-color').css('background-color', '#19191a')
         }
@@ -92,11 +98,17 @@ const ProjectRoot = () => {
     const modal = (
         <ModalRoot activeModal={modalView} onClose={() => setModalView('')}>
             <ModalPage id={Modal.Subjects}>
-                <ModalPageHeader>Выберите предмет</ModalPageHeader>
+                <ModalPageHeader  left={
+                    <PanelHeaderButton onClick={() => setModalView('')}>
+                        <Icon24Dismiss  />
+                    </PanelHeaderButton>}>Выберите предмет</ModalPageHeader>
                 <Subjects />
             </ModalPage>
-            <ModalPage id={Modal.Grades} dynamicContentHeight={true}>
-                <ModalPageHeader>Выберите Класс</ModalPageHeader>
+            <ModalPage id={Modal.Grades}  dynamicContentHeight={true}>
+                <ModalPageHeader  left={
+                    <PanelHeaderButton onClick={() => setModalView('')}>
+                        <Icon24Dismiss  />
+                    </PanelHeaderButton>}>Выберите Класс</ModalPageHeader>
                 <Grades />
             </ModalPage>
         </ModalRoot>
@@ -115,18 +127,18 @@ const ProjectRoot = () => {
                             <div className="panel scheme-color">
                                 <Routes>
                                     <Route path={Page.Timetable} element={<Timetable/>}/>
-                                    <Route path={Page.Diary} element={<Diary />}/>
+                                    <Route path={Page.Diary} element={ShowInstaller(<Diary /> )}/>
                                     <Route path={Page.Notes} element={<Notes />}/>
                                     <Route path={Page.Marks} element={<Marks />}/>
                                     <Route path={Page.Absences} element={<Absences />}/>
                                     <Route path={Page.Documents} element={<Documents />}/>
-                                    <Route path={Page.DiaryInfo} element={<DiaryInfo />}/>
+                                    <Route path={Page.DiaryInfo} element={ShowInstaller(<DiaryInfo />)}/>
                                     <Route path={Page.About} element={<About />}/>
                                     <Route path={Page.EmptyAuditories} element={<EmptyAuditories />}/>
-                                    <Route path={Page.Installation} element={<Installation />}/>
+                                    <Route path={Page.Settings} element={<Settings />}/>
                                     <Route
                                         path="*"
-                                        element={<Navigate to={Page.About} />}
+                                        element={<Navigate to={getInitialPage()} />}
                                     />
                                 </Routes>
                             </div>
