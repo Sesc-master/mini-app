@@ -1,6 +1,6 @@
 import buildHandler from "../../../src/APIModules/BuildHandler";
-import httpsRequest from "../../../src/APIModules/HttpsRequest";
 import { IdableScheduleType } from "../../../src/Modules/Schedule/Schedule";
+import SESCRequest from "../../../src/APIModules/SESCRequest";
 
 const server = "lyceum.urfu.ru";
 const timeout = 2000;
@@ -19,7 +19,7 @@ export async function getSchedule(args: IGetScheduleArgs) {
     url.searchParams.append("weekday", String(args.weekday));
     url.searchParams.append(args.type, String(args.id));
 
-    return httpsRequest({
+    return SESCRequest({
         hostname: server,
         timeout: timeout,
         path: url.toString(),

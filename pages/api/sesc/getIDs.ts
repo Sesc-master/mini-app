@@ -1,7 +1,7 @@
 import { parse } from "node-html-parser";
 import buildHandler from "../../../src/APIModules/BuildHandler";
 import buildCachedFunction from "../../../src/APIModules/Cache";
-import httpsRequest from "../../../src/APIModules/HttpsRequest";
+import SESCRequest from "../../../src/APIModules/SESCRequest";
 
 const ignoringText = [
     "Нет", "Учитель", "Выберите класс", "Выберите аудиторию", "Выберите преподавателя", "Выберите день"
@@ -15,7 +15,7 @@ export type ParsedIDs = {
 }
 
 export const getIDs = buildCachedFunction((): Promise<ParsedIDs | void> => {
-    return httpsRequest({
+    return SESCRequest({
         host: "lyceum.urfu.ru",
         path: "/ucheba/raspisanie-zanjatii"
     }).then(lyceumResponse => {
@@ -49,6 +49,6 @@ export const getIDs = buildCachedFunction((): Promise<ParsedIDs | void> => {
         });
         return result;
     });
-}, "ids");
+}, "ids", 5529600000);
 
 export default buildHandler(getIDs, false);
