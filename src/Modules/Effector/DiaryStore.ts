@@ -1,5 +1,4 @@
 import {createStore, createEvent,} from "effector";
-import {IModal} from "../Modal";
 
 export const setSubjects = createEvent<string[]>()
 export const setDiary = createEvent<{}>()
@@ -7,6 +6,7 @@ export const setIsLogin = createEvent<boolean>()
 export const setTargetSubject = createEvent<string>()
 export const setToken = createEvent<string>()
 export const setIsDiaryLoading = createEvent<boolean>()
+export const setTeacher = createEvent<string>()
 
 
 export type IDiaryStore = {
@@ -16,6 +16,7 @@ export type IDiaryStore = {
     targetSubject: string,
     token: string,
     isDiaryLoading: boolean,
+    teacher: string
 }
 
 export const diaryStore = createStore<IDiaryStore>({
@@ -25,6 +26,7 @@ export const diaryStore = createStore<IDiaryStore>({
     targetSubject: '',
     token: '',
     isDiaryLoading: false,
+    teacher: ''
 })
     .on(setDiary, (state, diary) => (
         {...state, diary}
@@ -43,4 +45,7 @@ export const diaryStore = createStore<IDiaryStore>({
     ))
     .on(setSubjects, (state, subjects) => (
         {...state, subjects}
+    ))
+    .on(setTeacher, (state, teacher) => (
+        {...state, teacher}
     ))
