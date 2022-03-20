@@ -4,13 +4,13 @@
 }
 
 .loader {
-    height: 100px;
-    width: 100px;
+    height: 2em;
+    width: 2em;
     position: absolute;
     left: 50%;
-    margin-left: -50px;
+    margin-left: -1em;
     top: 50%;
-    margin-top: -50px;
+    margin-top: -1em;
 }
 
 @media screen and (max-width: 770px) {
