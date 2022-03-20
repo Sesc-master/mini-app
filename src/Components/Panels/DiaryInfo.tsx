@@ -11,7 +11,6 @@ import {StorageKey} from "../../Modules/StorageKey";
 const DiaryInfo = () : JSX.Element => {
     const navigate = useNavigate()
     const {isLogin} = useStore(diaryStore)
-    useInstallation()
 
     const exitJournal = () => {
         setSubjects([])

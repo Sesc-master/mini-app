@@ -20,7 +20,6 @@ const Diary = () : JSX.Element => {
     const [isError, setIsError] = useState<boolean>(false)
     const {isLogin, isDiaryLoading} = useStore(diaryStore)
     const firstUpdate = useRef(true);
-    useInstallation()
 
     useEffect(() => {
         if (firstUpdate.current === true){
