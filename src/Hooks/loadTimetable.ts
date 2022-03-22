@@ -9,7 +9,7 @@ const memorizeGrade = (grade: string) => {
     localStorage.setItem('grade', grade)
 }
 
-export const loadTimetable = async (key: string, isTeacher?: boolean) => {
+export const loadTimetable = async (key: string, isTeacher: boolean = false) => {
     try {
         memorizeGrade(key)
 

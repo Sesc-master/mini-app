@@ -46,7 +46,6 @@ const getCurrentDay = () => {
             targetDay = 1
         else targetDay++
     }
-    console.log(targetDay)
     return targetDay
 }
 
@@ -66,41 +65,38 @@ const Timetable = () => {
         ["13:35", "14:15"],
         ["14:35", "15:15"]
     ];
-    const isInstructionRendering = !isError && !isTimetableLoading && weekSchedule.length == 0;
+    const isInstructionRendering = grade === '' && !isTeacher || isTeacher && teacher === '';
     const isTimetableRendering = !isError && !isTimetableLoading && weekSchedule.length !== 0;
 
 
     const renderError = () => {
         return (
-            <>
-                <div className="error">
-                    <div className="timetable-text-error">Что-то пошло не так...</div>
-                    <div className="timetable-btn" onClick={() => {
-                        loadTimetable(grade)
-                    }}>
-                        <div>
-                            Перезагрузить
-                        </div>
+            <div className="error">
+                <div className="timetable-text-error">Что-то пошло не так...</div>
+                <div className="timetable-btn" onClick={() => {
+                    loadTimetable(grade, isTeacher)
+                }}>
+                    <div>
+                        Перезагрузить
                     </div>
                 </div>
-            </>
+            </div>
         )
     }
 
-    if (isFirstRender.current && weekSchedule.length === 0){
-        const grade = localStorage.getItem('grade') || ''
-        setGrade(grade)
-        const targetDay = new Date().getDay();
-        setTargetDayIndex(targetDay === 0 ? targetDay + 1 : targetDay)
-        loadTimetable(grade)
-        isFirstRender.current = false
-    }
-
     useEffect( () => {
+        if (isFirstRender.current && weekSchedule.length === 0){
+            const grade = localStorage.getItem('grade') || ''
+            setGrade(grade)
+            loadTimetable(grade, isTeacher)
+            isFirstRender.current = false;
+            return;
+        }
+
         setIsError(false)
 
         if (!grade) return;
-        if (weekSchedule[targetDayIndex - 1] === undefined){
+        if (weekSchedule[targetDayIndex - 1] === undefined && !isTimetableLoading){
             setIsError(true);
             setIsTimetableLoading(false);
             return;
@@ -108,24 +104,16 @@ const Timetable = () => {
 
         const lessons = listifySchedule(weekSchedule[targetDayIndex - 1])
         setTimetable(lessons)
-    }, [weekSchedule])
+    }, [weekSchedule, targetDayIndex])
 
-    useEffect( () => {
-        setIsError(false)
-
-        if (weekSchedule[targetDayIndex - 1] === undefined){
-            setIsError(true);
-            setIsTimetableLoading(false);
-            return;
-        }
-
-        const lessons = listifySchedule(weekSchedule[targetDayIndex - 1])
-        setTimetable(lessons)
-    }, [targetDayIndex])
+    useEffect(() => {
+        const targetDay = new Date().getDay();
+        setTargetDayIndex(targetDay === 0 ? targetDay + 1 : targetDay)
+    }, [])
 
     return (
         <div>
-            <FormItem top={`Выберите класс`}>
+            <FormItem top={"Выберите класс или учителя"}>
                 <SelectMimicry
                     placeholder="Не выбран"
                     onClick={() => setModalView(Modal.Type)}
@@ -141,6 +129,6 @@ const Timetable = () => {
             <Div className='end'></Div>
         </div>
     );
-}
+};
 
-export default Timetable
+export default Timetable;
