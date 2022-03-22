@@ -1,7 +1,6 @@
-import { resolve } from "path/posix";
 import getIDs from "./GetIDs";
-import { getSchedule, getFullSchedule } from "./Schedule";
-import { IdableScheduleType, Schedule } from "./Schedule/Schedule";
+import {getFullSchedule, getSchedule} from "./Schedule";
+import {IdableScheduleType, Schedule} from "./Schedule/Schedule";
 
 export class Table {
     static teachers: any;
@@ -24,17 +23,16 @@ export class Table {
         return getFullSchedule(weekday)
     }
 
-    public static async getTableForWeek(grade: string) {
+    public static async getTableForWeek(key: string, isTeacher?: boolean) {
         const IDs = await getIDs();
+        const type = isTeacher ? 'teacher' : 'group';
+        const id = isTeacher ? Number(IDs.teachers.get(key)) : Number(IDs.groups.get(key))
 
-
-        const schedule = await Promise.all(Array.from({length: 6}, (_, dayIndex) => {
-            return getSchedule("group", dayIndex + 1, Number(IDs.groups.get(grade)))
-                    .catch(() => {
-                        return undefined
-                    })
+        return await Promise.all(Array.from({length: 6}, (_, dayIndex) => {
+            return getSchedule(type, dayIndex + 1, id)
+                .catch(() => {
+                    return undefined
+                })
         }));
-
-        return schedule;
     }
 }

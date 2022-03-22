@@ -9,14 +9,14 @@ const memorizeGrade = (grade: string) => {
     localStorage.setItem('grade', grade)
 }
 
-export const loadTimetable = async (grade: string) => {
+export const loadTimetable = async (key: string, isTeacher?: boolean) => {
     try {
-        memorizeGrade(grade)
+        memorizeGrade(key)
 
         setIsTimetableLoading(true)
         setIsError(false)
 
-        const weekSchedule = await Table.getTableForWeek(grade)
+        const weekSchedule = await Table.getTableForWeek(key, isTeacher)
         setWeekSchedule(weekSchedule)
 
         setIsTimetableLoading(false)

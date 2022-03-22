@@ -39,12 +39,15 @@ import {
 import {appSettingsStore, setScheme, setModalView, setNavbarItems} from "../Modules/Effector/AppSettingsSrore"
 import {useStore} from "effector-react";
 import {Role} from "../Modules/ScoleAPI/types/Role";
+// @ts-ignore
 import $ from "jquery"
 import Settings from "./Panels/Settings";
 import {StorageKey} from "../Modules/StorageKey";
 import {Appearance} from "../Modules/Appearance";
 import {getInitialPage} from "../Modules/getInitialPage";
-import ShowInstaller from './ShowInstaller'
+import ShowInstaller from './ShowInstaller';
+import Teachers from "./Panels/Teachers";
+import TimetableType from "./Panels/TimetableType";
 
 
 const ProjectRoot = () => {
@@ -108,8 +111,22 @@ const ProjectRoot = () => {
                 <ModalPageHeader  left={
                     <PanelHeaderButton onClick={() => setModalView('')}>
                         <Icon24Dismiss  />
-                    </PanelHeaderButton>}>Выберите Класс</ModalPageHeader>
+                    </PanelHeaderButton>}>Класс</ModalPageHeader>
                 <Grades />
+            </ModalPage>
+            <ModalPage id={Modal.Teachers} dynamicContentHeight={true}>
+                <ModalPageHeader  left={
+                    <PanelHeaderButton onClick={() => setModalView('')}>
+                        <Icon24Dismiss  />
+                    </PanelHeaderButton>}>Учитель</ModalPageHeader>
+                <Teachers />
+            </ModalPage>
+            <ModalPage id={Modal.Type}>
+                <ModalPageHeader  left={
+                    <PanelHeaderButton onClick={() => setModalView('')}>
+                        <Icon24Dismiss  />
+                    </PanelHeaderButton>}>Тип расписания</ModalPageHeader>
+                <TimetableType />
             </ModalPage>
         </ModalRoot>
     );

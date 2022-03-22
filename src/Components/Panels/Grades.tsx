@@ -3,7 +3,7 @@ import React, {useEffect, useState} from "react";
 import Options from "../Options"
 import {setModalView} from "../../Modules/Effector/AppSettingsSrore";
 import {withModalRootContext} from "@vkontakte/vkui";
-import {setGrade } from '../../Modules/Effector/TimetableStore'
+import {setGrade, setIsTeacher} from '../../Modules/Effector/TimetableStore'
 import {loadTimetable} from '../../Hooks/loadTimetable'
 
 type IGrades = {
@@ -34,6 +34,7 @@ const Grades = ({ updateModalHeight} : IGrades) => {
                 (grade) => {
                     setGrade(grade)
                     setModalView('')
+                    setIsTeacher(false)
                     loadTimetable(grade)
                 }}/>}
         </>
