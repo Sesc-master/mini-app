@@ -16,6 +16,7 @@ import {
     setTeacher
 } from '../../Modules/Effector/TimetableStore';
 import {loadTimetable} from '../../Hooks/loadTimetable'
+import {StorageKey} from "../../Modules/StorageKey";
 
 
 const renderInstruction = () => {
@@ -72,7 +73,7 @@ const Timetable = () => {
         ["13:35", "14:15"],
         ["14:35", "15:15"]
     ];
-    const isInstructionRendering = grade === '' && !isTeacher || isTeacher && teacher === '';
+    const isInstructionRendering = !grade && !isTeacher || isTeacher && !teacher;
     const isTimetableRendering = !isError && !isTimetableLoading && weekSchedule.length !== 0;
 
 
@@ -103,7 +104,7 @@ const Timetable = () => {
 
         setIsError(false)
 
-        if (!grade) return;
+        if (isInstructionRendering) return;
         if (weekSchedule[targetDayIndex - 1] === undefined && !isTimetableLoading){
             setIsError(true);
             setIsTimetableLoading(false);
@@ -117,7 +118,7 @@ const Timetable = () => {
     useEffect(() => {
         const targetDay = new Date().getDay();
         setTargetDayIndex(targetDay === 0 ? targetDay + 1 : targetDay)
-    }, [])
+    }, []);
 
     return (
         <div>
@@ -129,7 +130,7 @@ const Timetable = () => {
             </FormItem>
             <Week setTargetDayIndex={setTargetDayIndex} targetIndex={targetDayIndex}/>
             <div className='elements'>
-                {isTimetableLoading && renderLoader(times)}
+                {!isInstructionRendering && isTimetableLoading && renderLoader(times)}
                 {isError && !isTimetableLoading && renderError()}
                 {isInstructionRendering && renderInstruction()}
                 {isTimetableRendering && renderTimetable(timetable, times)}
