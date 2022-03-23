@@ -82,7 +82,7 @@ const Timetable = () => {
             <div className="error">
                 <div className="timetable-text-error">Что-то пошло не так...</div>
                 <div className="timetable-btn" onClick={() => {
-                    loadTimetable(grade, isTeacher)
+                    loadTimetable(isTeacher ? teacher : grade, isTeacher)
                 }}>
                     <div>
                         Перезагрузить
