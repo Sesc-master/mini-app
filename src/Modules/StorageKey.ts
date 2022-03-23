@@ -2,5 +2,6 @@ export enum StorageKey {
     Login = "loginData",
     Scheme = "scheme",
     NavbarItems = "navbar",
-    InitialPage = 'page'
+    InitialPage = 'page',
+    Timetable = 'timetable'
 }

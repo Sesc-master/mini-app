@@ -7,7 +7,14 @@ import TimetableItemLoader from "../TimetableItemLoader"
 import {setModalView} from "../../Modules/Effector/AppSettingsSrore";
 import {Modal} from "../../Modules/Modal";
 import {useStore} from "effector-react";
-import {setGrade, setIsError, setIsTimetableLoading, timetableStore,} from '../../Modules/Effector/TimetableStore';
+import {
+    setGrade,
+    setIsError,
+    setIsTeacher,
+    setIsTimetableLoading,
+    timetableStore,
+    setTeacher
+} from '../../Modules/Effector/TimetableStore';
 import {loadTimetable} from '../../Hooks/loadTimetable'
 
 
@@ -86,9 +93,10 @@ const Timetable = () => {
 
     useEffect( () => {
         if (isFirstRender.current && weekSchedule.length === 0){
-            const grade = localStorage.getItem('grade') || ''
-            setGrade(grade)
-            loadTimetable(grade, isTeacher)
+            const {key, isTeacher} = JSON.parse(localStorage.getItem(StorageKey.Timetable) || '{}')
+            isTeacher ? setTeacher(key) : setGrade(key);
+            setIsTeacher(isTeacher);
+            loadTimetable(key, isTeacher);
             isFirstRender.current = false;
             return;
         }

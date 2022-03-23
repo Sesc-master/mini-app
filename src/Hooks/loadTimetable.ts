@@ -4,14 +4,11 @@ import {
     setIsTimetableLoading,
     setIsError,
 } from '../Modules/Effector/TimetableStore'
-
-const memorizeGrade = (grade: string) => {
-    localStorage.setItem('grade', grade)
-}
+import {StorageKey} from "../Modules/StorageKey";
 
 export const loadTimetable = async (key: string, isTeacher: boolean = false) => {
     try {
-        memorizeGrade(key)
+        localStorage.setItem(StorageKey.Timetable ,JSON.stringify({key, isTeacher}));
 
         setIsTimetableLoading(true)
         setIsError(false)
