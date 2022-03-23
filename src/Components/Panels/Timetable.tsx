@@ -104,7 +104,6 @@ const Timetable = () => {
 
         setIsError(false)
 
-        if (isInstructionRendering) return;
         if (weekSchedule[targetDayIndex - 1] === undefined && !isTimetableLoading){
             setIsError(true);
             setIsTimetableLoading(false);
@@ -131,9 +130,9 @@ const Timetable = () => {
             <Week setTargetDayIndex={setTargetDayIndex} targetIndex={targetDayIndex}/>
             <div className='elements'>
                 {!isInstructionRendering && isTimetableLoading && renderLoader(times)}
-                {isError && !isTimetableLoading && renderError()}
+                {!isInstructionRendering && isError && !isTimetableLoading && renderError()}
                 {isInstructionRendering && renderInstruction()}
-                {isTimetableRendering && renderTimetable(timetable, times)}
+                {!isInstructionRendering && isTimetableRendering && renderTimetable(timetable, times)}
             </div>
             <Div className='end'></Div>
         </div>
