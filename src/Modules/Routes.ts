@@ -8,7 +8,5 @@ export enum Page {
     Marks = '/diary-info/marks',
     Notes = '/diary-info/notes',
     EmptyAuditories = '/empty-auditories',
-    Installation = '/installation',
     Settings = '/settings',
-    Main = '/a'
 }
