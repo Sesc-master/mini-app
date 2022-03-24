@@ -1,0 +1,24 @@
+{
+    "extends": "react-app",
+    "parserOptions": {
+        "project": "./tsconfig.json"
+    },
+    "ignorePatterns": [
+        "*.config.js",
+        "*.d.ts"
+    ],
+    "plugins": [
+        "@typescript-eslint"
+    ],
+    "rules": {
+        "react-hooks/rules-of-hooks": "warn",
+        "react-hooks/exhaustive-deps": "warn",
+        "@typescript-eslint/indent": ["warn", 4],
+        "max-classes-per-file": ["warn", 1],
+        "max-len": ["warn", 200],
+        "lines-between-class-members": "off",
+        "@typescript-eslint/quotes": ["warn", "double", "avoid-escape"],
+        "@typescript-eslint/explicit-function-return-type": ["warn"],
+        "brace-style": ["warn", "stroustrup", { "allowSingleLine": true }]
+    }
+}
