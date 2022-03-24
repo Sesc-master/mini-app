@@ -4,10 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node dist/index.js",
+    "start": "node build/index.js",
     "dev": "nodemon src/index.ts",
-    "build": "tsc -p .",
-    "build-client": "cd frontend && npm install && npm run build"
+    "build": "tsc -p . && cd .. && cd frontend && npm install && npm run build",
+    "build-client": "cd frontend && npm install && npm run build",
+    "build-server": "tsc -p ."
   },
   "keywords": [],
   "author": "",
