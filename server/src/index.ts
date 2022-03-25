@@ -8,8 +8,6 @@ import createServerSsl from "./helpers/CreateServerSsl";
 const PORT = process.env.PORT || 443;
 const app = express();
 
-console.log(process.env.isProduction);
-
 app.use(express.static(path.resolve(__dirname, "../../frontend/build")));
 app.use(express.json());
 
@@ -37,7 +35,7 @@ app.get("*", (req: any, res: any) => {
    res.sendFile(path.resolve(__dirname, "../../frontend/build", "index.html"));
 });
 
-if (process.env.isProducton === "true") {
+if (process.env.IsSSL === "true") {
     createServerSsl(app, Number(PORT));
 }else{
     app.listen(PORT, () => console.log('Server started on port ' + PORT));
