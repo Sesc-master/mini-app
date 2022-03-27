@@ -1,25 +1,25 @@
 import React, {useEffect } from 'react';
 import bridge from '@vkontakte/vk-bridge';
-import './Styles/About.css'
-import './Styles/AuditoriesPerLesson.css'
-import './Styles/EmptyAuditories.css'
-import './Styles/Lesson.css'
-import './Styles/Option.css'
-import './Styles/Timetable.css'
-import './Styles/TimetableItem.css'
+import './styles/About.css'
+import './styles/AuditoriesPerLesson.css'
+import './styles/EmptyAuditories.css'
+import './styles/Lesson.css'
+import './styles/Option.css'
+import './styles/Timetable.css'
+import './styles/TimetableItem.css'
 import '@vkontakte/vkui/dist/vkui.css';
-import './Styles/Task.css'
-import './Styles/Global.css'
-import './Styles/Marks.css'
-import './Styles/MarksTable.css'
-import "./Styles/Diary.css"
-import "./Styles/Notes.css"
-import "./Styles/Absences.css"
-import "./Styles/Journal.css"
-import "./Styles/Documents.css"
-import "./Styles/DesktopNavbar.css"
+import './styles/Task.css'
+import './styles/Global.css'
+import './styles/Marks.css'
+import './styles/MarksTable.css'
+import "./styles/Diary.css"
+import "./styles/Notes.css"
+import "./styles/Absences.css"
+import "./styles/Journal.css"
+import "./styles/Documents.css"
+import "./styles/DesktopNavbar.css"
 
-import ProjectRoot from './Components/ProjectRoot'
+import ProjectRoot from './components/ProjectRoot'
 
 
 const App = () => {
