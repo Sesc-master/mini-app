@@ -1,7 +1,7 @@
 import React from "react";
 import {Text} from "@vkontakte/vkui";
 import {TimetableElement} from "../modules/ListifySchedule";
-import Lesson from "./Lesson";
+import Lesson from "./lesson/Lesson";
 
 import "@vkontakte/vkui/dist/vkui.css";
 

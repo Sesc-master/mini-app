@@ -3,7 +3,7 @@ import bridge from '@vkontakte/vk-bridge';
 import './styles/About.css'
 import './styles/AuditoriesPerLesson.css'
 import './styles/EmptyAuditories.css'
-import './styles/Lesson.css'
+import './components/lesson/Lesson.module.scss'
 import './styles/Option.css'
 import './styles/Timetable.css'
 import './styles/TimetableItem.css'
