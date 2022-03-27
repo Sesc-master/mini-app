@@ -30,7 +30,7 @@
         width: 10px;
     }
      
-   ::-webkit-scrollbar-track {
+    ::-webkit-scrollbar-track {
         background-color: transparent;
     }
      
@@ -38,7 +38,7 @@
         background-color: #606060;
         border-radius: 50px;
     }
-    
+
     .panel {
         padding: 0px;
         justify-self: center;
@@ -49,18 +49,6 @@
         border-radius: 8px;
     }
 
-    .navbar {
-        position: initial; 
-        width: 700px; 
-        border-radius: 8px;
-        margin-left: auto;
-        margin-right: auto;
-        margin-bottom: 1em;
-    }
 }
 
 
-.vkuiTabs--default .vkuiTabsItem--selected::after {
-    height: 0.25em;
-    background: #47a7f4;
-}

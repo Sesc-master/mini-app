@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { getNotes } from "../modules/ScoleAPI";
-import TextWithLinks from "../components/TextWithLinks";
+import TextWithLinks from "../components/textWithLinks/TextWithLinks";
 import {useStore} from "effector-react";
 import {diaryStore} from "../modules/effector/DiaryStore";
 import {StorageKey} from "../modules/StorageKey";
@@ -35,7 +35,6 @@ const Notes = () => {
                     </div>
                 ))}
             </div>
-            <div className='end'></div>
         </>
     );
 }

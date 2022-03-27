@@ -49,7 +49,6 @@ const Absences = () : JSX.Element => {
             <h3 className="absences-summary">
                 {`Всего: ${summary}`}
             </h3>
-            <div className='end'></div>
         </>
     );
 }

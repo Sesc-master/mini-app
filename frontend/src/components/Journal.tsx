@@ -25,7 +25,7 @@ const Journal = () => {
                 <Task date={note.date} topic={note.theme} homework={note.hometask} weight={note.coefficient} mark={note.grades}/>
             </div>
             ))}
-            <Div className='end'></Div>
+            <Div className='end'/>
         </>
     )
 }

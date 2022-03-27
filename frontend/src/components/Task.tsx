@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import TextWithLinks from "./TextWithLinks"
+import TextWithLinks from "./textWithLinks/TextWithLinks"
 
 type ITask = {
     date : string, 

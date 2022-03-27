@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import {Div, Header} from "@vkontakte/vkui";
 import {getFreeAuditories} from "../modules/Schedule"
-import AuditoriesPerLesson from "../components/AuditoriesPerLesson"
+import AuditoriesPerLesson from "../components/auditoriesPerLesson/AuditoriesPerLesson"
 import {useNavigate} from "react-router-dom";
 import {Page} from "../modules/Routes";
 // import "../../../public/styles/EmptyAuditories.css"
@@ -20,7 +20,6 @@ const EmptyAuditory = () => {
         <>
             <Header >Свободные аудитории:</Header>
             {[...new Array(7)]?.map((value, index) => (<AuditoriesPerLesson auditories={auditories[index]} lesson={index + 1} />))}
-            <Div className={'end'}></Div>
         </>
     );
 }

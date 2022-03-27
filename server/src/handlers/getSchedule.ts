@@ -1,5 +1,6 @@
 import SESCRequest from "../helpers/SESCRequest";
 import buildHandler from "../helpers/BuildHandler";
+import httpsRequest from "../helpers/HttpsRequest";
 
 type IdableScheduleType = "group" | "teacher" | "auditory";
 
@@ -20,7 +21,7 @@ export async function getSchedule(args: IGetScheduleArgs) {
     url.searchParams.append("weekday", String(args.weekday));
     url.searchParams.append(args.type, String(args.id));
 
-    return SESCRequest({
+    return httpsRequest({
         hostname: server,
         timeout: timeout,
         path: url.toString(),

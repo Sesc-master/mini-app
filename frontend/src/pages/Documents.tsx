@@ -30,7 +30,6 @@ const Documents = () => {
                     </div>
                 ))}
             </div>
-            <div className='end'></div>
         </>
     );
 }

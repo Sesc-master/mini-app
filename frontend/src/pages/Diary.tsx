@@ -61,7 +61,6 @@ const Diary = () : JSX.Element => {
             {!isLogin && !isDiaryLoading && <Login setLoginRequest={setLoginRequest}/>}
             {isLogin && !isDiaryLoading && <Journal />}
             {isError && <Div className="diary-error">Убедитесь, что корректно указали данные</Div>}
-            
         </>
     );
 }

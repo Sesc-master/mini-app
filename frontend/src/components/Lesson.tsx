@@ -15,7 +15,7 @@ const Lesson = ({lesson}: ILesson) => {
         const {subject, teacher, auditory, group} = lesson;
         return(
             <>
-                <div className='stick'></div>
+                <div className='stick'/>
                 <div className='lesson'>
                     <Text weight="semibold">{subject}</Text>
                     <Text weight="regular">{isTeacher ? group : teacher.split(" ")[0]} {auditory}</Text>
@@ -26,7 +26,7 @@ const Lesson = ({lesson}: ILesson) => {
     else {
         return(
             <>
-                <div className='stick'></div>
+                <div className='stick'/>
                 <div className='lesson'>
                     <Text weight="semibold">—</Text>
                 </div>

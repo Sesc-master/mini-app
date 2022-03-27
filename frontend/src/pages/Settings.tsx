@@ -90,7 +90,6 @@ const Settings = () => {
                     )
                 })}
             </Group>
-            <Div className='end'/>
         </>
     );
 };

@@ -1,14 +1,10 @@
 import React from 'react';
-import {useLoadTimetable} from "../../hooks/useLoadTimetable";
 import {ICircledButton} from "./ICircledButton";
+import styles from "./CircledButton.module.scss";
 
 const CircledButton = ({text, handler} : ICircledButton) => {
     return (
-        <div className="timetable-btn" onClick={() => handler()}>
-            <div>
-                {text}
-            </div>
-        </div>
+        <button className={styles.button} type="button" onClick={handler}>{text}</button>
     );
 };
 

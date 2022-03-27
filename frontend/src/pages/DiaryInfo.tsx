@@ -42,7 +42,6 @@ const DiaryInfo = () : JSX.Element => {
                     </Div>
                 </>
                 }
-                <Div className='end'></Div>
             </Div>
         </>
     );

@@ -32,7 +32,6 @@ const Marks = () => {
                     )
                 })}
             </div>
-            <div className='end'></div>
         </>
     );
 }

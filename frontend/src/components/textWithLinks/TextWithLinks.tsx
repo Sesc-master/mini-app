@@ -1,5 +1,6 @@
 import React from "react";
 import * as linkify from "linkifyjs";
+import styles from './TextWithLinks.module.scss';
 
 function getDomain(url: string){
     let domain = (new URL(url));
@@ -8,7 +9,6 @@ function getDomain(url: string){
 
 const TextWithLinks = ({str} : {str: string}) : JSX.Element => {
     let formatedHomework = str.replace( /<\/?[^>]+(>|$)/g, "")
-    // deleted tags
     let links = linkify.find(formatedHomework)
     let splitSymbol = "<>"
 
@@ -23,7 +23,6 @@ const TextWithLinks = ({str} : {str: string}) : JSX.Element => {
             formatedHomework = formatedHomework.replace(value.value, splitSymbol)
         }
     })
-    // links were changed by split symbol
 
     let formatedHomeworkArr = formatedHomework.split(splitSymbol)
 
@@ -34,8 +33,8 @@ const TextWithLinks = ({str} : {str: string}) : JSX.Element => {
                     <>
                         {value}
                         {index !== formatedHomeworkArr.length - 1 && 
-                        <button className='btn-link' 
-                            onClick={() => window.open(links[index]?.href)} type='button'>
+                        <button className={styles.link}
+                            onClick={() => window.open(links[index]?.href)}>
                             {getDomain(links[index]?.href)}
                         </button>} 
                     </>
@@ -43,7 +42,6 @@ const TextWithLinks = ({str} : {str: string}) : JSX.Element => {
             })}
         </>
     )
-    //returned buttons instead links 
 }
 
-export default TextWithLinks
+export default TextWithLinks;

@@ -39,7 +39,6 @@ const About = () : JSX.Element => {
                     Оперативная информация
                 </Cell>
             </Group>
-            <Div className='end'></Div>
         </>
     );
 }

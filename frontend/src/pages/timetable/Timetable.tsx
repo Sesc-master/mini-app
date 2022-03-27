@@ -42,7 +42,6 @@ const Timetable = () => {
                     <Error />
                 )}
             </div>
-            <Div className='end'></Div>
         </div>
     );
 };

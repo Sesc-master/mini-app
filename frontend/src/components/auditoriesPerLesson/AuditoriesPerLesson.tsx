@@ -1,10 +1,7 @@
 import React, {useState} from "react";
 import {Cell, Div} from "@vkontakte/vkui";
-import Icon from "./Icon";
-import {IconName} from "../modules/IconName";
-
-// import "../../public/styles/AuditoriesPerLesson.css"
-
+import Icon from "../Icon";
+import {IconName} from "../../modules/IconName";
 
 type IAuditoriesPerLesson = {
     lesson: number,
@@ -16,10 +13,10 @@ const AuditoriesPerLesson = (props : IAuditoriesPerLesson) => {
 
     return(
         <>
-            <Cell before={<Icon iconName={IconName.EmptyRoom}/>} className="button" onClick={() =>{setVisibility(!isVisible)}}>
+            <Cell before={<Icon iconName={IconName.EmptyRoom}/>} onClick={() =>{setVisibility(!isVisible)}}>
                 {`свободны во время ${props.lesson} урока`}
             </Cell>
-            { isVisible && <Div className="auditories">{props.auditories?.join(", ")}</Div> }
+            { isVisible && <Div>{props.auditories?.join(", ")}</Div> }
         </>
     )
 };

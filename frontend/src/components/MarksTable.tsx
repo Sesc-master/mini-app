@@ -1,5 +1,4 @@
 import React from "react";
-// import '@vkontakte/vkui/dist/vkui.css';
 
 type IMarksTable = {
     marks: string | number [],
