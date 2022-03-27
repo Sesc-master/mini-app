@@ -8,7 +8,11 @@ const createServerSsl = (app: any, port: number) => {
         cert: fs.readFileSync(path.resolve(__dirname, "../../ssl/certificate.pem"))
     };
 
-    https.createServer(sslOptions, app).listen(port);
+    const server = https.createServer(sslOptions, app)
+    server.on("error", (error) => {
+        console.error(error)
+    })
+    server.listen(port);
 }
 
 export default createServerSsl;
