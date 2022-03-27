@@ -1,8 +1,8 @@
 import React, {useEffect, useState, useLayoutEffect} from "react";
 import "@vkontakte/vkui/dist/vkui.css";
-import Navbar from "./Navbar";
+import Navbar from "./navbar/Navbar";
 import Timetable from "../pages/timetable/Timetable";
-import AppHeader from "./AppHeader";
+import AppHeader from "./appHeader/AppHeader";
 import Diary from "../pages/Diary";
 import About from "../pages/About";
 import Grades from "../pages/timetable/timetableModalPages/Grades";
@@ -95,16 +95,16 @@ const ProjectRoot = () => {
     useLayoutEffect(() => {
         if (scheme === Appearance.Light && window.screen.width <= 700){
             $('body').css('background-color', 'white')
-            $('div.scheme-color').css('background-color', 'white')
+            $('.scheme-color').css('background-color', 'white')
         }else if (scheme === Appearance.Light && window.screen.width > 700){
             $('body').css('background-color', '#ececec')
-            $('div.scheme-color').css('background-color', 'white')
+            $('.scheme-color').css('background-color', 'white')
         }else if ((scheme === Appearance.Dark) && window.screen.width <= 700){
             $('body').css('background-color', '#19191a')
-            $('div.scheme-color').css('background-color', '#19191a')
+            $('.scheme-color').css('background-color', '#19191a')
         }else if ((scheme === Appearance.Dark) && window.screen.width > 700){
             $('body').css('background-color', 'black')
-            $('div.scheme-color').css('background-color', '#19191a')
+            $('.scheme-color').css('background-color', '#19191a')
         }
     }, [scheme])
 
@@ -151,7 +151,7 @@ const ProjectRoot = () => {
                         <Panel>
                             <AppHeader/>
                             <Navbar/>
-                            <div className="panel scheme-color">
+                            <section className="panel scheme-color">
                                 <Routes>
                                     <Route path={Page.Timetable} element={<Timetable/>}/>
                                     <Route path={Page.Diary} element={ShowInstaller(<Diary /> )}/>
@@ -168,7 +168,8 @@ const ProjectRoot = () => {
                                         element={<Navigate to={getInitialPage()} />}
                                     />
                                 </Routes>
-                            </div>
+                                <div className="end"/>
+                            </section>
                         </Panel>
                     </Router>
                 </SplitLayout>
