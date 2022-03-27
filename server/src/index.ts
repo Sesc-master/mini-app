@@ -4,6 +4,8 @@ import GetIDs from "./handlers/getIDs";
 import {getFullSchedule} from "./handlers/getFullSchedule";
 import {getSchedule} from "./handlers/getSchedule";
 import createServerSsl from "./helpers/CreateServerSsl";
+import NodeCache from "node-cache";
+const cache = new NodeCache();
 
 const PORT = process.env.PORT || 5000;
 const app = express();
@@ -25,9 +27,28 @@ app.post("/api/sesc/getFullSchedule", async (req, res) => {
 app.post("/api/sesc/getSchedule",  async (req, res) => {
     try {
         const schedule = await getSchedule(req.body);
+        const {id, weekday, type} = req.body;
+
+        const key = id.toString() + weekday.toString() + type.toString();
+        cache.set(key, schedule);
+
         res.status(200).json(schedule);
-    } catch (err) {
-        res.status(500).json(err);
+    } catch(error : Error | any) {
+        if (error?.name === "SyntaxError"){
+            res.status(400).send("Invalid JSON");
+        } else if (error?.name === "timeout"){
+            const {id, weekday, type} = req.body;
+            const key = id.toString() + weekday.toString() + type.toString();
+
+            if (!cache.has(key)){
+                res.status(500).send("Timeout Server Error");
+                return;
+            }
+
+            res.status(200).send(cache.get(key));
+        } else {
+            res.status(500).send("server Error");
+        }
     }
 });
 

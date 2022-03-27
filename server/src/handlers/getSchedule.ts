@@ -5,16 +5,16 @@ import httpsRequest from "../helpers/HttpsRequest";
 type IdableScheduleType = "group" | "teacher" | "auditory";
 
 const server = "lyceum.urfu.ru";
-const timeout = 2000;
+const timeout = 800;
 const methodType = 11;
 
-export interface IGetScheduleArgs {
+export interface ScheduleArgs {
     id: number,
     weekday: number,
     type: IdableScheduleType
 }
 
-export async function getSchedule(args: IGetScheduleArgs) {
+export async function getSchedule(args: ScheduleArgs) {
     let url = new URL(`http://${server}/`);
     url.searchParams.append("type", String(methodType));
     url.searchParams.append("scheduleType", args.type);
