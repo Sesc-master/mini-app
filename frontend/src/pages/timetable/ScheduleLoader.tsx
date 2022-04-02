@@ -1,5 +1,5 @@
 import React from 'react';
-import TimetableItemLoader from "../../components/TimetableItemLoader";
+import TimetableItemLoader from "./TimetableItemLoader";
 import {Spinner} from "@vkontakte/vkui";
 import {lessonTimes} from "../../modules/event/lessonTimes"
 import Loading from "../../components/loading/Loading";

@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import ScheduleItem from "../../../components/ScheduleItem";
+import ScheduleItem from "../ScheduleItem";
 import {lessonTimes} from "../../../modules/event/lessonTimes";
 import {TimetableElement} from "../../../modules/ListifySchedule";
 

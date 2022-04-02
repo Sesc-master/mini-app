@@ -8,38 +8,37 @@ function getDomain(url: string){
 }
 
 const TextWithLinks = ({str} : {str: string}) : JSX.Element => {
-    let formatedHomework = str.replace( /<\/?[^>]+(>|$)/g, "")
-    let links = linkify.find(formatedHomework)
-    let splitSymbol = "<>"
+    const getSplitedTextByLinks = (str: string) => {
+        let formatedStr = str.replace( /<\/?[^>]+(>|$)/g, "")
+        let links = linkify.find(formatedStr)
+        let splitSymbol = "<>"
 
-    if (links.length === 0) return (
-        <>
-            {formatedHomework}
-        </>
-    );
+        links.forEach(value => {
+            if (value.isLink){
+                formatedStr = formatedStr.replace(value.value, splitSymbol)
+            }
+        })
 
-    links.forEach(value => {
-        if (value.isLink){
-            formatedHomework = formatedHomework.replace(value.value, splitSymbol)
-        }
-    })
+        return {textArray: formatedStr.split(splitSymbol), links}
+    }
 
-    let formatedHomeworkArr = formatedHomework.split(splitSymbol)
+    const {textArray, links} = getSplitedTextByLinks(str)
 
     return (
         <>
-            {formatedHomeworkArr.map((value, index) => {
-                return (
-                    <>
-                        {value}
-                        {index !== formatedHomeworkArr.length - 1 && 
+            {linkify.find(str).length === 0 ? (
+                <div>{str}</div>
+            ) : textArray.map((value, index) => (
+                <>
+                    {value}
+                    {index !== textArray.length - 1 && (
                         <button className={styles.link}
-                            onClick={() => window.open(links[index]?.href)}>
+                                onClick={() => window.open(links[index]?.href)}>
                             {getDomain(links[index]?.href)}
-                        </button>} 
-                    </>
-                )
-            })}
+                        </button>
+                    )}
+                </>)
+            )}
         </>
     )
 }

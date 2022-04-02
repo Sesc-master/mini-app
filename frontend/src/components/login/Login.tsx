@@ -1,13 +1,5 @@
 import React, {useState} from "react";
-import {FormLayoutGroup, FormItem, Input, SliderSwitch, Button, Div, Text} from "@vkontakte/vkui";
-
-// import '@vkontakte/vkui/dist/vkui.css';
-
-type ISetLoginData = ( data : { roles: string[]; token: string; teachLoad: string;}) => void;
-
-type ILogin = {
-    setLoginData?: ISetLoginData
-}
+import {FormLayoutGroup, FormItem, Input, SliderSwitch, Button, Div} from "@vkontakte/vkui";
 
 type ILoginData = {
     login: string,

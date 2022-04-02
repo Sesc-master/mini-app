@@ -1,6 +1,6 @@
 import React from "react";
-import {Div, FormItem, SelectMimicry} from "@vkontakte/vkui";
-import Task from "../Task";
+import {FormItem, SelectMimicry} from "@vkontakte/vkui";
+import Task from "../task/Task";
 import {Modal} from "../../modules/Modal";
 import {setModalView} from "../../modules/effector/AppSettingsSrore";
 import {diaryStore} from "../../modules/effector/DiaryStore";

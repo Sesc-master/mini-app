@@ -1,9 +1,6 @@
-
 import React from "react";
-
-import "@vkontakte/vkui/dist/vkui.css";
 import { List, Div } from "@vkontakte/vkui";
-// import '../../public/styles/Option.css'
+import styles from "./Option.module.scss"
 
 type ISetOptions = (option: string) => void;
 
@@ -17,11 +14,10 @@ const Options = ({options, setOption}: IOptions) => {
         <>
             <List>
                 {options?.map((option, index) =>
-                    (<Div key={index} onClick={() => setOption(option)} className="option">
+                    (<Div key={index} onClick={() => setOption(option)} className={styles.option}>
                         {option}
                     </Div>))}
-            </List>	
-            <Div className='end'></Div>
+            </List>
         </>
     );
 }

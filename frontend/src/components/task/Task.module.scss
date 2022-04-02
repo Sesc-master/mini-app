@@ -8,7 +8,7 @@
   background-color: rgba(61, 61, 61, 0.1);
 }
 
-.task-date {
+.taskDate {
   width: 15%;
 }
 
@@ -46,28 +46,28 @@
   width: 20%;
 }
 
-.more-info {
+.moreInfo {
   padding: 8px;
   border-top: solid 2px #47a7f5;
   min-height: 50px;
   background-color: rgba(61, 61, 61, 0.1);
 }
 
-.text-style-task {
+.styledTask {
   font-size: 15px;
   font-weight: 500;
 }
 
-.hidden-task { 
+.hidden {
   visibility: hidden;
   display: none;
 }
 
-.main-closed-task {
+.closedTask {
   height: 80px;
 }
 
-.instruction-topic-task {
+.instruction {
   font-size: 17px;
   font-weight: 600;
   text-decoration: underline 2px;

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import {Tabbar, TabbarItem} from "@vkontakte/vkui";
 import {useNavigate, useLocation} from 'react-router-dom';
-import Icon from "../Icon"
+import Icon from "../icon/Icon";
 import {appSettingsStore} from "../../modules/effector/AppSettingsSrore"
 import {useStore} from "effector-react";
 import styles from "./Navbar.module.scss"

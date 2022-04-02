@@ -5,7 +5,7 @@ import sescMaster from "../assets/sesc-master.svg"
 import {useNavigate} from "react-router-dom";
 import {appSettingsStore} from "../modules/effector/AppSettingsSrore";
 import {useStore} from "effector-react";
-import Icon from "../components/Icon";
+import Icon from "../components/icon/Icon";
 import {IconName} from "../modules/IconName";
 import {Page} from "../modules/Routes";
 

@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {Cell, Div, Group, Header} from '@vkontakte/vkui'
-import Icon from "../components/Icon"
+import Icon from "../components/icon/Icon"
 import {appSettingsStore, setNavbarItems, setInitialPage} from "../modules/effector/AppSettingsSrore"
 import {useStore} from "effector-react";
 import {Page} from "../modules/Routes";

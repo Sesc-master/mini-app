@@ -4,7 +4,6 @@ import {useNavigate} from "react-router-dom";
 import {Page } from '../modules/Routes'
 import {setIsLogin, setDiary, setSubjects, diaryStore} from "../modules/effector/DiaryStore";
 import {useStore} from 'effector-react'
-import useInstallation from "../components/ShowInstaller";
 import {StorageKey} from "../modules/StorageKey";
 
 

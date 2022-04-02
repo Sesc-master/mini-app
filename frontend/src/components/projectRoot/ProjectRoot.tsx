@@ -1,13 +1,9 @@
-import React, {useEffect, useState, useLayoutEffect} from "react";
+import React, {useEffect, useLayoutEffect} from "react";
 import "@vkontakte/vkui/dist/vkui.css";
-import Navbar from "./navbar/Navbar";
-import Timetable from "../pages/timetable/Timetable";
-import AppHeader from "./appHeader/AppHeader";
-import Diary from "../pages/Diary";
-import About from "../pages/About";
-import Grades from "../pages/timetable/timetableModalPages/Grades";
-import EmptyAuditories from "../pages/EmptyAuditories";
-import Subjects from "../pages/Subjects"
+import Navbar from "../navbar/Navbar";
+import AppHeader from "../appHeader/AppHeader";
+import Grades from "../../pages/timetable/timetableModalPages/Grades";
+import Subjects from "../../pages/Subjects"
 import {
     ConfigProvider,
     AppRoot,
@@ -20,36 +16,28 @@ import {
     PanelHeaderButton
 } from "@vkontakte/vkui";
 import { Icon24Dismiss  } from '@vkontakte/icons';
-import { getDiary } from '../modules/GetDiary'
-import Notes from "../pages/Notes";
-import Absences from "../pages/Absences";
-import Marks from "../pages/Marks";
-import DiaryInfo from "../pages/DiaryInfo";
-import Documents from "../pages/Documents";
-import {BrowserRouter as Router, Route, Routes, Navigate, useNavigate} from 'react-router-dom'
-import {Page} from "../modules/Routes";
-import {Modal} from "../modules/Modal"
+import { getDiary } from '../../modules/GetDiary'
+import {BrowserRouter as Router} from 'react-router-dom'
+import {Modal} from "../../modules/Modal"
 import {
     setDiary,
     setIsDiaryLoading,
     setIsLogin,
     setSubjects,
     setToken,
-} from "../modules/effector/DiaryStore";
-import {appSettingsStore, setScheme, setModalView, setNavbarItems} from "../modules/effector/AppSettingsSrore"
+} from "../../modules/effector/DiaryStore";
+import {appSettingsStore, setScheme, setModalView, setNavbarItems} from "../../modules/effector/AppSettingsSrore"
 import {useStore} from "effector-react";
-import {Role} from "../modules/scoleAPI/types/Role";
+import {Role} from "../../modules/scoleAPI/types/Role";
 // @ts-ignore
 import $ from "jquery"
-import Settings from "../pages/Settings";
-import {StorageKey} from "../modules/StorageKey";
-import {Appearance} from "../modules/Appearance";
-import {getInitialPage} from "../modules/getInitialPage";
-import ShowInstaller from './ShowInstaller';
-import Teachers from "../pages/timetable/timetableModalPages/Teachers";
-import TimetableType from "../pages/timetable/timetableModalPages/TimetableType";
-import {useLoadTimetable} from "../hooks/useLoadTimetable";
-import {setGrade, setIsTeacher, setTeacher} from "../modules/effector/TimetableStore";
+import {StorageKey} from "../../modules/StorageKey";
+import {Appearance} from "../../modules/Appearance";
+import Teachers from "../../pages/timetable/timetableModalPages/Teachers";
+import TimetableType from "../../pages/timetable/timetableModalPages/TimetableType";
+import {useLoadTimetable} from "../../hooks/useLoadTimetable";
+import {setGrade, setIsTeacher, setTeacher} from "../../modules/effector/TimetableStore";
+import ProjectRoutes from "./ProjectRoutes";
 
 
 const ProjectRoot = () => {
@@ -147,31 +135,16 @@ const ProjectRoot = () => {
             <AdaptivityProvider>
             <AppRoot>
                 <SplitLayout modal={modal}>
-                    <Router>
-                        <Panel>
+                    <Panel>
+                        <Router>
                             <AppHeader/>
                             <Navbar/>
                             <section className="panel scheme-color">
-                                <Routes>
-                                    <Route path={Page.Timetable} element={<Timetable/>}/>
-                                    <Route path={Page.Diary} element={ShowInstaller(<Diary /> )}/>
-                                    <Route path={Page.Notes} element={<Notes />}/>
-                                    <Route path={Page.Marks} element={<Marks />}/>
-                                    <Route path={Page.Absences} element={<Absences />}/>
-                                    <Route path={Page.Documents} element={<Documents />}/>
-                                    <Route path={Page.DiaryInfo} element={ShowInstaller(<DiaryInfo />)}/>
-                                    <Route path={Page.About} element={<About />}/>
-                                    <Route path={Page.EmptyAuditories} element={<EmptyAuditories />}/>
-                                    <Route path={Page.Settings} element={<Settings />}/>
-                                    <Route
-                                        path="*"
-                                        element={<Navigate to={getInitialPage()} />}
-                                    />
-                                </Routes>
+                                <ProjectRoutes />
                                 <div className="end"/>
                             </section>
-                        </Panel>
-                    </Router>
+                        </Router>
+                    </Panel>
                 </SplitLayout>
             </AppRoot>
             </AdaptivityProvider>

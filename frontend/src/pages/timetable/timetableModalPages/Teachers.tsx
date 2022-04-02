@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import Options from "../../../components/Options";
+import Options from "../../../components/options/Options";
 import {withModalRootContext} from '@vkontakte/vkui'
 import getIDs from "../../../modules/GetIDs";
 import {setModalView} from "../../../modules/effector/AppSettingsSrore";

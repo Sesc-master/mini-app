@@ -1,27 +1,27 @@
-.marks-table-main {
+.main {
     margin: 5px;
     border: 2px solid #47a7f5;
     border-radius: 8px;
 }
 
-.marks-table-subject {
+.subject {
     border-bottom: 2px solid #47a7f5;
     padding: 8px;
 }
 
-.marks-table-flex { 
+.flex {
     display: flex;
 }
 
-.marks-table-cell {
+.cell {
     width: 14.2%;
     text-align: center
 }
 
-.marks-table-border {
+.border {
     border-right: 2px solid #47a7f5;
 }
 
-.marks-table-head {
+.head {
     border-bottom: 2px solid #47a7f5;
 }

@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import {Cell, Div} from "@vkontakte/vkui";
-import Icon from "../Icon";
+import Icon from "../icon/Icon";
 import {IconName} from "../../modules/IconName";
 
 type IAuditoriesPerLesson = {

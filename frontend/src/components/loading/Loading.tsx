@@ -1,9 +1,10 @@
 import React from 'react';
 import {Spinner} from "@vkontakte/vkui";
+import styles from "./Loading.module.scss"
 
 const Loading = () => {
     return (
-        <div className="loader">
+        <div className={styles.loader}>
             <Spinner size="medium"/>
         </div>
     );

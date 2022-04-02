@@ -1,5 +1,5 @@
 import React from 'react';
-import Options from "../../../components/Options";
+import Options from "../../../components/options/Options";
 import {Modal} from "../../../modules/Modal";
 import {setModalView} from "../../../modules/effector/AppSettingsSrore";
 

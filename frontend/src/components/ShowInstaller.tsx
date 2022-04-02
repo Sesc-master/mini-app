@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React from "react";
 import Installation from "./installation/Installation";
 import {useStore} from "effector-react";
 import {appSettingsStore} from "../modules/effector/AppSettingsSrore";

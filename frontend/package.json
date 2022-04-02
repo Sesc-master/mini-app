@@ -12,6 +12,7 @@
     "@vkontakte/vk-bridge": "^2.5.3",
     "@vkontakte/vkui": "^4.24.0",
     "babel": "^6.23.0",
+    "classnames": "^2.3.1",
     "effector": "^22.1.2",
     "effector-react": "^22.0.6",
     "http-proxy-middleware": "^2.0.4",

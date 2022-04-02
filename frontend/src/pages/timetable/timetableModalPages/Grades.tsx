@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 
-import Options from "../../../components/Options"
+import Options from "../../../components/options/Options"
 import {setModalView} from "../../../modules/effector/AppSettingsSrore";
 import {withModalRootContext} from "@vkontakte/vkui";
 import {setGrade, setIsTeacher} from '../../../modules/effector/TimetableStore'
