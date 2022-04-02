@@ -3,7 +3,7 @@ import {Text} from "@vkontakte/vkui";
 
 const Instruction = () => {
     return (
-        <Text className='instruction' weight="semibold" >Выберите класс и день недели</Text>
+        <Text className='instruction' weight="semibold" >Выберите день недели, класс или учителя</Text>
     );
 };
 
