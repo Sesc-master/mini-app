@@ -1,10 +1,11 @@
 import React from "react";
 import {Div, FormItem, SelectMimicry} from "@vkontakte/vkui";
-import Task from "./Task";
-import {Modal} from "../modules/Modal";
-import {setModalView} from "../modules/effector/AppSettingsSrore";
-import {diaryStore} from "../modules/effector/DiaryStore";
+import Task from "../Task";
+import {Modal} from "../../modules/Modal";
+import {setModalView} from "../../modules/effector/AppSettingsSrore";
+import {diaryStore} from "../../modules/effector/DiaryStore";
 import {useStore} from "effector-react"
+import styles from "./Journal.module.scss"
 
 const Journal = () => {
     const {diary, targetSubject} = useStore(diaryStore)
@@ -21,11 +22,10 @@ const Journal = () => {
                 >{!!targetSubject && `${targetSubject}. ${teacher}`}</SelectMimicry>
             </FormItem>
             {notes !== undefined && [...notes]?.map((note, index) => 
-            (<div className="journal-task" key={index}>
+            (<div className={styles.journalTask} key={index}>
                 <Task date={note.date} topic={note.theme} homework={note.hometask} weight={note.coefficient} mark={note.grades}/>
             </div>
             ))}
-            <Div className='end'/>
         </>
     )
 }

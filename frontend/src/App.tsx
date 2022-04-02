@@ -15,7 +15,7 @@ import './styles/MarksTable.css'
 import "./styles/Diary.css"
 import "./styles/Notes.css"
 import "./styles/Absences.css"
-import "./styles/Journal.css"
+import "./components/Joirnal/Journal.module.scss"
 import "./styles/Documents.css"
 import "./styles/DesktopNavbar.css"
 

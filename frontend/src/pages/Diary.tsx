@@ -2,7 +2,7 @@ import React, {useEffect, useState, useRef} from "react";
 import {Div, Spinner} from "@vkontakte/vkui"
 import { getDiary } from "../modules/GetDiary";
 import Login from "../components/Login";
-import Journal from "../components/Journal"
+import Journal from "../components/Joirnal/Journal"
 import {
     setToken,
     setSubjects,
