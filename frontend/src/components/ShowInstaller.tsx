@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import Installation from "./Installation";
+import Installation from "./installation/Installation";
 import {useStore} from "effector-react";
 import {appSettingsStore} from "../modules/effector/AppSettingsSrore";
 

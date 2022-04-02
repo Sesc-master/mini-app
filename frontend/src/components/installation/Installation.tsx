@@ -1,19 +1,19 @@
 import React, {useEffect, useState} from "react";
 import {isIOS, isDesktop, isAndroid} from "react-device-detect";
 import {Div, Text, Group, Header} from "@vkontakte/vkui"
-import {setIsPWA} from "../modules/effector/AppSettingsSrore";
+import {setIsPWA} from "../../modules/effector/AppSettingsSrore";
 
-import ios1 from "../assets/iosInstallation/ios1.png"
-import ios2 from "../assets/iosInstallation/ios2.png"
-import ios3 from "../assets/iosInstallation/ios3.png"
+import ios1 from "../../assets/iosInstallation/ios1.png"
+import ios2 from "../../assets/iosInstallation/ios2.png"
+import ios3 from "../../assets/iosInstallation/ios3.png"
 
-import desktop from "../assets/desktopInstallation/desktop.png"
+import desktop from "../../assets/desktopInstallation/desktop.png"
 
-import android1 from "../assets/androidInstallation/android1.jpg"
-import android2 from "../assets/androidInstallation/android2.jpg"
-import android3 from "../assets/androidInstallation/android3.jpg"
+import android1 from "../../assets/androidInstallation/android1.jpg"
+import android2 from "../../assets/androidInstallation/android2.jpg"
+import android3 from "../../assets/androidInstallation/android3.jpg"
 
-import "../styles/Installation.css";
+import styles from "./Installation.module.scss";
 
 const Installation = () : JSX.Element => {
     useEffect(() => {
@@ -22,19 +22,19 @@ const Installation = () : JSX.Element => {
 
     const iosInstallation = (
         <>
-            <div className={"step"}>
+            <div className={styles.step}>
                 <div className='step'>
                     1. Нажмите на 
                 </div>
                 <img src={ios1}/>
             </div>
-            <div className={"step"}>
+            <div className={styles.step}>
                 <div>
                     2. Пролистайте вниз и нажмите на 
                 </div>
                 <img src={ios2}/>
             </div>
-            <div className={"step"}>
+            <div className={styles.step}>
                 <div>
                     3. Скачайте приложение
                 </div>
@@ -45,19 +45,19 @@ const Installation = () : JSX.Element => {
 
     const androidInstallation = (
         <>
-            <div className={"step"}>
+            <div className={styles.step}>
                 <div>
                     1. Нажмите на 
                 </div>
                 <img height={"43px"} width={"43px"} src={android1}/>
             </div>
-            <div className={"step"}>
+            <div className={styles.step}>
                 <div>
                     2. Пролистайте вниз и нажмите на 
                 </div>
                 <img src={android2}/>
             </div>
-            <div className={"step"}>
+            <div className={styles.step}>
                 <div >
                     3. Скачайте приложение на android
                 </div>
@@ -69,7 +69,7 @@ const Installation = () : JSX.Element => {
 
     const desktopInstallation = (
         <>
-            <div className={"step"}>
+            <div className={styles.step}>
                 <div>
                     1. В верхнем правом углу нажмите на кнопку установить
                 </div>
@@ -95,7 +95,6 @@ const Installation = () : JSX.Element => {
             <h4>
                 Рекомендуем для ios использовать safari, для всего остального - chrome
             </h4>
-            <div className='end'></div>
         </Div>
     )
 }
