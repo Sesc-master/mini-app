@@ -22,7 +22,7 @@ const Journal = () => {
                 >{!!targetSubject && `${targetSubject}. ${teacher}`}</SelectMimicry>
             </FormItem>
             {notes !== undefined && [...notes]?.map((note, index) => 
-            (<div className={styles.journalTask} key={index}>
+            (<div className={styles.task} key={index}>
                 <Task date={note.date} topic={note.theme} homework={note.hometask} weight={note.coefficient} mark={note.grades}/>
             </div>
             ))}
