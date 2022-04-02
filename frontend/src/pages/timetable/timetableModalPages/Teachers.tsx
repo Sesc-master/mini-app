@@ -4,7 +4,7 @@ import {withModalRootContext} from '@vkontakte/vkui'
 import getIDs from "../../../modules/GetIDs";
 import {setModalView} from "../../../modules/effector/AppSettingsSrore";
 import {setTeacher, setIsTeacher} from "../../../modules/effector/TimetableStore";
-import Loading from "../../../components/Loading";
+import Loading from "../../../components/loading/Loading";
 import {useLoadTimetable} from "../../../hooks/useLoadTimetable";
 
 const Teachers = (props: {updateModalHeight: () => void}) => {
