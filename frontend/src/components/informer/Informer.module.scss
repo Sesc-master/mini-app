@@ -1,0 +1,22 @@
+.content {
+  padding: 0.4em;
+}
+
+.text {
+  display: flex;
+  justify-content: left;
+  font-weight: 500
+}
+
+.bar {
+  background-color: gray;
+  border-radius: 2px;
+  padding: 0;
+}
+
+.timer {
+  border-radius: 2px;
+  position: relative;
+  background-color: #47a7f5;
+  height: 0.25em;
+}
