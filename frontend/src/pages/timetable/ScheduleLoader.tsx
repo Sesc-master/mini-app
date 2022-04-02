@@ -1,13 +1,13 @@
 import React from 'react';
 import TimetableItemLoader from "../../components/TimetableItemLoader";
 import {Spinner} from "@vkontakte/vkui";
-import {times} from "./times"
+import {lessonTimes} from "../../modules/lessonTimes"
 import Loading from "../../components/Loading";
 
 const ScheduleLoader = () => {
     return (
         <>
-            {times.map((time, index) => <div key={index}><TimetableItemLoader time={time}/></div>)}
+            {lessonTimes.map((time, index) => <div key={index}><TimetableItemLoader time={time}/></div>)}
             <Loading />
         </>
     );
