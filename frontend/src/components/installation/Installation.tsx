@@ -16,10 +16,6 @@ import android3 from "../../assets/androidInstallation/android3.jpg"
 import styles from "./Installation.module.scss";
 
 const Installation = () : JSX.Element => {
-    useEffect(() => {
-        setIsPWA(window.matchMedia("(display-mode: standalone)").matches)
-    }, [])
-
     const iosInstallation = (
         <>
             <div className={styles.step}>

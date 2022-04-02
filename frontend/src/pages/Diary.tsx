@@ -12,7 +12,6 @@ import {
     diaryStore
 } from "../modules/effector/DiaryStore";
 import {useStore} from "effector-react";
-import useInstallation from "../components/ShowInstaller";
 import {StorageKey} from "../modules/StorageKey"
 
 const Diary = () : JSX.Element => {

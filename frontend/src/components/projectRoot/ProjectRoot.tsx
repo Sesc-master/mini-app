@@ -39,9 +39,11 @@ import {useLoadTimetable} from "../../hooks/useLoadTimetable";
 import {setGrade, setIsTeacher, setTeacher} from "../../modules/effector/TimetableStore";
 import ProjectRoutes from "./ProjectRoutes";
 
-
 const ProjectRoot = () => {
-    const {scheme, modalView} = useStore(appSettingsStore)
+    const {scheme, modalView} = useStore(appSettingsStore);
+    const isPWA = () => {
+
+    };
 
     useEffect(() => {
         if (localStorage.getItem(StorageKey.Login) !== null){
