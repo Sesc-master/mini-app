@@ -18,7 +18,7 @@ import "../styles/Installation.css";
 const Installation = () : JSX.Element => {
     useEffect(() => {
         setIsPWA(window.matchMedia("(display-mode: standalone)").matches)
-    })
+    }, [])
 
     const iosInstallation = (
         <>
