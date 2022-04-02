@@ -13,6 +13,8 @@ import android1 from "../assets/androidInstallation/android1.jpg"
 import android2 from "../assets/androidInstallation/android2.jpg"
 import android3 from "../assets/androidInstallation/android3.jpg"
 
+import "../styles/Installation.css";
+
 const Installation = () : JSX.Element => {
     useEffect(() => {
         setIsPWA(window.matchMedia("(display-mode: standalone)").matches)
