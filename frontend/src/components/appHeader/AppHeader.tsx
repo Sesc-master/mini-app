@@ -7,7 +7,7 @@ import styles from "./AppHeader.module.scss";
 
 const AppHeader = () : JSX.Element => {
     return(
-        <PanelHeader className={styles.appHeader} fixed={false}>SESC Master</PanelHeader>
+        <PanelHeader className={styles.appHeader} fixed={false} separator={false}>SESC Master</PanelHeader>
     )
 }
 
