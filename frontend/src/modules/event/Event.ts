@@ -30,7 +30,7 @@ export class Event {
             const end = Number(times[1].split(":")[0]) * 60 * 60+
                 Number(times[1].split(":")[0]) * 60;
 
-            if (now >= start && now < end){
+            if (now >= start && now <= end){
                 return {
                     order: i,
                     end,
