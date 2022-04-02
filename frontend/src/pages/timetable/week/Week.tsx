@@ -3,11 +3,11 @@ import Day from "./Day";
 import { Tabs } from "@vkontakte/vkui";
 
 const Week = () => {
-    let names = ["ПН", "ВТ", "СР", "ЧТ", "ПТ", "СБ"]
+    let names = ["mon", "tue", "wed", "thu", "fri", "sat"]
 
 
     return(
-        <Tabs style={{color: 'white'}}>
+        <Tabs>
             {names.map((element, index) => (
                 <Day key={index} name={element}
                      dayIndex={index}/>))}
