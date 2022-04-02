@@ -1,12 +1,10 @@
 import React, {useEffect, useState} from 'react';
 import ScheduleItem from "../../../components/ScheduleItem";
-import {lessonTimes} from "../../../modules/lessonTimes";
+import {lessonTimes} from "../../../modules/event/lessonTimes";
 import {TimetableElement} from "../../../modules/ListifySchedule";
 
 
 const Schedule = ({schedule} : {schedule: Array<TimetableElement>}) => {
-
-
     return (
         <>
             {Array.from(schedule).map((el, index) => (
