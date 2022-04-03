@@ -6,7 +6,6 @@ import {useStore} from "effector-react";
 import {Page} from "../../modules/Routes";
 import {Appearance} from "../../modules/Appearance";
 import {NavbarItem, defaultItems} from '../../modules/NavbarItems'
-import {useSetScheme} from "../../hooks/useSetScheme";
 import {StorageKey} from "../../modules/StorageKey";
 import {getInitialPage} from "../../modules/getInitialPage";
 
@@ -14,14 +13,6 @@ import {getInitialPage} from "../../modules/getInitialPage";
 const Settings = () => {
     const {navbarItems, scheme} = useStore(appSettingsStore)
     const [initialPage, setInitialPage] = useState(getInitialPage());
-
-    const changeAppearance = () => {
-        if (scheme === Appearance.Light){
-            useSetScheme(Appearance.Dark)
-        } else {
-            useSetScheme(Appearance.Light)
-        }
-    }
 
     const setItems = (list: NavbarItem[]) => {
         setNavbarItems(list);
@@ -37,15 +28,6 @@ const Settings = () => {
 
     return (
         <>
-            <Group
-                header={
-                    <Header>Тема</Header>
-                }
-            >
-                <Cell checked={scheme === Appearance.Dark} onChange={() => changeAppearance()} mode='selectable'>
-                    Тёмная тема
-                </Cell>
-            </Group>
             <Group
                 header={
                     <Header>Выбор панелей на навбаре </Header>

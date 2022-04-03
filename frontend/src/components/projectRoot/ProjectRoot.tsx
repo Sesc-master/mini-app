@@ -1,4 +1,4 @@
-import React, {useEffect, useLayoutEffect} from "react";
+import React, {useEffect,} from "react";
 import "@vkontakte/vkui/dist/vkui.css";
 import Navbar from "../navbar/Navbar";
 import AppHeader from "../appHeader/AppHeader";
@@ -16,23 +16,14 @@ import {
     PanelHeaderButton
 } from "@vkontakte/vkui";
 import { Icon24Dismiss  } from '@vkontakte/icons';
-import { getDiary } from '../../modules/GetDiary'
 import {BrowserRouter as Router} from 'react-router-dom'
 import {Modal} from "../../modules/Modal"
 import {
-    setDiary,
     setIsDiaryLoading,
-    setIsLogin,
-    setSubjects,
-    setToken,
 } from "../../modules/effector/DiaryStore";
 import {appSettingsStore, setScheme, setModalView, setNavbarItems} from "../../modules/effector/AppSettingsSrore"
 import {useStore} from "effector-react";
-import {Role} from "../../modules/scoleAPI/types/Role";
-// @ts-ignore
-import $ from "jquery"
 import {StorageKey} from "../../modules/StorageKey";
-import {Appearance} from "../../modules/Appearance";
 import Teachers from "../../pages/timetable/timetableModalPages/Teachers";
 import TimetableType from "../../pages/timetable/timetableModalPages/TimetableType";
 import {useLoadTimetable} from "../../hooks/useLoadTimetable";
@@ -68,22 +59,6 @@ const ProjectRoot = () => {
         }
     }, [])
 
-    useLayoutEffect(() => {
-        if (scheme === Appearance.Light && window.screen.width <= 700){
-            $('body').css('background-color', 'white')
-            $('.scheme-color').css('background-color', 'white')
-        }else if (scheme === Appearance.Light && window.screen.width > 700){
-            $('body').css('background-color', '#ececec')
-            $('.scheme-color').css('background-color', 'white')
-        }else if ((scheme === Appearance.Dark) && window.screen.width <= 700){
-            $('body').css('background-color', '#19191a')
-            $('.scheme-color').css('background-color', '#19191a')
-        }else if ((scheme === Appearance.Dark) && window.screen.width > 700){
-            $('body').css('background-color', 'black')
-            $('.scheme-color').css('background-color', '#19191a')
-        }
-    }, [scheme])
-
     const modal = (
         <ModalRoot activeModal={modalView} onClose={() => setModalView('')}>
             <ModalPage id={Modal.Subjects}>
@@ -114,6 +89,7 @@ const ProjectRoot = () => {
                     </PanelHeaderButton>}>Тип расписания</ModalPageHeader>
                 <TimetableType />
             </ModalPage>
+            <div className="end"/>
         </ModalRoot>
     );
 
@@ -127,7 +103,7 @@ const ProjectRoot = () => {
                         <Router>
                             <AppHeader/>
                             <Navbar/>
-                            <section className="panel scheme-color">
+                            <section className="panel">
                                 <ProjectRoutes />
                                 <div className="end"/>
                             </section>
