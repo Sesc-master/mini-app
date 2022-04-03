@@ -20,7 +20,7 @@ const DiaryInfo = () : JSX.Element => {
 
     return (
         <>
-            <Div style={{ display: "flex", alignItems: "center", flexDirection: "column"}}>
+            <div className="content" style={{ display: "flex", alignItems: "center", flexDirection: "column"}}>
                 {!isLogin && <Text style={{textAlign: 'center'}} weight="semibold">Авторизуйтесь, чтобы видеть ваши данные</Text>}
                 {isLogin &&
                 <>
@@ -41,7 +41,7 @@ const DiaryInfo = () : JSX.Element => {
                     </div>
                 </>
                 }
-            </Div>
+            </div>
         </>
     );
 }

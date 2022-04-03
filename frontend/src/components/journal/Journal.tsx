@@ -14,7 +14,7 @@ const Journal = () => {
 
 
     return (
-        <Div>
+        <div className="content">
             <SelectMimicry
                 placeholder="предмет не выбран"
                 onClick={() => setModalView(Modal.Subjects)}
@@ -24,7 +24,7 @@ const Journal = () => {
                 <Task date={note.date} topic={note.theme} homework={note.hometask} weight={note.coefficient} mark={note.grades}/>
             </div>
             ))}
-        </Div>
+        </div>
     )
 }
 
