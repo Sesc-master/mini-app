@@ -25,19 +25,19 @@ const DiaryInfo = () : JSX.Element => {
                 {isLogin &&
                 <>
                     <Div className='link'>
-                        <Button size="l" stretched mode="outline" onClick={() => navigate(Page.Marks)}>Табель</Button>
+                        <Button size="l" stretched appearance={"neutral"} onClick={() => navigate(Page.Marks)}>Табель</Button>
                     </Div>
                     <Div className='link'>
-                        <Button size="l" stretched mode="outline" onClick={() => navigate(Page.Notes)}>Заметки</Button>
+                        <Button size="l" stretched appearance={"neutral"} onClick={() => navigate(Page.Notes)}>Заметки</Button>
                     </Div>
                     <Div className='link'>
-                        <Button size="l" stretched mode="outline" onClick={() => navigate(Page.Absences)}>Пропуски</Button>
+                        <Button size="l" stretched appearance={"neutral"} onClick={() => navigate(Page.Absences)}>Пропуски</Button>
                     </Div>
                     <Div className='link'>
-                        <Button size="l" stretched mode="outline" onClick={() => navigate(Page.Documents)}>Справки</Button>
+                        <Button size="l" stretched appearance={"neutral"} onClick={() => navigate(Page.Documents)}>Справки</Button>
                     </Div>
                     <Div className='link'>
-                        <Button size="l" stretched mode="outline" onClick={exitJournal}>Выйти из Дневника</Button>
+                        <Button size="l" stretched appearance={"negative"} onClick={exitJournal}>Выйти из Дневника</Button>
                     </Div>
                 </>
                 }
