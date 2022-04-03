@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { getNotes } from "../modules/ScoleAPI";
-import TextWithLinks from "../components/textWithLinks/TextWithLinks";
+import { getNotes } from "../../modules/ScoleAPI";
+import TextWithLinks from "../../components/textWithLinks/TextWithLinks";
 import {useStore} from "effector-react";
-import {diaryStore} from "../modules/effector/DiaryStore";
-import {StorageKey} from "../modules/StorageKey";
+import {diaryStore} from "../../modules/effector/DiaryStore";
+import {StorageKey} from "../../modules/StorageKey";
 
 const Notes = () => {
     const {token} = useStore(diaryStore)

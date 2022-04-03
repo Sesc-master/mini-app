@@ -1,14 +1,14 @@
 import React, {useEffect, useState} from 'react';
 import {Cell, Div, Group, Header} from '@vkontakte/vkui'
-import Icon from "../components/icon/Icon"
-import {appSettingsStore, setNavbarItems, setInitialPage} from "../modules/effector/AppSettingsSrore"
+import Icon from "../../components/icon/Icon"
+import {appSettingsStore, setNavbarItems, setInitialPage} from "../../modules/effector/AppSettingsSrore"
 import {useStore} from "effector-react";
-import {Page} from "../modules/Routes";
-import {Appearance} from "../modules/Appearance";
-import {NavbarItem, defaultItems} from '../modules/NavbarItems'
-import {useSetScheme} from "../hooks/useSetScheme";
-import {StorageKey} from "../modules/StorageKey";
-import {getInitialPage} from "../modules/getInitialPage";
+import {Page} from "../../modules/Routes";
+import {Appearance} from "../../modules/Appearance";
+import {NavbarItem, defaultItems} from '../../modules/NavbarItems'
+import {useSetScheme} from "../../hooks/useSetScheme";
+import {StorageKey} from "../../modules/StorageKey";
+import {getInitialPage} from "../../modules/getInitialPage";
 
 
 const Settings = () => {

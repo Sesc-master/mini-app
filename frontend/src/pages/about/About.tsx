@@ -1,13 +1,13 @@
 import React from "react";
 import {Cell, Div, Group, Header, Text} from "@vkontakte/vkui";
 
-import sescMaster from "../assets/sesc-master.svg"
+import sescMaster from "../../assets/sesc-master.svg"
 import {useNavigate} from "react-router-dom";
-import {appSettingsStore} from "../modules/effector/AppSettingsSrore";
+import {appSettingsStore} from "../../modules/effector/AppSettingsSrore";
 import {useStore} from "effector-react";
-import Icon from "../components/icon/Icon";
-import {IconName} from "../modules/IconName";
-import {Page} from "../modules/Routes";
+import Icon from "../../components/icon/Icon";
+import {IconName} from "../../modules/IconName";
+import {Page} from "../../modules/Routes";
 
 const About = () : JSX.Element => {
     const store = useStore(appSettingsStore)

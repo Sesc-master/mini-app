@@ -1,15 +1,15 @@
 import React, {useEffect, useState, useRef} from "react";
 import {Div, Spinner} from "@vkontakte/vkui"
-import { getDiary } from "../modules/GetDiary";
-import Login from "../components/login/Login";
-import Journal from "../components/journal/Journal"
+import { getDiary } from "../../modules/GetDiary";
+import Login from "../../components/login/Login";
+import Journal from "../../components/journal/Journal"
 import {
     setIsDiaryLoading,
     diaryStore,
     setIsError
-} from "../modules/effector/DiaryStore";
+} from "../../modules/effector/DiaryStore";
 import {useStore} from "effector-react";
-import {useLoadDiary} from  "../hooks/useLoadDiary";
+import {useLoadDiary} from "../../hooks/useLoadDiary";
 
 const Diary = () : JSX.Element => {
     const [loginRequest, setLoginRequest] = useState<any>({})

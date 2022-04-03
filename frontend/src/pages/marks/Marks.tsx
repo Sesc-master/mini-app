@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
-import {getReportCard} from "../modules/ScoleAPI";
-import MarksTable from "../components/marksTable/MarksTable";
+import {getReportCard} from "../../modules/ScoleAPI";
+import MarksTable from "../../components/marksTable/MarksTable";
 import {useStore} from "effector-react";
-import {diaryStore} from "../modules/effector/DiaryStore";
-import {StorageKey} from "../modules/StorageKey";
+import {diaryStore} from "../../modules/effector/DiaryStore";
+import {StorageKey} from "../../modules/StorageKey";
 
 
 const Marks = () => {

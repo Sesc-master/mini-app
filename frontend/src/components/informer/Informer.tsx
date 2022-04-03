@@ -22,14 +22,18 @@ const Informer = () => {
     }
 
     return (
-        <div className={styles.content}>
-            {event && <div className={styles.text}>
-                {event?.order + 1} {event?.type}, {formatTime(Number(event?.timeToEnd))}
-            </div>}
-            <div className={styles.bar}>
-                {event && <div style={{width: `${event?.percent}%`}} className={styles.timer}/>}
-            </div>
-        </div>
+        <>
+            {event && (
+                <div className={styles.content}>
+                    <div className={styles.text}>
+                        {event?.order + 1} {event?.type}, {formatTime(Number(event?.timeToEnd))}
+                    </div>
+                    <div className={styles.bar}>
+                        <div style={{width: `${event?.percent}%`}} className={styles.timer}/>
+                    </div>
+                </div>
+            )}
+        </>
     );
 };
 

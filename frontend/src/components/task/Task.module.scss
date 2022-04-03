@@ -1,25 +1,29 @@
 .table {
-  border: solid 2px #47a7f5;
   border-radius: 7px;
+  background-color: #232323;
+  padding: 0.25em;
 }
 
 .main {
   display: flex;
-  background-color: rgba(61, 61, 61, 0.1);
+  height: 80px;
+  justify-content: space-between;
+}
+
+.cell {
+  border-radius: 7px;
+  background-color: #191919;
 }
 
 .taskDate {
-  width: 15%;
+  flex-basis: 3em;
 }
 
 .text {
   padding: 2px;
-  border-left: solid 2px #47a7f5;
-  border-right: solid 2px #47a7f5;
-  width: 65%;
+  flex-basis: calc(100% - 9em);
   overflow-y: hidden;
   position:relative;
-
 }
 
 .center {
@@ -28,43 +32,34 @@
   align-items: center;
 }
 
-.marks {
-  padding: 8px;
-  border-bottom: solid 2px #47a7f5;
-  flex-grow: 1;
-
+.bold {
+  font-weight: 1000;
 }
 
-.data {
+.marks {
   padding: 8px;
-  flex-grow: 1;
+  flex-basis: 22px;
 }
 
 .info {
   display: flex;
   flex-direction: column;
-  width: 20%;
+  flex-basis: 5em;
+  justify-content: space-between;
 }
 
 .moreInfo {
-  padding: 8px;
-  border-top: solid 2px #47a7f5;
+  margin-top: 0.25em;
   min-height: 50px;
-  background-color: rgba(61, 61, 61, 0.1);
 }
 
 .styledTask {
   font-size: 15px;
-  font-weight: 500;
 }
 
 .hidden {
   visibility: hidden;
   display: none;
-}
-
-.closedTask {
-  height: 80px;
 }
 
 .instruction {

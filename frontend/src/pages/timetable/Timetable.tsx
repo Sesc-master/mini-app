@@ -24,7 +24,7 @@ const Timetable = () => {
     }, []);
 
     return (
-        <div className='elements'>
+        <Div>
             <Informer/>
             <SelectMimicry
                     placeholder="Не выбран"
@@ -42,7 +42,7 @@ const Timetable = () => {
                     <Error />
                 )}
             </div>
-        </div>
+        </Div>
     );
 };
 

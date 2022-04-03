@@ -3,6 +3,7 @@ import TextWithLinks from "../textWithLinks/TextWithLinks";
 import styles from "./Task.module.scss";
 import TopicText from "./TopicText";
 import classNames from "classnames";
+import {Text} from "@vkontakte/vkui";
 
 type ITask = {
     date : string, 
@@ -17,19 +18,19 @@ const Task = ({date, topic, homework, mark, weight}: ITask) => {
 	
     return (	
         <div className={classNames(styles.table)} onClick={() => setIsOpened(!isOpened)}>
-            <div className={classNames({[styles.closedTask]: !isOpened}, styles.main)}>
-                <div className={classNames(styles.center, styles.taskDate)}>
+            <div className={classNames(styles.main)}>
+                <div className={classNames(styles.center, styles.taskDate, styles.cell)}>
                     {date}
                 </div>
-                <div className={classNames(styles.text)}>
+                <div className={classNames(styles.text, styles.cell)}>
                     <TopicText topic={topic} isOpened={isOpened}/>
                 </div>
                 <div className={styles.info}>
-                    <div className={classNames(styles.center, styles.marks, styles.styledTask)}>{mark}</div>
-                    <div className={classNames(styles.center, styles.data, styles.styledTask)}>{`${weight}x`}</div>
+                    <div className={classNames(styles.center, styles.marks, styles.styledTask, styles.cell, styles.bold)}>{mark}</div>
+                    <div className={classNames(styles.center, styles.marks, styles.styledTask, styles.cell)}>{`${weight}x`}</div>
                 </div>
             </div>
-            <div className={classNames({[styles.hidden]: !isOpened}, styles.moreInfo)}>
+            <div className={classNames({[styles.hidden]: !isOpened}, styles.moreInfo, styles.cell)}>
                 <TextWithLinks str={homework}/>
             </div>
         </div>

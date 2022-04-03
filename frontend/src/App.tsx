@@ -1,18 +1,17 @@
 import React, {useEffect } from 'react';
 import bridge from '@vkontakte/vk-bridge';
-import './styles/About.css'
-import './styles/AuditoriesPerLesson.css'
-import './styles/EmptyAuditories.css'
-import './styles/Timetable.css'
-import './styles/TimetableItem.css'
+import './pages/about/About.css'
+import './pages/emptyAuditories/AuditoriesPerLesson.css'
+import './pages/emptyAuditories/EmptyAuditories.css'
+import './pages/timetable/Timetable.css'
+import './pages/timetable/TimetableItem.css'
 import '@vkontakte/vkui/dist/vkui.css';
 import './styles/Global.css'
-import './styles/Marks.css'
-import "./styles/Diary.css"
-import "./styles/Notes.css"
-import "./styles/Absences.css"
-import "./styles/Documents.css"
-import "./styles/DesktopNavbar.css"
+import './pages/marks/Marks.css'
+import "./pages/diary/Diary.css"
+import "./pages/notes/Notes.css"
+import "./pages/absences/Absences.css"
+import "./pages/documents/Documents.css"
 
 import ProjectRoot from './components/projectRoot/ProjectRoot'
 import useMediaQuery from '@mui/material/useMediaQuery';

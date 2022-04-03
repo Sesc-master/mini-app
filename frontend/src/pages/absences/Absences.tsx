@@ -1,8 +1,8 @@
 import React, {useState, useEffect, EffectCallback} from "react";
-import { getAbsences} from "../modules/ScoleAPI";
+import { getAbsences} from "../../modules/ScoleAPI";
 import {useStore} from "effector-react";
-import {diaryStore} from "../modules/effector/DiaryStore";
-import {StorageKey} from "../modules/StorageKey";
+import {diaryStore} from "../../modules/effector/DiaryStore";
+import {StorageKey} from "../../modules/StorageKey";
 
 
 const Absences = () : JSX.Element => {

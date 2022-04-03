@@ -3,7 +3,7 @@ import "@vkontakte/vkui/dist/vkui.css";
 import Navbar from "../navbar/Navbar";
 import AppHeader from "../appHeader/AppHeader";
 import Grades from "../../pages/timetable/timetableModalPages/Grades";
-import Subjects from "../../pages/Subjects"
+import Subjects from "../../pages/subjects/Subjects"
 import {
     ConfigProvider,
     AppRoot,
