@@ -4,20 +4,16 @@ import { getDiary } from "../modules/GetDiary";
 import Login from "../components/login/Login";
 import Journal from "../components/journal/Journal"
 import {
-    setToken,
-    setSubjects,
-    setDiary,
-    setIsLogin,
     setIsDiaryLoading,
-    diaryStore
+    diaryStore,
+    setIsError
 } from "../modules/effector/DiaryStore";
 import {useStore} from "effector-react";
-import {StorageKey} from "../modules/StorageKey"
+import {useLoadDiary} from  "../hooks/useLoadDiary";
 
 const Diary = () : JSX.Element => {
     const [loginRequest, setLoginRequest] = useState<any>({})
-    const [isError, setIsError] = useState<boolean>(false)
-    const {isLogin, isDiaryLoading} = useStore(diaryStore)
+    const {isLogin, isDiaryLoading, isError} = useStore(diaryStore)
     const firstUpdate = useRef(true);
 
     useEffect(() => {
@@ -26,29 +22,11 @@ const Diary = () : JSX.Element => {
             return;
         }
 
-        setIsDiaryLoading(true)
-        setIsError(false)
+        setIsDiaryLoading(true);
+        setIsError(false);
 
-        getDiary(loginRequest.login, loginRequest.password, loginRequest.type)
-            .then((response : any) => {
-                if (response.journal){
-                    setSubjects([...response.journal.keys()])
-                    setDiary(response.journal)
-                    setIsLogin(true)
-                    localStorage.setItem(StorageKey.Login, JSON.stringify({
-                        login: loginRequest.login,
-                        password: loginRequest.password, 
-                        type: loginRequest.type
-                    }))
-                    setToken(response.token)
-                }
-                setIsDiaryLoading(false)
-            })
-            .catch((err) => {
-                console.log(err)
-                setIsError(true)
-                setIsDiaryLoading(false)
-            })
+        const {login, password, type} = loginRequest;
+        useLoadDiary(login, password, type);
     }, [loginRequest])
 
     return (

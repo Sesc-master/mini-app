@@ -38,31 +38,17 @@ import TimetableType from "../../pages/timetable/timetableModalPages/TimetableTy
 import {useLoadTimetable} from "../../hooks/useLoadTimetable";
 import {setGrade, setIsTeacher, setTeacher} from "../../modules/effector/TimetableStore";
 import ProjectRoutes from "./ProjectRoutes";
+import {useLoadDiary} from "../../hooks/useLoadDiary";
 
 const ProjectRoot = () => {
     const {scheme, modalView} = useStore(appSettingsStore);
-    const isPWA = () => {
-
-    };
 
     useEffect(() => {
         if (localStorage.getItem(StorageKey.Login) !== null){
-            const loginData : {login: string, password: string, type: Role} =
-            JSON.parse(localStorage.getItem(StorageKey.Login) || "{}")
+            const {login, password, type} =
+                JSON.parse(localStorage.getItem(StorageKey.Login) || "{}")
             setIsDiaryLoading(true)
-            getDiary(loginData.login, loginData.password, loginData.type)
-                .then((response : any) => {
-                    if (response.journal){
-                        setSubjects([...response.journal.keys()])
-                        setDiary(response.journal)
-                        setIsLogin(true)
-                        setToken(response.token)
-                    }
-                    setIsDiaryLoading(false)
-                })
-                .catch(() => {
-                    setIsDiaryLoading(false)
-                })
+            useLoadDiary(login, password, type);
         }
         if (localStorage.getItem(StorageKey.Scheme) !== null){
             const scheme = localStorage.getItem(StorageKey.Scheme) || "{}"
