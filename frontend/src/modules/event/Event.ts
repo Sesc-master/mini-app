@@ -28,7 +28,7 @@ export class Event {
             const start = Number(times[0].split(":")[0]) * 60 * 60 +
                 Number(times[0].split(":")[1]) * 60;
             const end = Number(times[1].split(":")[0]) * 60 * 60+
-                Number(times[1].split(":")[0]) * 60;
+                Number(times[1].split(":")[1]) * 60;
 
             if (now >= start && now <= end){
                 return {
