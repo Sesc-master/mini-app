@@ -16,6 +16,10 @@
         border-top-right-radius: 1em;
         border-top-left-radius: 1em;
     }
+
+    body {
+        background-color: #191919;
+    }
 }
 
 @media screen and (min-width: 771px) {

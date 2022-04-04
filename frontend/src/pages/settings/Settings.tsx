@@ -1,17 +1,16 @@
-import React, {useEffect, useState} from 'react';
-import {Cell, Div, Group, Header} from '@vkontakte/vkui'
+import React, {useState} from 'react';
+import {Cell, Group, Header} from '@vkontakte/vkui'
 import Icon from "../../components/icon/Icon"
-import {appSettingsStore, setNavbarItems, setInitialPage} from "../../modules/effector/AppSettingsSrore"
+import {appSettingsStore, setNavbarItems} from "../../modules/effector/AppSettingsSrore"
 import {useStore} from "effector-react";
 import {Page} from "../../modules/Routes";
-import {Appearance} from "../../modules/Appearance";
 import {NavbarItem, defaultItems} from '../../modules/NavbarItems'
 import {StorageKey} from "../../modules/StorageKey";
 import {getInitialPage} from "../../modules/getInitialPage";
 
 
 const Settings = () => {
-    const {navbarItems, scheme} = useStore(appSettingsStore)
+    const {navbarItems} = useStore(appSettingsStore)
     const [initialPage, setInitialPage] = useState(getInitialPage());
 
     const setItems = (list: NavbarItem[]) => {

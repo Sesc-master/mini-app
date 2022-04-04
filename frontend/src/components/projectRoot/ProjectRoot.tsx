@@ -21,7 +21,7 @@ import {Modal} from "../../modules/Modal"
 import {
     setIsDiaryLoading,
 } from "../../modules/effector/DiaryStore";
-import {appSettingsStore, setScheme, setModalView, setNavbarItems} from "../../modules/effector/AppSettingsSrore"
+import {appSettingsStore, setModalView, setNavbarItems} from "../../modules/effector/AppSettingsSrore"
 import {useStore} from "effector-react";
 import {StorageKey} from "../../modules/StorageKey";
 import Teachers from "../../pages/timetable/timetableModalPages/Teachers";
@@ -32,7 +32,7 @@ import ProjectRoutes from "./ProjectRoutes";
 import {useLoadDiary} from "../../hooks/useLoadDiary";
 
 const ProjectRoot = () => {
-    const {scheme, modalView} = useStore(appSettingsStore);
+    const {modalView} = useStore(appSettingsStore);
 
     useEffect(() => {
         if (localStorage.getItem(StorageKey.Login) !== null){
@@ -41,10 +41,7 @@ const ProjectRoot = () => {
             setIsDiaryLoading(true)
             useLoadDiary(login, password, type);
         }
-        if (localStorage.getItem(StorageKey.Scheme) !== null){
-            const scheme = localStorage.getItem(StorageKey.Scheme) || "{}"
-            setScheme(scheme)
-        }
+
         if (localStorage.getItem(StorageKey.NavbarItems) !== null){
             const navbarItems : any = JSON.parse(localStorage.getItem(StorageKey.NavbarItems) || "{}")
             setNavbarItems(navbarItems)
@@ -89,13 +86,11 @@ const ProjectRoot = () => {
                     </PanelHeaderButton>}>Тип расписания</ModalPageHeader>
                 <TimetableType />
             </ModalPage>
-            <div className="end"/>
         </ModalRoot>
     );
 
     return (
-        // @ts-ignore
-        <ConfigProvider scheme={scheme}>
+        <ConfigProvider scheme={"client_dark"}>
             <AdaptivityProvider>
             <AppRoot>
                 <SplitLayout modal={modal}>
