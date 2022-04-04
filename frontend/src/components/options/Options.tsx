@@ -18,6 +18,7 @@ const Options = ({options, setOption}: IOptions) => {
                         {option}
                     </Div>))}
             </List>
+            <div className="end"/>
         </>
     );
 }
