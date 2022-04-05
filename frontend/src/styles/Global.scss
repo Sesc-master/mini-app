@@ -1,3 +1,5 @@
+$bodyColor: #191919;
+
 .content {
     padding: 0.5em;
 }
@@ -18,7 +20,7 @@
     }
 
     body {
-        background-color: #191919;
+        background-color: $bodyColor;
     }
 }
 

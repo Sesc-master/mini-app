@@ -1,7 +1,9 @@
+@import "src/styles/variables";
+
 .button {
   padding: 1em;
   margin: 0.5em;
-  background-color: #47a7f5;
+  background-color: $blue;
   color: white;
   border: 0;
   border-radius: 2em;

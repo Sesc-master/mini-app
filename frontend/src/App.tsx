@@ -4,9 +4,9 @@ import './pages/about/About.css'
 import './pages/emptyAuditories/AuditoriesPerLesson.css'
 import './pages/emptyAuditories/EmptyAuditories.css'
 import './pages/timetable/Timetable.css'
-import './pages/timetable/TimetableItem.css'
+import './pages/timetable/TimetableItem.scss'
 import '@vkontakte/vkui/dist/vkui.css';
-import './styles/Global.css'
+import './styles/Global.scss'
 import './pages/marks/Marks.css'
 import "./pages/diary/Diary.css"
 import "./pages/notes/Notes.css"

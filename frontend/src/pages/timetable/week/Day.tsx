@@ -20,7 +20,7 @@ const Day = (props : IDay) => {
             height: '4.2em', alignItems: 'center', marginBottom: '0.5em'}}
         >   
             <Text style={{padding:0, margin: 0}} weight="regular">{new Date(new Date().getTime() +(((props.dayIndex + 1) - new Date().getDay()) *24*60*60*1000)).getDate()}</Text>
-            <Text style={{padding:0, margin: 0, fontSize: '1.35em'}} weight="semibold">{props.name}</Text>
+            <Text style={{padding:0, margin: 0, fontSize: '1em'}} weight="semibold">{props.name}</Text>
         </TabsItem>
     )
 }

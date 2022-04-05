@@ -1,5 +1,5 @@
 import React from "react";
-// import '../../public/styles/TimetableItem.css';
+// import '../../public/styles/TimetableItem.scss';
 import {Text} from "@vkontakte/vkui";
 
 type ITimetableItemLoader = {

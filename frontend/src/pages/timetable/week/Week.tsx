@@ -3,7 +3,7 @@ import Day from "./Day";
 import { Tabs } from "@vkontakte/vkui";
 
 const Week = () => {
-    let names = ["mon", "tue", "wed", "thu", "fri", "sat"]
+    let names = ["MON", "TUE", "WED", "THU", "FRI", "SAT"]
 
 
     return(

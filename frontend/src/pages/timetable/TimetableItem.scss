@@ -1,7 +1,9 @@
+@import "src/styles/variables";
+
 .task {
     display: flex; 
     /* background-color: #47a7f5;  */
-    background-color: rgba(65, 65, 65, 0.1);
+    background-color: $gray;
     border-radius: 7px; 
     margin-bottom: 5px;
     height: 60px; 

@@ -1,6 +1,8 @@
+@import "src/styles/variables";
+
 .table {
   border-radius: 7px;
-  background-color: #232323;
+  background-color: $gray;
   padding: 0.25em;
 }
 
@@ -12,7 +14,7 @@
 
 .cell {
   border-radius: 7px;
-  background-color: #191919;
+  background-color: $bodyColor;
 }
 
 .taskDate {
