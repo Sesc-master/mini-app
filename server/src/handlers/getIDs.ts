@@ -1,7 +1,7 @@
 import { parse } from "node-html-parser";
 import buildHandler from "../helpers/BuildHandler";
 import buildCachedFunction from "../helpers/Cache";
-import SESCRequest from "../helpers/SESCRequest";
+import HttpsRequest from "../helpers/HttpsRequest"
 
 const ignoringText = [
     "Нет", "Учитель", "Выберите класс", "Выберите аудиторию", "Выберите преподавателя", "Выберите день"
@@ -15,7 +15,7 @@ export type ParsedIDs = {
 }
 
 export const getIDs = buildCachedFunction((): Promise<ParsedIDs | void> => {
-    return SESCRequest({
+    return HttpsRequest({
         host: "lyceum.urfu.ru",
         path: "/ucheba/raspisanie-zanjatii"
     }).then(lyceumResponse => {

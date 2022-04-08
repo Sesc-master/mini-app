@@ -1,4 +1,3 @@
-import SESCRequest from "../helpers/SESCRequest";
 import buildHandler from "../helpers/BuildHandler";
 import httpsRequest from "../helpers/HttpsRequest";
 
