@@ -2,7 +2,6 @@ import { parse } from "node-html-parser";
 import buildHandler from "../helpers/BuildHandler";
 import buildCachedFunction from "../helpers/Cache";
 import axios from "axios";
-import SESCRequest from "../helpers/SESCRequest";
 
 const ignoringText = [
     "Нет", "Учитель", "Выберите класс", "Выберите аудиторию", "Выберите преподавателя", "Выберите день"

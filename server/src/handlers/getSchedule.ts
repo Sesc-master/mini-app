@@ -1,6 +1,5 @@
 import buildHandler from "../helpers/BuildHandler";
 import axios from "axios";
-import SESCRequest from "../helpers/SESCRequest";
 
 type IdableScheduleType = "group" | "teacher" | "auditory";
 
@@ -22,6 +21,7 @@ export async function getSchedule(args: ScheduleArgs) {
     url.searchParams.append(args.type, String(args.id));
 
     const response = await axios({
+        timeout,
         url: url.toString(),
         headers: { host: server }
     });

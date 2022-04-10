@@ -1,6 +1,5 @@
 import buildHandler from "../helpers/BuildHandler";
 import axios from "axios";
-import SESCRequest from "../helpers/SESCRequest";
 
 const server = "lyceum.urfu.ru";
 const timeout = 750;
