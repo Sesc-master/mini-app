@@ -20,12 +20,13 @@ export async function getSchedule(args: ScheduleArgs) {
     url.searchParams.append("scheduleType", args.type);
     url.searchParams.append("weekday", String(args.weekday));
     url.searchParams.append(args.type, String(args.id));
-    console.log(url.toString())
 
-    return axios({
+    const response = await axios({
         url: url.toString(),
         headers: { host: server }
-    }).then(response => response.data);
+    });
+
+    return response.data;
 }
 
 export default buildHandler(getSchedule);

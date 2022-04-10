@@ -17,11 +17,13 @@ export async function getFullSchedule(args: IGetFullScheduleArgs) {
     url.searchParams.append("scheduleType", scheduleType);
     url.searchParams.append("weekday", String(args.weekday));
 
-    return axios({
+    const response = await axios({
         url: url.toString(),
         timeout: timeout,
         headers: { host: server }
-    }).then(response => response.data);
+    });
+
+    return response.data;
 }
 
 export default buildHandler(getFullSchedule);
