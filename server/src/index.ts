@@ -28,29 +28,25 @@ app.post("/api/sesc/getSchedule",  async (req, res) => {
     try {
         const schedule = await getSchedule(req.body);
         const {id, weekday, type} = req.body;
+        if (!id || !weekday || !type){
+            res.status(400).send("invalid json")
+        }
 
         const key = id.toString() + weekday.toString() + type.toString();
         cache.set(key, schedule);
 
         res.status(200).json(schedule);
     } catch(error : Error | any) {
-        if (error?.name === "SyntaxError"){
-            res.status(400).send("Invalid JSON");
-        } else if (error?.name === "timeout"){
-            const {id, weekday, type} = req.body;
-            const key = id.toString() + weekday.toString() + type.toString();
+        const {id, weekday, type} = req.body;
+        const key = id.toString() + weekday.toString() + type.toString();
 
-            if (!cache.has(key)){
-                res.status(500).send("Timeout Server Error");
-                return;
-            }
-
-            res.status(200).send(cache.get(key));
-        } else {
-            res.status(500).send("server Error");
+        if (!cache.has(key)) {
+            res.status(500).send("Timeout Server Error");
         }
+
+        res.status(200).send(cache.get(key));
     }
-});
+})
 
 app.get("*", (req: any, res: any) => {
    res.sendFile(path.resolve(__dirname, "../../frontend/build", "index.html"));
