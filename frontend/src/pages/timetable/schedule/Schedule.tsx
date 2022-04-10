@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import ScheduleItem from "../ScheduleItem";
 import {lessonTimes} from "../../../modules/event/lessonTimes";
-import {TimetableElement} from "../../../modules/ListifySchedule";
+import {TimetableElement} from "../../../modules/schedule/format";
 
 
 const Schedule = ({schedule} : {schedule: Array<TimetableElement>}) => {

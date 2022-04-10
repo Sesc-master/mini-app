@@ -1,19 +1,19 @@
-import {Role} from "./scoleAPI/types/Role";
-import {Subjects} from "./scoleAPI/types/Subjects";
-import {Absences} from "./scoleAPI/types/Absences";
-import convertAbsences from "./scoleAPI/converters/absences";
-import reviver from "./JSONReviver";
-import {Documents} from "./scoleAPI/types/Documents";
-import convertDocuments from "./scoleAPI/converters/documents";
-import {Teacher} from "./scoleAPI/types/Teacher";
-import {Journal} from "./scoleAPI/types/Journal";
-import convertJournal from "./scoleAPI/converters/journal";
-import {Notes} from "./scoleAPI/types/Notes";
-import convertNotes from "./scoleAPI/converters/notes";
-import {ReportCard} from "./scoleAPI/types/ReportCard";
-import convertReportCard from "./scoleAPI/converters/reportCard";
-import {LoginInfo} from "./scoleAPI/types/LoginInfo";
-import {Captcha} from "./scoleAPI/types/Captcha";
+import {Role} from "./types/Role";
+import {Subjects} from "./types/Subjects";
+import {Absences} from "./types/Absences";
+import convertAbsences from "./converters/absences";
+import reviver from "../JSONReviver";
+import {Documents} from "./types/Documents";
+import convertDocuments from "./converters/documents";
+import {Teacher} from "./types/Teacher";
+import {Journal} from "./types/Journal";
+import convertJournal from "./converters/journal";
+import {Notes} from "./types/Notes";
+import convertNotes from "./converters/notes";
+import {ReportCard} from "./types/ReportCard";
+import convertReportCard from "./converters/reportCard";
+import {LoginInfo} from "./types/LoginInfo";
+import {Captcha} from "./types/Captcha";
 
 function convertRoleForAPI(role: Role): string {
     if (role == "parent") return "par";

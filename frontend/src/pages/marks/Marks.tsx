@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import {getReportCard} from "../../modules/ScoleAPI";
+import {getReportCard} from "../../modules/scoleAPI/ScoleAPI";
 import MarksTable from "../../components/marksTable/MarksTable";
 import {useStore} from "effector-react";
 import {diaryStore} from "../../modules/effector/DiaryStore";

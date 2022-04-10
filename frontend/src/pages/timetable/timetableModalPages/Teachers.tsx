@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import Options from "../../../components/options/Options";
 import {withModalRootContext} from '@vkontakte/vkui'
-import getIDs from "../../../modules/GetIDs";
+import getIDs from "../../../modules/schedule/GetIDs";
 import {setModalView} from "../../../modules/effector/AppSettingsSrore";
 import {setTeacher, setIsTeacher} from "../../../modules/effector/TimetableStore";
 import Loading from "../../../components/loading/Loading";

@@ -1,4 +1,4 @@
-import BaseLesson from "./BaseLesson";
+import BaseLesson from "./types/BaseLesson";
 
 export class FullSchedule {
     public static ignoringAuditories: Array<string> = ["Общежитие", "Библиотека", "Нет"];

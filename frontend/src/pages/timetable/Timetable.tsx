@@ -1,7 +1,7 @@
 import React, {useEffect, useRef, useState} from "react";
 import {Div, FormItem, SelectMimicry} from "@vkontakte/vkui";
 import Week from "./week/Week";
-import {listifySchedule} from "../../modules/ListifySchedule";
+import {format} from "../../modules/schedule/format";
 import {setModalView} from "../../modules/effector/AppSettingsSrore";
 import {Modal} from "../../modules/Modal";
 import {useStore} from "effector-react";
@@ -37,7 +37,7 @@ const Timetable = () => {
                 ) : isTimetableLoading ? (
                     <ScheduleLoader />
                 ) : weekSchedule[day] ? (
-                    <Schedule schedule={listifySchedule(weekSchedule[day])}/>
+                    <Schedule schedule={format(weekSchedule[day])}/>
                 ) : (
                     <Error />
                 )}

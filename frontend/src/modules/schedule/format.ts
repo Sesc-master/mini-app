@@ -1,5 +1,5 @@
-import { Schedule } from "./schedule/Schedule";
-import { ScheduleLesson } from "./schedule/ScheduleLesson";
+import { Schedule } from "./types/Schedule";
+import { ScheduleLesson } from "./types/ScheduleLesson";
 
 const maxLessons = 7;
 
@@ -10,7 +10,7 @@ export class TimetableElement {
     isCommonLesson: Boolean | undefined
 }
 
-export function listifySchedule (schedule: Schedule) : Array<TimetableElement>{
+export function format (schedule: Schedule) : Array<TimetableElement>{
     let lessons = new Array<Array<ScheduleLesson>>(), changes = new Array<Array<ScheduleLesson>>();
     for (let scheduleSlot = 0; scheduleSlot < maxLessons; scheduleSlot++) {
         changes.push(new Array<ScheduleLesson>());

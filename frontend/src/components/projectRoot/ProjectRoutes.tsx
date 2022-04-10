@@ -1,6 +1,6 @@
 import React from 'react';
 import {Navigate, Route, Routes} from "react-router-dom";
-import {Page} from "../../modules/Routes";
+import {Page} from "./Page";
 import Timetable from "../../pages/timetable/Timetable";
 import Diary from "../../pages/diary/Diary";
 import Notes from "../../pages/notes/Notes";
@@ -11,8 +11,8 @@ import DiaryInfo from "../../pages/diaryInfo/DiaryInfo";
 import About from "../../pages/about/About";
 import EmptyAuditories from "../../pages/emptyAuditories/EmptyAuditories";
 import Settings from "../../pages/settings/Settings";
-import {getInitialPage} from "../../modules/getInitialPage";
-import {isPWA} from "../../modules/IsPWA";
+import {getInitialPage} from "./getInitialPage";
+import {isPWA} from "./IsPWA";
 import Installation from "../installation/Installation";
 
 const ProjectRoutes = () => {

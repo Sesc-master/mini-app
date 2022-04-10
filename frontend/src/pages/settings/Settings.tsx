@@ -3,10 +3,10 @@ import {Cell, Group, Header} from '@vkontakte/vkui'
 import Icon from "../../components/icon/Icon"
 import {appSettingsStore, setNavbarItems} from "../../modules/effector/AppSettingsSrore"
 import {useStore} from "effector-react";
-import {Page} from "../../modules/Routes";
-import {NavbarItem, defaultItems} from '../../modules/NavbarItems'
+import {Page} from "../../components/projectRoot/Page";
+import {NavbarItem, defaultItems} from '../../components/navbar/NavbarItems'
 import {StorageKey} from "../../modules/StorageKey";
-import {getInitialPage} from "../../modules/getInitialPage";
+import {getInitialPage} from "../../components/projectRoot/getInitialPage";
 
 
 const Settings = () => {

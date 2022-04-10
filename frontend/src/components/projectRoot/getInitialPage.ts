@@ -1,5 +1,5 @@
-import {StorageKey} from "./StorageKey";
-import {Page} from "./Routes";
+import {StorageKey} from "../../modules/StorageKey";
+import {Page} from "./Page";
 
 export const getInitialPage = () => {
     if (localStorage.getItem(StorageKey.InitialPage) !== null){

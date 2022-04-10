@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { getDocuments } from "../../modules/ScoleAPI";
+import { getDocuments } from "../../modules/scoleAPI/ScoleAPI";
 import {useStore} from "effector-react";
 import {diaryStore} from "../../modules/effector/DiaryStore";
 import {StorageKey} from "../../modules/StorageKey";

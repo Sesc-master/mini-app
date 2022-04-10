@@ -1,10 +1,10 @@
-import {Table} from "../modules/Table"
 import {
     setWeekSchedule, 
     setIsTimetableLoading,
     setIsError,
 } from '../modules/effector/TimetableStore'
 import {StorageKey} from "../modules/StorageKey";
+import {getWeekSchedule} from "../modules/schedule/getWeekSchedule";
 
 export const useLoadTimetable = async (grade: string, teacher: string, isTeacher: boolean = false) => {
     try {
@@ -15,7 +15,7 @@ export const useLoadTimetable = async (grade: string, teacher: string, isTeacher
         setIsTimetableLoading(true)
         setIsError(false)
 
-        const weekSchedule = await Table.getTableForWeek(key, isTeacher)
+        const weekSchedule = await getWeekSchedule(key, isTeacher)
         setWeekSchedule(weekSchedule)
 
         setIsTimetableLoading(false)

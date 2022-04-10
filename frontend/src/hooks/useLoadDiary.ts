@@ -1,4 +1,4 @@
-import {getDiary} from "../modules/GetDiary";
+import {getDiary} from "../modules/scoleAPI/GetDiary";
 import {
     setDiary,
     setIsDiaryLoading,

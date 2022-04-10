@@ -6,8 +6,8 @@ import {useNavigate} from "react-router-dom";
 import {appSettingsStore} from "../../modules/effector/AppSettingsSrore";
 import {useStore} from "effector-react";
 import Icon from "../../components/icon/Icon";
-import {IconName} from "../../modules/IconName";
-import {Page} from "../../modules/Routes";
+import {IconName} from "../../components/icon/IconName";
+import {Page} from "../../components/projectRoot/Page";
 
 const About = () : JSX.Element => {
     const store = useStore(appSettingsStore)

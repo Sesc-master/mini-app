@@ -1,7 +1,7 @@
 import {createEvent, createStore} from "effector";
 import {IModal} from "../Modal";
-import {NavbarItem, defaultItems} from "../NavbarItems";
-import {Page} from "../Routes";
+import {NavbarItem, defaultItems} from "../../components/navbar/NavbarItems";
+import {Page} from "../../components/projectRoot/Page";
 
 export const setModalView = createEvent<IModal>()
 export const setNavbarItems = createEvent<NavbarItem[]>()

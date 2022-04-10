@@ -1,6 +1,6 @@
 import React from "react";
 import {Text} from "@vkontakte/vkui";
-import { ScheduleLesson } from "../../../modules/schedule/ScheduleLesson";
+import { ScheduleLesson } from "../../../modules/schedule/types/ScheduleLesson";
 import {useStore} from "effector-react";
 import {timetableStore} from "../../../modules/effector/TimetableStore";
 import styles from "./Lesson.module.scss"

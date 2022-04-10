@@ -1,5 +1,5 @@
-import {Page} from './Routes'
-import {IconName} from "./IconName";
+import {Page} from '../projectRoot/Page'
+import {IconName} from "../icon/IconName";
 
 export type NavbarItem = {
     link: Page,

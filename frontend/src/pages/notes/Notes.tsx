@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { getNotes } from "../../modules/ScoleAPI";
+import { getNotes } from "../../modules/scoleAPI/ScoleAPI";
 import TextWithLinks from "../../components/textWithLinks/TextWithLinks";
 import {useStore} from "effector-react";
 import {diaryStore} from "../../modules/effector/DiaryStore";

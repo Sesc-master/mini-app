@@ -1,4 +1,4 @@
-import reviver from "./JSONReviver"
+import reviver from "../JSONReviver"
 
 export type ParsedIDs = {
     groups: Map<string, number>;

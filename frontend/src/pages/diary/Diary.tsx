@@ -1,6 +1,6 @@
 import React, {useEffect, useState, useRef} from "react";
 import {Div, Spinner} from "@vkontakte/vkui"
-import { getDiary } from "../../modules/GetDiary";
+import { getDiary } from "../../modules/scoleAPI/GetDiary";
 import Login from "../../components/login/Login";
 import Journal from "../../components/journal/Journal"
 import {

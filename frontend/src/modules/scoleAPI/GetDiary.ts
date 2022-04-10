@@ -1,6 +1,6 @@
 import {getJournal, login, getCaptcha, getSubjectList, getTeachersList} from "./ScoleAPI"
 import { Resolve } from "./Resolve"
-import {Role} from "./scoleAPI/types/Role";
+import {Role} from "./types/Role";
 
 
 export async function getDiary(userName : string, password : string, type : Role) {

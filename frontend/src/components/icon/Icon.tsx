@@ -1,5 +1,5 @@
 import React, {FC} from 'react';
-import {IconName} from '../../modules/IconName'
+import {IconName} from './IconName'
 import {
     Icon24Dismiss,
     Icon28BillheadOutline,
