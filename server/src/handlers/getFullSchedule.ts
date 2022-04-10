@@ -17,11 +17,11 @@ export async function getFullSchedule(args: IGetFullScheduleArgs) {
     url.searchParams.append("scheduleType", scheduleType);
     url.searchParams.append("weekday", String(args.weekday));
 
-    return SESCRequest({
+    return axios({
         url: url.toString(),
         timeout: timeout,
         headers: { host: server }
-    }).then(response => JSON.parse(response.data));
+    }).then(response => response.data);
 }
 
 export default buildHandler(getFullSchedule);

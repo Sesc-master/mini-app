@@ -16,7 +16,7 @@ export type ParsedIDs = {
 }
 
 export const getIDs = buildCachedFunction((): Promise<ParsedIDs | void> => {
-    return SESCRequest({
+    return axios({
         url: "https://lyceum.urfu.ru/ucheba/raspisanie-zanjatii"
     }).then(lyceumResponse => {
         let result: ParsedIDs = {

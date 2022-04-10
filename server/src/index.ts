@@ -41,7 +41,7 @@ app.post("/api/sesc/getSchedule",  async (req, res) => {
         const key = id.toString() + weekday.toString() + type.toString();
 
         if (!cache.has(key)) {
-            res.status(500).send("Timeout Server Error");
+            res.status(500).send("Server Error");
         }
 
         res.status(200).send(cache.get(key));

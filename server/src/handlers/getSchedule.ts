@@ -15,17 +15,17 @@ export interface ScheduleArgs {
 }
 
 export async function getSchedule(args: ScheduleArgs) {
-    let url = new URL(`http://${server}/`);
+    let url = new URL(`https://${server}/`);
     url.searchParams.append("type", String(methodType));
     url.searchParams.append("scheduleType", args.type);
     url.searchParams.append("weekday", String(args.weekday));
     url.searchParams.append(args.type, String(args.id));
+    console.log(url.toString())
 
-    return SESCRequest({
-        timeout,
+    return axios({
         url: url.toString(),
         headers: { host: server }
-    }).then(response => JSON.parse(response.data));
+    }).then(response => response.data);
 }
 
 export default buildHandler(getSchedule);
