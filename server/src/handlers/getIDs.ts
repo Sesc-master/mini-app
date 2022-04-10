@@ -2,6 +2,7 @@ import { parse } from "node-html-parser";
 import buildHandler from "../helpers/BuildHandler";
 import buildCachedFunction from "../helpers/Cache";
 import axios from "axios";
+import SESCRequest from "../helpers/SESCRequest";
 
 const ignoringText = [
     "Нет", "Учитель", "Выберите класс", "Выберите аудиторию", "Выберите преподавателя", "Выберите день"
@@ -15,7 +16,7 @@ export type ParsedIDs = {
 }
 
 export const getIDs = buildCachedFunction((): Promise<ParsedIDs | void> => {
-    return axios({
+    return SESCRequest({
         url: "https://lyceum.urfu.ru/ucheba/raspisanie-zanjatii"
     }).then(lyceumResponse => {
         let result: ParsedIDs = {

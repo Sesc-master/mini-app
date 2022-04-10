@@ -1,5 +1,6 @@
 import buildHandler from "../helpers/BuildHandler";
 import axios from "axios";
+import SESCRequest from "../helpers/SESCRequest";
 
 type IdableScheduleType = "group" | "teacher" | "auditory";
 
@@ -20,7 +21,7 @@ export async function getSchedule(args: ScheduleArgs) {
     url.searchParams.append("weekday", String(args.weekday));
     url.searchParams.append(args.type, String(args.id));
 
-    return axios({
+    return SESCRequest({
         timeout,
         url: url.toString(),
         headers: { host: server }

@@ -1,5 +1,6 @@
 import buildHandler from "../helpers/BuildHandler";
 import axios from "axios";
+import SESCRequest from "../helpers/SESCRequest";
 
 const server = "lyceum.urfu.ru";
 const timeout = 750;
@@ -16,7 +17,7 @@ export async function getFullSchedule(args: IGetFullScheduleArgs) {
     url.searchParams.append("scheduleType", scheduleType);
     url.searchParams.append("weekday", String(args.weekday));
 
-    return axios({
+    return SESCRequest({
         url: url.toString(),
         timeout: timeout,
         headers: { host: server }
