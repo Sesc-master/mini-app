@@ -1,7 +1,7 @@
 import { parse } from "node-html-parser";
 import buildHandler from "../helpers/BuildHandler";
 import buildCachedFunction from "../helpers/Cache";
-import SESCRequest from "../helpers/SESCRequest";
+import axios from "axios";
 
 const ignoringText = [
     "Нет", "Учитель", "Выберите класс", "Выберите аудиторию", "Выберите преподавателя", "Выберите день"
@@ -15,9 +15,8 @@ export type ParsedIDs = {
 }
 
 export const getIDs = buildCachedFunction((): Promise<ParsedIDs | void> => {
-    return SESCRequest({
-        host: "lyceum.urfu.ru",
-        path: "/ucheba/raspisanie-zanjatii"
+    return axios({
+        url: "https://lyceum.urfu.ru/ucheba/raspisanie-zanjatii"
     }).then(lyceumResponse => {
         let result: ParsedIDs = {
             groups: new Map<string, number>(),
@@ -26,7 +25,7 @@ export const getIDs = buildCachedFunction((): Promise<ParsedIDs | void> => {
             weekdays: new Map<string, number>()
         }
 
-        let formElement = parse(lyceumResponse.body).getElementsByTagName("form")[0];
+        let formElement = parse(lyceumResponse.data).getElementsByTagName("form")[0];
         if (!formElement) return;
 
         let selectElements = formElement.getElementsByTagName("select");

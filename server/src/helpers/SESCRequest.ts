@@ -1,12 +1,10 @@
-import {RequestOptions} from "https";
-import {IncomingMessage} from "http";
-import httpsRequest from "./HttpsRequest";
+import axios from "axios";
 
-export default async function SESCRequest(options: RequestOptions, payload?: string): Promise<{message: IncomingMessage, body: string}> {
-    let response = await httpsRequest(options, payload);
-    while (response.body.includes("The page is being generated")) {
-        await new Promise((resolve) => setTimeout(resolve, 35000));
-        response = await httpsRequest(options, payload);
+export default async function SESCRequest(options: any): Promise<any> {
+    let response = await axios(options);
+    while (response.data.includes("The page is being generated")) {
+        await new Promise((resolve) => setTimeout(resolve, 10));
+        response = await axios(options);
     }
     return response;
 }
