@@ -1,7 +1,8 @@
 import React from "react";
 import {Text} from "@vkontakte/vkui";
-import {TimetableElement} from "../../modules/schedule/format";
+import {TimetableElement} from "../../../../modules/schedule/format";
 import Lesson from "./lesson/Lesson";
+import styles from "../Schedule.module.scss"
 
 import "@vkontakte/vkui/dist/vkui.css";
 
@@ -13,8 +14,8 @@ type IScheduleItem = {
 const ScheduleItem = ({time, schedule}: IScheduleItem) => {
     if (schedule.isCommonLesson === true || schedule.isCommonLesson === undefined){
         return (
-            <div className='task' id='ripple'>
-                <div className='date'>
+            <div className={styles.task}>
+                <div className={styles.date}>
                     <Text weight="semibold">
                         {time[0]}
                     </Text>
@@ -29,8 +30,8 @@ const ScheduleItem = ({time, schedule}: IScheduleItem) => {
         let firstGroupLesson = schedule.firstGroupLesson
         let secondGroupLesson = schedule.secondGroupLesson
         return (
-            <div className='task' id='ripple'>
-                <div className='date'>
+            <div className={styles.task}>
+                <div className={styles.date}>
                     <Text weight="semibold">
                         {time[0]}
                     </Text>

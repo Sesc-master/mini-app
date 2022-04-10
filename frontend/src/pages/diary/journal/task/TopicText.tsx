@@ -1,5 +1,5 @@
 import React from 'react';
-import TextWithLinks from "../textWithLinks/TextWithLinks";
+import TextWithLinks from "../../../../components/textWithLinks/TextWithLinks";
 import styles from "./Task.module.scss"
 
 const TopicText = ({topic, isOpened}: {topic: string, isOpened: boolean}) => {

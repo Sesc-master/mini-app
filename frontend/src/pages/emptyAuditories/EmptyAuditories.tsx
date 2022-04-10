@@ -1,10 +1,9 @@
 import React, {useEffect, useState} from "react";
 import {Div, Header} from "@vkontakte/vkui";
 import {getFreeAuditories} from "../../modules/schedule/Schedule"
-import AuditoriesPerLesson from "../../components/auditoriesPerLesson/AuditoriesPerLesson"
+import AuditoriesPerLesson from "./auditoriesPerLesson/AuditoriesPerLesson"
 import {useNavigate} from "react-router-dom";
-import {Page} from "../../components/projectRoot/Page";
-// import "../../../public/styles/EmptyAuditories.css"
+import "./EmptyAuditories.scss";
 
 
 const EmptyAuditory = () => {

@@ -1,8 +1,8 @@
 import React from 'react';
-import {useLoadTimetable} from "../../../hooks/useLoadTimetable";
+import {useLoadTimetable} from "../../../../hooks/useLoadTimetable";
 import {useStore} from "effector-react";
-import {timetableStore} from "../../../modules/effector/TimetableStore";
-import CircledButton from "../../../components/circledButton/CircledButton";
+import {timetableStore} from "../../../../modules/effector/TimetableStore";
+import CircledButton from "../../../../components/circledButton/CircledButton";
 import styles from "./Error.module.scss"
 
 const Error = () => {

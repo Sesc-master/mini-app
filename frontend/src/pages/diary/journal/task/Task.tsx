@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import TextWithLinks from "../textWithLinks/TextWithLinks";
+import TextWithLinks from "../../../../components/textWithLinks/TextWithLinks";
 import styles from "./Task.module.scss";
 import TopicText from "./TopicText";
 import classNames from "classnames";

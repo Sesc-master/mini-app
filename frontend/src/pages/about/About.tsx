@@ -1,21 +1,18 @@
 import React from "react";
 import {Cell, Div, Group, Header, Text} from "@vkontakte/vkui";
-
+import styles from "./About.module.scss"
 import sescMaster from "../../assets/sesc-master.svg"
 import {useNavigate} from "react-router-dom";
-import {appSettingsStore} from "../../modules/effector/AppSettingsSrore";
-import {useStore} from "effector-react";
 import Icon from "../../components/icon/Icon";
 import {IconName} from "../../components/icon/IconName";
 import {Page} from "../../components/projectRoot/Page";
 
 const About = () : JSX.Element => {
-    const store = useStore(appSettingsStore)
     const navigate = useNavigate()
 
     return (
         <>
-            <Div className='about-content'>
+            <Div className={styles.content}>
                 <img
                     alt="sesc-master"
                     src={sescMaster}
@@ -32,11 +29,6 @@ const About = () : JSX.Element => {
                 </Cell>
                 <Cell before={<Icon iconName={IconName.EmptyRoom}/>} onClick={() : void => {navigate(Page.EmptyAuditories)}}>
                     Найти свободный кабинет
-                </Cell>
-            </Group>
-            <Group >
-                <Cell before={<Icon iconName={IconName.Link}/>} onClick={() : void => {window.open("https://youtu.be/dQw4w9WgXcQ")}}>
-                    Оперативная информация
                 </Cell>
             </Group>
         </>

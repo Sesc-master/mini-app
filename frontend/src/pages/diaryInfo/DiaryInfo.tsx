@@ -5,6 +5,7 @@ import {Page } from '../../components/projectRoot/Page'
 import {setIsLogin, setDiary, setSubjects, diaryStore} from "../../modules/effector/DiaryStore";
 import {useStore} from 'effector-react'
 import {StorageKey} from "../../modules/StorageKey";
+import styles from "./DiaryInfo.module.scss"
 
 
 const DiaryInfo = () : JSX.Element => {
@@ -24,19 +25,19 @@ const DiaryInfo = () : JSX.Element => {
                 {!isLogin && <Text style={{textAlign: 'center'}} weight="semibold">Авторизуйтесь, чтобы видеть ваши данные</Text>}
                 {isLogin &&
                 <>
-                    <div className='link'>
+                    <div className={styles.link}>
                         <Button size="l" stretched appearance={"neutral"} onClick={() => navigate(Page.Marks)}>Табель</Button>
                     </div>
-                    <div className='link'>
+                    <div className={styles.link}>
                         <Button size="l" stretched appearance={"neutral"} onClick={() => navigate(Page.Notes)}>Заметки</Button>
                     </div>
-                    <div className='link'>
+                    <div className={styles.link}>
                         <Button size="l" stretched appearance={"neutral"} onClick={() => navigate(Page.Absences)}>Пропуски</Button>
                     </div>
-                    <div className='link'>
+                    <div className={styles.link}>
                         <Button size="l" stretched appearance={"neutral"} onClick={() => navigate(Page.Documents)}>Справки</Button>
                     </div>
-                    <div className='link'>
+                    <div className={styles.link}>
                         <Button size="l" stretched appearance={"negative"} onClick={exitJournal}>Выйти из Дневника</Button>
                     </div>
                 </>

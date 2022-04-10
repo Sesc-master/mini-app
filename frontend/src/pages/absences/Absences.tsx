@@ -3,7 +3,7 @@ import { getAbsences} from "../../modules/scoleAPI/ScoleAPI";
 import {useStore} from "effector-react";
 import {diaryStore} from "../../modules/effector/DiaryStore";
 import {StorageKey} from "../../modules/StorageKey";
-
+import "./Absences.scss"
 
 const Absences = () : JSX.Element => {
     const [absences, setAbsences] = useState(new Map())

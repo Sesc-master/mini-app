@@ -1,16 +1,16 @@
 import React from "react";
-// import '../../public/styles/TimetableItem.scss';
 import {Text} from "@vkontakte/vkui";
+import styles from "../Schedule.module.scss"
 
 type ITimetableItemLoader = {
     time: string []
 }
 
-const TimetableItemLoader = (props : ITimetableItemLoader) => {
+const ScheduleLoaderItem = (props : ITimetableItemLoader) => {
     const {time} = props
     return (
-        <div className='task'>
-            <div className='date'>
+        <div className={styles.task}>
+            <div className={styles.date}>
                 <Text weight="semibold">
                     {time[0]}
                 </Text>
@@ -18,9 +18,9 @@ const TimetableItemLoader = (props : ITimetableItemLoader) => {
                     {time[1]}
                 </Text>
             </div>
-            <div className='stick'></div>
+            <div className={styles.stick}/>
         </div>
     )
 }; 
 
-export default TimetableItemLoader;
+export default ScheduleLoaderItem;

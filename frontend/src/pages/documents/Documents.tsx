@@ -3,7 +3,7 @@ import { getDocuments } from "../../modules/scoleAPI/ScoleAPI";
 import {useStore} from "effector-react";
 import {diaryStore} from "../../modules/effector/DiaryStore";
 import {StorageKey} from "../../modules/StorageKey";
-
+import "./Documents.scss"
 
 const Documents = () => {
     const {token} = useStore(diaryStore)

@@ -1,5 +1,5 @@
-import React, {useEffect, useRef, useState} from "react";
-import {Div, FormItem, SelectMimicry} from "@vkontakte/vkui";
+import React, {useEffect} from "react";
+import {SelectMimicry} from "@vkontakte/vkui";
 import Week from "./week/Week";
 import {format} from "../../modules/schedule/format";
 import {setModalView} from "../../modules/effector/AppSettingsSrore";
@@ -9,9 +9,9 @@ import {
     timetableStore,
     setDay,
 } from '../../modules/effector/TimetableStore';
-import Instruction from "./Instruction";
-import ScheduleLoader from "./ScheduleLoader";
-import Error from "./error/Error";
+import Instruction from "./schedule/instruction/Instruction";
+import ScheduleLoader from "./schedule/scheduleLoader/ScheduleLoader";
+import Error from "./schedule/error/Error";
 import Schedule from "./schedule/Schedule";
 import Informer from "../../components/informer/Informer";
 

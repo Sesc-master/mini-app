@@ -4,6 +4,7 @@ import TextWithLinks from "../../components/textWithLinks/TextWithLinks";
 import {useStore} from "effector-react";
 import {diaryStore} from "../../modules/effector/DiaryStore";
 import {StorageKey} from "../../modules/StorageKey";
+import "./Notes.scss"
 
 const Notes = () => {
     const {token} = useStore(diaryStore)

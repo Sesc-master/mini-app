@@ -1,9 +1,9 @@
 import React from "react";
 import {FormItem, SelectMimicry, Div} from "@vkontakte/vkui";
-import Task from "../task/Task";
-import {Modal} from "../../modules/Modal";
-import {setModalView} from "../../modules/effector/AppSettingsSrore";
-import {diaryStore} from "../../modules/effector/DiaryStore";
+import Task from "./task/Task";
+import {Modal} from "../../../modules/Modal";
+import {setModalView} from "../../../modules/effector/AppSettingsSrore";
+import {diaryStore} from "../../../modules/effector/DiaryStore";
 import {useStore} from "effector-react"
 import styles from "./Journal.module.scss"
 

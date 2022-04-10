@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
 import {getReportCard} from "../../modules/scoleAPI/ScoleAPI";
-import MarksTable from "../../components/marksTable/MarksTable";
+import MarksTable from "./marksTable/MarksTable";
 import {useStore} from "effector-react";
 import {diaryStore} from "../../modules/effector/DiaryStore";
 import {StorageKey} from "../../modules/StorageKey";
+import "./Marks.scss"
 
 
 const Marks = () => {

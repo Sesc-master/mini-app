@@ -1,7 +1,8 @@
 import React, {useState} from "react";
 import {Cell, Div} from "@vkontakte/vkui";
-import Icon from "../icon/Icon";
-import {IconName} from "../icon/IconName";
+import Icon from "../../../components/icon/Icon";
+import {IconName} from "../../../components/icon/IconName";
+import "./AuditoriesPerLesson.scss";
 
 type IAuditoriesPerLesson = {
     lesson: number,
