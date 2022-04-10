@@ -14,9 +14,6 @@ import "./pages/absences/Absences.css"
 import "./pages/documents/Documents.css"
 
 import ProjectRoot from './components/projectRoot/ProjectRoot'
-import useMediaQuery from '@mui/material/useMediaQuery';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-import CssBaseline from '@mui/material/CssBaseline';
 
 
 const App = () => {
@@ -24,22 +21,8 @@ const App = () => {
 		bridge.send("VKWebAppInit", {});
 	}, []);
 
-	const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
-
-	const theme = React.useMemo(
-		() =>
-			createTheme({
-				palette: {
-					mode: prefersDarkMode ? 'dark' : 'light',
-				},
-			}),
-		[prefersDarkMode],
-	);
-
 	return (
-		<ThemeProvider theme={theme}>
-			<ProjectRoot/>
-		</ThemeProvider>
+		<ProjectRoot/>
 	);
 }
 
