@@ -17,9 +17,18 @@ app.get("/api/sesc/getIDs", GetIDs);
 
 app.post("/api/sesc/getFullSchedule", async (req, res) => {
     try{
+        if (!req.body.weekday){
+            res.status(400).send("invalid json");
+        }
         const fullSchedule = await getFullSchedule(req.body);
+        cache.set(req.body.weekday, fullSchedule)
+
         res.status(200).json(fullSchedule);
     }catch (err) {
+        if (cache.has(req.body.weekday)) {
+            const fullSchedule = cache.get(req.body.weekday);
+            res.status(200).json(fullSchedule);
+        }
         res.status(500).json(err);
     }
 });
