@@ -19,7 +19,6 @@ export async function getFullSchedule(args: IGetFullScheduleArgs) {
     const response = await axios({
         url: url.toString(),
         headers: {host: server},
-        timeout
     });
 
     return response.data;
