@@ -1,16 +1,17 @@
 import React, { useState, useEffect } from "react";
-import {getReportCard} from "../../modules/scoleAPI/ScoleAPI";
+import {getReportCard} from "../../../modules/scoleAPI/ScoleAPI";
 import MarksTable from "./marksTable/MarksTable";
 import {useStore} from "effector-react";
-import {diaryStore} from "../../modules/effector/DiaryStore";
-import {StorageKey} from "../../modules/StorageKey";
+import {diaryStore} from "../../../modules/effector/DiaryStore";
+import {StorageKey} from "../../../modules/StorageKey";
 import "./Marks.scss"
+import Loading from "../../../components/loading/Loading";
 
 
 const Marks = () => {
     const {token} = useStore(diaryStore)
     const {login, type} = JSON.parse(localStorage.getItem(StorageKey.Login) || '{}')
-    const [marks, setMarks] = useState<Map<string, any>>(new Map())
+    const [marks, setMarks] = useState<Map<string, any> | undefined>()
 
     const setMarksData = async () => {
         const marks = new Map(await getReportCard(login, token, type) || [])
@@ -18,13 +19,13 @@ const Marks = () => {
     }
 
     useEffect(() => {
-        setMarksData()
-    }, [])
+        if (token) setMarksData()
+    }, [token])
 
     return (
         <>
-            <h1 className='marks-header'>Табель</h1>
-            <div className='marks-content'>
+            {!marks && <Loading />}
+            {marks && <div className='marks-content'>
                 {Array.from(marks?.keys())?.map((subject : any, index) => {
                     return ( 
                         <div key={index}>
@@ -32,7 +33,7 @@ const Marks = () => {
                         </div>
                     )
                 })}
-            </div>
+            </div>}
         </>
     );
 }

@@ -1,3 +1,5 @@
+@import "src/styles/variables";
+
 .absences-header {
     padding: 0;
     margin: 8px;
@@ -16,15 +18,17 @@
 
 .absences-absence {
     margin: 5px;
-    border: 2px solid #47a7f5;
+    background-color: $gray;
     border-radius: 8px
 }
 
 .absences-dates {
     padding: 8px;
+    margin: 4px;
+    border-radius: 6px;
+    background-color: $bodyColor;
 }
 
 .absences-subject {
-    border-bottom: 2px solid #47a7f5;
     padding: 8px;
 }

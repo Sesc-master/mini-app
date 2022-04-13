@@ -8,7 +8,6 @@ import "./EmptyAuditories.scss";
 
 const EmptyAuditory = () => {
     let [auditories, setAuditories]= useState<string[][]>([])
-    const navigate = useNavigate()
 
     useEffect(() => {
         const day = new Date().getDay()

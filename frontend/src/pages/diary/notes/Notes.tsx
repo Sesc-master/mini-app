@@ -1,15 +1,16 @@
 import React, { useState, useEffect } from "react";
-import { getNotes } from "../../modules/scoleAPI/ScoleAPI";
-import TextWithLinks from "../../components/textWithLinks/TextWithLinks";
+import { getNotes } from "../../../modules/scoleAPI/ScoleAPI";
+import TextWithLinks from "../../../components/textWithLinks/TextWithLinks";
 import {useStore} from "effector-react";
-import {diaryStore} from "../../modules/effector/DiaryStore";
-import {StorageKey} from "../../modules/StorageKey";
+import {diaryStore} from "../../../modules/effector/DiaryStore";
+import {StorageKey} from "../../../modules/StorageKey";
 import "./Notes.scss"
+import Loading from "../../../components/loading/Loading";
 
 const Notes = () => {
     const {token} = useStore(diaryStore)
     const {login, type} = JSON.parse(localStorage.getItem(StorageKey.Login) || '{}')
-    const [notes, setNotes] = useState<Array<any>>([])
+    const [notes, setNotes] = useState<Array<any> | undefined>([])
 
     const setNotesData = async () => {
         let notes = await getNotes(login, token, type) || []
@@ -20,13 +21,13 @@ const Notes = () => {
     }
 
     useEffect( () => {
-        setNotesData()
+        if (token) setNotesData();
     }, [])
 
     return (
         <>
-            <h1 className="notes-header">Заметки</h1>
-            <div className="notes-content">
+            {!notes && <Loading />}
+            {notes && <div className="notes-content">
                 {notes.map((note, index) => (
                     <div key={index} className="notes-note">
                         <div className="notes-author">{note.author}</div>
@@ -35,7 +36,7 @@ const Notes = () => {
                         </div>
                     </div>
                 ))}
-            </div>
+            </div>}
         </>
     );
 }

@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { getDocuments } from "../../modules/scoleAPI/ScoleAPI";
+import { getDocuments } from "../../../modules/scoleAPI/ScoleAPI";
 import {useStore} from "effector-react";
-import {diaryStore} from "../../modules/effector/DiaryStore";
-import {StorageKey} from "../../modules/StorageKey";
+import {diaryStore} from "../../../modules/effector/DiaryStore";
+import {StorageKey} from "../../../modules/StorageKey";
 import "./Documents.scss"
+import Loading from "../../../components/loading/Loading";
 
 const Documents = () => {
     const {token} = useStore(diaryStore)
-    const [documents, setDocuments] = useState<Array<any>>([])
+    const [documents, setDocuments] = useState<Array<any> | undefined>([])
 
     const setDocumentsData = async () => {
         const {login, type} = JSON.parse(localStorage.getItem(StorageKey.Login) || '{}')
@@ -16,20 +17,20 @@ const Documents = () => {
     }
 
     useEffect(() => {
-        setDocumentsData()
+        if (token) setDocumentsData()
     }, [])
 
     return (
         <>
-            <h1 className="documents-header">Справки</h1>
-            <div className="documents-content">
+            {!documents && <Loading />}
+            {documents && <div className="documents-content">
                 {documents?.map((document, index) => (
                     <div key={index} className="documents-text">
                         {`Освобождение с ${document?.dateStart?.split('-').join('.')} 
                         до ${document?.dateEnd?.split('-').join('.')}`}
                     </div>
                 ))}
-            </div>
+            </div>}
         </>
     );
 }

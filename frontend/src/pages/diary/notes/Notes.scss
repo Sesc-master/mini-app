@@ -1,8 +1,4 @@
-.notes-header {
-    padding: 0;
-    margin: 8px;
-    text-align: center;
-}
+@import "src/styles/variables";
 
 .notes-content {
     display: flex;
@@ -11,15 +7,17 @@
 
 .notes-note {
     margin: 5px;
-    border: 2px solid #47a7f5;
     border-radius: 8px;
+    background-color: $gray;
 }
 
 .notes-author {
-    border-bottom: 2px solid #47a7f5;
     padding: 8px;
 }
 
 .notes-text {
-    padding: 8px
+    padding: 0.4em;
+    margin: 0.15em;
+    border-radius: 6px;
+    background-color: $bodyColor
 }

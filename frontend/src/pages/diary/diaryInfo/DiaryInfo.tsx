@@ -1,10 +1,10 @@
 import React from "react";
 import { Div, Button, Text} from "@vkontakte/vkui";
 import {useNavigate} from "react-router-dom";
-import {Page } from '../../components/projectRoot/Page'
-import {setIsLogin, setDiary, setSubjects, diaryStore} from "../../modules/effector/DiaryStore";
+import {Page } from '../../../components/projectRoot/Page'
+import {setIsLogin, setDiary, setSubjects, diaryStore} from "../../../modules/effector/DiaryStore";
 import {useStore} from 'effector-react'
-import {StorageKey} from "../../modules/StorageKey";
+import {StorageKey} from "../../../modules/StorageKey";
 import styles from "./DiaryInfo.module.scss"
 
 
