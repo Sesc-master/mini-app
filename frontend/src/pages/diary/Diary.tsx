@@ -14,28 +14,28 @@ import Loading from "../../components/loading/Loading";
 import Marks from "./marks/Marks";
 import Documents from "./documents/Documents";
 import Notes from "./notes/Notes";
-import Absences from "./absences/Absences";
+import SkippedLessons from "./skipedLessons/SkippedLessons";
 
 const DiaryPanel = {
     Journal: {
         name: "Дневник",
         element: <Journal/>
     },
+    SkippedLessons: {
+        name: "Пропуски",
+        element: <SkippedLessons/>
+    },
     Marks: {
         name: "Табель",
         element: <Marks/>
-    },
-    Documents: {
-        name: "Документы",
-        element: <Documents/>
     },
     Notes: {
         name: "Заметки",
         element: <Notes/>
     },
-    Skips: {
-        name: "Пропуски",
-        element: <Absences/>
+    Documents: {
+        name: "Документы",
+        element: <Documents/>
     },
 }
 
@@ -67,6 +67,7 @@ const Diary = () : JSX.Element => {
                     <HorizontalScroll
                         getScrollToLeft={(i) => i - 120}
                         getScrollToRight={(i) => i + 120}
+                        showArrows={true}
                     >
                         {
                             Object.values(DiaryPanel).map((panel, id) =>

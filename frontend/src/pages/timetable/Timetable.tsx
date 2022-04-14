@@ -14,12 +14,13 @@ import ScheduleLoader from "./schedule/scheduleLoader/ScheduleLoader";
 import Error from "./schedule/error/Error";
 import Schedule from "./schedule/Schedule";
 import Informer from "../../components/informer/Informer";
+import {getCurrentDay} from "./week/GetCurrentDay";
 
 const Timetable = () => {
     const {grade, weekSchedule, isTimetableLoading, isTeacher, teacher, day} = useStore(timetableStore);
 
     useEffect(() => {
-        const targetDay = new Date().getDay();
+        const targetDay = getCurrentDay();
         setDay(targetDay === 0 ? 0 : targetDay - 1);
     }, []);
 

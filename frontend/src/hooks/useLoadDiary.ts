@@ -5,7 +5,8 @@ import {
     setIsError,
     setIsLogin,
     setSubjects,
-    setToken
+    setToken,
+    setTargetSubject
 } from "../modules/effector/DiaryStore";
 import {StorageKey} from "../modules/StorageKey";
 import {Role} from "../modules/scoleAPI/types/Role";
@@ -15,6 +16,7 @@ export const useLoadDiary = (login: string, password: string, type: Role) => {
         .then((response : any) => {
             if (response && response.journal){
                 setSubjects([...response.journal.keys()]);
+                setTargetSubject([...response.journal.keys()][0])
                 setDiary(response.journal);
                 setIsLogin(true);
                 localStorage.setItem(StorageKey.Login, JSON.stringify({

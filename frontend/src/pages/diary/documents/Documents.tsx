@@ -5,10 +5,11 @@ import {diaryStore} from "../../../modules/effector/DiaryStore";
 import {StorageKey} from "../../../modules/StorageKey";
 import "./Documents.scss"
 import Loading from "../../../components/loading/Loading";
+import {Document} from "../../../modules/scoleAPI/types/Document";
 
 const Documents = () => {
     const {token} = useStore(diaryStore)
-    const [documents, setDocuments] = useState<Array<any> | undefined>([])
+    const [documents, setDocuments] = useState<Document[] | undefined>()
 
     const setDocumentsData = async () => {
         const {login, type} = JSON.parse(localStorage.getItem(StorageKey.Login) || '{}')

@@ -10,7 +10,7 @@ import Loading from "../../../components/loading/Loading";
 const Notes = () => {
     const {token} = useStore(diaryStore)
     const {login, type} = JSON.parse(localStorage.getItem(StorageKey.Login) || '{}')
-    const [notes, setNotes] = useState<Array<any> | undefined>([])
+    const [notes, setNotes] = useState<Array<any> | undefined>()
 
     const setNotesData = async () => {
         let notes = await getNotes(login, token, type) || []

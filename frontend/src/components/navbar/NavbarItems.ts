@@ -22,16 +22,10 @@ export const defaultItems: NavbarItem[] = [
         isActive: true
     },
     {
-        link: Page.DiaryInfo,
-        iconName: IconName.DiaryInfo,
-        value: 'Данные ученика',
-        isActive: true
-    },
-    {
         link: Page.EmptyAuditories,
         iconName: IconName.EmptyRoom,
         value: 'Свободные кабинеты',
-        isActive: false
+        isActive: true
     },
     {
         link: Page.About,

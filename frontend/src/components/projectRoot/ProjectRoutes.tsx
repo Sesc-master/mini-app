@@ -5,9 +5,8 @@ import Timetable from "../../pages/timetable/Timetable";
 import Diary from "../../pages/diary/Diary";
 import Notes from "../../pages/diary/notes/Notes";
 import Marks from "../../pages/diary/marks/Marks";
-import Absences from "../../pages/diary/absences/Absences";
+import SkippedLessons from "../../pages/diary/skipedLessons/SkippedLessons";
 import Documents from "../../pages/diary/documents/Documents";
-import DiaryInfo from "../../pages/diary/diaryInfo/DiaryInfo";
 import About from "../../pages/about/About";
 import EmptyAuditories from "../../pages/emptyAuditories/EmptyAuditories";
 import Settings from "../../pages/settings/Settings";
@@ -20,11 +19,6 @@ const ProjectRoutes = () => {
         <Routes>
             <Route path={Page.Timetable} element={<Timetable/>}/>
             <Route path={Page.Diary} element={isPWA() ? <Diary /> : <Installation />}/>
-            <Route path={Page.Notes} element={<Notes />}/>
-            <Route path={Page.Marks} element={<Marks />}/>
-            <Route path={Page.Absences} element={<Absences />}/>
-            <Route path={Page.Documents} element={<Documents />}/>
-            <Route path={Page.DiaryInfo} element={isPWA() ? <DiaryInfo /> : <Installation />}/>
             <Route path={Page.About} element={<About />}/>
             <Route path={Page.EmptyAuditories} element={<EmptyAuditories />}/>
             <Route path={Page.Settings} element={<Settings />}/>

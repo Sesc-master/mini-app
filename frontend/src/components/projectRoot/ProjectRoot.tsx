@@ -13,7 +13,7 @@ import {
     ModalPage,
     AdaptivityProvider,
     ModalPageHeader,
-    PanelHeaderButton
+    PanelHeaderButton, Appearance
 } from "@vkontakte/vkui";
 import { Icon24Dismiss  } from '@vkontakte/icons';
 import {BrowserRouter as Router} from 'react-router-dom'
@@ -90,7 +90,7 @@ const ProjectRoot = () => {
     );
 
     return (
-        <ConfigProvider scheme={"client_dark"}>
+        <ConfigProvider appearance={Appearance.DARK}>
             <AdaptivityProvider>
             <AppRoot>
                 <SplitLayout modal={modal}>

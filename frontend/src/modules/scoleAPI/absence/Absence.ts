@@ -3,6 +3,7 @@ import {Documents} from "../types/Documents";
 import {isBetweenDates} from "../date/isBetweenDates"
 import {academicDates} from "../date/academicDates";
 import {Absent} from "../types/Absent";
+import {IStatistics} from "./Statistics";
 
 class Absence {
     absences : Absences | undefined;
@@ -13,7 +14,7 @@ class Absence {
         this.documents = documents;
     }
 
-    private isSkip = (date: string) => {
+    public isSkip = (date: string) => {
         if (!this.documents || !this.documents.length){
             return false;
         }
@@ -29,28 +30,26 @@ class Absence {
         return true;
     }
 
-    public getSummary = () => {
-        if (!this.absences) return undefined;
+    public getYearStatistics = () : IStatistics[] => {
+        const statistics: IStatistics[] = [];
 
-        const summary: any = [];
-
-        Object.values(academicDates).forEach(({dates, name}) => {
-            let all = 0;
-            let skiped = 0;
+        Object.values(academicDates).forEach(({dates, name : period}) => {
+            let allLessons = 0;
+            let skippedLessons = 0;
             Array.from(this.absences?.values() || []).forEach((absent: Absent[]) => {
                 Object.values(absent).forEach(({date, abs}: Absent) => {
                     if (this.isSkip(date) && isBetweenDates(dates, date)) {
-                        skiped += abs;
+                        skippedLessons += abs;
                     }
                     if (isBetweenDates(dates, date)){
-                        all += abs;
+                        allLessons += abs;
                     }
                 })
             })
-            summary.push({name, all, skiped})
+            statistics.push({period, allLessons, skippedLessons})
         })
 
-        return summary;
+        return statistics;
     }
 }
 

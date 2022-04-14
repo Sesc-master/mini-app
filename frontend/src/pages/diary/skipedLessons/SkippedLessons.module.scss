@@ -1,34 +1,47 @@
 @import "src/styles/variables";
 
-.absences-header {
+.header {
     padding: 0;
     margin: 8px;
     text-align: center;
 }
 
-.absences-content {
+.content {
     display: flex;
     flex-direction: column;
 }
 
-.absences-summary {
+.summary {
     padding: 5px;
     margin: 1px;
 }
 
-.absences-absence {
+.absence {
     margin: 5px;
     background-color: $gray;
     border-radius: 8px
 }
 
-.absences-dates {
+.dates {
     padding: 8px;
     margin: 4px;
     border-radius: 6px;
     background-color: $bodyColor;
 }
 
-.absences-subject {
+.subject {
     padding: 8px;
+}
+
+.circle {
+    width: 1em;
+    height: 1em;
+    background-color: rgb(248 81 73 / 90%);
+    border-radius: 50%
+}
+
+.hint {
+    display: flex;
+    flex-direction: row;
+    margin: 0.4em;
 }
