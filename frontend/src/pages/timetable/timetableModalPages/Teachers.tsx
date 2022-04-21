@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from "react";
 import Options from "../../../components/options/Options";
 import {withModalRootContext} from '@vkontakte/vkui'
-import getIDs from "../../../modules/GetIDs";
 import {setModalView} from "../../../modules/effector/AppSettingsSrore";
 import {setTeacher, setIsTeacher} from "../../../modules/effector/TimetableStore";
 import Loading from "../../../components/loading/Loading";
@@ -13,13 +12,21 @@ const Teachers = (props: {updateModalHeight: () => void}) => {
 
     useEffect(() => {
         setIsLoading(true)
-        getIDs()
-             .then((ids) =>{
-                 setIsLoading(false);
-                 setTeachers(Array.from(ids.teachers.keys()));
-                 props.updateModalHeight();
-             })
-        }, [])
+        fetch("/graphql", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              "Accept": "application/json",
+            },
+            body: JSON.stringify({query: "{ getTeachers }"})
+        })
+            .then(response => response.json())
+            .then(response => {
+                setIsLoading(false);
+                setTeachers(response.data.getTeachers);
+                props.updateModalHeight();
+            });
+    }, []);
 
     return (
         <>
