@@ -16,24 +16,31 @@ export async function getFullSchedule(weekday: number): Promise<FullSchedule> {
 }
 
 export async function getFreeAuditories(weekday: number) : Promise<Array<Array<string>>> {
-    return getFullSchedule(weekday).then(fullSchedule => fullSchedule.getFreeAuditories());
-}
-
-export async function getSchedule(type: IdableScheduleType, weekday: number, id: number): Promise<Schedule> {
-    return fetch("/api/sesc/getSchedule", {
-        body: JSON.stringify({type, weekday, id}),
-        headers: { "Content-Type": "application/json" },
-        method: "POST"
+    return fetch("/graphql", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json",
+        },
+        body: JSON.stringify({query: `{ getFreeAuditories(weekday: ${weekday}) }`})
     })
-        .then(response => {
-            if (response.ok){
-                return response.text();
-            }
-            throw new Error();
-        })
-        .then(text => {
-            return JSON.parse(text,
-                reviver([["type", "lessons", "diffs"], ["subject", "teacher", "group"]]));
-        })
+        .then(response => response.text())
+        .then(response => JSON.parse(response, reviver()).get("data").get("getFreeAuditories"));
 }
 
+export async function getSchedule(type: IdableScheduleType, weekday: number, ID: number): Promise<Schedule> {
+    return fetch("/graphql", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json",
+        },
+        body: JSON.stringify({query: `{ getSchedule(type: "${type}", ID: ${ID}, weekday: ${weekday}) {
+            type,
+            lessons { subject, teacher, group, uid, auditory, subgroup, number, weekday },
+            diffs { subject, teacher, group, uid, auditory, subgroup, number, weekday }
+        } }`})
+    })
+        .then(response => response.text())
+        .then(response => JSON.parse(response, reviver([["type", "lessons", "diffs"], ["subject", "teacher", "group"]])).get("data").get("getSchedule"));
+}

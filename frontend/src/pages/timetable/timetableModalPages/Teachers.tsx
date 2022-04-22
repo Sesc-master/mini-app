@@ -1,11 +1,12 @@
 import React, {useEffect, useState} from "react";
 import Options from "../../../components/options/Options";
 import {withModalRootContext} from '@vkontakte/vkui'
-import getIDs from "../../../modules/schedule/GetIDs";
+import getIDs from "../../../modules/schedule/getID";
 import {setModalView} from "../../../modules/effector/AppSettingsSrore";
 import {setTeacher, setIsTeacher} from "../../../modules/effector/TimetableStore";
 import Loading from "../../../components/loading/Loading";
 import {useLoadTimetable} from "../../../hooks/useLoadTimetable";
+import getTeachers from "../../../modules/schedule/getTeachers";
 
 const Teachers = (props: {updateModalHeight: () => void}) => {
     const [teachers, setTeachers] = useState<string []>([])
@@ -13,13 +14,14 @@ const Teachers = (props: {updateModalHeight: () => void}) => {
 
     useEffect(() => {
         setIsLoading(true)
-        getIDs()
-             .then((ids) =>{
-                 setIsLoading(false);
-                 setTeachers(Array.from(ids.teachers.keys()));
-                 props.updateModalHeight();
-             })
-        }, [])
+
+        getTeachers()
+            .then(teachers => {
+                setIsLoading(false);
+                setTeachers(teachers);
+                props.updateModalHeight();
+            })
+    }, [])
 
     return (
         <>

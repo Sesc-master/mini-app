@@ -1,11 +1,11 @@
 import express from "express";
 import path from "path";
-import GetIDs from "./handlers/getIDs";
-import {getFullSchedule} from "./handlers/getFullSchedule";
-import {getSchedule} from "./handlers/getSchedule";
 import createServerSsl from "./helpers/CreateServerSsl";
-import NodeCache from "node-cache";
-const cache = new NodeCache();
+import { graphqlHTTP } from "express-graphql";
+import { buildSchemaSync } from "type-graphql";
+import TimingsResolver from "./api/resolvers/timingsResolver";
+import IDsResolver from "./api/resolvers/IDsResolver";
+import ScheduleResolver from "./api/resolvers/scheduleResolver";
 
 const PORT = process.env.PORT || 5000;
 const app = express();
@@ -13,56 +13,19 @@ const app = express();
 app.use(express.static(path.resolve(__dirname, "../../frontend/build")));
 app.use(express.json());
 
-app.get("/api/sesc/getIDs", GetIDs);
-
-app.post("/api/sesc/getFullSchedule", async (req, res) => {
-    try{
-        if (!req.body.weekday){
-            res.status(400).send("invalid json");
-        }
-        const fullSchedule = await getFullSchedule(req.body);
-        cache.set(req.body.weekday, fullSchedule)
-
-        res.status(200).json(fullSchedule);
-    }catch (err) {
-        if (cache.has(req.body.weekday)) {
-            const fullSchedule = cache.get(req.body.weekday);
-            res.status(200).json(fullSchedule);
-        }
-        res.status(500).json(err);
-    }
-});
-
-app.post("/api/sesc/getSchedule",  async (req, res) => {
-    try {
-        const schedule = await getSchedule(req.body);
-        const {id, weekday, type} = req.body;
-        if (!id || !weekday || !type){
-            res.status(400).send("invalid json")
-        }
-
-        const key = id.toString() + weekday.toString() + type.toString();
-        cache.set(key, schedule);
-
-        res.status(200).json(schedule);
-    } catch(error : Error | any) {
-        const {id, weekday, type} = req.body;
-        const key = id.toString() + weekday.toString() + type.toString();
-
-        if (!cache.has(key)) {
-            res.status(500).send("Server Error");
-        }
-
-        res.status(200).send(cache.get(key));
-    }
-})
+app.use("/graphql", graphqlHTTP({
+    schema: buildSchemaSync({
+        resolvers: [TimingsResolver, IDsResolver, ScheduleResolver]
+    })
+}));
 
 app.get("*", (req: any, res: any) => {
-   res.sendFile(path.resolve(__dirname, "../../frontend/build", "index.html"));
+    res.sendFile(path.resolve(__dirname, "../../frontend/build", "index.html"));
 });
 
 if (process.env.IsSSL === "true") {
     createServerSsl(app, Number(PORT));
-}else{
-    app.listen(PORT, () => console.log('Server started on port ' + PORT));
+}
+else {
+    app.listen(PORT, () => console.log("Server started on port " + PORT));
 }
