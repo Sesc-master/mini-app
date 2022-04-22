@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import {Div, Header} from "@vkontakte/vkui";
-import {getFreeAuditories} from "../../modules/schedule/Schedule"
+import {getFreeAuditories} from "../../modules/schedule/api/Schedule"
 import AuditoriesPerLesson from "./auditoriesPerLesson/AuditoriesPerLesson"
 import {useNavigate} from "react-router-dom";
 import "./EmptyAuditories.scss";

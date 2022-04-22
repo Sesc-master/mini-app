@@ -1,4 +1,4 @@
-import { IdableScheduleType } from "./types/Schedule";
+import { IdableScheduleType } from "../types/Schedule";
 
 export default async function (type: IdableScheduleType, name: string): Promise<number> {
     return fetch("/graphql", {

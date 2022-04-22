@@ -1,5 +1,5 @@
-import getID from "./getID";
-import {getSchedule} from "./Schedule";
+import getID from "./api/getID";
+import {getSchedule} from "./api/Schedule";
 
 export async function getWeekSchedule(key: string, isTeacher?: boolean) {
     const type = isTeacher ? 'teacher' : 'group';

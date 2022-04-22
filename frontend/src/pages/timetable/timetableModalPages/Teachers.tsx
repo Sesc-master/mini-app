@@ -1,12 +1,12 @@
 import React, {useEffect, useState} from "react";
 import Options from "../../../components/options/Options";
 import {withModalRootContext} from '@vkontakte/vkui'
-import getIDs from "../../../modules/schedule/getID";
+import getIDs from "../../../modules/schedule/api/getID";
 import {setModalView} from "../../../modules/effector/AppSettingsSrore";
 import {setTeacher, setIsTeacher} from "../../../modules/effector/TimetableStore";
 import Loading from "../../../components/loading/Loading";
 import {useLoadTimetable} from "../../../hooks/useLoadTimetable";
-import getTeachers from "../../../modules/schedule/getTeachers";
+import getTeachers from "../../../modules/schedule/api/getTeachers";
 
 const Teachers = (props: {updateModalHeight: () => void}) => {
     const [teachers, setTeachers] = useState<string []>([])
