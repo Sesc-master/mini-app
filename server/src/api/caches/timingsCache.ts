@@ -10,6 +10,6 @@ export async function updateEatTimingsCache() {
 }
 
 updateEatTimingsCache();
-export const eatTimingsCacheUpdateTimer = setInterval(updateEatTimingsCache, 1000 * 60 * 24);
+export const eatTimingsCacheUpdateTimer = setInterval(updateEatTimingsCache, 1000 * 60 * 60 * 24 * 30);
 
 export default () => eatTimingsCache;
