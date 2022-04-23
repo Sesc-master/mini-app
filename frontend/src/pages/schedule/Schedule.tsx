@@ -9,14 +9,14 @@ import {
     timetableStore,
     setDay,
 } from '../../modules/effector/TimetableStore';
-import Instruction from "./schedule/instruction/Instruction";
-import ScheduleLoader from "./schedule/scheduleLoader/ScheduleLoader";
-import Error from "./schedule/error/Error";
-import Schedule from "./schedule/Schedule";
+import Instruction from "./components/instruction/Instruction";
+import ScheduleLoader from "./components/scheduleLoader/ScheduleLoader";
+import Error from "./components/error/Error";
+import DailySchedule from "./components/DailySchedule";
 import Informer from "../../components/informer/Informer";
 import {getCurrentDay} from "./week/GetCurrentDay";
 
-const Timetable = () => {
+const Schedule = () => {
     const {grade, weekSchedule, isTimetableLoading, isTeacher, teacher, day} = useStore(timetableStore);
 
     useEffect(() => {
@@ -38,7 +38,7 @@ const Timetable = () => {
                 ) : isTimetableLoading ? (
                     <ScheduleLoader />
                 ) : weekSchedule[day] ? (
-                    <Schedule schedule={format(weekSchedule[day])}/>
+                    <DailySchedule schedule={format(weekSchedule[day])}/>
                 ) : (
                     <Error />
                 )}
@@ -47,4 +47,4 @@ const Timetable = () => {
     );
 };
 
-export default Timetable;
+export default Schedule;

@@ -3,7 +3,7 @@ import Options from "../../../components/options/Options";
 import {Modal} from "../../../modules/Modal";
 import {setModalView} from "../../../modules/effector/AppSettingsSrore";
 
-const TimetableType = () => {
+const ScheduleType = () => {
     const options = ["Учитель", "Класс"];
 
     const openTargetModal = (option: string) => {
@@ -21,4 +21,4 @@ const TimetableType = () => {
     );
 };
 
-export default TimetableType;
+export default ScheduleType;

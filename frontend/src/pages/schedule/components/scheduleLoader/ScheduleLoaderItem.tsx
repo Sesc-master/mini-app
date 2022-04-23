@@ -1,6 +1,6 @@
 import React from "react";
 import {Text} from "@vkontakte/vkui";
-import styles from "../Schedule.module.scss"
+import styles from "../Components.module.scss"
 
 type ITimetableItemLoader = {
     time: string []

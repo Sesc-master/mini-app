@@ -2,7 +2,7 @@ import React from "react";
 import {Text} from "@vkontakte/vkui";
 import {TimetableElement} from "../../../../modules/schedule/format";
 import Lesson from "./lesson/Lesson";
-import styles from "../Schedule.module.scss"
+import styles from "../Components.module.scss"
 
 import "@vkontakte/vkui/dist/vkui.css";
 

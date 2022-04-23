@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React from "react";
 import { TabsItem, Text} from "@vkontakte/vkui";
 import {useStore} from 'effector-react'
 import {timetableStore, setDay} from "../../../modules/effector/TimetableStore";

@@ -2,7 +2,7 @@ import React, {useEffect,} from "react";
 import "@vkontakte/vkui/dist/vkui.css";
 import Navbar from "../navbar/Navbar";
 import AppHeader from "../appHeader/AppHeader";
-import Grades from "../../pages/timetable/timetableModalPages/Grades";
+import Grades from "../../pages/schedule/scheduleModalPages/Grades";
 import Subjects from "../../pages/subjects/Subjects"
 import {
     ConfigProvider,
@@ -24,8 +24,8 @@ import {
 import {appSettingsStore, setModalView, setNavbarItems} from "../../modules/effector/AppSettingsSrore"
 import {useStore} from "effector-react";
 import {StorageKey} from "../../modules/StorageKey";
-import Teachers from "../../pages/timetable/timetableModalPages/Teachers";
-import TimetableType from "../../pages/timetable/timetableModalPages/TimetableType";
+import Teachers from "../../pages/schedule/scheduleModalPages/Teachers";
+import ScheduleType from "../../pages/schedule/scheduleModalPages/ScheduleType";
 import {useLoadTimetable} from "../../hooks/useLoadTimetable";
 import {setGrade, setIsTeacher, setTeacher} from "../../modules/effector/TimetableStore";
 import ProjectRoutes from "./ProjectRoutes";
@@ -84,7 +84,7 @@ const ProjectRoot = () => {
                     <PanelHeaderButton onClick={() => setModalView('')}>
                         <Icon24Dismiss  />
                     </PanelHeaderButton>}>Тип расписания</ModalPageHeader>
-                <TimetableType />
+                <ScheduleType />
             </ModalPage>
         </ModalRoot>
     );

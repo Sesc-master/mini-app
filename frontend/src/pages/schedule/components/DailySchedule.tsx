@@ -4,7 +4,7 @@ import {lessonTimes} from "../../../modules/event/lessonTimes";
 import {TimetableElement} from "../../../modules/schedule/format";
 
 
-const Schedule = ({schedule} : {schedule: Array<TimetableElement>}) => {
+const DailySchedule = ({schedule} : {schedule: Array<TimetableElement>}) => {
     return (
         <>
             {Array.from(schedule).map((el, index) => (
@@ -16,4 +16,4 @@ const Schedule = ({schedule} : {schedule: Array<TimetableElement>}) => {
     )
 };
 
-export default Schedule;
+export default DailySchedule;

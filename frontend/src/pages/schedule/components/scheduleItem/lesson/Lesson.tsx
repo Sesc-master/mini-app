@@ -3,7 +3,7 @@ import {Text} from "@vkontakte/vkui";
 import { ScheduleLesson } from "../../../../../modules/schedule/types/ScheduleLesson";
 import {useStore} from "effector-react";
 import {timetableStore} from "../../../../../modules/effector/TimetableStore";
-import styles from "../../Schedule.module.scss"
+import styles from "../../Components.module.scss"
 
 type ILesson = {
     lesson: ScheduleLesson | undefined,
