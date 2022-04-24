@@ -2,15 +2,11 @@ import React, {useEffect, useState} from "react";
 
 import Options from "../../../components/options/Options"
 import {setModalView} from "../../../modules/effector/AppSettingsSrore";
-import {withModalRootContext} from "@vkontakte/vkui";
 import {setGrade, setIsTeacher} from '../../../modules/effector/TimetableStore'
 import {useLoadTimetable} from '../../../hooks/useLoadTimetable'
 
-type IGrades = {
-    updateModalHeight: () => void
-}
 
-const Grades = ({ updateModalHeight} : IGrades) => {
+const Grades = () => {
     const grades = {
         "8": ["8А", "8В"],
         "9": ["9А", "9Б", "9В", "9Г", "9Е"],
@@ -19,10 +15,6 @@ const Grades = ({ updateModalHeight} : IGrades) => {
     };
 
     const [gradeName, setGradeName] = useState("");
-
-    useEffect(()=> {
-        if (gradeName != '') updateModalHeight()
-    }, [gradeName])
 
     return (
         <>
@@ -41,4 +33,4 @@ const Grades = ({ updateModalHeight} : IGrades) => {
     );
 }
 
-export default withModalRootContext(Grades);
+export default Grades;

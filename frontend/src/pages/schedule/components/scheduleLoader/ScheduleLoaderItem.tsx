@@ -1,6 +1,6 @@
 import React from "react";
-import {Text} from "@vkontakte/vkui";
 import styles from "../Components.module.scss"
+import Typography from "@mui/material/Typography";
 
 type ITimetableItemLoader = {
     time: string []
@@ -9,17 +9,17 @@ type ITimetableItemLoader = {
 const ScheduleLoaderItem = (props : ITimetableItemLoader) => {
     const {time} = props
     return (
-        <div className={styles.task}>
+        <section className={styles.task}>
             <div className={styles.date}>
-                <Text weight="semibold">
+                <Typography>
                     {time[0]}
-                </Text>
-                <Text weight="semibold">
+                </Typography>
+                <Typography>
                     {time[1]}
-                </Text>
+                </Typography>
             </div>
             <div className={styles.stick}/>
-        </div>
+        </section>
     )
 }; 
 

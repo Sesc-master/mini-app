@@ -1,8 +1,8 @@
 import React, {useState} from "react";
-import {Cell, Div} from "@vkontakte/vkui";
 import Icon from "../../../components/icon/Icon";
 import {IconName} from "../../../components/icon/IconName";
 import "./AuditoriesPerLesson.scss";
+import {ListItem, ListItemButton, ListItemIcon, ListItemText, Typography} from "@mui/material";
 
 type IAuditoriesPerLesson = {
     lesson: number,
@@ -14,10 +14,15 @@ const AuditoriesPerLesson = (props : IAuditoriesPerLesson) => {
 
     return(
         <>
-            <Cell before={<Icon iconName={IconName.EmptyRoom}/>} onClick={() =>{setVisibility(!isVisible)}}>
-                {`свободны во время ${props.lesson} урока`}
-            </Cell>
-            { isVisible && <Div>{props.auditories?.join(", ")}</Div> }
+            <ListItem disablePadding onClick={() =>{setVisibility(!isVisible)}}>
+                <ListItemButton>
+                    <ListItemIcon>
+                        <Icon iconName={IconName.EmptyRoom}/>
+                    </ListItemIcon>
+                    <ListItemText primary={`свободны во время ${props.lesson} урока`}/>
+                </ListItemButton>
+            </ListItem>
+            { isVisible && <Typography sx={{margin: "1em"}}>{props.auditories?.join(", ")}</Typography> }
         </>
     )
 };

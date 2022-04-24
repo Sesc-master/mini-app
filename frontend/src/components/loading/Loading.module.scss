@@ -1,9 +1,7 @@
 .loader {
-  height: 2em;
-  width: 2em;
+  height: 60px;
+  width: 60px;
   position: absolute;
-  left: 50%;
-  margin-left: -1em;
-  top: 50%;
-  margin-top: -1em;
+  left: calc(50% - 30px);
+  top: calc(50% - 30px);
 }

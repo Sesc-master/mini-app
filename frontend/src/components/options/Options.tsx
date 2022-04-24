@@ -1,6 +1,6 @@
 import React from "react";
-import { List, Div } from "@vkontakte/vkui";
 import styles from "./Option.module.scss"
+import {List, ListItem} from "@mui/material";
 
 type ISetOptions = (option: string) => void;
 
@@ -14,9 +14,9 @@ const Options = ({options, setOption}: IOptions) => {
         <>
             <List>
                 {options?.map((option, index) =>
-                    (<Div key={index} onClick={() => setOption(option)} className={styles.option}>
+                    (<ListItem key={index} onClick={() => setOption(option)} className={styles.option}>
                         {option}
-                    </Div>))}
+                    </ListItem>))}
             </List>
             <div className="end"/>
         </>

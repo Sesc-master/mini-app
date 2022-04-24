@@ -21,4 +21,4 @@ export async function updateIDsCache() {
 export default () => IDsCache;
 
 updateIDsCache();
-export const IDsCacheUpdateTimer = setInterval(updateIDsCache, 1000 * 60 * 60 * 24 * 30);
+export const IDsCacheUpdateTimer = setInterval(updateIDsCache, 1000 * 60 * 60 * 24 * 20);

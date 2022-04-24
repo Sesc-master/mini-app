@@ -1,10 +1,8 @@
 import React from "react";
-import {Text} from "@vkontakte/vkui";
 import {TimetableElement} from "../../../../modules/schedule/format";
 import Lesson from "./lesson/Lesson";
 import styles from "../Components.module.scss"
-
-import "@vkontakte/vkui/dist/vkui.css";
+import Typography from "@mui/material/Typography";
 
 type IScheduleItem = {
     time : string [], 
@@ -16,12 +14,12 @@ const ScheduleItem = ({time, schedule}: IScheduleItem) => {
         return (
             <div className={styles.task}>
                 <div className={styles.date}>
-                    <Text weight="semibold">
+                    <Typography >
                         {time[0]}
-                    </Text>
-                    <Text weight="semibold">
+                    </Typography>
+                    <Typography >
                         {time[1]}	
-                    </Text>
+                    </Typography>
                 </div>
                 <Lesson lesson={schedule.commonLesson}/>
             </div>)
@@ -32,12 +30,12 @@ const ScheduleItem = ({time, schedule}: IScheduleItem) => {
         return (
             <div className={styles.task}>
                 <div className={styles.date}>
-                    <Text weight="semibold">
+                    <Typography >
                         {time[0]}
-                    </Text>
-                    <Text weight="semibold">
+                    </Typography>
+                    <Typography >
                         {time[1]}	
-                    </Text>
+                    </Typography>
                 </div>
                 <Lesson lesson={firstGroupLesson}/>
                 <Lesson lesson={secondGroupLesson}/>

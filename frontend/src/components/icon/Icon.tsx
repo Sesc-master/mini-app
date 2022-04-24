@@ -1,54 +1,47 @@
-import React, {FC} from 'react';
+import React from 'react';
 import {IconName} from './IconName'
-import {
-    Icon24Dismiss,
-    Icon28BillheadOutline,
-    Icon28DoorArrowLeftOutline,
-    Icon28MenuOutline,
-    Icon28NewsfeedOutline,
-    Icon28ServicesOutline,
-    Icon28SettingsOutline,
-    Icon28LinkOutline
-} from "@vkontakte/icons";
-
+import LoginOutlinedIcon from '@mui/icons-material/LoginOutlined';
+import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
+import MenuOutlinedIcon from '@mui/icons-material/MenuOutlined';
+import ListAltOutlinedIcon from '@mui/icons-material/ListAltOutlined';
+import EventNoteOutlinedIcon from '@mui/icons-material/EventNoteOutlined';
+import CloseIcon from '@mui/icons-material/Close';
+import LinkOutlinedIcon from '@mui/icons-material/LinkOutlined';
 
 type IconProps = {
     iconName: IconName
 }
 
-const Icon: React.FC<IconProps> = ({iconName} : IconProps) => {
-    let TargetIcon : FC<any>;
+const Icon: any = ({iconName} : IconProps) => {
+    let TargetIcon : any;
 
     switch (iconName) {
         case IconName.About:
-            TargetIcon = Icon28MenuOutline
+            TargetIcon = MenuOutlinedIcon
             break
         case IconName.Diary:
-            TargetIcon = Icon28NewsfeedOutline
-            break
-        case IconName.DiaryInfo:
-            TargetIcon = Icon28ServicesOutline
+            TargetIcon = ListAltOutlinedIcon
             break
         case IconName.Timetable:
-            TargetIcon = Icon28BillheadOutline
+            TargetIcon = EventNoteOutlinedIcon
             break
         case IconName.CloseButton:
-            TargetIcon = Icon24Dismiss
+            TargetIcon = CloseIcon
             break
         case IconName.EmptyRoom:
-            TargetIcon = Icon28DoorArrowLeftOutline
+            TargetIcon = LoginOutlinedIcon
             break
         case IconName.Settings:
-            TargetIcon = Icon28SettingsOutline
+            TargetIcon = SettingsOutlinedIcon
             break
         case IconName.Link:
-            TargetIcon = Icon28LinkOutline
+            TargetIcon = LinkOutlinedIcon
             break
     }
 
     return (
         <>
-            <TargetIcon/>
+            <TargetIcon sx={{ fontSize: 32 }}/>
         </>
     )
 };

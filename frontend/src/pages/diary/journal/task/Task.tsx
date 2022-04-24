@@ -3,7 +3,6 @@ import TextWithLinks from "../../../../components/textWithLinks/TextWithLinks";
 import styles from "./Task.module.scss";
 import TopicText from "./TopicText";
 import classNames from "classnames";
-import {Text} from "@vkontakte/vkui";
 
 type ITask = {
     date : string, 

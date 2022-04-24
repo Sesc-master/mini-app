@@ -1,5 +1,4 @@
 import React, {useEffect, useState, useRef} from "react";
-import {Div, HorizontalScroll, Spinner, Tabs, TabsItem} from "@vkontakte/vkui"
 import "./Diary.css"
 import Login from "./login/Login";
 import Journal from "./journal/Journal"
@@ -15,6 +14,8 @@ import Marks from "./marks/Marks";
 import Documents from "./documents/Documents";
 import Notes from "./notes/Notes";
 import SkippedLessons from "./skipedLessons/SkippedLessons";
+import Tabs, { tabsClasses } from "@mui/material/Tabs";
+import Tab from "@mui/material/Tab";
 
 const DiaryPanel = {
     Journal: {
@@ -63,26 +64,31 @@ const Diary = () : JSX.Element => {
             {isDiaryLoading && <Loading />}
             {!isLogin && !isDiaryLoading && <Login setLoginRequest={setLoginRequest}/>}
             {isLogin && (
-                <Tabs>
-                    <HorizontalScroll
-                        getScrollToLeft={(i) => i - 120}
-                        getScrollToRight={(i) => i + 120}
-                        showArrows={true}
-                    >
-                        {
-                            Object.values(DiaryPanel).map((panel, id) =>
-                                <TabsItem onClick={() => setActivePage(panel)}
-                                          selected={activePage.name === panel.name}
-                                          key={id}>
-                                    {panel.name}
-                                </TabsItem>
-                            )
-                        }
-                    </HorizontalScroll>
+                <Tabs
+                    value={activePage.name}
+                    variant="fullWidth"
+                    allowScrollButtonsMobile
+                    scrollButtons
+                    sx={{
+                        [`& .${tabsClasses.scrollButtons}`]: {
+                            '&.Mui-disabled': { opacity: 0.3 },
+                        },
+                    }}
+                >
+                    {Object.values(DiaryPanel).map((panel, id) =>
+                        <Tab
+                            onClick={() => setActivePage(panel)}
+                            value={panel.name}
+                            key={id}
+                            label={panel.name}
+                        />
+                    )}
                 </Tabs>
             )}
             {isLogin && !isDiaryLoading && activePage?.element}
-            {isError && <Div className="diary-error">Убедитесь, что корректно указали данные</Div>}
+            {isError && <section className="diary-error">
+                Убедитесь, что корректно указали данные
+            </section>}
         </>
     );
 }

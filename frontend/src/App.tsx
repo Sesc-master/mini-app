@@ -1,8 +1,6 @@
 import React, {useEffect } from 'react';
 import bridge from '@vkontakte/vk-bridge';
-import '@vkontakte/vkui/dist/vkui.css';
 import './styles/Global.scss'
-
 import ProjectRoot from './components/projectRoot/ProjectRoot'
 
 

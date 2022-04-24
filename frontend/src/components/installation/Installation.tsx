@@ -1,7 +1,5 @@
-import React, {useEffect, useState} from "react";
+import React from "react";
 import {isIOS, isDesktop, isAndroid} from "react-device-detect";
-import {Div, Text, Group, Header} from "@vkontakte/vkui"
-import {setIsPWA} from "../../modules/effector/AppSettingsSrore";
 
 import ios1 from "../../assets/iosInstallation/ios1.png"
 import ios2 from "../../assets/iosInstallation/ios2.png"
@@ -14,84 +12,94 @@ import android2 from "../../assets/androidInstallation/android2.jpg"
 import android3 from "../../assets/androidInstallation/android3.jpg"
 
 import styles from "./Installation.module.scss";
+import Typography from "@mui/material/Typography";
+import {List, ListSubheader, ListItem} from "@mui/material";
 
 const Installation = () : JSX.Element => {
+
     const iosInstallation = (
         <>
-            <div className={styles.step}>
-                <div className='step'>
+            <ListItem className={styles.step}>
+                <Typography className='step'>
                     1. Нажмите на 
-                </div>
+                </Typography>
                 <img src={ios1}/>
-            </div>
-            <div className={styles.step}>
-                <div>
+            </ListItem>
+            <ListItem className={styles.step}>
+                <Typography>
                     2. Пролистайте вниз и нажмите на 
-                </div>
+                </Typography>
                 <img src={ios2}/>
-            </div>
-            <div className={styles.step}>
-                <div>
+            </ListItem>
+            <ListItem className={styles.step}>
+                <Typography>
                     3. Скачайте приложение
-                </div>
+                </Typography>
                 <img src={ios3}/>
-            </div>
+            </ListItem>
         </>
     )
 
     const androidInstallation = (
         <>
-            <div className={styles.step}>
-                <div>
+            <ListItem className={styles.step}>
+                <Typography>
                     1. Нажмите на 
-                </div>
+                </Typography>
                 <img height={"43px"} width={"43px"} src={android1}/>
-            </div>
-            <div className={styles.step}>
-                <div>
+            </ListItem>
+            <ListItem className={styles.step}>
+                <Typography>
                     2. Пролистайте вниз и нажмите на 
-                </div>
+                </Typography>
                 <img src={android2}/>
-            </div>
-            <div className={styles.step}>
-                <div >
+            </ListItem>
+            <ListItem className={styles.step}>
+                <Typography >
                     3. Скачайте приложение на android
-                </div>
+                </Typography>
                 <img src={android3}/>
-            </div>
+            </ListItem>
         </>
     )
 
-
     const desktopInstallation = (
-        <>
-            <div className={styles.step}>
-                <div>
-                    1. В верхнем правом углу нажмите на кнопку установить
-                </div>
-                <img src={desktop}/>
-            </div>
-        </>
+        <ListItem className={styles.step}>
+            <Typography>
+                1. В верхнем правом углу нажмите на кнопку установить
+            </Typography>
+            <img src={desktop}/>
+        </ListItem>
     )
 
     return(
-        <Div>
-            <Group header={<Header>Дневник доступен только в приложении</Header>}>
-                <Text weight="semibold">
-                    К сожалению, вы не можете пользоваться дневником напрямую из браузера,
-                    но он станет доступным, если вы установите наше приложение. Это сделано
-                    по требованию отдела компьютеризации СУНЦ УрФУ.
-                </Text>
-            </Group>
-            <Group header={<Header>Установка</Header>}>
+        <section className="content">
+            <List subheader={
+                <ListSubheader>
+                    Дневник доступен только в приложении
+                </ListSubheader>}
+            >
+                <ListItem>
+                    <Typography>
+                        К сожалению, вы не можете пользоваться дневником напрямую из браузера,
+                        но он станет доступным, если вы установите наше приложение. Это сделано
+                        по требованию отдела компьютеризации СУНЦ УрФУ.
+                    </Typography>
+                </ListItem>
+            </List>
+            <List disablePadding subheader={
+                <ListSubheader>
+                    Установка
+                </ListSubheader>}
+            >
                 {isIOS && iosInstallation}
                 {isAndroid && androidInstallation}
                 {isDesktop && !isIOS && desktopInstallation}
-            </Group>
-            <h4>
+            </List>
+            <Typography>
                 Рекомендуем для ios использовать safari, для всего остального - chrome
-            </h4>
-        </Div>
+            </Typography>
+        </section>
     )
 }
 
