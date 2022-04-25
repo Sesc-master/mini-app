@@ -12,7 +12,7 @@ const Day = (props : IDay) => {
         (((props.dayIndex + 1) - new Date().getDay()) *24*60*60*1000)).getDate();
 
     return(
-        <Tab onClick={() => {setDay(props.dayIndex)}} style={{minWidth: 50, width: "16.6%"}} value={props.dayIndex} label={
+        <Tab onClick={() => {setDay(props.dayIndex)}} style={{minWidth: 50, width: "calc(100% / 6)"}} value={props.dayIndex} label={
             <div>
                 <Typography >{date}</Typography>
                 <Typography >{props.name}</Typography>

@@ -16,6 +16,7 @@ import Grades from "../../pages/schedule/scheduleModalPages/Grades";
 import Subjects from "../../pages/subjects/Subjects";
 import ScheduleType from "../../pages/schedule/scheduleModalPages/ScheduleType";
 import Teachers from "../../pages/schedule/scheduleModalPages/Teachers";
+import Box from "@mui/material/Box";
 
 
 const ProjectRoot = () => {
@@ -45,6 +46,9 @@ const ProjectRoot = () => {
     const darkTheme = createTheme({
         palette: {
             mode: 'dark',
+            background: {
+                paper: "#191919"
+            }
         },
     });
 
@@ -53,10 +57,10 @@ const ProjectRoot = () => {
             <ThemeProvider theme={darkTheme}>
                 <AppHeader/>
                 <Navbar/>
-                <section className="panel">
+                <Box className="panel">
                     <ProjectRoutes />
                     <div className="end"/>
-                </section>
+                </Box>
                 <ModalPage name={Modal.Grades}>
                     <Grades />
                 </ModalPage>

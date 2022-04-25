@@ -18,8 +18,8 @@ const Lesson = ({lesson}: ILesson) => {
                 <>
                     <div className={styles.stick}/>
                     <div className={styles.lesson}>
-                        <Typography >{lesson?.subject}</Typography>
-                        <Typography >{isTeacher ? lesson?.group : lesson?.teacher.split(" ")[0]} {lesson?.auditory}</Typography>
+                        <Typography fontSize="15px" fontWeight={"bold"}>{lesson?.subject}</Typography>
+                        <Typography fontSize="12px">{isTeacher ? lesson?.group : lesson?.teacher.split(" ")[0]} {lesson?.auditory}</Typography>
                     </div>
                 </>
             ) : (

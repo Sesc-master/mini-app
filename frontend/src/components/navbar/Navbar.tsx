@@ -27,7 +27,9 @@ const Navbar = () => {
     }, )
 
     return (
-        <Paper sx={{ zIndex: "1" ,position: 'fixed', bottom: 0, left: 0, right: 0 }} elevation={10}>
+        <Paper
+            sx={{zIndex: "1", position: 'fixed', bottom: 0, left: 0, right: 0 }}
+            elevation={10}>
             <BottomNavigation
                 value={page}
             >
