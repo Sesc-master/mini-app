@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "../Components.module.scss"
 import Typography from "@mui/material/Typography";
+import Paper from "@mui/material/Paper";
 
 type ITimetableItemLoader = {
     time: string []
@@ -9,7 +10,7 @@ type ITimetableItemLoader = {
 const ScheduleLoaderItem = (props : ITimetableItemLoader) => {
     const {time} = props
     return (
-        <section className={styles.task}>
+        <Paper className={styles.task}>
             <div className={styles.date}>
                 <Typography>
                     {time[0]}
@@ -19,7 +20,7 @@ const ScheduleLoaderItem = (props : ITimetableItemLoader) => {
                 </Typography>
             </div>
             <div className={styles.stick}/>
-        </section>
+        </Paper>
     )
 }; 
 

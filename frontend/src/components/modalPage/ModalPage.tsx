@@ -1,11 +1,24 @@
 import React from 'react';
-import Drawer from '@mui/material/Drawer';
+import {
+    Drawer,
+    Dialog,
+    DialogActions,
+    DialogContent,
+    Button,
+    SwipeableDrawer
+} from '@mui/material';
 import {setModalView} from "../../modules/effector/AppSettingsSrore";
 import {Modal as ModalName} from "../../modules/Modal";
 import Modal from '@mui/material/Modal';
 import {useStore} from "effector-react";
 import {appSettingsStore} from "../../modules/effector/AppSettingsSrore";
 import Paper from "@mui/material/Paper";
+import Box from "@mui/material/Box";
+import Icon from "../icon/Icon";
+import {IconName} from "../icon/IconName";
+import {Close} from "@mui/icons-material";
+import IconButton from "@mui/material/IconButton";
+import Puller from "./Puller";
 
 type IModalPage = {
     children: JSX.Element,
@@ -15,7 +28,7 @@ type IModalPage = {
 const ModalPage = ({children, name} : IModalPage)=> {
     const {modalView} = useStore(appSettingsStore);
     const width = document.documentElement.clientWidth;
-    const toggleDrawer =
+    const modalPage =
         (name: ModalName | "") =>
             (event: React.KeyboardEvent | React.MouseEvent) => {
                 if (
@@ -33,23 +46,38 @@ const ModalPage = ({children, name} : IModalPage)=> {
     return (
         <>
             {width <= 770 ? (
-                <Drawer
+                <SwipeableDrawer
                     anchor={"bottom"}
                     open={modalView === name}
-                    onClose={toggleDrawer("")}
+                    onClose={modalPage("")}
+                    onOpen={modalPage(name)}
+                    disableSwipeToOpen={true}
+                    sx={{'& .MuiDrawer-paper':
+                            {
+                                maxHeight: "90%",
+                                minHeight: "25%",
+                                borderRadius: "8px 8px 0px 0px"
+                            }}}
+                    swipeAreaWidth={50}
                 >
+                    <Puller />
                     {children}
-                </Drawer>
+                </SwipeableDrawer>
             ) : (
-                <Modal
-                    sx={{width: "30em", minHeight: "10em", left: "calc(50% - 15em)", top: "40%"}}
+                <Dialog
+                    sx={{ '& .MuiDialog-paper': { width: '80%', maxHeight: 435 } }}
+                    maxWidth="xs"
                     open={modalView === name}
-                    onClose={toggleDrawer("")}
                 >
-                    <Paper>
+                    <DialogContent  dividers>
                         {children}
-                    </Paper>
-                </Modal>
+                    </DialogContent>
+                    <DialogActions>
+                        <Button autoFocus onClick={modalPage("")}>
+                            Cancel
+                        </Button>
+                    </DialogActions>
+                </Dialog>
             )}
         </>
     );
