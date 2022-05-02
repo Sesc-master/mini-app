@@ -1,13 +1,11 @@
 import React, {useState} from 'react';
-import {Cell, Group, Header} from '@vkontakte/vkui'
 import Icon from "../../components/icon/Icon"
 import {appSettingsStore, setNavbarItems} from "../../modules/effector/AppSettingsSrore"
 import {useStore} from "effector-react";
-import {Page} from "../../components/projectRoot/Page";
 import {NavbarItem, defaultItems} from '../../components/navbar/NavbarItems'
 import {StorageKey} from "../../modules/StorageKey";
 import {getInitialPage} from "../../components/projectRoot/getInitialPage";
-
+import {List, ListSubheader, ListItemButton, ListItemText, ListItemIcon, Checkbox} from "@mui/material";
 
 const Settings = () => {
     const {navbarItems} = useStore(appSettingsStore)
@@ -27,50 +25,67 @@ const Settings = () => {
 
     return (
         <>
-            <Group
-                header={
-                    <Header>Выбор панелей на навбаре </Header>
+            <List
+                sx={{ width: '100%' }}
+                subheader={
+                    <ListSubheader component="div" id="nested-list-subheader">
+                        Навигационная паенль
+                    </ListSubheader>
                 }
             >
                 {navbarItems.map((navbarItem) => {
                     return (
-                        <Cell checked={navbarItem.isActive}
-                              disabled={navbarItem.link === Page.About}
-                              mode='selectable' draggable
-                              onChange={() => setItems(navbarItems.map((item) => {
-                                  if (item.value === navbarItem.value) {
-                                      item.isActive = !navbarItem.isActive
-                                  }
-                                  return item
-                              }))}
-                              onDragFinish={({ from, to }) => {
-                                  reorderItems(from - 1, to - 1, navbarItems)
-                              }}
-                              before={<Icon iconName={navbarItem.iconName}/>}>
-                            {navbarItem.value}
-                        </Cell>
+                    <ListItemButton
+                            onClick={() => setItems(navbarItems.map((item) => {
+                                if (item.value === navbarItem.value) {
+                                    item.isActive = !navbarItem.isActive
+                                }
+                                return item
+                            }))} dense>
+                        <ListItemIcon>
+                            <Checkbox
+                                edge="start"
+                                checked={navbarItem.isActive}
+                                disableRipple
+                            />
+                        </ListItemIcon>
+                        <ListItemText primary={navbarItem.value} />
+                        <ListItemIcon>
+                            <Icon iconName={navbarItem.iconName}/>
+                        </ListItemIcon>
+                    </ListItemButton>
                     )
                 })}
-            </Group>
-            <Group
-                header={
-                    <Header>Выбор загрузочной панели</Header>
+            </List>
+            <List
+                sx={{ width: '100%' }}
+                subheader={
+                    <ListSubheader component="div" id="nested-list-subheader">
+                        Выбор загрузочной панели
+                    </ListSubheader>
                 }
             >
                 {defaultItems.map((navbarItem) => {
                     return (
-                        <Cell checked={navbarItem.link === initialPage}
-                              mode='selectable'
-                              onChange={() => {
-                                  setInitialPage(navbarItem.link)
-                                  localStorage.setItem(StorageKey.InitialPage, navbarItem.link)
-                              }}
-                              before={<Icon iconName={navbarItem.iconName}/>}>
-                              {navbarItem.value}
-                        </Cell>
+                        <ListItemButton onClick={() => {
+                            setInitialPage(navbarItem.link)
+                            localStorage.setItem(StorageKey.InitialPage, navbarItem.link)
+                        }} dense>
+                            <ListItemIcon>
+                                <Checkbox
+                                    edge="start"
+                                    checked={navbarItem.link === initialPage}
+                                    disableRipple
+                                />
+                            </ListItemIcon>
+                            <ListItemText primary={navbarItem.value} />
+                            <ListItemIcon>
+                                <Icon iconName={navbarItem.iconName}/>
+                            </ListItemIcon>
+                        </ListItemButton>
                     )
                 })}
-            </Group>
+            </List>
         </>
     );
 };

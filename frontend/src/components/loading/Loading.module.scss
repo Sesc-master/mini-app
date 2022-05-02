@@ -1,9 +1,6 @@
 .loader {
-  height: 2em;
-  width: 2em;
   position: absolute;
   left: 50%;
-  margin-left: -1em;
   top: 50%;
-  margin-top: -1em;
+  transform: translate(-50%,-50%);
 }

@@ -1,6 +1,7 @@
 import React from "react";
 import * as linkify from "linkifyjs";
 import styles from './TextWithLinks.module.scss';
+import Typography from "@mui/material/Typography";
 
 function getDomain(url: string){
     let domain = (new URL(url));
@@ -27,7 +28,7 @@ const TextWithLinks = ({str} : {str: string}) : JSX.Element => {
     return (
         <>
             {linkify.find(str).length === 0 ? (
-                <div>{str}</div>
+                <Typography>{str}</Typography>
             ) : textArray.map((value, index) => (
                 <>
                     {value}

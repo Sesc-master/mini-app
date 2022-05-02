@@ -1,10 +1,9 @@
 import React from "react";
-import {Text} from "@vkontakte/vkui";
 import {TimetableElement} from "../../../../modules/schedule/format";
 import Lesson from "./lesson/Lesson";
 import styles from "../Components.module.scss"
-
-import "@vkontakte/vkui/dist/vkui.css";
+import Time from "./time/Time";
+import Paper from "@mui/material/Paper";
 
 type IScheduleItem = {
     time : string [], 
@@ -14,36 +13,22 @@ type IScheduleItem = {
 const ScheduleItem = ({time, schedule}: IScheduleItem) => {
     if (schedule.isCommonLesson === true || schedule.isCommonLesson === undefined){
         return (
-            <div className={styles.task}>
-                <div className={styles.date}>
-                    <Text weight="semibold">
-                        {time[0]}
-                    </Text>
-                    <Text weight="semibold">
-                        {time[1]}	
-                    </Text>
-                </div>
+            <Paper className={styles.task}>
+                <Time time={time}/>
                 <Lesson lesson={schedule.commonLesson}/>
-            </div>)
+            </Paper>)
     }
     else {
         let firstGroupLesson = schedule.firstGroupLesson
         let secondGroupLesson = schedule.secondGroupLesson
         return (
-            <div className={styles.task}>
-                <div className={styles.date}>
-                    <Text weight="semibold">
-                        {time[0]}
-                    </Text>
-                    <Text weight="semibold">
-                        {time[1]}	
-                    </Text>
-                </div>
+            <Paper className={styles.task}>
+                <Time time={time}/>
                 <Lesson lesson={firstGroupLesson}/>
                 <Lesson lesson={secondGroupLesson}/>
-            </div>
+            </Paper>
         )
     }
-}; 
+};
 
 export default ScheduleItem;

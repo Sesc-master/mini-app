@@ -1,13 +1,21 @@
 import React from "react";
-import {PanelHeader} from "@vkontakte/vkui";
-import styles from "./AppHeader.module.scss";
-  
-
-// import '@vkontakte/vkui/dist/vkui.css';
+import AppBar from '@mui/material/AppBar';
+import Typography from '@mui/material/Typography';
+import Toolbar from '@mui/material/Toolbar';
+import CssBaseline from '@mui/material/CssBaseline';
 
 const AppHeader = () : JSX.Element => {
     return(
-        <PanelHeader className={styles.appHeader} fixed={false} separator={false}>SESC Master</PanelHeader>
+        <>
+            <CssBaseline />
+            <AppBar sx={{margin: "0px", position: "relative"}}>
+                <Toolbar>
+                    <Typography variant="h6" component="div">
+                        SESC Master
+                    </Typography>
+                </Toolbar>
+            </AppBar>
+        </>
     )
 }
 

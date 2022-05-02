@@ -1,9 +1,8 @@
 import React, {useEffect, useState} from "react";
-import {Div, Header} from "@vkontakte/vkui";
 import {getFreeAuditories} from "../../modules/schedule/api/Schedule"
 import AuditoriesPerLesson from "./auditoriesPerLesson/AuditoriesPerLesson"
-import {useNavigate} from "react-router-dom";
 import "./EmptyAuditories.scss";
+import {List, ListSubheader} from "@mui/material";
 
 
 const EmptyAuditory = () => {
@@ -16,8 +15,17 @@ const EmptyAuditory = () => {
     
     return (
         <>
-            <Header >Свободные аудитории:</Header>
-            {[...new Array(7)]?.map((value, index) => (<AuditoriesPerLesson auditories={auditories[index]} lesson={index + 1} />))}
+            <List
+                subheader={
+                    <ListSubheader>
+                        Свободные кабинеты
+                    </ListSubheader>
+                }
+            >
+                {[...new Array(7)]?.map((value, index) => (
+                    <AuditoriesPerLesson auditories={auditories[index]} lesson={index + 1} />
+                ))}
+            </List>
         </>
     );
 }

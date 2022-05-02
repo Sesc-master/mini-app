@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useRef, useMemo} from "react";
+import React, {useState, useEffect, useMemo} from "react";
 import {getAbsences, getDocuments} from "../../../modules/scoleAPI/ScoleAPI";
 import {useStore} from "effector-react";
 import {diaryStore} from "../../../modules/effector/DiaryStore";

@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {Event, IEvent} from "../../modules/event/Event";
 import styles from "./Informer.module.scss";
+import {LinearProgress} from "@mui/material";
 
 const Informer = () => {
     const [event, setEvent] = useState<IEvent | undefined>();
@@ -24,14 +25,12 @@ const Informer = () => {
     return (
         <>
             {event && (
-                <div className={styles.content}>
+                <section className={styles.content}>
                     <div className={styles.text}>
                         {event?.order + 1} {event?.type}, {formatTime(Number(event?.timeToEnd))}
                     </div>
-                    <div className={styles.bar}>
-                        <div style={{width: `${event?.percent}%`}} className={styles.timer}/>
-                    </div>
-                </div>
+                    <LinearProgress variant="determinate" value={event?.percent}/>
+                </section>
             )}
         </>
     );

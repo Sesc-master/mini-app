@@ -1,10 +1,11 @@
 import React from 'react';
-import {Text} from "@vkontakte/vkui";
-import styles from "./Instruction.module.scss"
+import Typography from "@mui/material/Typography";
 
 const Instruction = () => {
     return (
-        <Text className={styles.instruction} weight="semibold" >Выберите день недели, класс или учителя</Text>
+        <div style={{margin: "2.5em"}}>
+            <Typography align={"center"} variant={"h5"}>Выберите класс или учителя</Typography>
+        </div>
     );
 };
 

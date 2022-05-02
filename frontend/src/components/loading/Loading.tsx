@@ -1,11 +1,11 @@
 import React from 'react';
-import {Spinner} from "@vkontakte/vkui";
 import styles from "./Loading.module.scss"
+import {CircularProgress} from "@mui/material";
 
 const Loading = () => {
     return (
         <div className={styles.loader}>
-            <Spinner size="medium"/>
+            <CircularProgress />
         </div>
     );
 };

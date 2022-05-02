@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
-import {Tabbar, TabbarItem} from "@vkontakte/vkui";
 import {useNavigate, useLocation} from 'react-router-dom';
 import Icon from "../icon/Icon";
 import {appSettingsStore} from "../../modules/effector/AppSettingsSrore"
 import {useStore} from "effector-react";
+import BottomNavigation from '@mui/material/BottomNavigation';
+import BottomNavigationAction from '@mui/material/BottomNavigationAction';
+import Paper from '@mui/material/Paper';
 import styles from "./Navbar.module.scss"
-
 
 const Navbar = () => {
     const [page, setPage] = useState<string>()
@@ -27,20 +28,28 @@ const Navbar = () => {
     }, )
 
     return (
-        <Tabbar className={styles.navbar}>
-            {navbarItems.map((navbarItem) => {
-                if (navbarItem.isActive) {
-                    return (
-                        <TabbarItem selected={page === navbarItem.link} onClick={() => {
-                            openPage(navbarItem.link)
-                            setPage(navbarItem.link)
-                        }}>
-                            <Icon iconName={navbarItem.iconName}/>
-                        </TabbarItem>
-                    )
-                }
-            })}
-        </Tabbar>
+        <Paper
+            className={styles.navbar}
+            elevation={10}>
+            <BottomNavigation
+                value={page}
+            >
+                {navbarItems.map((navbarItem) => {
+                    if (navbarItem.isActive) {
+                        return (
+                            <BottomNavigationAction
+                                value={navbarItem?.link}
+                                icon={<Icon iconName={navbarItem.iconName}/>}
+                                onClick={() => {
+                                    openPage(navbarItem.link)
+                                    setPage(navbarItem.link)
+                                }}>
+                            </BottomNavigationAction>
+                        )
+                    }
+                })}
+            </BottomNavigation>
+        </Paper>
     );
 }
 

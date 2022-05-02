@@ -1,38 +1,25 @@
 import React, {useEffect,} from "react";
-import "@vkontakte/vkui/dist/vkui.css";
 import Navbar from "../navbar/Navbar";
 import AppHeader from "../appHeader/AppHeader";
-import Grades from "../../pages/schedule/scheduleModalPages/Grades";
-import Subjects from "../../pages/subjects/Subjects"
-import {
-    ConfigProvider,
-    AppRoot,
-    Panel,
-    SplitLayout,
-    ModalRoot,
-    ModalPage,
-    AdaptivityProvider,
-    ModalPageHeader,
-    PanelHeaderButton, Appearance
-} from "@vkontakte/vkui";
-import { Icon24Dismiss  } from '@vkontakte/icons';
 import {BrowserRouter as Router} from 'react-router-dom'
 import {Modal} from "../../modules/Modal"
-import {
-    setIsDiaryLoading,
-} from "../../modules/effector/DiaryStore";
-import {appSettingsStore, setModalView, setNavbarItems} from "../../modules/effector/AppSettingsSrore"
-import {useStore} from "effector-react";
+import {setIsDiaryLoading,} from "../../modules/effector/DiaryStore";
+import {setNavbarItems} from "../../modules/effector/AppSettingsSrore"
 import {StorageKey} from "../../modules/StorageKey";
-import Teachers from "../../pages/schedule/scheduleModalPages/Teachers";
-import ScheduleType from "../../pages/schedule/scheduleModalPages/ScheduleType";
 import {useLoadTimetable} from "../../hooks/useLoadTimetable";
 import {setGrade, setIsTeacher, setTeacher} from "../../modules/effector/TimetableStore";
 import ProjectRoutes from "./ProjectRoutes";
 import {useLoadDiary} from "../../hooks/useLoadDiary";
+import {createTheme, ThemeProvider} from '@mui/material/styles';
+import ModalPage from "../modalPage/ModalPage";
+import Grades from "../../pages/schedule/scheduleModalPages/Grades";
+import Subjects from "../../pages/subjects/Subjects";
+import ScheduleType from "../../pages/schedule/scheduleModalPages/ScheduleType";
+import Teachers from "../../pages/schedule/scheduleModalPages/Teachers";
+import Box from "@mui/material/Box";
+
 
 const ProjectRoot = () => {
-    const {modalView} = useStore(appSettingsStore);
 
     useEffect(() => {
         if (localStorage.getItem(StorageKey.Login) !== null){
@@ -56,58 +43,35 @@ const ProjectRoot = () => {
         }
     }, [])
 
-    const modal = (
-        <ModalRoot activeModal={modalView} onClose={() => setModalView('')}>
-            <ModalPage id={Modal.Subjects}>
-                <ModalPageHeader  left={
-                    <PanelHeaderButton onClick={() => setModalView('')}>
-                        <Icon24Dismiss  />
-                    </PanelHeaderButton>}>Выберите предмет</ModalPageHeader>
-                <Subjects />
-            </ModalPage>
-            <ModalPage id={Modal.Grades}  dynamicContentHeight={true}>
-                <ModalPageHeader  left={
-                    <PanelHeaderButton onClick={() => setModalView('')}>
-                        <Icon24Dismiss  />
-                    </PanelHeaderButton>}>Класс</ModalPageHeader>
-                <Grades />
-            </ModalPage>
-            <ModalPage id={Modal.Teachers} dynamicContentHeight={true}>
-                <ModalPageHeader  left={
-                    <PanelHeaderButton onClick={() => setModalView('')}>
-                        <Icon24Dismiss  />
-                    </PanelHeaderButton>}>Учитель</ModalPageHeader>
-                <Teachers />
-            </ModalPage>
-            <ModalPage id={Modal.Type}>
-                <ModalPageHeader  left={
-                    <PanelHeaderButton onClick={() => setModalView('')}>
-                        <Icon24Dismiss  />
-                    </PanelHeaderButton>}>Тип расписания</ModalPageHeader>
-                <ScheduleType />
-            </ModalPage>
-        </ModalRoot>
-    );
+    const darkTheme = createTheme({
+        palette: {
+            mode: 'dark',
+        },
+    });
 
     return (
-        <ConfigProvider appearance={Appearance.DARK}>
-            <AdaptivityProvider>
-            <AppRoot>
-                <SplitLayout modal={modal}>
-                    <Panel>
-                        <Router>
-                            <AppHeader/>
-                            <Navbar/>
-                            <section className="panel">
-                                <ProjectRoutes />
-                                <div className="end"/>
-                            </section>
-                        </Router>
-                    </Panel>
-                </SplitLayout>
-            </AppRoot>
-            </AdaptivityProvider>
-        </ConfigProvider>
+        <Router>
+            <ThemeProvider theme={darkTheme}>
+                <AppHeader/>
+                <Navbar/>
+                <Box className="panel">
+                    <ProjectRoutes />
+                    <div className="end"/>
+                </Box>
+                <ModalPage name={Modal.Grades}>
+                    <Grades />
+                </ModalPage>
+                <ModalPage name={Modal.Subjects}>
+                    <Subjects />
+                </ModalPage>
+                <ModalPage name={Modal.Type}>
+                    <ScheduleType />
+                </ModalPage>
+                <ModalPage name={Modal.Teachers}>
+                    <Teachers />
+                </ModalPage>
+            </ThemeProvider>
+        </Router>
     );
 }
 

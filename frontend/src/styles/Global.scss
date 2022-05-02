@@ -26,7 +26,8 @@ $bodyColor: #191919;
 
 @media screen and (min-width: 771px) {
     ::-webkit-scrollbar {
-        width: 10px;
+        width: 8px;
+        padding: 1px;
     }
      
     ::-webkit-scrollbar-track {
@@ -35,7 +36,7 @@ $bodyColor: #191919;
      
     ::-webkit-scrollbar-thumb {
         background-color: #606060;
-        border-radius: 50px;
+        margin: 1px;
     }
 
     .panel {
@@ -46,7 +47,6 @@ $bodyColor: #191919;
         margin-right: auto;
         min-height: 700px;
         border-radius: 8px;
-        background-color: #191919;
     }
 
 }

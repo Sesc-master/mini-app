@@ -4,14 +4,22 @@ import {useStore} from "effector-react";
 import {timetableStore} from "../../../../modules/effector/TimetableStore";
 import CircledButton from "../../../../components/circledButton/CircledButton";
 import styles from "./Error.module.scss"
+import {Button} from "@mui/material";
+import Typography from "@mui/material/Typography";
 
 const Error = () => {
     const {isTeacher, teacher, grade} = useStore(timetableStore);
 
     return (
         <div className={styles.container}>
-            <div className={styles.text}>Что-то пошло не так...</div>
-            <CircledButton handler={() => useLoadTimetable(grade, teacher, isTeacher)} text={"Перезагрузить"} />
+            <Typography variant="h6" className={styles.text}>Что-то пошло не так...</Typography>
+            <Button
+                onClick={() => useLoadTimetable(grade, teacher, isTeacher)}
+                color={"primary"}
+                variant="contained"
+            >
+                Перезагрузить
+            </Button>
         </div>
     );
 };
