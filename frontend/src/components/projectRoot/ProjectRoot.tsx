@@ -46,9 +46,6 @@ const ProjectRoot = () => {
     const darkTheme = createTheme({
         palette: {
             mode: 'dark',
-            background: {
-                paper: "#191919"
-            }
         },
     });
 
