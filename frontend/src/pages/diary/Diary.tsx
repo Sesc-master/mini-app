@@ -1,5 +1,4 @@
 import React, {useEffect, useState, useRef} from "react";
-import "./Diary.css"
 import Login from "./login/Login";
 import Journal from "./journal/Journal"
 import {
@@ -16,6 +15,8 @@ import Notes from "./notes/Notes";
 import SkippedLessons from "./skipedLessons/SkippedLessons";
 import Tabs, { tabsClasses } from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
+import Paper from "@mui/material/Paper";
+import Typography from "@mui/material/Typography";
 
 const DiaryPanel = {
     Journal: {
@@ -86,9 +87,11 @@ const Diary = () : JSX.Element => {
                 </Tabs>
             )}
             {isLogin && !isDiaryLoading && activePage?.element}
-            {isError && <section className="diary-error">
-                Убедитесь, что корректно указали данные
-            </section>}
+            {isError &&
+                <Typography className={"content"} color={"error.light"}>
+                    *убедитесь, что верно указали данные
+                </Typography>
+            }
         </>
     );
 }

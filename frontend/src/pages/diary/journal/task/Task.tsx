@@ -25,8 +25,12 @@ const Task = ({date, topic, homework, mark, weight}: ITask) => {
                     <TopicText topic={topic} isOpened={isOpened}/>
                 </div>
                 <div className={styles.info}>
-                    <div className={classNames(styles.center, styles.marks, styles.styledTask, styles.cell, styles.bold)}>{mark}</div>
-                    <div className={classNames(styles.center, styles.marks, styles.styledTask, styles.cell)}>{`${weight}x`}</div>
+                    <div className={classNames(styles.center, styles.mark, styles.styledTask, styles.cell, styles.bold)}>
+                        {mark}
+                    </div>
+                    <div className={classNames(styles.center, styles.mark, styles.styledTask, styles.cell)}>
+                        {`${weight / 2}x`}
+                    </div>
                 </div>
             </div>
             <div className={classNames({[styles.hidden]: !isOpened}, styles.moreInfo, styles.cell)}>
