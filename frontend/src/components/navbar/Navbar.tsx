@@ -6,6 +6,7 @@ import {useStore} from "effector-react";
 import BottomNavigation from '@mui/material/BottomNavigation';
 import BottomNavigationAction from '@mui/material/BottomNavigationAction';
 import Paper from '@mui/material/Paper';
+import styles from "./Navbar.module.scss"
 
 const Navbar = () => {
     const [page, setPage] = useState<string>()
@@ -28,7 +29,7 @@ const Navbar = () => {
 
     return (
         <Paper
-            sx={{zIndex: "1", position: 'fixed', bottom: 0, left: 0, right: 0 }}
+            className={styles.navbar}
             elevation={10}>
             <BottomNavigation
                 value={page}

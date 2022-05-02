@@ -1,8 +1,10 @@
 @media screen and (max-width: 770px) {
   .navbar {
-    padding-bottom: 1em;
-    border-top-right-radius: 1em;
-    border-top-left-radius: 1em;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    right: 0;
+    bottom: 0;
   }
 }
 
