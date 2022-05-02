@@ -5,6 +5,7 @@ import {
     ToggleButtonGroup,
     ToggleButton, Button
 } from "@mui/material";
+import Typography from "@mui/material/Typography";
 
 type ILoginData = {
     login: string,
@@ -75,6 +76,9 @@ const Login = ({setLoginRequest} : any) => {
             >
                 Войти
             </Button>
+            <Typography sx={{marginTop: "1em"}} color={"info.main"}>
+                *капча проходится автоматически
+            </Typography>
         </section>
     )
 }
