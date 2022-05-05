@@ -14,6 +14,7 @@ import {ReportCard} from "./types/ReportCard";
 import convertReportCard from "./converters/reportCard";
 import {LoginInfo} from "./types/LoginInfo";
 import {Captcha} from "./types/Captcha";
+import request from "../capacitorRequest/request";
 
 function convertRoleForAPI(role: Role): string {
     if (role == "parent") return "par";
@@ -29,10 +30,11 @@ async function scoleRequest(methodName: string, login: string, token: string, ro
     }
     if (args) requestBody.z = args;
 
-    return fetch("https://lycreg.urfu.ru", {
-        method: "POST",
-        body: JSON.stringify(requestBody)}
-    ).then(response => response.text()).then(body => {
+    return request({
+            method: "POST",
+            data: JSON.stringify(requestBody),
+            url: "https://lycreg.urfu.ru",
+        }).then(response => response.data).then(body => {
         if (body === "none") return undefined;
         else return JSON.parse(body, reviver(reviverObjects));
     });
@@ -96,24 +98,19 @@ export async function getTeachersList(login: string, token: string, role: Role):
 
 
 export async function getCaptcha(): Promise<Captcha> {
-    let headers: Headers;
-    return fetch("https://lycreg.urfu.ru/cpt.a")
+    return request({
+        url: "https://lycreg.urfu.ru/cpt.a",
+        method: "GET",
+        responseType: "blob"
+    })
         .then(response => {
-            headers = response.headers
-            return response.blob()
+            const headers = response.headers
+
+            return {
+                ID: Number(headers["x-cpt"]),
+                data: "data:image/png;base64," + response.data
+            }
         })
-        .then(blob => {
-            return new Promise((resolve, reject) => {
-                var reader = new FileReader();
-                reader.readAsDataURL(blob);
-                reader.onloadend = () : any => {
-                    resolve({
-                        ID: Number(headers.get("x-cpt")),
-                        data: reader.result as string
-                    });
-                }
-            });
-        });
 }
 
 export async function login(login: string, password: string, role: Role, captcha: number | string, captchaID: number | string): Promise<LoginInfo | undefined> {

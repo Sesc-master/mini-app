@@ -10,6 +10,8 @@ export async function getDiary(userName : string, password : string, type : Role
 
     const loginData = await login(userName, password, type, captchaCode, ID)
 
+    console.log(loginData)
+
     if (loginData) {
         await getSubjectList(userName, loginData.token, type);
         await getTeachersList(userName, loginData.token, type);
