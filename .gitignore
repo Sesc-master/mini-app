@@ -17,6 +17,7 @@
 
 # production
 /build
+/android
 /https_cert
 /public/sw.js
 /public/workbox-*.js
