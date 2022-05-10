@@ -1,8 +1,8 @@
 import { parse, HTMLElement } from "node-html-parser";
-import SESCRequest from "../helpers/SESCRequest";
-import EatTimings from "../api/types/eatTimings";
-import EatTiming from "../api/types/eatTiming";
-import Timing from "../api/types/timing";
+import SESCRequest from "../../utils/SESCRequest";
+import EatTimings from "../../api/types/eatTimings";
+import EatTiming from "../../api/types/eatTiming";
+import Timing from "../../api/types/timing";
 
 const timeout = 8000;
 

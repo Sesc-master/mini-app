@@ -1,14 +1,14 @@
-import BaseLesson from "../api/types/baseSchedule";
-import reviver from "../helpers/JSONReviver";
-import SESCRequest from "../helpers/SESCRequest";
+import BaseLesson from "../../api/types/baseSchedule";
+import reviver from "../../utils/JSONReviver";
+import SESCRequest from "../../utils/SESCRequest";
 
 const server = "lyceum.urfu.ru";
 const timeout = 8000;
 const methodType = 11;
 const scheduleType = "all"
 
-export default async function getFullSchedule(weekday: number): Promise<Map<string, Array<false | BaseLesson>>> {
-    let url = new URL(`http://${server}/`);
+export default async function getClassrooms(weekday: number): Promise<Map<string, Array<false | BaseLesson>>> {
+    let url = new URL(`https://${server}/`);
     url.searchParams.append("type", String(methodType));
     url.searchParams.append("scheduleType", scheduleType);
     url.searchParams.append("weekday", String(weekday));

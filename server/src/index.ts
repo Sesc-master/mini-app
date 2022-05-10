@@ -1,11 +1,17 @@
 import express from "express";
 import path from "path";
-import createServerSsl from "./helpers/CreateServerSsl";
-import { graphqlHTTP } from "express-graphql";
-import { buildSchemaSync } from "type-graphql";
-import TimingsResolver from "./api/resolvers/timingsResolver";
-import IDsResolver from "./api/resolvers/IDsResolver";
-import ScheduleResolver from "./api/resolvers/scheduleResolver";
+import createServerSsl from "./utils/CreateServerSsl";
+import {graphqlHTTP} from "express-graphql";
+import {buildSchemaSync} from "type-graphql";
+import TimingsResolver from "./api/timingsResolver";
+import IDsResolver from "./api/IDsResolver";
+import ScheduleResolver from "./api/scheduleResolver";
+import {setCache} from "./sesc/sescCache/setCache";
+import {keysTimeout} from "./sesc/sescCache/keysTimeout";
+import {updateCache} from "./sesc/sescCache/updateCache";
+
+setCache();
+setInterval(updateCache, keysTimeout.defaultTimeoutMs)
 
 const PORT = process.env.PORT || 5000;
 const app = express();

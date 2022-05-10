@@ -1,17 +1,17 @@
 import reviver from "../../JSONReviver";
 import { IdableScheduleType, Schedule } from "../types/Schedule";
 
-export async function getFreeAuditories(weekday: number) : Promise<Array<Array<string>>> {
+export async function getFreeClassrooms(weekday: number) : Promise<Array<Array<string>>> {
     return fetch("/graphql", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
             "Accept": "application/json",
         },
-        body: JSON.stringify({query: `{ getFreeAuditories(weekday: ${weekday}) }`})
+        body: JSON.stringify({query: `{ getFreeClassrooms(weekday: ${weekday}) }`})
     })
         .then(response => response.text())
-        .then(response => JSON.parse(response, reviver()).get("data").get("getFreeAuditories"));
+        .then(response => JSON.parse(response, reviver()).get("data").get("getFreeClassrooms"));
 }
 
 export async function getSchedule(type: IdableScheduleType, weekday: number, ID: number): Promise<Schedule> {

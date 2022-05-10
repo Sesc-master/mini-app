@@ -1,11 +1,11 @@
-import Schedule from "../api/types/schedule";
-import SESCRequest from "../helpers/SESCRequest";
+import Schedule from "../../api/types/schedule";
+import SESCRequest from "../../utils/SESCRequest";
 
 export type IdableScheduleType = "group" | "teacher" | "auditory";
-export const IdableScheduleTypeValues = ["group", "teacher", "auditory"];
+export const IdableScheduleTypeValues : Array<IdableScheduleType> = ["group", "teacher", "auditory"];
 
 const server = "lyceum.urfu.ru";
-const timeout = 8000;
+const timeout = 15000;
 const methodType = 11;
 
 export default async function getSchedule(weekday: number, type: IdableScheduleType, ID: number): Promise<Schedule> {

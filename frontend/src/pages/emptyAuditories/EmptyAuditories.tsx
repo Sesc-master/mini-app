@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import {getFreeAuditories} from "../../modules/schedule/api/Schedule"
+import {getFreeClassrooms} from "../../modules/schedule/api/Schedule"
 import AuditoriesPerLesson from "./auditoriesPerLesson/AuditoriesPerLesson"
 import "./EmptyAuditories.scss";
 import {List, ListSubheader} from "@mui/material";
@@ -10,7 +10,7 @@ const EmptyAuditory = () => {
 
     useEffect(() => {
         const day = new Date().getDay()
-        getFreeAuditories(day === 0 ? 1 : day).then((result) => {setAuditories(result)})
+        getFreeClassrooms(day === 0 ? 1 : day).then((result) => {setAuditories(result)})
     }, [])
     
     return (

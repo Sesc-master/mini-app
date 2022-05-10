@@ -1,5 +1,5 @@
 import { parse } from "node-html-parser";
-import SESCRequest from "../helpers/SESCRequest";
+import SESCRequest from "../../utils/SESCRequest";
 import { IdableScheduleType } from "./getSchedule";
 
 const timeout = 8000;
